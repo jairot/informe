@@ -1,0 +1,32 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Tesis Romano Trad                              %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[11pt,A4paper,oneside]{book}
+
+\usepackage[spanish]{babel} % para escribir en español
+\usepackage[utf8x]{inputenc}% solución a los acentos
+\usepackage{verbatim}       % para insertar código sin perder formato
+\usepackage{amsmath}        % fórmulas matemáticas
+\usepackage{graphicx}       % para insertar imágenes
+
+\begin{document}            % inicio del documento
+
+\input{Tesis_Portada.tex}
+
+\frontmatter
+\tableofcontents            % índice de contenidos
+\listoffigures              % índice de figuras
+\listoftables               % índice de tablas
+
+\mainmatter
+\input{1-introduccion/1-introduccion.tex}
+\input{2-sistema/2-sistema.tex} 
+\input{3-arquitectura/3-arquitectura.tex}
+\input{4-implementacion/4-implementacion} 
+\input{5-resultados/5-resultados.tex} 
+\input{6-conclusiones/6-conclusiones.tex} 
+\backmatter
+\input{7-bibliografia/7-bibliografia.tex}
+\input{8-apendices/8-apendices.tex}
+
+\end{document}              % fin del documento
