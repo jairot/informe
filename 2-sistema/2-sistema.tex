@@ -1,3 +1,41 @@
 \chapter{Sistema}
 
+
+Uno de los mayores cuellos de botella en los routers lo constituye el cómputo de del prefijo más largo para cada paquete entrante.
+
+Implementar ciertos esquemas de clasificacion en hardware se ve limitado principalmente debido a 2 factores: La cantidad de memoria requerida y lla complejidad creciente de los mismos.
+
+En tanto crece el trafico en las redes se ve la necesidad de implementar esquemas mas complejos de clasificacion.
+
+Dichos esquemas tienen una implementación más sencilla en software. Dichas implementaciones estan ampliamente difundidas en la web.
+Esto hace innecesario tener que “adaptarlas” a un HDL. El paso es trivial (corregir esta redaccion)
+
+\section{FPGA}
+Son dispositivos lógicos programables cuya lógica interna puede ser reconfigurada. Esta característica permite implementar un diseño propio, con la posibilidad de efectuar la cantidad necesaria de pruebas hasta llegar a los resultados deseados. Se puede instanciar componentes usando la lógica interna (ej microprocesadores, PLL, Memorias,etc).
+
+\section{Sistemas embebidos}
+Aunque se pone mucho foco en el  diseño de los procesadores de proposito general en la realidad estos solo representan solo una pequeña proporcion de los procesadores efectivamente producidos cada año.  Existe una especial motivacion en la industria por los denominados “Procesadores Heterogeneos” que integran sistemas dedicados con procesadores de proposito general.
+
+(acá se podría poner algunas generalidades sobre Ethernet e IP)
+
+(tambien se podria agregar algo del problema del prefijo más largo)
+
+
+El sistema implementado en el presente trabajo consta de un microprocesador NIOS2/f interconectado mediante un bus Avalon-MM a 5 componentes: 
+\begin{itemize}
+\item PLL
+\item JTAG UART
+\item Iterfaz con SDRAM
+\item Timer
+\item Módulo extractor de cabeceras
+\end{itemize}
+
+A su vez, éste último está conformado por un generador de paquetes Ethernet conectado a una FIFO. Esta está a su vez conectada a un modulo denominado delay buffer, que está conectado al modulo uplink y al write output.. Uplink a su vez está conectado también a write output.
+
+(colocar Imagen).
+
+Sobre el hardware descrito anteriormente se ejecuta un software de clasificacion de paquetes, que se encuentra almacenado en una memoria RAM.
+
+
+
 %\section{Distribucion Lineal}
