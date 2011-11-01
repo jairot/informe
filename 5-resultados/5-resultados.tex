@@ -43,3 +43,38 @@ En este capitulo se presentan los resultados obtenidos de la ejecución del proy
    			 \end{itemize}	 \\ \hline
 	\end{longtable} 
 \end{center}
+
+La FPGA incluida en la placa es una Cyclone II EP2C35 cuyas especificaciones son:
+
+\begin{center}
+	\begin{longtable}{|l|p{1.75in}|} \hline
+		\textbf{Feature} & \textbf{Description} \\ \hline
+		LEs & 33216 \\ \hline
+		Total RAM bits & 483840 \\ \hline
+		Embedded multipliers & 35 \\ \hline
+		PLLs & 4 \\ \hline
+		Maximum user I/O pins & 475 \\ \hline
+	\end{longtable}
+\end{center}
+
+\subsection{Caso loopback}
+\begin{figure}[h]
+  \centering
+	\includegraphics[width=0.70\textwidth]{5-resultados/graf/loop.eps}
+  \caption{Caso Loopback para 1 y 15 palabras}
+  \label{fig}
+\end{figure}
+En primera instancia nos ocupamos del caso loopback a los fines de encontrar los limites superiores de nuestro dise\~no.  En este caso, el software solo se limita a recibir los datos e inmediantemente después confirma el procesamiento y envía los resultados de regreso al hardware. Se realizan las pruebas correspondientes para las dos versiones de Uplink.
+En el eje de las abscisas es posibles ver la cantidad de paquetes por segundo, el origen corresponde a la mayor velocidad a la que es posible transmitir sin perdidas. En las Ordenadas se puede observar la cantidad de paquetes perdidos en valores porcentuales, para obtener esta métrica se proceso una cantidad constante de paquetes, 9000, y luego se contrasto este valor con un contador global que el Generador estampa en la ultima palabra de cada paquete. Así se calculo la cantidad paquetes perdidos, sobre la cantidad total de paquetes generados. Este mismo sistema es el usado en todos los graficos posteriores.
+
+\subsection{Caso Algoritmos unicamente}
+
+Se estudiará la performance de los algoritmos aplicados, midiendo el retardo de lookup en funcion de la posición en la tabla de ruteo, se realizaran las pruebas de manera independiente al modulo extracto de cabeceras, para asi obtener una medida mas exacta del rendimiento.
+
+\begin{figure}[h]
+  \centering
+	\includegraphics[width=0.8\textwidth]{5-resultados/graf/llu-utlsof.eps}
+  \caption{Retardo de Busqueda LLU vs UTL}
+  \label{fig}
+\end{figure}
+
