@@ -30,9 +30,22 @@ El sistema implementado en el presente trabajo consta de un microprocesador NIOS
 \item Módulo extractor de cabeceras
 \end{itemize}
 
+
+\begin{figure}[h]
+  \centering
+	\includegraphics[width=0.80\textwidth]{2-sistema/graf/sistema.eps}
+  \caption{Sistema}
+  \label{fig}
+\end{figure}
+
 A su vez, éste último está conformado por un generador de paquetes Ethernet conectado a una FIFO. Esta está a su vez conectada a un modulo denominado delay buffer, que está conectado al modulo uplink y al write output.. Uplink a su vez está conectado también a write output.
 
-(colocar Imagen).
+\begin{figure}[h]
+  \centering
+	\includegraphics[width=0.80\textwidth]{2-sistema/graf/extractor.eps}
+  \caption{Extractor de cabeceras}
+  \label{fig}
+\end{figure}
 
 Sobre el hardware descrito anteriormente se ejecuta un software de clasificacion de paquetes, que se encuentra almacenado en una memoria RAM.
 
