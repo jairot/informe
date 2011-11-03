@@ -2,7 +2,38 @@
 
 \section{Parte HW}
 
-(Acá hay q poner una descripción detallada de los módulos mencionados en el capítulo anterior)
+\subsection{Componentes del sistema}
+
+\subsubsection*{NIOS II}
+
+Es un microprocesador softcore. Esto significa que el mismo es instanciado usando la lógica propia de la FPGA. En este diseño, ejecuta un software de clasificación de paquetes que se almacena en una memoria SDRAM en la placa de desarrollo.
+
+\subsubsection*{PLL}
+
+Este módulo toma como entrada una señal de clocl de 50 MHZ de frecuencia y la bifurca en 2: Una de ellas alimentará al módulo que oficia de interfaz con la memoria SDRAM y la otra hará lo propio con el resto de los componentes del sistema. Estas señales están defasadas entre sí 60º con el fin de evitar el skew producido por la diferencia entre la llegada del clock a la memoria y al resto del sistema.
+
+\subsubsection*{Timer}
+
+Módulo utilizado para llevar estadísticas de retardo dentro del software.
+
+\subsubsection*{JTAG UART}
+
+Este módulo permite interactuar con el sistema vía USB. Esto implica tanto la configuracion de la FPGA, como también la posibilidad de ver la ejecución del software en una consola.
+
+\subsubsection*{Interfaz con SDRAM}
+
+Tiene la función de interconectar al sistema con la memoria SDRAM de la placa de desarrollo.
+
+\subsubsection*{Extractor de cabeceras}
+
+Este módulo extrae cabeceras de paquetes Ethernet y las envía al software, donde son procesadas y devueltas. Su funcionamiento se detallará a continuación.
+
+\subsection{Módulo extractor de cabeceras}
+
+
+(..esta parte completala vos...)
+
+\section{Parte SW}
 
 \section{Parte SW}
 
@@ -15,15 +46,17 @@ El mismo fue desarrollado en lenguaje c++, por presentar éste ciertas facilidad
 Para efectuar el intercambio de datos con el hardware se hizo uso de las macros IOWR e IORD, las cuales escriben y leen respectivamente los datos hacia/desde un componente conectado al bus Avalon MM. La razón de haber usado dichas macros yace en el hecho de que las mismas no son "cacheadas". Esta característica se torna indispensable en este diseño, ya que en el mismo no se puede leer un dato sin saber si está verdaderamente disponible en el bus.
 
 
-Búsqueda lineal.
+\subsection {Búsqueda lineal}
 
 Se implementó en una lista enlazada, creada a partir del template list de c++. Los nodos de la lista contienen 3 campos:
 
-Dirección de red (entero de 32 bit sin signo)
+\begin{itemize}
+	\item Dirección de red (entero de 32 bit sin signo)
 
-Máscara de red (entero de 32 bit sin signo)
+	\item Máscara de red (entero de 32 bit sin signo)
 
-Identificador de decisión (entero de 32 bit con signo)
+	\item Identificador de decisión (entero de 32 bit con signo)
+\end{itemize}
 
 Como se le dió prioridad a los prefijos de red más largos, se debió sobrecargar el operador de comparación ( > ) para que la función sort pudiese ordenar en base a la longitud de máscara. De esa manera, los nodos que contenían valores de máscara más grandes quedaban en las primeras posiciones de la lista.
 
@@ -34,7 +67,7 @@ Cuando la función encargada del lookup recibe una dirección IP de destino, rea
 	\item Realiza un AND con el valor de máscara del nodo que está siendo apuntado. Si el resultado de la operación es igual al valor de dirección de red de dicho nodo, entonces se retorna con el valor identificador de decisión. En otro caso, continúa la busqueda en el siguiente nodo.
 \end{itemize}
 
-Busqueda en Arbol unibit.
+\subsection {Busqueda en Arbol unibit}
 
 Se implementó una clase en la cual se definieron las características de los nodos del arbol, como así tambien las operaciones de inserción y búsqueda.
 Cada nodo cuenta con los siguientes campos:
@@ -58,10 +91,20 @@ El algoritmo de búsqueda toma como entrada la dirección IP de destino del paqu
 \begin{itemize}
     	\item     El puntero de recorrido queda varado en un nodo decision, con lo cual se retorna el valor de gw. Ó
     	\item El puntero de recorrido queda varado en un nodo común. 
-    \end{itemize}
+\end{itemize}
 
 
 
 Contemplando esta última posibilidad, el algoritmo hace que en cada nodo se chequee si se trata de un nodo decisión. En dicho caso, se almacena el campo gw en una variable y se continua el recorrido. Si se da un caso en el cual el nodo de recorrido queda apuntando a un nodo comun y luego de testear un bit se determina que el mismo no tiene un nodo asociado (es decir, que alguno de los punteros zero / one esté en NULL) la funcion retorna la variable anteriormente mencionada. 
+
+\subsection {Cache}
+
+Se implementó una cache directa. La misma consta de una tabla hash de 16 entradas. Las colisiones se resuelven por reemplazo directo. La misma fue testeada con ambos algoritmos mencionados anteriormente. Para ello, se agregó una lógica adicional que consistió en:
+
+\begin{itemize}
+	\item Al tomar una direccion IP, chequear primero si el valor de decisión se encuentra en caché.
+	\item Si está, retornar dicho valor.
+	\item En otro caso, efectuar el lookup y almacenar el valor de decisión en caché.
+\end{itemize}
 
 %\section{Distribucion Lineal}
