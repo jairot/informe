@@ -14,7 +14,7 @@
    id="svg2"
    version="1.1"
    inkscape:version="0.47 r22583"
-   sodipodi:docname="sistema.eps">
+   sodipodi:docname="sistema.svg">
   <defs
      id="defs4">
     <inkscape:perspective
@@ -123,9 +123,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.4254587"
-     inkscape:cx="317.81774"
-     inkscape:cy="279.83733"
+     inkscape:zoom="0.76367532"
+     inkscape:cx="520.55427"
+     inkscape:cy="323.97925"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -142,7 +142,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -152,14 +152,14 @@
      id="layer1"
      transform="translate(0,-308.2677)">
     <rect
-       style="fill:#00dfff;fill-opacity:1;stroke:#000000;stroke-opacity:1"
+       style="fill:#999999;fill-opacity:1;stroke:#000000;stroke-opacity:1"
        id="rect2816"
        width="214.28572"
        height="197.14285"
        x="420"
        y="360.93362" />
     <rect
-       style="fill:#00ff6c;fill-opacity:1;stroke:#000000;stroke-opacity:1"
+       style="fill:#b3b3b3;fill-opacity:1;stroke:#000000;stroke-opacity:1"
        id="rect3590"
        width="925.71429"
        height="94.285713"
@@ -167,35 +167,35 @@
        y="315.52304"
        transform="translate(0,308.2677)" />
     <rect
-       style="fill:#fbff00;fill-opacity:1;stroke:#000000;stroke-opacity:1"
+       style="fill:#b3b3b3;fill-opacity:1;stroke:#000000;stroke-opacity:1"
        id="rect3592"
        width="165.71429"
        height="145.71428"
        x="45.714287"
        y="789.50507" />
     <rect
-       style="fill:#fbff00;fill-opacity:1;stroke:#000000;stroke-opacity:1"
+       style="fill:#cccccc;fill-opacity:1;stroke:#000000;stroke-opacity:1"
        id="rect3592-8"
        width="165.71429"
        height="145.71428"
        x="257.14285"
        y="788.07648" />
     <rect
-       style="fill:#fbff00;fill-opacity:1;stroke:#000000;stroke-opacity:1"
+       style="fill:#cccccc;fill-opacity:1;stroke:#000000;stroke-opacity:1"
        id="rect3592-87"
        width="165.71429"
        height="145.71428"
        x="468.57141"
        y="789.2193" />
     <rect
-       style="fill:#fbff00;fill-opacity:1;stroke:#000000;stroke-opacity:1"
+       style="fill:#cccccc;fill-opacity:1;stroke:#000000;stroke-opacity:1"
        id="rect3592-1"
        width="165.71429"
        height="145.71428"
        x="666.57147"
        y="787.21936" />
     <rect
-       style="fill:#fbff00;fill-opacity:1;stroke:#000000;stroke-opacity:1"
+       style="fill:#cccccc;fill-opacity:1;stroke:#000000;stroke-opacity:1"
        id="rect3592-2"
        width="165.71429"
        height="145.71428"
@@ -222,14 +222,14 @@
          x="354"
          y="678.36218">AVALON--MM BUS</tspan></text>
     <rect
-       style="fill:#00ffe6;fill-opacity:1;stroke:#000000;stroke-width:1.28285778000000006;stroke-opacity:1"
+       style="fill:#e6e6e6;fill-opacity:1;stroke:#000000;stroke-width:1.28285778000000006;stroke-opacity:1"
        id="rect3697"
        width="135.71715"
        height="49.71714"
        x="458.14142"
        y="506.5036" />
     <rect
-       style="fill:#00ffe6;fill-opacity:1;stroke:#000000;stroke-opacity:1"
+       style="fill:#e6e6e6;fill-opacity:1;stroke:#000000;stroke-opacity:1"
        id="rect3701"
        width="136"
        height="50"
@@ -237,28 +237,28 @@
        y="482.09448"
        transform="translate(0,308.2677)" />
     <rect
-       style="fill:#00ffe6;fill-opacity:1;stroke:#000000;stroke-opacity:1"
+       style="fill:#e6e6e6;fill-opacity:1;stroke:#000000;stroke-opacity:1"
        id="rect3701-1"
        width="136"
        height="50"
        x="272.82736"
        y="789.36218" />
     <rect
-       style="fill:#00ffe6;fill-opacity:1;stroke:#000000;stroke-opacity:1"
+       style="fill:#e6e6e6;fill-opacity:1;stroke:#000000;stroke-opacity:1"
        id="rect3701-8"
        width="136"
        height="50"
        x="482"
        y="789.36218" />
     <rect
-       style="fill:#00ffe6;fill-opacity:1;stroke:#000000;stroke-opacity:1"
+       style="fill:#e6e6e6;fill-opacity:1;stroke:#000000;stroke-opacity:1"
        id="rect3701-0"
        width="136"
        height="50"
        x="682"
        y="787.94849" />
     <rect
-       style="fill:#00ffe6;fill-opacity:1;stroke:#000000;stroke-opacity:1"
+       style="fill:#e6e6e6;fill-opacity:1;stroke:#000000;stroke-opacity:1"
        id="rect3701-7"
        width="136"
        height="50"
