@@ -43,7 +43,11 @@ El modelo está conformado por las siguientes capas:
 
 \subsubsection{Unidad de datos del protocolo}
 
+Es un bloque de datos que cada capa utiliza para el intercambio de información con su par en el sistema destino. 
 
+Cuando llega la información por parte del usuario, la capa de aplicación le agrega información de control y se conforma la PDU de dicha capa, la cual es transferida a la siguiente, que va a hacer lo mismo. De esta manera, cada capa agrega información a la PDU recibida de la anterior y transfiere la PDU resultante hacia la de abajo. Esto se repite hasta llegar al nivel físico, en el cual la información se transmite desde el sistema origen hacia el sistema destino en forma de bits.
+
+Una vez que los datos han llegado a destino, comienza el proceso inverso. Los bits en capa física son transferidos a la capa de enlace de datos, la cual los delimita conformando tramas (PDUs de dicha capa). En base a la información de control, cada capa va transfiriendo su PDU hacia arriba, hasta que los datos llegan a la aplicación de destino.
 
 \subsection{Ethernet}
 
