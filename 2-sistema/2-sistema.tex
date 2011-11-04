@@ -2,9 +2,18 @@
 En este capitulo se introduce brevemente una serie de conceptos que fueron utilizados para la realizacion del presente proyecto integrador. No se pretende que el lector alcance una comprensión exaustiva de los mismos, sino que tenga las herramientas necesarias para la correcta interpretacion de los capitulos posteriores. De manera paralela se introducen los bloques basicos que formaran parte del sistema planteado.
 
 \section{Sistemas Embebidos y Logica Reconfigurable}
-Un Sistema embebido es una combinacion de hardware y software diseñado para realizar funciones dedicadas,generalmente en tiempo real. En algunos casos los sistemas embebidos no actuan de manera independiente y se encuentran integrados en un sistema o producto mayor. 
-En la actualidad el 98\% de los Microprocesadores fabricados tienen como destino algun sistema embebido mientras que solo el 2\% se destina a Microprocesadores de proposito general.
-El Campo de aplicacion para los sistemas embebidos es muy amplio, pero se encuentran mayormente en:
+Un Sistema embebido es una combinacion de hardware y software diseñado para realizar funciones dedicadas,generalmente en tiempo real. En algunos casos los sistemas embebidos no actuan de manera independiente y se encuentran integrados en un sistema o producto mayor.
+En la actualidad el 98\% de los microprocesadores fabricados tienen como destino algun sistema embebido mientras que solo el 2\% se destina a microprocesadores de proposito general.
+
+El campo de aplicacion para los sistemas embebidos es muy variado, desde dispositivos portatiles como reproductores MP3 o telefonos celulares, hasta sistemas de control en centrales nucleares.
+No es posible caracterizar los componentes exactos de un sistema embebido ya que existen una gran cantidad de configuraciones posibles, pero dentro de los componentes fundamentales que se encuentran en la mayoria de los sistemas estan:
+
+\begin{itemize}
+\item Microprocesador
+\item Memoria RAM
+\item Perifericos para Captura de datos
+\item Perifericos de Comunicacion.
+\end{itemize}
 
 
 
@@ -12,9 +21,38 @@ El Campo de aplicacion para los sistemas embebidos es muy amplio, pero se encuen
 
 \section{Redes de Computadoras}
 
+\subsection{Modelo OSI}
+
+Es el modelo de red descriptivo creado por la Organización Internacional para la Estandarización en el año 1984. Sirve como marco de referencia para la definición de arquitecturas de interconexión de sistemas de comunicaciones.
+
+Se basa en el concepto de capa: Un conjunto de rutinas (y en algunos casos, hardware) que cumplen una serie de funciones determinadas. Cada capa ofrece servicios a las q se ubican por encima y hace uso de servicios ofrecidos por las de abajo.
+
+El modelo está conformado por las siguientes capas:
+
+\begin{itemize}
+	\item Aplicación: Representa el punto de acceso de las aplicaciones que hacen uso del esquema de transmisión de datos.
+	\item Presentación: Relacionada con la representación de los datos.
+	\item Sesión: se encarga de mantener y controlar el enlace establecido entre dos computadores que están transmitiendo datos.
+	\item Transporte: encargada de efectuar el transporte de los datos (que se encuentran dentro del paquete) de la máquina origen a la de destino, independizándolo del tipo de red física que se esté utilizando.
+	\item Red: Se encarga de identificar el enrutamiento existente entre una o más redes.
+	\item Enlace de datos: se ocupa del direccionamiento físico, de la topología de la red, del acceso al medio, de la detección de errores, de la distribución ordenada de tramas y del control del flujo.
+	\item Física: se encarga de las conexiones físicas de la computadora hacia la red, tanto en lo que se refiere al medio físico como a la forma en la que se transmite la información.
+\end{itemize}
+
+
+
+\subsection{Ethernet}
+
+Ethernet es un estándar de transmisión de datos para redes de área local. El mismo define las características del cableado y señalización en capa física, así como también el formato de trama en capa de enlace de datos.
+
+
+
+\subsection{Búsqueda del prefijo más largo}
+
+(... pendiente ...)
+
+
 *-*-* Esto queda como reserva de datos que despues vmaos a usar****
-
-
 
 Uno de los mayores cuellos de botella en los routers lo constituye el cómputo de del prefijo más largo para cada paquete entrante.
 
