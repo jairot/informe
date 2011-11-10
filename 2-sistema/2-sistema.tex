@@ -15,13 +15,24 @@ No es posible caracterizar los componentes exactos de un sistema embebido ya que
 \item Perifericos para Captura de datos y de Comunicacion.
 \end{itemize}
 
-El sistema embebido que sera generado apartir de este proyecto no sera la exepción y contara al menos con los componentes anteriormente nombrados. En la Figura X es posible ver el diseño preliminar del hardware de nuestro sistema.
+\begin{figure}[h]
+  \centering
+	\includegraphics[width=0.70\textwidth]{2-sistema/graf/general.eps}
+  \caption{Diseño preliminar}
+  \label{fig:diseno}
+\end{figure}
+
+El sistema embebido que sera generado apartir de este proyecto no sera la exepción y contara al menos con los componentes anteriormente nombrados. En la Figura ~\ref{fig:diseno} es posible ver el diseño preliminar del hardware de nuestro sistema.
+
+
+
 
 \subsection{Dispositivos Lógicos Programables}
 Los dispositivos logicos pueden ser clasificados en dos categorias, fijos y programables. Los fijos son permanentes, estan preparados para realizar una o una variedad especifica de funciones y una vez manufacturados no pueden ser modificados.
 En cambio, los dispositivos logicos programables, de ahora en adelante referenciados como PLDs, ofrecen como su nombre lo indica la posibilidad de ser reprogramados en cualquier momento con cualquier funcion logica que el usuario requiere y que sea soportado por el dispositivo en cuestion.	
 
 \section{Redes de Computadoras}
+
 \subsection{Modelo OSI}
 
 Es el modelo de red descriptivo creado por la Organización Internacional para la Estandarización en el año 1984. Sirve como marco de referencia para la definición de arquitecturas de interconexión de sistemas de comunicaciones.
@@ -91,7 +102,21 @@ El sistema implementado en el presente trabajo consta de un microprocesador NIOS
 \end{itemize}
 
 
+\begin{figure}[h]
+  \centering
+	\includegraphics[width=0.80\textwidth]{2-sistema/graf/sistema.eps}
+  \caption{Sistema}
+  \label{fig}
+\end{figure}
+
 A su vez, éste último está conformado por un generador de paquetes Ethernet conectado a una FIFO. Esta está a su vez conectada a un modulo denominado delay buffer, que está conectado al modulo uplink y al write output.. Uplink a su vez está conectado también a write output.
+
+\begin{figure}[h]
+  \centering
+	\includegraphics[width=0.80\textwidth]{2-sistema/graf/extractor.eps}
+  \caption{Extractor de cabeceras}
+  \label{fig}
+\end{figure}
 
 Sobre el hardware descrito anteriormente se ejecuta un software de clasificacion de paquetes, que se encuentra almacenado en una memoria RAM.
 
