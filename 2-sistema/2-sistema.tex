@@ -1,7 +1,7 @@
 \chapter{Sistema}
 En este capitulo se introduce brevemente una serie de conceptos que fueron utilizados para la realizacion del presente proyecto integrador. No se pretende que el lector alcance una comprensión exaustiva de los mismos, sino que tenga las herramientas necesarias para la correcta interpretacion de los capitulos posteriores. De manera paralela se introducen los bloques basicos que formaran parte del sistema planteado.
 
-\section{Sistemas Embebidos y Logica Reconfigurable}
+\section{Sistemas Embebidos y Dispositivos Logicos programables}
 
 Un Sistema embebido es una combinacion de hardware y software diseñado para realizar funciones dedicadas,generalmente en tiempo real. En algunos casos los sistemas embebidos no actuan de manera independiente y se encuentran integrados en un sistema o producto mayor.
 En la actualidad el 98\% de los microprocesadores fabricados tienen como destino algun sistema embebido mientras que solo el 2\% se destina a microprocesadores de proposito general.
@@ -15,11 +15,21 @@ No es posible caracterizar los componentes exactos de un sistema embebido ya que
 \item Perifericos para Captura de datos y de Comunicacion.
 \end{itemize}
 
-El sistema embebido que sera generado apartir de este proyecto no sera la exepcion y contara al menos con los componentes anteriormente nombrados. En la Figura X es posible ver el diseño preliminar del hardware de nuestro sistema.
+\begin{figure}[h]
+  \centering
+	\includegraphics[width=0.70\textwidth]{2-sistema/graf/general.eps}
+  \caption{Diseño preliminar}
+  \label{fig:diseno}
+\end{figure}
+
+El sistema embebido que sera generado apartir de este proyecto no sera la exepción y contara al menos con los componentes anteriormente nombrados. En la Figura ~\ref{fig:diseno} es posible ver el diseño preliminar del hardware de nuestro sistema.
 
 
 
 
+\subsection{Dispositivos Lógicos Programables}
+Los dispositivos logicos pueden ser clasificados en dos categorias, fijos y programables. Los fijos son permanentes, estan preparados para realizar una o una variedad especifica de funciones y una vez manufacturados no pueden ser modificados.
+En cambio, los dispositivos logicos programables, de ahora en adelante referenciados como PLDs, ofrecen como su nombre lo indica la posibilidad de ser reprogramados en cualquier momento con cualquier funcion logica que el usuario requiere y que sea soportado por el dispositivo en cuestion.	
 
 \section{Redes de Computadoras}
 
