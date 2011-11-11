@@ -1,35 +1,44 @@
 \chapter{Sistema}
-En este capitulo se introduce brevemente una serie de conceptos que fueron utilizados para la realizacion del presente proyecto integrador. No se pretende que el lector alcance una comprensión exaustiva de los mismos, sino que tenga las herramientas necesarias para la correcta interpretacion de los capitulos posteriores. De manera paralela se introducen los bloques basicos que formaran parte del sistema planteado.
+En este capitulo se introduce brevemente una serie de conceptos que fueron utilizados para la realización del presente proyecto integrador. No se pretende que el lector alcance una comprensión exhaustiva de los mismos, sino que tenga las herramientas necesarias para la correcta interpretación de los capítulos posteriores. De manera paralela se introducen los bloques básicos que formaran parte del sistema planteado.
 
-\section{Sistemas Embebidos y Dispositivos Logicos programables}
+\section{Sistemas Embebidos y Dispositivos Lógicos programables}
 
-Un Sistema embebido es una combinacion de hardware y software diseñado para realizar funciones dedicadas,generalmente en tiempo real. En algunos casos los sistemas embebidos no actuan de manera independiente y se encuentran integrados en un sistema o producto mayor.
-En la actualidad el 98\% de los microprocesadores fabricados tienen como destino algun sistema embebido mientras que solo el 2\% se destina a microprocesadores de proposito general.
+Un Sistema embebido es una combinación de hardware y software diseñado para realizar funciones dedicadas,generalmente en tiempo real. En algunos casos los sistemas embebidos no actúan de manera independiente y se encuentran integrados en un sistema o producto mayor.
+En la actualidad el 98\% de los microprocesadores fabricados tienen como destino algún sistema embebido mientras que solo el 2\% se destina a microprocesadores de propósito general.
 
-El campo de aplicacion para los sistemas embebidos es muy variado, desde dispositivos portatiles como reproductores MP3 o telefonos celulares, hasta sistemas de control en centrales nucleares.
-No es posible caracterizar los componentes exactos de un sistema embebido ya que existen una gran cantidad de configuraciones posibles, pero dentro de los componentes fundamentales que se encuentran en la mayoria de los sistemas estan:
+El campo de aplicación para los sistemas embebidos es muy variado, desde dispositivos portátiles como reproductores MP3 o teléfonos celulares, hasta sistemas de control en centrales nucleares.
+No es posible caracterizar los componentes exactos de un sistema embebido ya que existen una gran cantidad de configuraciones posibles, pero dentro de los componentes fundamentales que se encuentran en la mayoría de los sistemas están:
 
 \begin{itemize}
 \item Microprocesador
 \item Memoria RAM 
-\item Perifericos para Captura de datos y de Comunicacion.
+\item Periféricos para Captura de datos y de Comunicación.
 \end{itemize}
 
 \begin{figure}[h]
   \centering
 	\includegraphics[width=0.70\textwidth]{2-sistema/graf/general.eps}
   \caption{Diseño preliminar}
-  \label{fig:diseno}
+  \label{figu:diseno}
 \end{figure}
 
-El sistema embebido que sera generado apartir de este proyecto no sera la exepción y contara al menos con los componentes anteriormente nombrados. En la Figura ~\ref{fig:diseno} es posible ver el diseño preliminar del hardware de nuestro sistema.
+El sistema embebido que sera generado apartir de este proyecto no sera la excepción y contara al menos con los componentes anteriormente nombrados. En la Figura~\ref{figu:diseno} es posible ver el diseño preliminar del hardware de nuestro sistema.
 
 
 
 
 \subsection{Dispositivos Lógicos Programables}
-Los dispositivos logicos pueden ser clasificados en dos categorias, fijos y programables. Los fijos son permanentes, estan preparados para realizar una o una variedad especifica de funciones y una vez manufacturados no pueden ser modificados.
-En cambio, los dispositivos logicos programables, de ahora en adelante referenciados como PLDs, ofrecen como su nombre lo indica la posibilidad de ser reprogramados en cualquier momento con cualquier funcion logica que el usuario requiere y que sea soportado por el dispositivo en cuestion.	
+Los dispositivos lógicos pueden ser clasificados en dos categorías, fijos y programables. Los fijos son permanentes, están preparados para realizar una o una variedad especifica de funciones y una vez manufacturados no pueden ser modificados.
+En cambio, los dispositivos lógicos programables, de ahora en adelante referenciados como PLDs, ofrecen como su nombre lo indica la posibilidad de ser reprogramados en cualquier momento con cualquier función lógica que el usuario requiere y que sea soportado por el dispositivo en cuestión.	
+
+Existen dos grandes tipos de PLDs, FPGAs y CPLDs. Los CPLDs ofrecen una capacidad lógica pequeña, pero con unas características de temporización predecibles lo que los hace dispositivos ideales para aplicaciones de control y cualquier otra tarea de tiempo real. Además su consumo de potencia reducido y su bajo costo los posicionan muy bien en el campo de los dispositivos portátiles.
+Por otro lado las FPGAs ofrecen una mayor densidad lógica y una mejor prerrománica. Actualmente es posible encontrar hasta 2 Millones de celdas lógicas en una FPGA comercial. Además estos dispositivos ofrece módulos embebidos como tranceptores, memoria o microprocesadores. Todo esto le permite a las FPGAs ser usadas en una amplia variedad de aplicaciones como procesamiento de datos, instrumentación, telecomunicaciones y procesamiento de señales.
+
+\subsection{Sistemas embebidos en Logica Reprogramable}
+
+ç
+
+
 
 \section{Redes de Computadoras}
 
