@@ -84,9 +84,33 @@ Cuando llega la información por parte del usuario, la capa de aplicación le ag
 
 Una vez que los datos han llegado a destino, comienza el proceso inverso. Los bits en capa física son transferidos a la capa de enlace de datos, la cual los delimita conformando tramas (PDUs de dicha capa). En base a la información de control, cada capa va transfiriendo su PDU hacia arriba, hasta que los datos llegan a la aplicación de destino. Se dice que la comunicación entre capas pares es transparente, ya que cada una de ellas no es consciente de los detalles de la implementación de las capas inferiores, tanto en el sistema origen como en el sistema destino. La figura ~\ref{fig:osi} muestra este concepto.
 
+\subsection{TCP/IP}
+
+Es un conjunto de protocolos de red en los que se basa Internet y que permiten la transmisión de datos entre computadoras. Se le denomina simplemente TCP/IP, en referencia a los dos protocolos más importantes que la componen: Protocolo de Control de Transmisión (TCP) y Protocolo de Internet (IP).
+
+\subsubsection{Relación con el modelo OSI}
+
+TCP/IP puede describirse como un modelo de capas al igual que OSI. Sin embargo, éste último es más bien una abstracción teórica, que sirve como referencia, mientras que TCP/IP es una implementación práctica que cuenta con 5 capas en vez de 8.
+
+
+
+
+
 \subsection{Ethernet}
 
-Ethernet es un estándar de transmisión de datos para redes de área local. El mismo define las características del cableado y señalización en capa física, así como también el formato de trama en capa de enlace de datos.
+Ethernet es un estándar de transmisión de datos para redes de área local. El mismo define las características del cableado y señalización en capa física, así como también el formato de trama en capa de enlace de datos. 
+
+\subsubsection{Formato de trama}
+
+\begin{itemize}
+	\item SOP (Start of packet): Indica el comienzo de un paquete.
+	\item Source Address: Indica la dirección MAC de origen.
+	\item Destination Address: Indica la dirección de destino.
+	\item Ethertype / Length: Indica el tipo de trama o el tamaño de la misma, dependiendo de la versión de Ethernet.
+	\item EOP (End of packet): Indica el final de un paquete.
+\end{itemize}
+
+
 
 
 
