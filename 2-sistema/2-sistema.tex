@@ -156,7 +156,7 @@ Es un protocolo no orientado a conexión (esto es, establece una comunicación e
 
 \subsubsection{Fragmentación}
 
-La unidad máxima de transferencia (Maximum Transfer Unit - MTU) se define como el tamaño en bytes de la unidad de datos más grande que puede enviarse usando un protocolo de comunicaciones. Para el caso del protocolo IP este valor es de 64 KBytes. muy pocos protocolos o tecnologías a nivel de enlace admiten enviar tramas de semejante tamaño. Normalmente el nivel de enlace no fragmenta3, por lo que tendrá que ser IP el que adapte el tamaño de los datagramas para que quepan en las tramas del nivel de enlace; por tanto en la práctica el tamaño máximo del datagrama viene determinado por el tamaño máximo de trama característico de la red utilizada.
+La unidad máxima de transferencia (Maximum Transfer Unit - MTU) se define como el tamaño en bytes de la unidad de datos más grande que puede enviarse usando un protocolo de comunicaciones. Para el caso del protocolo IP este valor es de 64 KBytes. Muy pocos protocolos o tecnologías a nivel de enlace admiten enviar tramas de semejante tamaño. Normalmente el nivel de enlace no fragmenta3, por lo que tendrá que ser IP el que adapte el tamaño de los datagramas para que quepan en las tramas del nivel de enlace; por tanto en la práctica el tamaño máximo del datagrama viene determinado por el tamaño máximo de trama característico de la red utilizada.
 
 En este contexto, pueden distinguirse 2 tipos de fragmentación:
 
@@ -209,34 +209,78 @@ En el diseño inicial de Internet se reservaron los ocho primeros bits para la r
 	\item Una red clase C tiene los primeros tres bits a 110; el campo red ocupa los siguientes 21 bits, y el  campo host los 8 últimos. Puede haber hasta 2097152 redes clase C con 256 direcciones cada una.
 \end{itemize}
 
-Para indicar qué parte de la dirección corrresponde a la red y qué parte al host se suele utilizar una notación denominada máscara, consistente en poner a 1 los bits que corresponden a la parte de red y a 0 los que corresponden a la parte host. Así por ejemplo diremos que una red clase A tiene una máscara 255.0.0.0, lo cual equivale a decir que los ocho primeros bits especifican la red y los 24 restantes el host. Análogamente decimos que una red clase B tiene una máscara 255.255.0.0 y una clase C una máscara 255.255.255.0.
+Los bits que corresponden a la parte de red conforman lo que se denomina \textit{prefijo de red}. 
+
+La forma más común de representar una dirección IP es en lo que se denomina \textit{notación punto-decimal}. Esto es, cada uno de los cuatro octetos que conforman la dirección se colocan en base decimal separados por puntos.
 
 Las máscaras permiten extraer de forma sencilla la parte de red o de host de una dirección. Por ejemplo un router que ha de enviar un datagrama puede realizar un AND entre la dirección de destino y la máscara correspondiente, con lo que extraerá la parte de red de la dirección.
 
 Existen además direcciones (no redes) clase D cuyos primeros cuatro bits valen 1110. Las direcciones clase D se utilizan para definir grupos multicast. El grupo queda definido por los 28 bits siguientes. Puede haber hasta 268435456 direcciones multicast en Internet. Las direcciones clase D nunca puede aparecer como direcciones de origen de un datagrama.
 
-Por último, la clase E, que corresponde al valor 1111 en los primeros cuatro bits, no se utiliza de
-momento y está reservada para usos futuros.
+Por último, la clase E, que corresponde al valor 1111 en los primeros cuatro bits, no se utiliza de momento y está reservada para usos futuros.
 
 
 
 \subsection{Búsqueda del prefijo más largo}
 
-(... pendiente ...)
+\subsubsection{Formas de representar un prefijo}
+
+Existen 3 maneras de representar un prefijo de red:
+
+\begin{itemize}
+	\item Binario con asterisco: Por ejemplo, el prefijo 132.239 se denotaría 1000010011101111* (dado que 132 es en binario 10000100 y 239 es 11101111). El asterisco al final denota que los bits restantes pueden ser de cualquier valor.
+	\item Notación A/L, donde A es una dirección IP y L es la longitud del prefijo.
+	\item Notación máscara: Se utiliza una dirección de red y una máscara en vez de un prefijo explícito. De esta manera, volviendo al ejemplo anteriormente mencionado, éste puede expresarse como 132.239.0.0 con máscara 255.255.0.0
+\end{itemize}
+
+\subsubsection{Lookup}
+
+El procedimiento que se lleva acabo en un dispositivo de enrutamiento podría describirse de la siguiente manera:
+
+Un paquete llega por una interfaz de entrada. Éste porta una dirección IP determinada. El dispositivo consulta una tabla de forwardeo para determinar la interfaz de salida para el paquete en cuestión. Dicha tabla contiene un conjunto de prefijos con sus correspondientes interfaces de salida. El paquete es correspondido con el prefijo más largo que esté contenido en la dirección de destino y luego es redirigido  a la correspondiente interfaz de salida. Esta tarea de determinar el enlace de salida es denominada \textit{Búsqueda de dirección (address lookup).}
+
+\subsubsection{Búsqueda lineal}
+
+El esquema más simple de lookup consiste en una tabla, donde cada entrada contiene un prefijo (expresado en notación máscara) más un identificador de enlace de salida. Cuando llega un paquete se examina su dirección IP y se va comparando con cada uno de los prefijos almacenados. Esto es, se efectúa una operación AND entre la dirección IP del paquete y la máscara, que debe dar igual a la dirección de red de la entrada de tabla. Si esto se cumple para varios prefijos, se opta por el más largo de ellos y el paquete se expide por el enlace asociado a dicho prefijo.
+Para optimizar este esquema, los prefijos se almacenan en orden decreciente de longitud, de manera que al encontrar una coincidencia no sea necesario seguir buscando en el resto de la tabla.
+
+\subsubsection {Unibit tries}
+
+Un unibit trie es un árbol en el cual cada nodo contiene un \textit{puntero-cero }y un \textit{puntero-uno}. Partiendo del nodo raíz, todos los prefijos que comienzan con 0 son almacenados en el subarbol apuntado por el puntero-cero y aquellos que comienzan con 1 se almacenan en el subarbol apuntado por el puntero-uno.
+
+Cada subarbol es construido recursivamente de manera similar usando los bits restantes de cada uno de los prefijos.
+
+Considerar la siguiente tabla de ruteo
+
+\begin{center}
+	\begin{tabular}{|c|c|} \hline
+		\textbf{Prefijo} & \textbf{Enlace de salida} \\ \hline
+		101* & S1 \\
+		111* & S2 \\
+		11001* & S3 \\
+		1* & S4 \\
+		0* & S5 \\
+		1000* & S6 \\
+		100000* & S7 \\
+		100* & S8 \\
+		110* & S9 \\	\hline
+	\end{tabular}	
+\end{center}
 
 
-*-*-* Esto queda como reserva de datos que despues vmaos a usar****
+\begin{figure}[h]
+  \centering
+	\includegraphics[width=0.80\textwidth]{2-sistema/graf/trie.eps}
+  \caption{Unibit trie}
+  \label{fig:trie}
+\end{figure}
 
-Uno de los mayores cuellos de botella en los routers lo constituye el cómputo de del prefijo más largo para cada paquete entrante.
+A la misma le corresponde representación en unibit trie de la figura ~\ref{fig:trie}
 
-Implementar ciertos esquemas de clasificacion en hardware se ve limitado principalmente debido a 2 factores: La cantidad de memoria requerida y lla complejidad creciente de los mismos.
-
-En tanto crece el trafico en las redes se ve la necesidad de implementar esquemas mas complejos de clasificacion.
-
-Dichos esquemas tienen una implementación más sencilla en software. Dichas implementaciones estan ampliamente difundidas en la web.
-Esto hace innecesario tener que “adaptarlas” a un HDL. El paso es trivial (corregir esta redaccion)
+Considerar una dirección de destino \textit{D}. Para efectuar la búsqueda del prefijo más largo los bits de \textit{D} son usados para trazar un camino a lo largo del trie. Dicho camino comienza en el nodo raíz y continúa hasta toparse con un puntero vacío o un nodo vacío. Durante el recorrido a través del trie, el algoritmo mantiene un registro del último prefijo encontrado en un nodo en el camino. Cuando la búsqueda falla, ese es el prefijo retornado.
 
 
+\section{Sistema}
 
 El sistema implementado en el presente trabajo consta de un microprocesador NIOS2/f interconectado mediante un bus Avalon-MM a 5 componentes: 
 \begin{itemize}
@@ -266,6 +310,16 @@ A su vez, éste último está conformado por un generador de paquetes Ethernet c
 
 Sobre el hardware descrito anteriormente se ejecuta un software de clasificación de paquetes, que se encuentra almacenado en una memoria RAM.
 
+
+(... Esta información restante no se dónde colocarla ...)
+Uno de los mayores cuellos de botella en los routers lo constituye el cómputo de del prefijo más largo para cada paquete entrante.
+
+Implementar ciertos esquemas de clasificacion en hardware se ve limitado principalmente debido a 2 factores: La cantidad de memoria requerida y lla complejidad creciente de los mismos.
+
+En tanto crece el trafico en las redes se ve la necesidad de implementar esquemas mas complejos de clasificacion.
+
+Dichos esquemas tienen una implementación más sencilla en software. Dichas implementaciones estan ampliamente difundidas en la web.
+Esto hace innecesario tener que “adaptarlas” a un HDL. El paso es trivial (corregir esta redaccion)
 
 
 %\section{Distribucion Lineal}
