@@ -92,9 +92,20 @@ Es un conjunto de protocolos de red en los que se basa Internet y que permiten l
 
 TCP/IP puede describirse como un modelo de capas al igual que OSI. Sin embargo, éste último es más bien una abstracción teórica, que sirve como referencia, mientras que TCP/IP es una implementación práctica que cuenta con 5 capas en vez de 8.
 
+\begin{figure}[h]
+  \centering
+	\includegraphics[width=0.90\textwidth]{2-sistema/graf/ositcp.eps}
+  \caption{Relación entre los modelos OSI y TCP/IP}
+  \label{fig:ositcp}
+\end{figure}
 
-
-
+\begin{itemize}
+	\item Aplicación: Contiene toda la lógica necesaria para posibilitar las distintas aplicaciones de usuario.
+	\item Transporte: Encargada de garantizar que todos los datos se entreguen en forma fiable, esto es, que los datos lleguen a la aplicación de destino en el mismo orden en que fueron enviados. El protocolo más utilizado a tal fin es TCP (Transfer Control Protocol).
+	\item Internet: Provee una serie de procedimientos que permite que los datos atraviesen las distintas redes interconectadas. El protocolo IP (Internet protocol) se utiliza en esta capa para ofrecer el servicio de encaminamiento a través de varias redes.
+	\item Acceso a la red: Es responsable del intercambio de datos entre el dispositivo y la red a la cual está conectado. 
+	\item Física: Define la interfaz física entre el dispositivo de transmisión y la red. (Análoga a la capa física en el modelo OSI).
+\end{itemize}
 
 \subsection{Ethernet}
 
@@ -102,15 +113,103 @@ Ethernet es un estándar de transmisión de datos para redes de área local. El 
 
 \subsubsection{Formato de trama}
 
+\begin{figure}[h]
+  \centering
+	\includegraphics[width=1\textwidth]{2-sistema/graf/frame.eps}
+  \caption{Formato de trama IEEE 802.3}
+  \label{fig:frame}
+\end{figure}
+
+
+
+La trama Ethernet definida en el estándar original IEEE 802.3 contiene los siguientes campos
+
 \begin{itemize}
-	\item SOP (Start of packet): Indica el comienzo de un paquete.
-	\item Source Address: Indica la dirección MAC de origen.
-	\item Destination Address: Indica la dirección de destino.
-	\item Ethertype / Length: Indica el tipo de trama o el tamaño de la misma, dependiendo de la versión de Ethernet.
-	\item EOP (End of packet): Indica el final de un paquete.
+	\item Preámbulo: Es una secuencia de 56 bits que tiene 1 y 0 alternados que son utilizados para sincronización. Estos sirven para detectar la presencia de señal y para ir leyendo la señal antes que la trama de datos arrive.
+
+	\item Delimitador de comienzo de trama: Secuencia de 8 bits que tiene la configuración 10101011 que indica el comienzo de una trama.
+
+	\item Direcciones MAC de origen y destino : La dirección de destino identifica la estación o las estaciones que reciben el cuadro. La dirección de fuente identifica la estación que ha originado la trama.
+Una dirección de destino que tiene todos sus bits igual a 1 se refiere a que la trama es enviado a todas las estaciones de la LAN. Ocupan 6 bytes.
+
+	\item Longitud / tipo: Si el valor de este campo es menor o igual que 1500 indica el número de bytes que contiene el campo \textit{Payload}. Si el valor de este campo es mayor o igual a 1536, indica el tipo de protocolo de la capa MAC. Es un campo de 2 bytes.
+
+	\item Payload: Este campo contiene los datos transferidos. El largo máximo de este campo es 1500 bytes. Si la medida del campo es menor de 46 bytes es necesario usar el campo \textit{relleno} para llevar el tamaño de la trama hasta el largo mínimo.
+
+	\item Relleno: En este campo se  agregan los bytes de datos extra para llevar el largo del cuadro hasta su tamaño mínimo. El mínimo largo de trama de Ethernet es de 64 bytes desde el campo de la dirección de destino MAC hasta el campo Frame Check Sequence.
+
+	\item Secuencia de comprobación de trama: Este campo contiene el valor de 4 bytes del chequeo cíclico redundante (CRC) usado para el chequeo de errores. Cuando una estación arma un cuadro MAC esta realiza el calculo del CRC en todos los bits desde la dirección de destino MAC hasta el campo \textit{Relleno} (esto es, todos los campos excepto el Preámbulo, el delimitador de comienzo de trama y secuencia de comprobación de trama). El valor se guarda en este campo y se transmite como parte de la trama. Cuando el cuadro es recibido por la estación de destino, ésta realiza un chequeo idéntico. Si el valor calculado no es igual al valor en este campo, se asume que un error a ocurrido durante la transmisión y se descarta la trama.
 \end{itemize}
 
+\subsection{Protocolo IP}
 
+Es un protocolo no orientado a conexión (esto es, establece una comunicación entre dos puntos finales de una red en los que un mensaje puede ser enviado desde un punto final a otro sin acuerdo previo), para la comunicación de datos, a través de una red de paquetes conmutados no fiable y de mejor entrega posible sin garantías.
+
+ IP no provee ningún mecanismo para determinar si un paquete alcanza o no su destino y únicamente proporciona seguridad (mediante checksums o sumas de comprobación) de sus cabeceras y no de los datos transmitidos. Por lo tanto, la seguridad de éstos queda a cargo de algún mecanismo de capa superior.
+
+\subsubsection{Fragmentación}
+
+La unidad máxima de transferencia (Maximum Transfer Unit - MTU) se define como el tamaño en bytes de la unidad de datos más grande que puede enviarse usando un protocolo de comunicaciones. Para el caso del protocolo IP este valor es de 64 KBytes. muy pocos protocolos o tecnologías a nivel de enlace admiten enviar tramas de semejante tamaño. Normalmente el nivel de enlace no fragmenta3, por lo que tendrá que ser IP el que adapte el tamaño de los datagramas para que quepan en las tramas del nivel de enlace; por tanto en la práctica el tamaño máximo del datagrama viene determinado por el tamaño máximo de trama característico de la red utilizada.
+
+En este contexto, pueden distinguirse 2 tipos de fragmentación:
+
+\begin{itemize}
+	\item Fragmentación en ruta: se produce cuando un datagrama es creado por un host en una red con un valor determinado de MTU y en su camino hacia el host de destino ha de pasar por otra red con una MTU menor. En estos casos el router que hace la transición a la red de MTU menor ha de fragmentar los datagramas para que no excedan el tamaño de la nueva red.
+	\item Fragmentación en origen: se produce como consecuencia del diseño de la aplicación (es decir, cuando ésta trabaja con bloques de datos mayores al MTU del protocolo de enlace de datos).	
+\end{itemize}
+
+\subsubsection{Datagrama IP}
+
+\begin{figure}[h]
+  \centering
+	\includegraphics[width=1\textwidth]{2-sistema/graf/ip.eps}
+  \caption{Formato de datagrama IP}
+  \label{fig:ip}
+\end{figure}
+
+La PDU del protocolo IP se denomina \textit{datagrama IP} y se compone de los siguientes campos:
+\begin{itemize}
+	\item Version: Indica la version del protocolo.
+	\item Longitud de la cabecera: Longitud de la cabecera expresada en palabras de 32 bits.
+	\item Tipo de servicio: especifica los parámetros de fiabilidad, prioridad, retardo y rendimiento.
+	\item Longitud total: longitud total del datagrama en Bytes.
+	\item Identificador: un número de secuencia que, junto a la dirección origen y destino y el protocolo usuario, se utiliza para identificar de forma unívoca al datagrama.
+	\item Flags: Son 3 bits de los cuales solo 2 están definidos. El bit de \textit{no fragmentación} prohíbe la fragmentación cuando está puesto a 1. El bit de \textit{Más datos} se utiliza para fragmentación y reensamblado.
+	\item Desplazamiento del fragmento: indica el lugar donde se sitúa el fragmento dentro del datagrama original, medido en unidades de 64 bits.
+	\item Tiempo de vida: En cada router se decrementa en 1 unidad. Tiene como fin evitar que un datagrama se quede dando vueltas para siempre en la red.
+	\item Protocolo: especifica a que protocolo del nivel de transporte corresponde el datagrama.
+	\item Suma de comprobación de la cabecera: Es el complemento a uno de la suma en complemento a uno de todas las palabras de 16 bits de la cabecera.
+	\item Dirección origen: Codificada para permitir una asignación variable de bits para especificar la red y el sistema final conectado a la red especificada.
+	\item Dirección destino: Igual que el campo anterior.
+	\item Opciones: Contiene las opciones solicitadas por el usuario que envía los datos.
+	\item Relleno: Se usa para asegurar que la cabecera del datagrama tenga una longitud múltiplo de 31 bits.
+	\item Datos: Debe tener una longitud múltiplo de 8 bits.
+\end{itemize}
+
+\subsubsection{Dirección IP}
+
+Es un número de 32 bit que identifica un dispositivo dentro de una red que utilice el protocolo IP. Las direcciones IP se suelen representar por cuatro números decimales separados por puntos, que equivalen al valor de cada uno de los cuatro bytes que componen la dirección.
+
+Como ocurre en la mayoría de las redes las direcciones IP tienen una estructura jerárquica. Una parte de la dirección corresponde a la red, y la otra al host dentro de la red. Cuando un dispositivo de enrutamiento recibe un datagrama por una de sus interfaces compara la parte de red de la dirección con las entradas contenidas en sus tablas (que normalmente sólo contienen direcciones de red, no de host) y envía el datagrama por la interfaz correspondiente.
+ 
+En el diseño inicial de Internet se reservaron los ocho primeros bits para la red, dejando los 24 restantes para el host; se creía que con 254 redes habría suficiente para la red experimental de un proyecto de investigación del Departamento de Defensa americano. Pronto se vio que esto resultaba insuficiente, por lo que se reorganizó el espacio de direcciones reservando unos rangos para definir redes más pequeñas. El resultado de esa reorganización es lo que hoy se conoce como las redes clase A, B y C:
+
+\begin{itemize}
+	\item Una red de clase A se caracteriza por tener a 0 el primer bit de dirección; el campo red ocupa los 7 bits siguientes y el campo host los últimos 24. Puede haber hasta 128 redes de clase A con 16777216 direcciones cada una.
+
+	\item Una red de clase B tiene el primer bit a 1 y el segundo a 0; el campo red ocupa los 14 bits  siguientes, y el campo host los 16 últimos. Puede haber 16384 redes clase B con 65536  direcciones cada una.
+	
+	\item Una red clase C tiene los primeros tres bits a 110; el campo red ocupa los siguientes 21 bits, y el  campo host los 8 últimos. Puede haber hasta 2097152 redes clase C con 256 direcciones cada una.
+\end{itemize}
+
+Para indicar qué parte de la dirección corrresponde a la red y qué parte al host se suele utilizar una notación denominada máscara, consistente en poner a 1 los bits que corresponden a la parte de red y a 0 los que corresponden a la parte host. Así por ejemplo diremos que una red clase A tiene una máscara 255.0.0.0, lo cual equivale a decir que los ocho primeros bits especifican la red y los 24 restantes el host. Análogamente decimos que una red clase B tiene una máscara 255.255.0.0 y una clase C una máscara 255.255.255.0.
+
+Las máscaras permiten extraer de forma sencilla la parte de red o de host de una dirección. Por ejemplo un router que ha de enviar un datagrama puede realizar un AND entre la dirección de destino y la máscara correspondiente, con lo que extraerá la parte de red de la dirección.
+
+Existen además direcciones (no redes) clase D cuyos primeros cuatro bits valen 1110. Las direcciones clase D se utilizan para definir grupos multicast. El grupo queda definido por los 28 bits siguientes. Puede haber hasta 268435456 direcciones multicast en Internet. Las direcciones clase D nunca puede aparecer como direcciones de origen de un datagrama.
+
+Por último, la clase E, que corresponde al valor 1111 en los primeros cuatro bits, no se utiliza de
+momento y está reservada para usos futuros.
 
 
 
@@ -130,15 +229,6 @@ En tanto crece el trafico en las redes se ve la necesidad de implementar esquema
 Dichos esquemas tienen una implementación más sencilla en software. Dichas implementaciones estan ampliamente difundidas en la web.
 Esto hace innecesario tener que “adaptarlas” a un HDL. El paso es trivial (corregir esta redaccion)
 
-\section{FPGA}
-Son dispositivos lógicos programables cuya lógica interna puede ser reconfigurada. Esta característica permite implementar un diseño propio, con la posibilidad de efectuar la cantidad necesaria de pruebas hasta llegar a los resultados deseados. Se puede instanciar componentes usando la lógica interna (ej microprocesadores, PLL, Memorias,etc).
-
-\section{Sistemas embebidos}
-Aunque se pone mucho foco en el  diseño de los procesadores de proposito general en la realidad estos solo representan solo una pequeña proporcion de los procesadores efectivamente producidos cada año.  Existe una especial motivacion en la industria por los denominados “Procesadores Heterogeneos” que integran sistemas dedicados con procesadores de proposito general.
-
-(acá se podría poner algunas generalidades sobre Ethernet e IP)
-
-(tambien se podria agregar algo del problema del prefijo más largo)
 
 
 El sistema implementado en el presente trabajo consta de un microprocesador NIOS2/f interconectado mediante un bus Avalon-MM a 5 componentes: 
@@ -167,7 +257,7 @@ A su vez, éste último está conformado por un generador de paquetes Ethernet c
   \label{fig}
 \end{figure}
 
-Sobre el hardware descrito anteriormente se ejecuta un software de clasificacion de paquetes, que se encuentra almacenado en una memoria RAM.
+Sobre el hardware descrito anteriormente se ejecuta un software de clasificación de paquetes, que se encuentra almacenado en una memoria RAM.
 
 
 
