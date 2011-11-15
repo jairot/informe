@@ -42,9 +42,24 @@ En el presente proyecto se enfocara el desarrollo sobre FPGA ya que se dispone d
 La tecnologia que forma parte de las FPGA esta disponible desde mediados de los 80. Inicialmente eran usadas en su mayoria como contenedores de la logica de interconexion que rodea a aplicaciones de microprocesadores. 
 En los ultimos años las FPGA se utilizaron para el procesamiento de señales y como una alternativa a los DSP de proposito general.
 
-Actualmente existe un interes particular por el uso de las FPGA como plataforma para sistemas embebidos, especialmente en aplicaciones que no justifican el costo de un ASIC.
+Actualmente existe un interes particular por el uso de las FPGA como plataforma para sistemas embebidos, especialmente en aplicaciones que no justifican el costo de un ASIC. Esto es posible gracias a dos tendencias observadas en los ultimos años, el incremento de la cantidad de elementos logicos disponibles en cada dispositivo y la evolucion de las Herramientas de Software provistas por los fabricantes. En el figura~\ref{figa:elementoslogicos} es posible ver el aumento de la cantidad de elementos logicos, o celdas logicas, disponibles en dispositivos de alta gama de las dos empresas mas importantes del sector.
 
+\begin{figure}[ht]
+  \centering
+	\includegraphics[width=0.80\textwidth]{2-sistema/graf/legrow.eps}
+  \caption{Cantidad de Elementos Logicos/Celdas Logicas por FPGA}
+  \label{figa:elementoslogicos}
+\end{figure}
 
+\newpage
+\subsubsection{Procesadores embebidos en Logica Reprogramable}
+A la hora de implementar un sistema embebido en una FPGA es importante la seleccion del Procesador que va a formar parte del mismo, aunque se realizara un estudio mas detallado de las opciones disponibles en el proximo capitulo. En este caso tendremos dos tipos de Procesadores disponibles, Softcores y HardCores. 
+
+Los Hardcores son procesadores fisicos embebidos directamente en el Silicio de la FPGA, la obvia ventaja es el mayor rendimiento que se obtiene al contar con un procesador fisico, mientras que entre las desventajas estan la menor flexibilidad a la hora de diseñar el sistema y el mayor costo de los dispositivos que proveen este tipo de procesador.
+
+Los SoftCores son procesadores que se construyen a partir de la logica de proposito general de la FPGA, por lo cual es necesario que estos se encuentren descriptos en algun Lenguaje de Descripcion de Hardware(HDL). Aunque el rendimiento de los softcores es bastante menor que el de los hardcores, estos poseen un nivel de configuracion que permite mas opciones y ademas son, en general, independientes del dispositivo en el que se los implemente.
+
+En ambos tipos de procesadores la memoria, lo interconexion entre perifericos, los controladores de perifericos y los perifericos mismos deben ser contruidos con la logica de proposito general de la FPGA.
 
 
 \section{Redes de Computadoras}
