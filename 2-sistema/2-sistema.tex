@@ -3,6 +3,7 @@ En este capitulo se introduce brevemente una serie de conceptos que fueron utili
 
 \section{Sistemas Embebidos y Dispositivos Lógicos programables}
 
+\subsection{Sistemas Embebidos}
 Un Sistema embebido es una combinación de hardware y software diseñado para realizar funciones dedicadas,generalmente en tiempo real. En algunos casos los sistemas embebidos no actúan de manera independiente y se encuentran integrados en un sistema o producto mayor.
 En la actualidad el 98\% de los microprocesadores fabricados tienen como destino algún sistema embebido mientras que solo el 2\% se destina a microprocesadores de propósito general.
 
@@ -29,10 +30,10 @@ El sistema embebido que sera generado apartir de este proyecto no sera la excepc
 
 \subsection{Dispositivos Lógicos Programables}
 Los dispositivos lógicos pueden ser clasificados en dos categorías, fijos y programables. Los fijos son permanentes, están preparados para realizar una o una variedad especifica de funciones y una vez manufacturados no pueden ser modificados.
-En cambio, los dispositivos lógicos programables, de ahora en adelante referenciados como PLDs, ofrecen la posibilidad de ser reprogramados en cualquier momento con cualquier función lógica que el usuario requiere y que sea soportado por el dispositivo en cuestión.	
+En cambio, los dispositivos lógicos programables, de ahora en adelante referenciados como PLD, ofrecen la posibilidad de ser reprogramados en cualquier momento con cualquier función lógica que el usuario requiere y que sea soportado por el dispositivo en cuestión.	
 
-Existen dos grandes tipos de PLDs, FPGAs y CPLDs. Los CPLDs ofrecen una capacidad lógica pequeña, pero con unas características de temporización predecibles lo que los hace dispositivos ideales para aplicaciones de control y cualquier otra tarea de tiempo real. Además su consumo de potencia reducido y su bajo costo los posicionan muy bien en el campo de los dispositivos portátiles.
-Por otro lado las FPGAs ofrecen una mayor densidad lógica y una mejor prerrománica. Actualmente es posible encontrar hasta 2 Millones de celdas lógicas en una FPGA comercial. Además estos dispositivos ofrece módulos embebidos como tranceptores, memoria o microprocesadores. Todo esto le permite a las FPGAs ser usadas en una amplia variedad de aplicaciones como procesamiento de datos, instrumentación, telecomunicaciones y procesamiento de señales.
+Existen dos grandes tipos de PLD, FPGA y CPLD. Los CPLD ofrecen una capacidad lógica pequeña, pero con unas características de temporización predecibles lo que los hace dispositivos ideales para aplicaciones de control y cualquier otra tarea de tiempo real. Además su consumo de potencia reducido y su bajo costo los posicionan muy bien en el campo de los dispositivos portátiles.
+Por otro lado las FPGA ofrecen una mayor densidad lógica y un mejor rendimiento. Actualmente es posible encontrar hasta 2 millones de celdas lógicas en una FPGA comercial. Además estos dispositivos ofrece módulos embebidos como tranceptores, memoria o microprocesadores. Todo esto le permite a las FPGA ser usadas en una amplia variedad de aplicaciones como procesamiento de datos, instrumentación, telecomunicaciones y procesamiento de señales.
 
 En el presente proyecto se enfocara el desarrollo sobre FPGA ya que se dispone del Hardware necesario para dicha tarea y ademas se cuenta con el conocimiento previo que requiere el desarrollo en este tipo de dispositivos.
  
@@ -53,11 +54,11 @@ Actualmente existe un interes particular por el uso de las FPGA como plataforma 
 
 \newpage
 \subsubsection{Procesadores embebidos en Logica Reprogramable}
-A la hora de implementar un sistema embebido en una FPGA es importante la seleccion del Procesador que va a formar parte del mismo, aunque se realizara un estudio mas detallado de las opciones disponibles en el proximo capitulo. En este caso tendremos dos tipos de Procesadores disponibles, Softcores y HardCores. 
+A la hora de implementar un sistema embebido en una FPGA es importante la seleccion del procesador que va a formar parte del mismo, aunque se realizara un estudio mas detallado de las opciones disponibles en el proximo capitulo. En este caso tendremos dos tipos de procesadores disponibles, Softcores y Hardcores. 
 
 Los Hardcores son procesadores fisicos embebidos directamente en el Silicio de la FPGA, la obvia ventaja es el mayor rendimiento que se obtiene al contar con un procesador fisico, mientras que entre las desventajas estan la menor flexibilidad a la hora de diseñar el sistema y el mayor costo de los dispositivos que proveen este tipo de procesador.
 
-Los SoftCores son procesadores que se construyen a partir de la logica de proposito general de la FPGA, por lo cual es necesario que estos se encuentren descriptos en algun Lenguaje de Descripcion de Hardware(HDL). Aunque el rendimiento de los softcores es bastante menor que el de los hardcores, estos poseen un nivel de configuracion que permite mas opciones y ademas son, en general, independientes del dispositivo en el que se los implemente.
+Los Softcores son procesadores que se construyen a partir de la logica de proposito general de la FPGA, por lo cual es necesario que estos se encuentren descriptos en algun Lenguaje de Descripcion de Hardware(HDL). Aunque el rendimiento de los Softcores es bastante menor que el de los Hardcores, estos poseen un nivel de configuracion que permite mas opciones y ademas son, en general, independientes del dispositivo en el que se los implemente.
 
 En ambos tipos de procesadores la memoria, lo interconexion entre perifericos, los controladores de perifericos y los perifericos mismos deben ser contruidos con la logica de proposito general de la FPGA.
 
@@ -283,6 +284,12 @@ Considerar la siguiente tabla de ruteo
 \end{center}
 
 
+
+
+A la misma le corresponde representación en unibit trie de la figura ~\ref{fig:trie}
+
+Considerar una dirección de destino \textit{D}. Para efectuar la búsqueda del prefijo más largo los bits de \textit{D} son usados para trazar un camino a lo largo del trie. Dicho camino comienza en el nodo raíz y continúa hasta toparse con un puntero vacío o un nodo vacío. Durante el recorrido a través del trie, el algoritmo mantiene un registro del último prefijo encontrado en un nodo en el camino. Cuando la búsqueda falla, ese es el prefijo retornado.
+\newpage
 \begin{figure}[h]
   \centering
 	\includegraphics[width=0.80\textwidth]{2-sistema/graf/trie.eps}
@@ -290,13 +297,26 @@ Considerar la siguiente tabla de ruteo
   \label{fig:trie}
 \end{figure}
 
-A la misma le corresponde representación en unibit trie de la figura ~\ref{fig:trie}
+/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*
 
-Considerar una dirección de destino \textit{D}. Para efectuar la búsqueda del prefijo más largo los bits de \textit{D} son usados para trazar un camino a lo largo del trie. Dicho camino comienza en el nodo raíz y continúa hasta toparse con un puntero vacío o un nodo vacío. Durante el recorrido a través del trie, el algoritmo mantiene un registro del último prefijo encontrado en un nodo en el camino. Cuando la búsqueda falla, ese es el prefijo retornado.
+{Aca hay que poner algo(Con la bibliografia correspondiente) donde se indique que la implementacion de esots esquemas de configuracion no es factible en Hardware por}
 
+Uno de los mayores cuellos de botella en los routers lo constituye el cómputo de del prefijo más largo para cada paquete entrante.
 
-\section{Sistema}
+Implementar ciertos esquemas de clasificacion en hardware se ve limitado principalmente debido a 2 factores: La cantidad de memoria requerida y lla complejidad creciente de los mismos.
 
+En tanto crece el trafico en las redes se ve la necesidad de implementar esquemas mas complejos de clasificacion.
+
+Dichos esquemas tienen una implementación más sencilla en software. Dichas implementaciones estan ampliamente difundidas en la web.
+Esto hace innecesario tener que “adaptarlas” a un HDL. El paso es trivial (corregir esta redaccion)
+(Tiene que estar mejor escrito)
+
+/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*
+%
+\section{Diseño}
+A lo que es posible ver en la figura~\ref{figu:diseno} es necesario agregarle algun tipo de interfaz de red que posibilite el ingreso de informacion al sistema para luego procesarla. Ademas, segun lo planteado en los objetivos de este trabajo integrador, se desea implementar un sistema operativo ¿o algun tipo de capa de abstraccion?{No queda muy obvio?} que permita la ejecucion de un Software en el que se realizara dicho procesamiento de estos paquetes. Para vincular estos dos modulos tambien es necesario algun tipo de puente que transporte los datos recibidos por la interfaz de red hacia el software y luego sobreescriba los resultados obtenidos en algun tipo de TAG adjunto a los datos procesados. En la figura XX se puede ver como resulta el diseño propuesto
+
+\begin{comment}
 El sistema implementado en el presente trabajo consta de un microprocesador NIOS2/f interconectado mediante un bus Avalon-MM a 5 componentes: 
 \begin{itemize}
 \item PLL
@@ -325,16 +345,10 @@ A su vez, éste último está conformado por un generador de paquetes Ethernet c
 
 Sobre el hardware descrito anteriormente se ejecuta un software de clasificación de paquetes, que se encuentra almacenado en una memoria RAM.
 
+\end{comment}
 
-(... Esta información restante no se dónde colocarla ...)
-Uno de los mayores cuellos de botella en los routers lo constituye el cómputo de del prefijo más largo para cada paquete entrante.
 
-Implementar ciertos esquemas de clasificacion en hardware se ve limitado principalmente debido a 2 factores: La cantidad de memoria requerida y lla complejidad creciente de los mismos.
 
-En tanto crece el trafico en las redes se ve la necesidad de implementar esquemas mas complejos de clasificacion.
-
-Dichos esquemas tienen una implementación más sencilla en software. Dichas implementaciones estan ampliamente difundidas en la web.
-Esto hace innecesario tener que “adaptarlas” a un HDL. El paso es trivial (corregir esta redaccion)
 
 
 %\section{Distribucion Lineal}
