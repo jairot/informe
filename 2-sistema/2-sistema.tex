@@ -301,15 +301,13 @@ Considerar una dirección de destino \textit{D}. Para efectuar la búsqueda del 
 
 {Aca hay que poner algo(Con la bibliografia correspondiente) donde se indique que la implementacion de esots esquemas de configuracion no es factible en Hardware por}
 
-Uno de los mayores cuellos de botella en los routers lo constituye el cómputo de del prefijo más largo para cada paquete entrante.
+Uno de los mayores cuellos de botella en los routers lo constituye el cómputo de del prefijo más largo para cada paquete entrante. Esto se debe a que los nuevos protocolos realizan una selección de ruta basados más de un campo en el paquete.Esto trae como consecuencia la necesidad de  efectuar un mayor número de accesos a memoria.
 
 Implementar ciertos esquemas de clasificacion en hardware se ve limitado principalmente debido a 2 factores: La cantidad de memoria requerida y la complejidad creciente de los mismos.
 
-En tanto crece el trafico en las redes se ve la necesidad de implementar esquemas mas complejos de clasificacion.
+Implementar ciertos esquemas de clasificacion en hardware se ve limitado principalmente debido a 2 factores: La complejidad creciente de los mismos y en consecuencia la cantidad de memoria requerida. Respecto al primer factor, éste viene dado a su vez por el creciente tráfico en las redes de datos. Esto trae aparejada la necesidad de aumentar el número de políticas en los esquemas y es por ello que se requiere más cantidad de memoria como se mencionó anteriormente.
 
-Dichos esquemas tienen una implementación más sencilla en software. Dichas implementaciones estan ampliamente difundidas en la web.
-Esto hace innecesario tener que “adaptarlas” a un HDL. El paso es trivial (corregir esta redaccion)
-(Tiene que estar mejor escrito)
+Las diversas implementaciones de los mismos en software están ampliamente difundidas y documentadas. Por lo tanto, si se opta por una implementación SW dentro de un sistema embebido, puede utilizarse cualquiera de ellas con leves modificaciones. O bien, hacer una implementación propia basada en alguna de las ya existentes.
 
 /*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*
 %
