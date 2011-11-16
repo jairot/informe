@@ -303,7 +303,7 @@ Considerar una dirección de destino \textit{D}. Para efectuar la búsqueda del 
 
 Uno de los mayores cuellos de botella en los routers lo constituye el cómputo de del prefijo más largo para cada paquete entrante.
 
-Implementar ciertos esquemas de clasificacion en hardware se ve limitado principalmente debido a 2 factores: La cantidad de memoria requerida y lla complejidad creciente de los mismos.
+Implementar ciertos esquemas de clasificacion en hardware se ve limitado principalmente debido a 2 factores: La cantidad de memoria requerida y la complejidad creciente de los mismos.
 
 En tanto crece el trafico en las redes se ve la necesidad de implementar esquemas mas complejos de clasificacion.
 
@@ -314,16 +314,16 @@ Esto hace innecesario tener que “adaptarlas” a un HDL. El paso es trivial (c
 /*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*
 %
 \section{Diseño}
-A lo que es posible ver en la figura ~\ref{fig:diseno} es necesario agregarle algun tipo de interfaz de red que posibilite el ingreso de informacion al sistema para luego procesarla. Ademas, segun lo planteado en los objetivos de este trabajo integrador, se desea implementar un sistema operativo ¿o algun tipo de capa de abstraccion?{No queda muy obvio?} que permita la ejecucion de un Software en el que se realizara dicho procesamiento de estos paquetes. Para vincular estos dos modulos tambien es necesario algun tipo de puente que transporte los datos recibidos por la interfaz de red hacia el software y luego sobreescriba los resultados obtenidos en algun tipo de TAG adjunto a los datos procesados. 
+A lo que es posible ver en la figura ~\ref{fig:diseno} es necesario agregarle algun tipo de interfaz de red que posibilite el ingreso de informacion al sistema para luego procesarla. Ademas, segun lo planteado en los objetivos de este trabajo, se desea implementar un sistema operativo o algun tipo de capa de abstracción que permita la ejecucion de un Software en el que se realizará dicho procesamiento de estos paquetes. Para vincular estos dos módulos también es necesario algun tipo de puente que transporte los datos recibidos por la interfaz de red hacia el software y luego sobreescriba los resultados obtenidos en algun tipo de TAG adjunto a los datos procesados. En la figura ~\ref{fig:diseno2} se puede ver como resulta el diseño propuesto
 
-\begin{figure}[h]
+\begin{figure}[H]
   \centering
-	\includegraphics[width=0.70\textwidth]{2-sistema/graf/general2.eps}
+	\includegraphics[width=0.60\textwidth]{2-sistema/graf/general2.eps}
   \caption{Diseño preliminar actualizado.}
   \label{fig:diseno2}
 \end{figure}
 
-En la figura ~\ref{fig:diseno2} se puede ver como resulta el diseño propuesto
+
 
 \begin{comment}
 El sistema implementado en el presente trabajo consta de un microprocesador NIOS2/f interconectado mediante un bus Avalon-MM a 5 componentes: 
