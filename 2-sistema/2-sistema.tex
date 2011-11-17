@@ -1,10 +1,10 @@
 \chapter{Sistema}
-En este capitulo se introduce brevemente una serie de conceptos que fueron utilizados para la realización del presente proyecto integrador. No se pretende que el lector alcance una comprensión exhaustiva de los mismos, sino que tenga las herramientas necesarias para la correcta interpretación de los capítulos posteriores. De manera paralela se introducen los bloques básicos que formaran parte del sistema planteado.
+En este capitulo se introduce brevemente una serie de conceptos que fueron utilizados para la realización del presente proyecto integrador. No se pretende que el lector alcance una comprensión exhaustiva de los mismos, sino que tenga las herramientas necesarias para la correcta interpretación de los capítulos posteriores. De manera paralela al desarrollo de dichos conceptos se introducen los bloques básicos que formaran parte del sistema planteado.
 
-\section{Sistemas Embebidos y Dispositivos Lógicos programables}
+\section{Sistemas Embebidos y Dispositivos Lógicos Programables}
 
 \subsection{Sistemas Embebidos}
-Un Sistema embebido es una combinación de hardware y software diseñado para realizar funciones dedicadas,generalmente en tiempo real. En algunos casos los sistemas embebidos no actúan de manera independiente y se encuentran integrados en un sistema o producto mayor.
+Un Sistema embebido es una combinación de hardware y software diseñado para realizar funciones dedicadas, generalmente en tiempo real. En algunos casos los sistemas embebidos no actúan de manera independiente y se encuentran integrados en un sistema o producto mayor.
 En la actualidad el 98\% de los microprocesadores fabricados tienen como destino algún sistema embebido mientras que solo el 2\% se destina a microprocesadores de propósito general.
 
 El campo de aplicación para los sistemas embebidos es muy variado, desde dispositivos portátiles como reproductores MP3 o teléfonos celulares, hasta sistemas de control en centrales nucleares.
@@ -23,7 +23,7 @@ No es posible caracterizar los componentes exactos de un sistema embebido ya que
   \label{fig:diseno}
 \end{figure}
 
-El sistema embebido que sera generado apartir de este proyecto no sera la excepción y contara al menos con los componentes anteriormente nombrados. En la Figura ~\ref{fig:diseno} es posible ver el diseño preliminar del hardware de nuestro sistema.
+El sistema embebido que sera generado a partir de este proyecto no sera la excepción y contara al menos con los componentes anteriormente nombrados. En la Figura ~\ref{fig:diseno} es posible ver el diseño preliminar del hardware de nuestro sistema.
 
 
 
@@ -35,32 +35,32 @@ En cambio, los dispositivos lógicos programables, de ahora en adelante referenc
 Existen dos grandes tipos de PLD, FPGA y CPLD. Los CPLD ofrecen una capacidad lógica pequeña, pero con unas características de temporización predecibles lo que los hace dispositivos ideales para aplicaciones de control y cualquier otra tarea de tiempo real. Además su consumo de potencia reducido y su bajo costo los posicionan muy bien en el campo de los dispositivos portátiles.
 Por otro lado las FPGA ofrecen una mayor densidad lógica y un mejor rendimiento. Actualmente es posible encontrar hasta 2 millones de celdas lógicas en una FPGA comercial. Además estos dispositivos ofrece módulos embebidos como tranceptores, memoria o microprocesadores. Todo esto le permite a las FPGA ser usadas en una amplia variedad de aplicaciones como procesamiento de datos, instrumentación, telecomunicaciones y procesamiento de señales.
 
-En el presente proyecto se enfocará el desarrollo sobre FPGA ya que se dispone del Hardware necesario para dicha tarea y ademas se cuenta con el conocimiento previo que requiere el desarrollo en este tipo de dispositivos.
+En el presente proyecto se enfocará el desarrollo sobre FPGA ya que se dispone del Hardware necesario para dicha tarea y además se cuenta con el conocimiento previo que requiere el desarrollo en este tipo de dispositivos.
  
 
-\subsection{Sistemas embebidos en Logica Reprogramable}
+\subsection{Sistemas embebidos en Lógica Programable}
 
 La tecnología que forma parte de las FPGA esta disponible desde mediados de los 80. Inicialmente eran usadas en su mayoría como contenedores de la lógica de interconexion que rodea a aplicaciones de microprocesadores. 
-En los ultimos años las FPGA se utilizaron para el procesamiento de señales y como una alternativa a los DSP de propósito general.
+En los últimos años las FPGA se utilizaron para el procesamiento de señales y como una alternativa a los DSP de propósito general.
 
-Actualmente existe un interés particular por el uso de las FPGA como plataforma para sistemas embebidos, especialmente en aplicaciones que no justifican el costo de un ASIC. Esto es posible gracias a dos tendencias observadas en los ultimos años, el incremento de la cantidad de elementos logicos disponibles en cada dispositivo y la evolucion de las Herramientas de Software provistas por los fabricantes. En el figura~\ref{figa:elementoslogicos} es posible ver el aumento de la cantidad de elementos logicos, o celdas logicas, disponibles en dispositivos de alta gama de las dos empresas mas importantes del sector.
+Actualmente existe un interés particular por el uso de las FPGA como plataforma para sistemas embebidos, especialmente en aplicaciones que no justifican el costo de un ASIC. Esto es posible gracias a dos tendencias observadas en los últimos años, el incremento de la cantidad de elementos lógicos disponibles en cada dispositivo y la evolución de las Herramientas de Software provistas por los fabricantes. En el figura~\ref{figa:elementoslogicos} es posible ver el aumento de la cantidad de elementos lógicos, o celdas lógicas, disponibles en dispositivos de alta gama de las dos empresas mas importantes del sector.
 
 \begin{figure}[ht]
   \centering
 	\includegraphics[width=0.80\textwidth]{2-sistema/graf/legrow.eps}
-  \caption{Cantidad de Elementos Logicos/Celdas Logicas por FPGA}
+  \caption{Cantidad de Elementos Lógicos/Celdas Lógicas por FPGA}
   \label{figa:elementoslogicos}
 \end{figure}
 
 \newpage
-\subsubsection{Procesadores embebidos en Logica Reprogramable}
-A la hora de implementar un sistema embebido en una FPGA es importante la seleccion del procesador que va a formar parte del mismo, aunque se realizará un estudio mas detallado de las opciones disponibles en el próximo capítulo. En este caso tendremos dos tipos de procesadores disponibles, Softcores y Hardcores. 
+\subsubsection{Procesadores embebidos en Lógica Programable}
+A la hora de implementar un sistema embebido en una FPGA es importante la selección del procesador que va a formar parte del mismo, aunque se realizará un estudio mas detallado de las opciones disponibles en el próximo capítulo. En este caso tendremos dos tipos de procesadores disponibles, Softcores y Hardcores. 
 
-Los Hardcores son procesadores fisicos embebidos directamente en el Silicio de la FPGA. La evidente ventaja es el mayor rendimiento que se obtiene al contar con un procesador fisico, mientras que entre las desventajas estan la menor flexibilidad a la hora de diseñar el sistema y el mayor costo de los dispositivos que proveen este tipo de procesador.
+Los Hardcores son procesadores físicos embebidos directamente en el silicio de la FPGA. La evidente ventaja es el mayor rendimiento que se obtiene al contar con un procesador físico, mientras que entre las desventajas están la menor flexibilidad a la hora de diseñar el sistema y el mayor costo de los dispositivos que proveen este tipo de procesador.
 
-Los Softcores son procesadores que se construyen a partir de la lógica de propósito general de la FPGA, por lo cual es necesario que estos se encuentren descriptos en algun Lenguaje de Descripcion de Hardware(HDL). Aunque el rendimiento de los Softcores es bastante menor que el de los Hardcores, estos poseen un nivel de configuracion que permite mas opciones y ademas son, en general, independientes del dispositivo en el que se los implemente.
+Los Softcores son procesadores que se construyen a partir de la lógica de propósito general de la FPGA, por lo cual es necesario que estos se encuentren descriptos en algún Lenguaje de Descripción de Hardware(HDL). Aunque el rendimiento de los Softcores es bastante menor que el de los Hardcores, estos poseen un nivel de configuración que permite mas opciones y además son, en general, independientes del dispositivo en el que se los implemente.
 
-En ambos tipos de procesadores la memoria, lo interconexión entre perifericos, los controladores de perifericos y los perifericos mismos deben ser contruidos con la logica de proposito general de la FPGA.
+En ambos tipos de procesadores la memoria, lo interconexión entre periféricos, los controladores de periféricos y los periféricos mismos deben ser construidos con la lógica de propósito general de la FPGA.
 
 
 \section{Redes de Computadoras}
@@ -123,11 +123,11 @@ TCP/IP puede describirse como un modelo de capas al igual que OSI. Sin embargo, 
 \end{figure}
 
 \begin{itemize}
-	\item Aplicación: Contiene toda la lógica necesaria para posibilitar las distintas aplicaciones de usuario.
-	\item Transporte: Encargada de garantizar que todos los datos se entreguen en forma fiable, esto es, que los datos lleguen a la aplicación de destino en el mismo orden en que fueron enviados. El protocolo más utilizado a tal fin es TCP (Transfer Control Protocol).
-	\item Internet: Provee una serie de procedimientos que permite que los datos atraviesen las distintas redes interconectadas. El protocolo IP (Internet protocol) se utiliza en esta capa para ofrecer el servicio de encaminamiento a través de varias redes.
-	\item Acceso a la red: Es responsable del intercambio de datos entre el dispositivo y la red a la cual está conectado. 
-	\item Física: Define la interfaz física entre el dispositivo de transmisión y la red. (Análoga a la capa física en el modelo OSI).
+	\item Aplicación: contiene toda la lógica necesaria para posibilitar las distintas aplicaciones de usuario.
+	\item Transporte: encargada de garantizar que todos los datos se entreguen en forma fiable, esto es, que los datos lleguen a la aplicación de destino en el mismo orden en que fueron enviados. El protocolo más utilizado a tal fin es TCP (Transfer Control Protocol).
+	\item Internet: provee una serie de procedimientos que permite que los datos atraviesen las distintas redes interconectadas. El protocolo IP (Internet protocol) se utiliza en esta capa para ofrecer el servicio de encaminamiento a través de varias redes.
+	\item Acceso a la red: es responsable del intercambio de datos entre el dispositivo y la red a la cual está conectado. 
+	\item Física: define la interfaz física entre el dispositivo de transmisión y la red. (Análoga a la capa física en el modelo OSI).
 \end{itemize}
 
 \subsection{Ethernet}
@@ -148,20 +148,20 @@ Ethernet es un estándar de transmisión de datos para redes de área local. El 
 La trama Ethernet definida en el estándar original IEEE 802.3 contiene los siguientes campos
 
 \begin{itemize}
-	\item Preámbulo: Es una secuencia de 56 bits que tiene 1 y 0 alternados que son utilizados para sincronización. Estos sirven para detectar la presencia de señal y para ir leyendo la señal antes que la trama de datos arrive.
+	\item Preámbulo: es una secuencia de 56 bits que tiene 1 y 0 alternados que son utilizados para sincronización. Estos sirven para detectar la presencia de señal y para ir leyendo la señal antes que la trama de datos arribe.
 
-	\item Delimitador de comienzo de trama: Secuencia de 8 bits que tiene la configuración 10101011 que indica el comienzo de una trama.
+	\item Delimitador de comienzo de trama: secuencia de 8 bits que tiene la configuración 10101011 que indica el comienzo de una trama.
 
-	\item Direcciones MAC de origen y destino : La dirección de destino identifica la estación o las estaciones que reciben el cuadro. La dirección de fuente identifica la estación que ha originado la trama.
+	\item Direcciones MAC de origen y destino: la dirección de destino identifica la estación o las estaciones que reciben el cuadro. La dirección de fuente identifica la estación que ha originado la trama.
 Una dirección de destino que tiene todos sus bits igual a 1 se refiere a que la trama es enviado a todas las estaciones de la LAN. Ocupan 6 bytes.
 
-	\item Longitud / tipo: Si el valor de este campo es menor o igual que 1500 indica el número de bytes que contiene el campo \textit{Payload}. Si el valor de este campo es mayor o igual a 1536, indica el tipo de protocolo de la capa MAC. Es un campo de 2 bytes.
+	\item Longitud / tipo: si el valor de este campo es menor o igual que 1500 indica el número de bytes que contiene el campo \textit{Payload}. Si el valor de este campo es mayor o igual a 1536, indica el tipo de protocolo de la capa MAC. Es un campo de 2 bytes.
 
-	\item Payload: Este campo contiene los datos transferidos. El largo máximo de este campo es 1500 bytes. Si la medida del campo es menor de 46 bytes es necesario usar el campo \textit{relleno} para llevar el tamaño de la trama hasta el largo mínimo.
+	\item Payload: este campo contiene los datos transferidos. El largo máximo de este campo es 1500 bytes. Si la medida del campo es menor de 46 bytes es necesario usar el campo \textit{relleno} para llevar el tamaño de la trama hasta el largo mínimo.
 
-	\item Relleno: En este campo se  agregan los bytes de datos extra para llevar el largo del cuadro hasta su tamaño mínimo. El mínimo largo de trama de Ethernet es de 64 bytes desde el campo de la dirección de destino MAC hasta el campo Frame Check Sequence.
+	\item Relleno: en este campo se  agregan los bytes de datos extra para llevar el largo del cuadro hasta su tamaño mínimo. El mínimo largo de trama de Ethernet es de 64 bytes desde el campo de la dirección de destino MAC hasta el campo Frame Check Sequence.
 
-	\item Secuencia de comprobación de trama: Este campo contiene el valor de 4 bytes del chequeo cíclico redundante (CRC) usado para el chequeo de errores. Cuando una estación arma un cuadro MAC esta realiza el calculo del CRC en todos los bits desde la dirección de destino MAC hasta el campo \textit{Relleno} (esto es, todos los campos excepto el Preámbulo, el delimitador de comienzo de trama y secuencia de comprobación de trama). El valor se guarda en este campo y se transmite como parte de la trama. Cuando el cuadro es recibido por la estación de destino, ésta realiza un chequeo idéntico. Si el valor calculado no es igual al valor en este campo, se asume que un error a ocurrido durante la transmisión y se descarta la trama.
+	\item Secuencia de comprobación de trama: este campo contiene el valor de 4 bytes del chequeo cíclico redundante (CRC) usado para el chequeo de errores. Cuando una estación arma un cuadro MAC esta realiza el calculo del CRC en todos los bits desde la dirección de destino MAC hasta el campo \textit{Relleno} (esto es, todos los campos excepto el Preámbulo, el delimitador de comienzo de trama y secuencia de comprobación de trama). El valor se guarda en este campo y se transmite como parte de la trama. Cuando el cuadro es recibido por la estación de destino, ésta realiza un chequeo idéntico. Si el valor calculado no es igual al valor en este campo, se asume que un error a ocurrido durante la transmisión y se descarta la trama.
 \end{itemize}
 
 \subsection{Protocolo IP}
@@ -192,21 +192,21 @@ En este contexto, pueden distinguirse 2 tipos de fragmentación:
 
 La PDU del protocolo IP se denomina \textit{datagrama IP} y se compone de los siguientes campos:
 \begin{itemize}
-	\item Version: Indica la version del protocolo.
-	\item Longitud de la cabecera: Longitud de la cabecera expresada en palabras de 32 bits.
+	\item Versión: indica la versión del protocolo.
+	\item Longitud de la cabecera: longitud de la cabecera expresada en palabras de 32 bits.
 	\item Tipo de servicio: especifica los parámetros de fiabilidad, prioridad, retardo y rendimiento.
 	\item Longitud total: longitud total del datagrama en Bytes.
 	\item Identificador: un número de secuencia que, junto a la dirección origen y destino y el protocolo usuario, se utiliza para identificar de forma unívoca al datagrama.
-	\item Flags: Son 3 bits de los cuales solo 2 están definidos. El bit de \textit{no fragmentación} prohíbe la fragmentación cuando está puesto a 1. El bit de \textit{Más datos} se utiliza para fragmentación y reensamblado.
+	\item Flags: son 3 bits de los cuales solo 2 están definidos. El bit de \textit{no fragmentación} prohíbe la fragmentación cuando está puesto a 1. El bit de \textit{Más datos} se utiliza para fragmentación y reensamblado.
 	\item Desplazamiento del fragmento: indica el lugar donde se sitúa el fragmento dentro del datagrama original, medido en unidades de 64 bits.
-	\item Tiempo de vida: En cada router se decrementa en 1 unidad. Tiene como fin evitar que un datagrama se quede dando vueltas para siempre en la red.
+	\item Tiempo de vida: en cada router se decrementa en 1 unidad. Tiene como fin evitar que un datagrama se quede dando vueltas para siempre en la red.
 	\item Protocolo: especifica a que protocolo del nivel de transporte corresponde el datagrama.
 	\item Suma de comprobación de la cabecera: Es el complemento a uno de la suma en complemento a uno de todas las palabras de 16 bits de la cabecera.
-	\item Dirección origen: Codificada para permitir una asignación variable de bits para especificar la red y el sistema final conectado a la red especificada.
-	\item Dirección destino: Igual que el campo anterior.
-	\item Opciones: Contiene las opciones solicitadas por el usuario que envía los datos.
-	\item Relleno: Se usa para asegurar que la cabecera del datagrama tenga una longitud múltiplo de 31 bits.
-	\item Datos: Debe tener una longitud múltiplo de 8 bits.
+	\item Dirección origen: codificada para permitir una asignación variable de bits para especificar la red y el sistema final conectado a la red especificada.
+	\item Dirección destino: igual que el campo anterior.
+	\item Opciones: contiene las opciones solicitadas por el usuario que envía los datos.
+	\item Relleno: se usa para asegurar que la cabecera del datagrama tenga una longitud múltiplo de 31 bits.
+	\item Datos: debe tener una longitud múltiplo de 8 bits.
 \end{itemize}
 
 \subsubsection{Dirección IP}
@@ -215,7 +215,7 @@ Es un número de 32 bit que identifica un dispositivo dentro de una red que util
 
 Como ocurre en la mayoría de las redes las direcciones IP tienen una estructura jerárquica. Una parte de la dirección corresponde a la red, y la otra al host dentro de la red. Cuando un dispositivo de enrutamiento recibe un datagrama por una de sus interfaces compara la parte de red de la dirección con las entradas contenidas en sus tablas (que normalmente sólo contienen direcciones de red, no de host) y envía el datagrama por la interfaz correspondiente.
  
-En el diseño inicial de Internet se reservaron los ocho primeros bits para la red, dejando los 24 restantes para el host; se creía que con 254 redes habría suficiente para la red experimental de un proyecto de investigación del Departamento de Defensa americano. Pronto se vio que esto resultaba insuficiente, por lo que se reorganizó el espacio de direcciones reservando unos rangos para definir redes más pequeñas. El resultado de esa reorganización es lo que hoy se conoce como las redes clase A, B y C:
+En el diseño inicial de Internet se reservaron los ocho primeros bits para la red, dejando los 24 restantes para el host; se creía que con 254 redes habría suficiente para la red experimental de un proyecto de investigación del Departamento de Defensa americano. Pronto se vio que esto resultaba insuficiente, por lo que se reorganizó el espacio de direcciones reservando unos rangos para definir redes más pequeñas. El resultado de esa reorganización es lo que hoy se conoce como las redes clase A, B y C.
 
 \begin{itemize}
 	\item Una red de clase A se caracteriza por tener a 0 el primer bit de dirección; el campo red ocupa los 7 bits siguientes y el campo host los últimos 24. Puede haber hasta 128 redes de clase A con 16777216 direcciones cada una.
@@ -262,9 +262,9 @@ Para optimizar este esquema, los prefijos se almacenan en orden decreciente de l
 
 \subsubsection {Unibit tries}
 
-Un unibit trie es un árbol en el cual cada nodo contiene un \textit{puntero-cero }y un \textit{puntero-uno}. Partiendo del nodo raíz, todos los prefijos que comienzan con 0 son almacenados en el subarbol apuntado por el puntero-cero y aquellos que comienzan con 1 se almacenan en el subarbol apuntado por el puntero-uno.
+Un unibit trie es un árbol en el cual cada nodo contiene un \textit{puntero-cero }y un \textit{puntero-uno}. Partiendo del nodo raíz, todos los prefijos que comienzan con 0 son almacenados en el subárbol apuntado por el puntero-cero y aquellos que comienzan con 1 se almacenan en el subárbol apuntado por el puntero-uno.
 
-Cada subarbol es construido recursivamente de manera similar usando los bits restantes de cada uno de los prefijos.
+Cada subárbol es construido recursivamente de manera similar usando los bits restantes de cada uno de los prefijos.
 
 Considerar la siguiente tabla de ruteo
 
@@ -299,11 +299,11 @@ Considerar una dirección de destino \textit{D}. Para efectuar la búsqueda del 
 
 /*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*
 
-{Aca hay que poner algo(Con la bibliografia correspondiente) donde se indique que la implementacion de esots esquemas de configuracion no es factible en Hardware por}
+{Acá hay que poner algo(Con la bibliografía correspondiente) donde se indique que la implementación de estos esquemas de configuración no es factible en Hardware por}
 
 Uno de los mayores cuellos de botella en los routers lo constituye el cómputo de del prefijo más largo para cada paquete entrante. Esto se debe a que los nuevos protocolos realizan una selección de ruta basados más de un campo en el paquete.Esto trae como consecuencia la necesidad de  efectuar un mayor número de accesos a memoria.
 
-Implementar ciertos esquemas de clasificacion en hardware se ve limitado principalmente debido a 2 factores: La complejidad creciente de los mismos y en consecuencia la cantidad de memoria requerida. Respecto al primer factor, éste viene dado a su vez por el creciente tráfico en las redes de datos. Esto trae aparejada la necesidad de aumentar el número de políticas en los esquemas y es por ello que se requiere más cantidad de memoria como se mencionó anteriormente.
+Implementar ciertos esquemas de clasificación en hardware se ve limitado principalmente debido a 2 factores: La complejidad creciente de los mismos y en consecuencia la cantidad de memoria requerida. Respecto al primer factor, éste viene dado a su vez por el creciente tráfico en las redes de datos. Esto trae aparejada la necesidad de aumentar el número de políticas en los esquemas y es por ello que se requiere más cantidad de memoria como se mencionó anteriormente.
 
 Las diversas implementaciones de los mismos en software están ampliamente difundidas y documentadas. Por lo tanto, si se opta por una implementación SW dentro de un sistema embebido, puede utilizarse cualquiera de ellas con leves modificaciones. O bien, hacer una implementación propia basada en alguna de las ya existentes.
 
@@ -311,7 +311,7 @@ Las diversas implementaciones de los mismos en software están ampliamente difun
 %
 \section{Diseño}
 
-A lo que es posible ver en la figura ~\ref{fig:diseno} es necesario agregarle algun tipo de interfaz de red que posibilite el ingreso de informacion al sistema para luego procesarla. Ademas, segun lo planteado en los objetivos de este trabajo, se desea implementar un sistema operativo o algun tipo de capa de abstracción que permita la ejecucion de un Software en el que se realizará dicho procesamiento de estos paquetes. Para vincular estos dos módulos también es necesario algun tipo de puente que transporte los datos recibidos por la interfaz de red hacia el software y luego sobreescriba los resultados obtenidos en algun tipo de TAG adjunto a los datos procesados. En la figura ~\ref{fig:diseno2} se puede ver como resulta el diseño propuesto
+A lo que es posible ver en la figura ~\ref{fig:diseno} es necesario agregarle algún tipo de interfaz de red que posibilite el ingreso de información al sistema para luego procesarla. Además, según lo planteado en los objetivos de este trabajo, se desea implementar un sistema operativo o algún tipo de capa de abstracción que permita la ejecución de un Software en el que se realizará dicho procesamiento de estos paquetes. Para vincular estos dos módulos también es necesario un modulo que transporte los datos recibidos por la interfaz de red hacia el software y luego sobreescriba los resultados obtenidos en una etiqueta adjunta a los datos procesados. En la figura ~\ref{fig:diseno2} se puede ver como resulta el diseño propuesto
 
 \begin{figure}[H]
   \centering
@@ -324,12 +324,12 @@ A lo que es posible ver en la figura ~\ref{fig:diseno} es necesario agregarle al
 
 
 \begin{comment}
-El sistema implementado en el presente trabajo consta de un microprocesador NIOS2/f interconectado mediante un bus Avalon-MM a 5 componentes: 
+El sistema implementado en el presente trabajo consta de un microprocesador NIOS2/f interconectado mediante un bus Avalan-MM a 5 componentes: 
 \begin{itemize}
-\item PLL
-\item JTAG UART
-\item Iterfaz con SDRAM
-\item Timer
+\item PLE
+\item JATA USART
+\item Interfaz con DRAMA
+\item Temer
 \item Módulo extractor de cabeceras
 \end{itemize}
 
