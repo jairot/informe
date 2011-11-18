@@ -23,7 +23,7 @@ No es posible caracterizar los componentes exactos de un sistema embebido ya que
   \label{fig:diseno}
 \end{figure}
 
-El sistema embebido que sera generado a partir de este proyecto no sera la excepción y contara al menos con los componentes anteriormente nombrados. En la Figura ~\ref{fig:diseno} es posible ver el diseño preliminar del hardware de nuestro sistema.
+El sistema embebido que sera generado a partir de este proyecto no sera la excepción y contará al menos con los componentes anteriormente nombrados. En la Figura ~\ref{fig:diseno} es posible ver el diseño preliminar del hardware de nuestro sistema.
 
 
 
@@ -63,7 +63,7 @@ Los Softcores son procesadores que se construyen a partir de la lógica de prop�
 En ambos tipos de procesadores la memoria, lo interconexión entre periféricos, los controladores de periféricos y los periféricos mismos deben ser construidos con la lógica de propósito general de la FPGA.
 
 
-\section{Redes de Computadoras}
+\section{Redes de Datos}
 
 \subsection{Modelo OSI}
 
@@ -76,18 +76,18 @@ Es el modelo de red descriptivo creado por la Organización Internacional para l
   \label{fig:osi}
 \end{figure}
 
-Se basa en el concepto de \textit{capa}: Un conjunto de rutinas (y en algunos casos, hardware) que cumplen una serie de funciones determinadas. Cada capa ofrece servicios a las q se ubican por encima y hace uso de servicios ofrecidos por las de abajo. 
+Se basa en el concepto de \textit{capa}: un conjunto de rutinas (y en algunos casos, hardware) que cumplen una serie de funciones determinadas. Cada capa ofrece servicios a las q se ubican por encima y hace uso de servicios ofrecidos por las de abajo. 
 
 
 
 El modelo está conformado por las siguientes capas:
 
 \begin{itemize}
-	\item Aplicación: Representa el punto de acceso de las aplicaciones que hacen uso del esquema de transmisión de datos.
-	\item Presentación: Relacionada con la representación de los datos.
+	\item Aplicación: representa el punto de acceso de las aplicaciones que hacen uso del esquema de transmisión de datos.
+	\item Presentación: relacionada con la representación de los datos.
 	\item Sesión: se encarga de mantener y controlar el enlace establecido entre dos computadores que están transmitiendo datos.
-	\item Transporte: encargada de efectuar el transporte de los datos (que se encuentran dentro del paquete) de la máquina origen a la de destino, independizándolo del tipo de red física que se esté utilizando.
-	\item Red: Se encarga de identificar el enrutamiento existente entre una o más redes.
+	\item Transporte: encargada de transportar los datos (que se encuentran dentro del paquete) de la máquina origen a la de destino, independizándolo del tipo de red física que se esté utilizando.
+	\item Red: re encarga de identificar el enrutamiento existente entre una o más redes.
 	\item Enlace de datos: se ocupa del direccionamiento físico, de la topología de la red, del acceso al medio, de la detección de errores, de la distribución ordenada de tramas y del control del flujo.
 	\item Física: se encarga de las conexiones físicas de la computadora hacia la red, tanto en lo que se refiere al medio físico como a la forma en la que se transmite la información.
 \end{itemize}
@@ -244,9 +244,9 @@ Por último, la clase E, que corresponde al valor 1111 en los primeros cuatro bi
 Existen 3 maneras de representar un prefijo de red:
 
 \begin{itemize}
-	\item Binario con asterisco: Por ejemplo, el prefijo 132.239 se denotaría 1000010011101111* (dado que 132 es en binario 10000100 y 239 es 11101111). El asterisco al final denota que los bits restantes pueden ser de cualquier valor.
+	\item Binario con asterisco: por ejemplo, el prefijo 132.239 se denotaría 1000010011101111* (dado que 132 es en binario 10000100 y 239 es 11101111). El asterisco al final denota que los bits restantes pueden ser de cualquier valor.
 	\item Notación A/L, donde A es una dirección IP y L es la longitud del prefijo. Siguiendo el ejemplo anterior, la notación sería 132.239.0.0/16.
-	\item Notación máscara: Se utiliza una dirección de red y una máscara en vez de un prefijo explícito. De esta manera, volviendo al ejemplo anteriormente mencionado, éste puede expresarse como 132.239.0.0 con máscara 255.255.0.0
+	\item Notación máscara: pe utiliza una dirección de red y una máscara en vez de un prefijo explícito. De esta manera, volviendo al ejemplo anteriormente mencionado, éste puede expresarse como 132.239.0.0 con máscara 255.255.0.0
 \end{itemize}
 
 \subsubsection{Concepto de Lookup}
@@ -303,7 +303,7 @@ Considerar una dirección de destino \textit{D}. Para efectuar la búsqueda del 
 
 Uno de los mayores cuellos de botella en los routers lo constituye el cómputo de del prefijo más largo para cada paquete entrante. Esto se debe a que los nuevos protocolos realizan una selección de ruta basados más de un campo en el paquete.Esto trae como consecuencia la necesidad de  efectuar un mayor número de accesos a memoria.
 
-Implementar ciertos esquemas de clasificación en hardware se ve limitado principalmente debido a 2 factores: La complejidad creciente de los mismos y en consecuencia la cantidad de memoria requerida. Respecto al primer factor, éste viene dado a su vez por el creciente tráfico en las redes de datos. Esto trae aparejada la necesidad de aumentar el número de políticas en los esquemas y es por ello que se requiere más cantidad de memoria como se mencionó anteriormente.
+Implementar ciertos esquemas de clasificación en hardware se ve limitado principalmente debido a 2 factores: la complejidad creciente de los mismos y en consecuencia la cantidad de memoria requerida. Respecto al primer factor, éste viene dado a su vez por el creciente tráfico en las redes de datos. Esto trae aparejada la necesidad de aumentar el número de políticas en los esquemas y es por ello que se requiere más cantidad de memoria como se mencionó anteriormente.
 
 Las diversas implementaciones de los mismos en software están ampliamente difundidas y documentadas. Por lo tanto, si se opta por una implementación SW dentro de un sistema embebido, puede utilizarse cualquiera de ellas con leves modificaciones. O bien, hacer una implementación propia basada en alguna de las ya existentes.
 
