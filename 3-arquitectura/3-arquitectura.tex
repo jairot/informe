@@ -7,6 +7,88 @@ Como se dijo en el capitulo 2, los microprocesadores embebidos en logica reprogr
 \section{Modulo Gestor de Datos}
 \section{Software}
 
+\subsection {HAL}
+
+La Capa de Abstracción de Hardware \textit{(Hardware Abstraction Layer o HAL)} provee una interfaz simple de drivers de dispositivos para conectar los programas con el hardware subyacente. La API está integrada con la librería estándar ANSI C, lo cual permite al software acceder a los dispositivos mediante el uso de funciones C ampliamente conocidas, tal como printf, fopen, fwrite, etc.
+
+La razón de utilizar la HAL en vez de un sistema operativo, yace principalmente en la mayor simplicidad de uso que ésta presenta. En el caso de haber optado por el segundo enfoque hubiese sido necesario el desarrollo de drivers para el manejo de los dispositivos, con la complejidad que ello implica. La HAL, por otra parte, ofrece un conjunto de funciones de la librería estándar ANSI C para la interacción con el hardware del diseño, lo cual hace que dicha tarea sea significativamente más simple.
+
+
+
+\subsection {Algoritmos de clasificación}
+
+Se implementaron 2 algoritmos de clasificacion: Busqueda lineal y Busqueda en árbol unibit.
+
+El software utilizado para realizar las pruebas consistió en 2 proyectos por separado. Uno para cada tipo de búsqueda en la tabla.
+
+El mismo fue desarrollado en lenguaje c++, por presentar éste ciertas facilidades para las implementaciones llevadas a cabo. Puntualmente se sacó ventaja de un STL container (list) para implementar la búsqueda lineal. La característica utilizada en este caso fue el ordenamiento de la lista con sólo una llamada a función.
+
+Para efectuar el intercambio de datos con el hardware se hizo uso de las macros IOWR e IORD, las cuales escriben y leen respectivamente los datos hacia/desde un componente conectado al bus Avalon MM. La razón de haber usado dichas macros yace en el hecho de que las mismas no son puestas en caché. Esta característica se torna indispensable en este diseño, ya que en el mismo no se puede leer un dato sin saber si está verdaderamente disponible en el bus.
+
+
+\subsubsection {Búsqueda lineal}
+
+Se implementó en una lista enlazada, creada a partir del template list de c++. Los nodos de la lista contienen 3 campos:
+
+\begin{itemize}
+	\item Dirección de red (entero de 32 bit sin signo)
+	\item Máscara de red (entero de 32 bit sin signo)
+	\item Identificador de decisión (entero de 32 bit con signo)
+\end{itemize}
+
+Como se le dió prioridad a los prefijos de red más largos, se debió sobrecargar el operador de comparación ( > ) para que la función sort pudiese ordenar en base a la longitud de máscara. De esa manera, los nodos que contenían valores de máscara más grandes quedaban en las primeras posiciones de la lista.
+
+Cuando la función encargada del lookup recibe una dirección IP de destino, realiza los siguientes pasos:
+
+\begin{itemize}
+	\item Coloca un iterador al comienzo de la lista.
+	\item Realiza un AND con el valor de máscara del nodo que está siendo apuntado. Si el resultado de la operación es igual al valor de dirección de red de dicho nodo, entonces se retorna con el valor identificador de decisión. En otro caso, continúa la busqueda en el siguiente nodo.
+\end{itemize}
+
+\subsubsection {Busqueda en Arbol unibit}
+
+Se implementó una clase en la cual se definieron las características de los nodos del arbol, como así tambien las operaciones de inserción y búsqueda.
+
+En este contexto, pueden existir 2 tipos de nodo:
+
+\begin{itemize}
+	\item Común: no está asociado a una decisión.
+	\item Decisión: contiene un valor que identifica a la decisión a tomar. 
+\end{itemize}
+
+Cada nodo cuenta con los siguientes campos:
+\begin{itemize}
+	\item gw: es un identificador de la decisión a tomar. En los nodos no asociados a una decision, tiene el valor estipulado en la macro NONE.
+    \item zero / one: Son punteros a nodo, asociados a los bits 0/1 del prefijo que se esté leyendo.
+
+\end{itemize}
+
+
+
+
+El algoritmo de búsqueda toma como entrada la dirección IP de destino del paquete a clasificar. Luego de ello, va haciendo un testeo bit a bit de la misma, partiendo con un puntero de recorrido desde el nodo raíz. Si el bit de la dirección es 0 y el puntero zero está apuntando hacia algun nodo, el puntero de recorrido se mueve al nodo apuntado por el puntero zero. En caso contrario, se mueve al nodo apuntado por el puntero one (En caso de que exista alguno). Esto se repite nodo a nodo, hasta que ocurre alguna de las siguientes situaciones:
+
+\begin{itemize}
+    	\item     El puntero de recorrido queda varado en un nodo decision, con lo cual se retorna el valor de gw.
+    	\item El puntero de recorrido queda varado en un nodo común. 
+\end{itemize}
+
+
+
+Contemplando esta última posibilidad, el algoritmo hace que en cada nodo se chequee si se trata de un nodo decisión. En dicho caso, se almacena el campo gw en una variable y se continua el recorrido. Si se da un caso en el cual el nodo de recorrido queda apuntando a un nodo comun y luego de testear un bit se determina que el mismo no tiene un nodo asociado (es decir, que alguno de los punteros zero / one esté en NULL) la funcion retorna la variable anteriormente mencionada. 
+
+\subsection {Cache}
+
+Se implementó una cache directa. La misma consta de una tabla hash de 16 entradas. Las colisiones se resuelven por reemplazo directo. La misma fue testeada con ambos algoritmos mencionados anteriormente. Para ello, se agregó una lógica adicional que consistió en:
+
+\begin{itemize}
+	\item Al tomar una direccion IP, chequear primero si el valor de decisión se encuentra en caché.
+	\item Si está, retornar dicho valor.
+	\item En otro caso, efectuar el lookup y almacenar el valor de decisión en caché.
+\end{itemize}
+
+Para evitar el overhead introducido por el uso de clases, se optó por el uso de estructuras para la implementación de este último enfoque.
+
 \begin{comment}
 \section{Parte HW}
 
