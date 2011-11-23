@@ -21,9 +21,101 @@ Los SoftCores pueden ser clasificados en tres tipos segun su origen
 \section{Modulo Gestor de Datos}
 \section{Software}
 
+\subsection{NIOS II SBT}
+
+El NIOS II Software Building Tools (o SBT) es un conjunto de utilidades y scripts que sirve para crear y construir aplicaciones embebidas basadas en C/C++, librerías de usuario y paquetes de soporte de placa (board support packages o BSP). 
+
+Puede invocarse desde la IDE Eclipse o desde el intérprete de comandos del NIOS II.
+
+El NIOS II SBT puede crear los siguientes tipos de proyecto:
+\begin{itemize}
+	\item Aplicación NIOS II: un programa que implementa alguna funcion deseada.
+	\item NIOS II BSP: una librería que provee acceso al hardware en el sistema. Brinda un entorno de rutinas a medida para un procesador y, eventualmente, un sistema operativo. 
+	\item Librería de usuario: un conjunto de funciones reutilizables. 
+\end{itemize}
+
+\subsubsection{Aplicaciones y librerías de usuario}
+
+Para el caso de aplicaciones y librerías de usuario, el SBT genera un makefile privado (denominado \textbf{Makefile}) el cual es usado para construir el proyecto. Al hacer esto se genera un archivo .elf para una aplicación, o .a para una librería. En este último caso, también se produce un makefile público (denominado \textbf{public.mk}), que se incluye en el privado para cualquier aplicación que use la librería de usuario.
+
+Cuando se crea un makefile se provee al SBT con una lista de archivos de código fuente y una referencia al directorio donde se almacena el BSP. Luego, la herramienta examina la extensión de cada archivo fuente para determinar el lenguaje de programación. 
+
+Actualmente, los soportados son:
+
+\begin{itemize}
+	\item C (extensión .c).
+	\item C++ (extensiones .cpp, .cxx, .cc).
+	\item NIOS II Assembler (extensiones .s, .S).
+\end{itemize}
+
+
+\subsubsection{Board Support Packages}
+
+Un BSP es una librería especializada que contiene código de soporte específico del sistema. Aisla la aplicación de los detalles del sistema, tales como mapeo de memoria, dispositivos disponibles y configuración del procesador.
+
+Se compone de:
+
+\begin{itemize}
+	\item Capa de abstracción de Hardware (Hardware Abstraction Layer o HAL)
+	\item Librería C estándar newlib
+	\item Dispositivo
+\end{itemize}
+
 \subsection {HAL}
 
-La Capa de Abstracción de Hardware \textit{(Hardware Abstraction Layer o HAL)} provee una interfaz simple de drivers de dispositivos para conectar los programas con el hardware subyacente. La API está integrada con la librería estándar ANSI C, lo cual permite al software acceder a los dispositivos mediante el uso de funciones C ampliamente conocidas, tal como printf, fopen, fwrite, etc.
+La Capa de Abstracción de Hardware \textit{(Hardware Abstraction Layer o HAL)} provee una interfaz simple de drivers de dispositivos para conectar los programas con el hardware subyacente. La API está integrada con la librería estándar ANSI C, lo cual permite al software acceder a los dispositivos mediante el uso de funciones C ampliamente conocidas, tal como printf(), fopen(), fwrite(), etc.
+
+\subsubsection{Servicios}
+
+La HAL provee los siguientes servicios:
+
+\begin{itemize}
+	\item Integración con la librería estándar newlib: provee funciones estándar ANSI C de amplio uso.
+	\item Drivers de dispositivo: brinda acceso a cada dispositivo en el sistema.
+	\item API: proporciona una interfaz estándar consistente a los servicios de la HAL, tales como acceso a dispositivos y manejo de interrupciones.
+	\item Inicialización de sistema: Lleva a cabo la inicialización para el procesador y las rutinas antes de ejecutar la función principal (main).
+	\item Inicialización de dispositivos: Instancia e inicializa cada uno de los dispositivos del sistema antes de que se ejecute la función main.
+\end{itemize}
+
+La figura ~\ref{fig:hal} muestra las capas de un sistema basado en la HAL, desde el nivel de hardware hasta el programa de usuario.
+
+\begin{figure}[H]
+  \centering
+	\includegraphics[width=0.80\textwidth]{3-arquitectura/graf/hal.eps}
+  \caption{Capas de un sistema basado en la HAL.}
+  \label{fig:hal}
+\end{figure}
+
+\subsubsection{Modelos de dispositivos genéricos}
+
+La HAL provee modelos de dispositivos genéricos para diversos tipos de periféricos que se encuentran en sistemas embebidos, tales como timers, interfaces Ethernet y dispositivos de I/O que transmiten datos de caracter. Estos modelos permiten escribir programas usando una API consistente sin preocuparse por el hardware subyacente.
+
+Los tipos de periféricos cubiertos son:
+
+\begin{itemize}
+	\item Dispositivos de caracter: envían y/o reciben caracteres en forma serial, como ser una UART.
+	\item Timers: dispositivos que llevan la cuenta de los tics de un clock y pueden generar interrupciones periódicas.
+	\item Subsistemas de archivos: un mecanismo para acceder a archivos almacenados en dispositivos físicos. Dependiendo de la implementación interna, el driver del subsistema de archivos podría acceder a los dispositivos subyacentes en forma directa o usar un driver aparte.
+	\item Dispositivos Ethernet: proveen acceso a una conexión Ethernet para una pila de red, tal como la NicheStack® TCP/IP Stack, provista por Altera.
+	\item Dispositivos DMA: periféricos que llevan a cabo una gran cantidad de transacciones de datos. El origen y destino pueden ser la propia memoria o algún otro dispositivo.
+	\item Dispositivos con memoria flash: periféricos con memoria no volátil que utilizan un protocolo especial de programación para almacenar datos.
+\end{itemize}
+
+Todos los periféricos, ya sean de Altera o de terceros, deben proveer un archivo de cabecera que defina la interfaz de bajo nivel del dispositivo con el hardware. 
+
+Ciertos dispositivos tienen características específicas de hardware con requierimientos de uso que no se adaptan bien a una API de propósito general. La HAL maneja dichos requerimientos mediante la función ioctl(), cuyas opciones dependerán del periférico en cuestión.
+
+Algunos periféricos proveen funciones de acceso dedicadas que no están basadas en el modelo genérico de la HAL. En ese caso, se debe proveer un archivo de cabecera con dichas funciones.
+
+
+\subsubsection{Librería C estándar : newlib}
+La HAL integra su entorno de rutinas con una implementación open-source de la librería C estándar:\textbf{ newlib}. La misma está hecha para ser utilizada en sistemas embebidos. 
+
+
+
+
+
+
 
 La razón de utilizar la HAL en vez de un sistema operativo, yace principalmente en la mayor simplicidad de uso que ésta presenta. En el caso de haber optado por el segundo enfoque hubiese sido necesario el desarrollo de drivers para el manejo de los dispositivos, con la complejidad que ello implica. La HAL, por otra parte, ofrece un conjunto de funciones de la librería estándar ANSI C para la interacción con el hardware del diseño, lo cual hace que dicha tarea sea significativamente más simple.
 
