@@ -56,10 +56,25 @@ Un BSP es una librería especializada que contiene código de soporte específic
 Se compone de:
 
 \begin{itemize}
-	\item Capa de abstracción de Hardware (Hardware Abstraction Layer o HAL)
-	\item Librería C estándar newlib
-	\item Dispositivo
+	\item Capa de abstracción de Hardware (Hardware Abstraction Layer o HAL): Permite al software interactuar con el hardware del sistema. Se describirá en detalle más adelante en este capítulo.
+	\item Librería C estándar newlib: ANSI C estándar diseñada para sistemas embebidos.
+	\item Drivers de dispositivos: para manejar cada uno de los componentes del sistema.
+	\item Paquetes de software opcionales: permiten proveer funcionalidad adicional.
+	\item Sistema operativo de tiempo real opcional: implementación de MicroC/OS-II RTOS.
 \end{itemize}
+
+\subsubsection{Proceso de construcción del software}
+
+Para crear un proyecto de software se llevan a cabo una serie de pasos:
+
+\begin{enumerate}
+	\item Se obtiene el diseño de hardware sobre el cual va a correr el software. Dicha información está almacenada en un archivo de extensión \textbf{.sopcinfo}, el cual es generado por la herramienta SOPC builder.
+	\item Se genera el BSP con las características necesarias según las funcionalidades requeridas. También se genera un makefile para dicho paquete.
+	\item Opcionalmente, se crea una librería de usuario (junto a su correspondiente makefile).
+	\item Se escribe el software de aplicación. Se colecta todo el código fuente, y luego se genera el makefile correspondiente.
+	\item Se construye el proyecto.
+\end{enumerate}
+
 
 \subsection {HAL}
 
@@ -111,9 +126,31 @@ Algunos periféricos proveen funciones de acceso dedicadas que no están basadas
 \subsubsection{Librería C estándar : newlib}
 La HAL integra su entorno de rutinas con una implementación open-source de la librería C estándar:\textbf{ newlib}. La misma está hecha para ser utilizada en sistemas embebidos. 
 
+\subsubsection{La HAL dentro de un proyecto de software}
+La creación y administración de proyectos basados en la HAL están altamente ligadas al NIOS II SBT
 
+\begin{figure}[h]
+  \centering
+	\includegraphics[width=0.90\textwidth]{3-arquitectura/graf/halsof.eps}
+  \caption{Capas de un programa basado en HAL}
+  \label{fig:halsof}
+\end{figure}
 
+La figura ~\ref{fig:halsof} muestra el diagrama en bloques de un software basado en la HAL. Todo programa de este tipo consta de dos proyectos. El ćodigo de aplicación específico se encuentra en uno de ellos, el cual depende a su vez de otro proyecto BSP separado.
 
+EL primero contiene todo el código que el programador desarrolla. El segundo, toda la información necesaria para la interacción hardware-software. Este último a su vez depende del hardware del sistema, cuya información se encuentra en un archivo generado por la herramienta SOPC Builder.
+
+\subsubsection{El archivo de descripción del sistema (system.h)}
+El archivo system.h provee una descripción completa del software del sistema basado en NIOS II. Describe cada periférico e incluye:
+
+\begin{itemize}
+	\item La configuración de hardware del periférico.
+	\item La dirección base.
+	\item Información IRQ (si es necesario).
+	\item Un nombre simbólico para el periférico.
+\end{itemize}
+
+El SBT genera un archivo \textbf{system.h} para cada proyecto BSP, cuyo contenido dependerá del archivo .sopcinfo mencionado anteriormente en este capítulo.
 
 
 
