@@ -35,8 +35,25 @@ Se destaca el proyecto Openrisc 1200, que tiene una gran comunidad que lo soport
 
 
 \subsubsection{Tabla comparativa}
+																																						 																												
+																																								
 
-
+\begin{table}
+	\centering
+	\begin{tabular}{|p{1.65cm}|p{1.98cm}|p{1.9cm}|p{2.2cm}|p{1.5cm}|c|c|p{1.5cm}|} \hline
+		Core & Arquitectura & Licencia & Profundidad del Pipeline & Ciclos por Instruccion & MMU & FPU & FPGA \\ \hline
+		MicroBlaze & MicroBlaze & Propietaria & 3,5 & 1 & Opt & Opt & Xilinx\\ \hline
+		Nios II/fast & Nios II & Propietaria & 6 & 1 & si & opt & Altera \\ \hline
+		Nios II/std & Nios II & Propietaria & 5 & 1 & no & Opt & Altera \\ \hline
+		Nios II/econ & Nios II & Propietaria & no & 6 & no & Opt & Altera \\ \hline
+		LEON3 & SPARC-v8 & Open Source(GPL) & 7 & 1 & si & si & Xilinx, Altera, Lattice \\ \hline
+		OpenRISC 1200 & OpenRISC 1000 & Open Source(LGPL) & 5 & 1 & si & no & Xilinx, Altera, Lattice \\ \hline
+		Lattice Mico32 & Lattice Mico32 & Open Source & 6 & 1 & no & no & Indep. \\ \hline
+		Cortex-M1 & ARMv6 & Propietaria & 3 & 1 & no & no & Xilinx, Altera \\ \hline
+	\end{tabular}
+	\caption{Comparativa softcores}
+	\label{tab:comp}
+\end{table}
 
 
 \section{Modulo Gestor de Datos}
