@@ -40,15 +40,15 @@ Se destaca el proyecto Openrisc 1200, que tiene una gran comunidad que lo soport
 
 \begin{table}
 	\centering
-	\begin{tabular}{|p{1.65cm}|p{1.98cm}|p{1.9cm}|p{2.2cm}|p{1.5cm}|c|c|p{1.5cm}|} \hline
+	\begin{tabular}{|p{1.65cm}|p{1.98cm}|c|p{2.2cm}|p{1.5cm}|c|c|p{1.5cm}|} \hline
 		Core & Arquitectura & Licencia & Profundidad del Pipeline & Ciclos por Instruccion & MMU & FPU & FPGA \\ \hline
 		MicroBlaze & MicroBlaze & Propietaria & 3,5 & 1 & Opt & Opt & Xilinx\\ \hline
 		Nios II/fast & Nios II & Propietaria & 6 & 1 & si & opt & Altera \\ \hline
 		Nios II/std & Nios II & Propietaria & 5 & 1 & no & Opt & Altera \\ \hline
 		Nios II/econ & Nios II & Propietaria & no & 6 & no & Opt & Altera \\ \hline
-		LEON3 & SPARC-v8 & Open Source(GPL) & 7 & 1 & si & si & Xilinx, Altera, Lattice \\ \hline
-		OpenRISC 1200 & OpenRISC 1000 & Open Source(LGPL) & 5 & 1 & si & no & Xilinx, Altera, Lattice \\ \hline
-		Lattice Mico32 & Lattice Mico32 & Open Source & 6 & 1 & no & no & Indep. \\ \hline
+		LEON3 & SPARC-v8 & GPL & 7 & 1 & si & si & Xilinx, Altera, Lattice \\ \hline
+		OpenRISC 1200 & OpenRISC 1000 & LGPL & 5 & 1 & si & no & Xilinx, Altera, Lattice \\ \hline
+		Lattice Mico32 & Lattice Mico32 & Propietaria & 6 & 1 & no & no & Indep. \\ \hline
 		Cortex-M1 & ARMv6 & Propietaria & 3 & 1 & no & no & Xilinx, Altera \\ \hline
 	\end{tabular}
 	\caption{Comparativa softcores}
@@ -189,6 +189,31 @@ El archivo system.h provee una descripción completa del software del sistema ba
 \end{itemize}
 
 El SBT genera un archivo \textbf{system.h} para cada proyecto BSP, cuyo contenido dependerá del archivo .sopcinfo mencionado anteriormente en este capítulo.
+
+\subsubsection{Acceso al hardware}
+El software accede al hardware a través de macros que abstraen la interfaz mapeada en memoria al dispositivo. Todos los componentes proveen un directorio que define el hardware y el software del periférico en cuestión. En esta carpeta se encuentra un archivo de cabecera que define la interfaz con el hardware y su nombre es $<componente>$\_regs.h, el cual se incluye en el subdirectorio inc. Por ejemplo, el componente JTAG UART define su interfaz en el archivo $<Directorio Instalacion Altera>$/ip/altera/sopc\_builder\_ip/
+
+altera\_avalon\_jtag\_uart/inc/altera\_avalon\_jtag\_uart\_regs.h.
+
+El archivo de cabecera \_regs.h define las siguientes macros de acceso para el componente:
+\begin{itemize}
+	\item Macros de acceso a registros que proveen operaciones de lectura/escritura. Éstas son:
+	\begin{itemize}
+		\item IORD\_$<NombreDelComponente>$\_$<NombreDelRegistro>$ ($<DireccionBaseDelComponente>$).
+		\item IOWR\_$<NombreDelComponente>$\_$<NombreDelRegistro>$ ($<DireccionBaseDelComponente>$, $<Dato>$).
+	\end{itemize}
+	\item Macros de direccionamiento de registro, que retornan las direcciones físicas de cada uno de ellos. La dirección devuelta es la dirección base del componente + el valor de desplazamiento de registro especificado. Esta macro tiene el nombre de esta forma:
+	\begin{itemize}
+		\item IOADDR\_$<NombreDelComponente>$\_$<NombreDelRegistro>$ ($<DireccionBaseDelComponente>$).
+	\end{itemize}
+	\item Máscaras a nivel de bits. Estas macros tienen los siguientes nombres:
+	\begin{itemize}
+		\item $<NombreDelComponente>$\_$<NombreDelRegistro>$\_$<NombreDelCampo>$\_MSK : Máscara de bit de un campo.
+		\item $<NombreDelComponente>$\_$<NombreDelRegistro>$\_$<NombreDelCampo>$\_OFST : Desplazamiento de bit del el comienzo del campo.
+	\end{itemize}
+\end{itemize}
+
+Cabe mencionar que las los valores leídos/escritos mediante las macros de acceso a registro (IORD e IOWR) no trabajan con la caché del microprocesador.
 
 
 
