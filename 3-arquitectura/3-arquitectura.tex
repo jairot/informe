@@ -35,11 +35,9 @@ Se destaca el proyecto Openrisc 1200, que tiene una gran comunidad que lo soport
 
 
 \subsubsection{Tabla comparativa}
-																																						 																												
-																																								
-
+																																						 \newpage																												
 \begin{table}
-	\centering
+	\center
 	\begin{tabular}{|p{1.65cm}|p{1.98cm}|p{1.9cm}|p{2.2cm}|p{1.5cm}|c|c|p{1.5cm}|} \hline
 		Core & Arquitectura & Licencia & Profundidad del Pipeline & Ciclos por Instruccion & MMU & FPU & FPGA \\ \hline
 		MicroBlaze & MicroBlaze & Propietaria & 3,5 & 1 & Opt & Opt & Xilinx\\ \hline
@@ -55,7 +53,37 @@ Se destaca el proyecto Openrisc 1200, que tiene una gran comunidad que lo soport
 	\label{tab:comp}
 \end{table}
 
+\subsection{Criterios de Seleccion}
 
+Los criterios mas importantes a la hora de seleccionar el Softcore que va a ser utilizado en este proyecto son:
+\begin{itemize}
+	\item Hardware: se debe contar con el dispositivo necesario para la implementacion de estos dispositivos.
+	\item Herramientas de Diseño: la cadena de herramientas necesarias para diseñar el sistema y el software debe ser simple y funcional, para evitar que comprender las herramientas lleve mas tiempo que realizar el proyecto en si mismo.
+	\item Rendimiento: se desea que el rendimiento sea aceptable y que sea posible optimizarlo a medida de que el proyecto avanza.
+\end{itemize}
+
+Bajo estos criterios y teniendo en cuenta que en el laboratorio en que se realiza el presente proyecto integrador es posible acceder a una amplia variedad de kits de desarrollo equipados con FPGAs de Altera, todas las licencias de software y varios proyectos con antencedentes de haber puesto en funcionamiento un Nios II es este el Core seleccionado para el sistema embebido a implementar.
+
+\subsection{Nios II}
+El Nios II es un procesador RISC de 32 bits de proposito general que cuenta con las siguientes especificaciones:
+\begin{itemize}
+	\item Set de instrucciones, bus de datos y espacio de direcciones de 32 bits.
+	\item 32 registros de proposito general.
+	\item Soporte para hasta 32 interrupciones.
+	\item Controlador de interrupciones externas para soportar una mayor cantidad de interrupciones.
+	\item Multiplicacion y division en una sola instruccion de 32 x 32 produciendo un resultado de 32-bits.
+	\item Instrucciones dedicadas para multiplicaciones con resultados de 64 y 128 bits.
+	\item Acceso a una variedad de perifericos e interfases a memorias  y perifericos fuera del chip.
+	\item Modulo de depurado asistido por hardware.
+	\item Unidad de manejo de memoria (MMU) opcional para soportar sistemas operativos mas complejos.
+	\item Unidad de proteccion de memoria (MPU) opcional.
+	\item Entorno de desarrollo de software basado en GNU C/C++ integrado a Eclipse.
+	\item Integracion con SignalTap® II, el analizador de logica embebida de altera permitiendo el analisis de tiempo real de todas las señales presentes en la FPGA.
+	\item Set de instrucciones compatible entre todos las versiones del procesador Nios II.
+\end{itemize}
+
+
+\subsection{SOPC}
 \section{Modulo Gestor de Datos}
 \section{Software}
 
