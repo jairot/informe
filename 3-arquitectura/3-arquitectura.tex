@@ -1,11 +1,11 @@
 \chapter{Arquitectura}
-En este capitulos se detallara la arquitectura del proyecto en general, poniendo foco en la seleccion adecuada de las tecnologias a utilizar y completando mas detalladamente el diseño obtenida en el capitulo anterior.
+En este capítulos se detallara la arquitectura del proyecto en general, poniendo foco en la selección adecuada de las tecnologías a utilizar y completando mas detalladamente el diseño obtenida en el capitulo anterior.
 
 \section{Procesador Embebido}
 
-Como se dijo en el capitulo 2, los microprocesadores embebidos en logica reprogramable se clasifican, basicamente, en dos tipos Hardcore y Softcore. Aunque los Hardcores ofrecen unas mejores prestaciones existen muy pocos dispositivos en el mercado que ofrecen este tipo de modulos y, en general, el costo de este tipo de dispositivos es mayor que el de uno que no cuenta con un hardcore. Por esta razones de ahora en adelante se limitara el estudio a softcores, siempre buscando que lo implementado siga los principios del diseño modular a los fines de facilitar la portabilidad.
+Como se dijo en el capitulo 2, los microprocesadores embebidos en lógica reprogramable se clasifican, básicamente, en dos tipos Hardcore y Softcore. Aunque los Hardcores ofrecen unas mejores prestaciones existen muy pocos dispositivos en el mercado que ofrecen este tipo de módulos y, en general, el costo de este tipo de dispositivos es mayor que el de uno que no cuenta con un hardcore. Por estas razones de ahora en adelante se limitará el estudio a softcores, siempre buscando que lo implementado siga los principios del diseño modular a los fines de facilitar la portabilidad.
 \subsection{Estudio de los softcores disponibles}
-Los SoftCores pueden ser clasificados en tres tipos segun su origen
+Los SoftCores pueden ser clasificados en tres tipos según su origen
 
 \begin{itemize}
 	\item Provistos por los fabricantes de las FPGA
@@ -14,24 +14,24 @@ Los SoftCores pueden ser clasificados en tres tipos segun su origen
 \end{itemize}
 
 \subsubsection{Provistos por los fabricantes de las FPGA}
-Xilinx y Altera, los dos mayores fabricantes de FPGA, proveen un Softcore para integrar en sus dispositivos. La ventaja natural de este tipo de core es que se encuentran altamente integrados en las herramientas de desarrollo de dichos fabricantes, permitiendo montar un sistema embebido en minutos de manera grafica e intuitiva. Ademas estan a disposición del usuario una buena cantidad de  modulos IP para anexar al procesador y aumentar asi sus funcionalidades. 
+Xilinx y Altera, los dos mayores fabricantes de FPGA, proveen un Softcore para integrar en sus dispositivos. La ventaja natural de este tipo de core es que se encuentran altamente integrados en las herramientas de desarrollo de dichos fabricantes, permitiendo montar un sistema embebido en minutos de manera gráfica e intuitiva. Además están a disposición del usuario una buena cantidad de  módulos IP para anexar al procesador y aumentar así sus funcionalidades. 
 
-Dentro de las desventajas esta el hecho de que son dependientes de la plataforma y no es posible implementar el core propietario de Altera en un dispositivo Xilinx, y viseversa. Ademas se debe pagar una licencia por el uso de estos cores y no se cuenta con la posibilidad de observar o modificar el codigo de los mismos. 
+Dentro de las desventajas esta el hecho de que son dependientes de la plataforma y no es posible implementar el core propietario de Altera en un dispositivo Xilinx, y viseversa. Además se debe pagar una licencia por el uso de estos cores y no se cuenta con la posibilidad de observar o modificar el código de los mismos. 
 
 Xilinx ofrece a los usuarios de sus dispositivos el MicroBlaze, un procesador RISC de 32 bits con una arquitectura muy similar al MIPS DLX. A nivel herramientas de desarrollo la empresa provee el "Xilinx's EDK(Embedded Development Kit)" que permite generar un sistema embebido completo con las interconexiones necesarias. Es posible correr el sistema operativo GNU/Linux en este tipo de procesador.
 
-Altera por su parte ofrece la linea de Cores NIOS II, tambien RISC de 32 bits, que cuenta en tres variantes principales Nios II Fast, Economy y Standard y dos variantes especializadas Nios II SC core, para aplicaciones militares y aeroespaciales, y DesignWare IP, para implementar en ASIC. Altera provee ademas una interfaz de usuario para la construccion del sistema embebido llamado SOPC que se encuentra integrado a Quartus y ademas el Nios II Embedded Design Suite (EDS) que permite diseñar el software requerido para cada aplicacio. Permite la implementacion del sistema operativo GNU/Linux.
+Altera por su parte ofrece la linea de Cores NIOS II, también RISC de 32 bits, que cuenta en tres variantes principales Nios II Fast, Economy y Standard y dos variantes especializadas Nios II SC core, para aplicaciones militares y aeroespaciales, y DesignWare IP, para implementar en ASIC. Altera provee además una interfaz de usuario para la construcción del sistema embebido llamado SOPC que se encuentra integrado a la herramienta Quartus y además el Nios II Embedded Design Suite (EDS) que permite diseñar el software requerido para cada aplicacio. Permite la implementación del sistema operativo GNU/Linux.
 
 \subsubsection{Provistos por empresas distribuidoras de bloques IP}
-Existe una buena cantidad de empresas que se dedican a generar y comercializar bloques de propiedad intelectual (IP Cores o IP Blocks), unidades logicas reusables que son propiedad intelectual de un individuo o empresa.
-Varias de estas empresas cuentan con Softcores con distintas capacidades y tecnologias. La ventaja principal esla portabilidad de estos cores entre FPGA de distintos fabricantes. Entre las desventajas podemos nombrar la calidad de la documentacion y la complejidad intrinseca que implica comprender y utilizar una herramienta de desarrollo de un tercero. 
+Existe una buena cantidad de empresas que se dedican a generar y comercializar bloques de propiedad intelectual (IP Cores o IP Blocks), unidades lógicas reusables que son propiedad intelectual de un individuo o empresa.
+Varias de estas empresas cuentan con Softcores con distintas capacidades y tecnologías. La ventaja principal es la portabilidad de estos cores entre FPGA de distintos fabricantes. Entre las desventajas podemos nombrar la calidad de la documentación y la complejidad intrínseca que implica comprender y utilizar una herramienta de desarrollo de un tercero. 
 
 Dentro de los mas conocidos se puede nombrar a la linea Leon de la empresa Aeroflex, LatticeMico32 de Lattice semiconductor o ARM cortex de Freescale. Los IP core pueden estar licenciados de diferentes formas incluidas entre ellas GPL.
  
 \subsubsection{Provistos por la comunidad Open Source}
-La comunidad open source se ha encargado de producir una buena cantidad de softcores, las capacidades y perfomance de los mismos cubre casi todos los rangos. En la pagina web que lleva una lista de este tipo de proyectos, opencores, se pueden encontrar alrededor de 130 cores. El problema con este tipo de core esta en la poco uniforme calidad de la documentacion y en la calidad dudosa de varios de los cores. Sin embargo la flexibilidad para poder modificar la arquitectura a gusto y el costo cero de implementacion son ventajas nada despreciables de estos productos. 
+La comunidad open source se ha encargado de producir una buena cantidad de softcores, las capacidades y perfomance de los mismos cubre casi todos los rangos. En la pagina web que lleva una lista de este tipo de proyectos, \textit{opencores.com}, se pueden encontrar alrededor de 130 cores. El problema con este tipo de core esta en la poco uniforme calidad de la documentación y en la calidad dudosa de varios de los cores. Sin embargo la flexibilidad para poder modificar la arquitectura a gusto y el costo cero de implementación son ventajas nada despreciables de estos productos. 
 
-Se destaca el proyecto Openrisc 1200, que tiene una gran comunidad que lo soporta y algun prestigio ganado en este terreno.
+Se destaca el proyecto Openrisc 1200, que tiene una gran comunidad que lo soporta y algún prestigio ganado en este terreno.
 
 
 \subsubsection{Tabla comparativa}
@@ -41,7 +41,7 @@ Se destaca el proyecto Openrisc 1200, que tiene una gran comunidad que lo soport
 
 	\centering
 	\begin{tabular}{|p{1.65cm}|p{1.98cm}|c|p{2.2cm}|p{1.5cm}|c|c|p{1.5cm}|} \hline
-		Core & Arquitectura & Licencia & Profundidad del Pipeline & Ciclos por Instruccion & MMU & FPU & FPGA \\ \hline
+		Core & Arquitectura & Licencia & Profundidad del Pipeline & Ciclos por Instrucción & MMU & FPU & FPGA \\ \hline
 		MicroBlaze & MicroBlaze & Propietaria & 3,5 & 1 & Opt & Opt & Xilinx\\ \hline
 		Nios II/fast & Nios II & Propietaria & 6 & 1 & si & opt & Altera \\ \hline
 		Nios II/std & Nios II & Propietaria & 5 & 1 & no & Opt & Altera \\ \hline
@@ -55,32 +55,32 @@ Se destaca el proyecto Openrisc 1200, que tiene una gran comunidad que lo soport
 	\label{tab:comp}
 \end{table}
 
-\subsection{Criterios de Seleccion}
+\subsection{Criterios de Selección}
 
 Los criterios mas importantes a la hora de seleccionar el Softcore que va a ser utilizado en este proyecto son:
 \begin{itemize}
-	\item Hardware: se debe contar con el dispositivo necesario para la implementacion de estos dispositivos.
-	\item Herramientas de Diseño: la cadena de herramientas necesarias para diseñar el sistema y el software debe ser simple y funcional, para evitar que comprender las herramientas lleve mas tiempo que realizar el proyecto en si mismo.
+	\item Hardware: se debe contar con el dispositivo necesario para la implementación de estos dispositivos.
+	\item Herramientas de Diseño: la cadena de herramientas necesarias para diseñar el sistema y el software debe ser simple y funcional, para evitar que comprender las herramientas lleve mas tiempo que realizar el proyecto en sí mismo.
 	\item Rendimiento: se desea que el rendimiento sea aceptable y que sea posible optimizarlo a medida de que el proyecto avanza.
 \end{itemize}
 
-Bajo estos criterios y teniendo en cuenta que en el laboratorio en que se realiza el presente proyecto integrador es posible acceder a una amplia variedad de kits de desarrollo equipados con FPGAs de Altera, todas las licencias de software y varios proyectos con antencedentes de haber puesto en funcionamiento un Nios II es este el Core seleccionado para el sistema embebido a implementar.
+Bajo estos criterios y teniendo en cuenta que en el laboratorio en que se realiza el presente proyecto integrador es posible acceder a una amplia variedad de kits de desarrollo equipados con FPGAs de Altera, todas las licencias de software y varios proyectos con antecedentes de haber puesto en funcionamiento un Nios II es este el Core seleccionado para el sistema embebido a implementar.
 
 \subsection{Nios II}
-El Nios II es un procesador RISC de 32 bits de proposito general que cuenta con las siguientes especificaciones:
+El Nios II es un procesador RISC de 32 bits de propósito general que cuenta con las siguientes especificaciones:
 \begin{itemize}
 	\item Set de instrucciones, bus de datos y espacio de direcciones de 32 bits.
-	\item 32 registros de proposito general.
-	\item Soporte para hasta 32 interrupciones.
+	\item 32 registros de propósito general.
+	\item Soporte de hasta 32 interrupciones.
 	\item Controlador de interrupciones externas para soportar una mayor cantidad de interrupciones.
-	\item Multiplicacion y division en una sola instruccion de 32 x 32 produciendo un resultado de 32-bits.
+	\item Multiplicación y división en una sola instrucción de 32 x 32 produciendo un resultado de 32-bits.
 	\item Instrucciones dedicadas para multiplicaciones con resultados de 64 y 128 bits.
-	\item Acceso a una variedad de perifericos e interfases a memorias  y perifericos fuera del chip.
+	\item Acceso a una variedad de periféricos e interfases a memorias  y periféricos fuera del chip.
 	\item Modulo de depurado asistido por hardware.
 	\item Unidad de manejo de memoria (MMU) opcional para soportar sistemas operativos mas complejos.
-	\item Unidad de proteccion de memoria (MPU) opcional.
+	\item Unidad de protección de memoria (MPU) opcional.
 	\item Entorno de desarrollo de software basado en GNU C/C++ integrado a Eclipse.
-	\item Integracion con SignalTap® II, el analizador de logica embebida de altera permitiendo el analisis de tiempo real de todas las señales presentes en la FPGA.
+	\item Integración con SignalTap® II, el analizador de lógica embebida de altera permitiendo el análisis de tiempo real de todas las señales presentes en la FPGA.
 	\item Set de instrucciones compatible entre todos las versiones del procesador Nios II.
 \end{itemize}
 
@@ -97,7 +97,7 @@ Puede invocarse desde la IDE Eclipse o desde el intérprete de comandos del NIOS
 
 El NIOS II SBT puede crear los siguientes tipos de proyecto:
 \begin{itemize}
-	\item Aplicación NIOS II: un programa que implementa alguna funcion deseada.
+	\item Aplicación NIOS II: un programa que implementa alguna función deseada.
 	\item NIOS II BSP: una librería que provee acceso al hardware en el sistema. Brinda un entorno de rutinas a medida para un procesador y, eventualmente, un sistema operativo. 
 	\item Librería de usuario: un conjunto de funciones reutilizables. 
 \end{itemize}
@@ -146,7 +146,7 @@ Para crear un proyecto de software se llevan a cabo una serie de pasos:
 
 \subsection {HAL}
 
-La Capa de Abstracción de Hardware \textit{(Hardware Abstraction Layer o HAL)} provee una interfaz simple de drivers de dispositivos para conectar los programas con el hardware subyacente. La API está integrada con la librería estándar ANSI C, lo cual permite al software acceder a los dispositivos mediante el uso de funciones C ampliamente conocidas, tal como printf(), fopen(), fwrite(), etc.
+La Capa de Abstracción de Hardware \textit{(Hardware Abstraction Layer o HAL)} provee una interfaz simple de drivers de dispositivos para conectar los programas con el hardware subyacente. La API está integrada con la librería estándar ANSI C, lo cual permite al software acceder a los dispositivos mediante el uso de funciones C ampliamente conocidas, tales como printf(), fopen(), fwrite(), etc.
 
 \subsubsection{Servicios}
 
@@ -244,13 +244,13 @@ El archivo de cabecera \_regs.h define las siguientes macros de acceso para el c
 \end{itemize}
 
 Cabe mencionar que las los valores leídos/escritos mediante las macros de acceso a registro (IORD e IOWR) no trabajan con la caché del microprocesador.
+En este contexto, es necesario destacar esto ya que los valores intercambiados entre el módulo software y el gestor de datos tienen que ser leidos/escritos sólamente si estos están en el bus.
 
 
-
-La razón de utilizar la HAL en vez de un sistema operativo, yace principalmente en la mayor simplicidad de uso que ésta presenta. En el caso de haber optado por el segundo enfoque hubiese sido necesario el desarrollo de drivers para el manejo de los dispositivos, con la complejidad que ello implica. La HAL, por otra parte, ofrece un conjunto de funciones de la librería estándar ANSI C para la interacción con el hardware del diseño, lo cual hace que dicha tarea sea significativamente más simple.
-
+La razón de utilizar la HAL en vez de un sistema operativo, yace principalmente en la mayor simplicidad de uso que ésta presenta. En el caso de haber optado por el segundo enfoque hubiese sido necesario el desarrollo de drivers para el manejo de los dispositivos, con la complejidad que ello implica. La HAL, por otra parte, ofrece un conjunto de funciones de la librería estándar ANSI C para la interacción con el hardware del diseño, además de un conjuto de macros de fácil utilización, lo cual hace que dicha tarea sea significativamente más simple.
 
 
+\begin{comment}
 \subsection {Algoritmos de clasificación}
 
 Se implementaron 2 algoritmos de clasificacion: Busqueda lineal y Busqueda en árbol unibit.
@@ -283,7 +283,7 @@ Cuando la función encargada del lookup recibe una dirección IP de destino, rea
 
 \subsubsection {Busqueda en Arbol unibit}
 
-Se implementó una clase en la cual se definieron las características de los nodos del arbol, como así tambien las operaciones de inserción y búsqueda.
+Se implementó una clase en la cual se definieron las características de los nodos del arbol, como así también las operaciones de inserción y búsqueda.
 
 En este contexto, pueden existir 2 tipos de nodo:
 
@@ -302,7 +302,7 @@ Cada nodo cuenta con los siguientes campos:
 
 
 
-El algoritmo de búsqueda toma como entrada la dirección IP de destino del paquete a clasificar. Luego de ello, va haciendo un testeo bit a bit de la misma, partiendo con un puntero de recorrido desde el nodo raíz. Si el bit de la dirección es 0 y el puntero zero está apuntando hacia algun nodo, el puntero de recorrido se mueve al nodo apuntado por el puntero zero. En caso contrario, se mueve al nodo apuntado por el puntero one (En caso de que exista alguno). Esto se repite nodo a nodo, hasta que ocurre alguna de las siguientes situaciones:
+El algoritmo de búsqueda toma como entrada la dirección IP de destino del paquete a clasificar. Luego de ello, va haciendo un testeo bit a bit de la misma, partiendo con un puntero de recorrido desde el nodo raíz. Si el bit de la dirección es 0 y el puntero zero está apuntando hacia algún nodo, el puntero de recorrido se mueve al nodo apuntado por el puntero zero. En caso contrario, se mueve al nodo apuntado por el puntero one (En caso de que exista alguno). Esto se repite nodo a nodo, hasta que ocurre alguna de las siguientes situaciones:
 
 \begin{itemize}
     	\item     El puntero de recorrido queda varado en un nodo decision, con lo cual se retorna el valor de gw.
@@ -311,7 +311,7 @@ El algoritmo de búsqueda toma como entrada la dirección IP de destino del paqu
 
 
 
-Contemplando esta última posibilidad, el algoritmo hace que en cada nodo se chequee si se trata de un nodo decisión. En dicho caso, se almacena el campo gw en una variable y se continua el recorrido. Si se da un caso en el cual el nodo de recorrido queda apuntando a un nodo comun y luego de testear un bit se determina que el mismo no tiene un nodo asociado (es decir, que alguno de los punteros zero / one esté en NULL) la funcion retorna la variable anteriormente mencionada. 
+Contemplando esta última posibilidad, el algoritmo hace que en cada nodo se chequee si se trata de un nodo decisión. En dicho caso, se almacena el campo gw en una variable y se continua el recorrido. Si se da un caso en el cual el nodo de recorrido queda apuntando a un nodo comun y luego de testear un bit se determina que el mismo no tiene un nodo asociado (es decir, que alguno de los punteros zero / one esté en NULL) la función retorna la variable anteriormente mencionada. 
 
 \subsection {Cache}
 
@@ -325,7 +325,7 @@ Se implementó una cache directa. La misma consta de una tabla hash de 16 entrad
 
 Para evitar el overhead introducido por el uso de clases, se optó por el uso de estructuras para la implementación de este último enfoque.
 
-\begin{comment}
+
 \section{Parte HW}
 
 \subsection{Componentes del sistema}
@@ -395,7 +395,7 @@ Cuando la función encargada del lookup recibe una dirección IP de destino, rea
 
 \subsection {Busqueda en Arbol unibit}
 
-Se implementó una clase en la cual se definieron las características de los nodos del arbol, como así tambien las operaciones de inserción y búsqueda.
+Se implementó una clase en la cual se definieron las características de los nodos del arbol, como así también las operaciones de inserción y búsqueda.
 Cada nodo cuenta con los siguientes campos:
 \begin{itemize}
 	\item gw: es un identificador de la decisión a tomar. En los nodos no asociados a una decision, tiene el valor estipulado en la macro NONE.
@@ -412,7 +412,7 @@ En este contexto, pueden existir 2 tipos de nodo:
 
 
 
-El algoritmo de búsqueda toma como entrada la dirección IP de destino del paquete a clasificar. Luego de ello, va haciendo un testeo bit a bit de la misma, partiendo con un puntero de recorrido desde el nodo raíz. Si el bit de la dirección es 0 y el puntero zero está apuntando hacia algun nodo, el puntero de recorrido se mueve al nodo apuntado por el puntero zero. En caso contrario, se mueve al nodo apuntado por one (En caso de que exista). Esto se repite nodo a nodo, hasta que:
+El algoritmo de búsqueda toma como entrada la dirección IP de destino del paquete a clasificar. Luego de ello, va haciendo un testeo bit a bit de la misma, partiendo con un puntero de recorrido desde el nodo raíz. Si el bit de la dirección es 0 y el puntero zero está apuntando hacia algún nodo, el puntero de recorrido se mueve al nodo apuntado por el puntero zero. En caso contrario, se mueve al nodo apuntado por one (En caso de que exista). Esto se repite nodo a nodo, hasta que:
 
 \begin{itemize}
     	\item     El puntero de recorrido queda varado en un nodo decision, con lo cual se retorna el valor de gw. Ó
@@ -421,7 +421,7 @@ El algoritmo de búsqueda toma como entrada la dirección IP de destino del paqu
 
 
 
-Contemplando esta última posibilidad, el algoritmo hace que en cada nodo se chequee si se trata de un nodo decisión. En dicho caso, se almacena el campo gw en una variable y se continua el recorrido. Si se da un caso en el cual el nodo de recorrido queda apuntando a un nodo comun y luego de testear un bit se determina que el mismo no tiene un nodo asociado (es decir, que alguno de los punteros zero / one esté en NULL) la funcion retorna la variable anteriormente mencionada. 
+Contemplando esta última posibilidad, el algoritmo hace que en cada nodo se chequee si se trata de un nodo decisión. En dicho caso, se almacena el campo gw en una variable y se continua el recorrido. Si se da un caso en el cual el nodo de recorrido queda apuntando a un nodo comun y luego de testear un bit se determina que el mismo no tiene un nodo asociado (es decir, que alguno de los punteros zero / one esté en NULL) la función retorna la variable anteriormente mencionada. 
 
 \subsection {Cache}
 
