@@ -80,13 +80,57 @@ El Nios II es un procesador RISC de 32 bits de propósito general que cuenta con
 	\item Unidad de manejo de memoria (MMU) opcional para soportar sistemas operativos mas complejos.
 	\item Unidad de protección de memoria (MPU) opcional.
 	\item Entorno de desarrollo de software basado en GNU C/C++ integrado a Eclipse.
-	\item Integración con SignalTap® II, el analizador de lógica embebida de altera permitiendo el análisis de tiempo real de todas las señales presentes en la FPGA.
+	\item Integración con SignalTap® II, el analizador de lógica embebida de Altera permitiendo el análisis de tiempo real de todas las señales presentes en la FPGA.
 	\item Set de instrucciones compatible entre todos las versiones del procesador Nios II.
 \end{itemize}
 
+Para poder ser implementado en una mayor variedad de dispositivos el Nios II ofrece 3 configuraciones diferentes:  Nios II/f (fast), Nios II/s (standard), and Nios II/e (economy).
+
+\subsubsection{Nios II/e}
+El Core Nios II/e esta diseñado para utilizar la menor cantidad de espacio posible. Esto esto funciona especialmente para FPGA de bajo costo. Tiene las siguientes caracteristicas:
+\begin{itemize}
+	\item Espacio de direcciones de hasta 2GB
+	\item Gratuito, no requiere licencia 
+\end{itemize}
+
+\subsubsection{Nios II/s}
+El Nios II/s esta diseñado para mantener un balance entre rendimiento y costo. Entre sus caracteristicas principales estan:
+
+\begin{itemize}
+	\item Cache de instrucciones
+	\item Espacio de direcciones de hasta 2GB
+	\item Pipeline de 5 etapas
+	\item Predictor de saltos estatico
+	\item Multiplicador y divisor por hardware. 
+\end{itemize}
+
+
+
+\subsubsection{Nios II/f}
+El core Nios II/f esta diseñado para ofrecer la mayor performance a las expensas de un mayor tamaño, medido en unidades logicas, este core tiene las siguientes caracteristicas:
+
+\begin{itemize}
+	\item Cache de instrucciones y de datos separadas
+	\item MMU y MPU opcionales
+	\item Espacio de direcciones de hasta 2GB
+	\item Pipeline de 6 etapas
+	\item Mutiplicador por hardware en un ciclo
+	\item Divisor por hardware opcional
+	\item Predictor de saltos dinamico
+\end{itemize}
+
+
+//No se que mas poner estoy trabado aca//
+
+
+\subsection{Bus Avalon}
 
 \subsection{SOPC}
+
+
 \section{Modulo Gestor de Datos}
+En esta seccion se detallara una 
+
 \section{Software}
 
 \subsection{NIOS II SBT}
