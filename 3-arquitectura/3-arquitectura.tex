@@ -290,6 +290,7 @@ El archivo de cabecera \_regs.h define las siguientes macros de acceso para el c
 Cabe mencionar que las los valores leídos/escritos mediante las macros de acceso a registro (IORD e IOWR) no trabajan con la caché del microprocesador.
 En este contexto, es necesario destacar esto ya que los valores intercambiados entre el módulo software y el gestor de datos tienen que ser leidos/escritos sólamente si estos están en el bus.
 
+\subsubsection{Criterio de selección: HAL vs. Sistema Operativo}
 
 La razón de utilizar la HAL en vez de un sistema operativo, yace principalmente en la mayor simplicidad de uso que ésta presenta. En el caso de haber optado por el segundo enfoque hubiese sido necesario el desarrollo de drivers para el manejo de los dispositivos, con la complejidad que ello implica. La HAL, por otra parte, ofrece un conjunto de funciones de la librería estándar ANSI C para la interacción con el hardware del diseño, además de un conjuto de macros de fácil utilización, lo cual hace que dicha tarea sea significativamente más simple.
 
