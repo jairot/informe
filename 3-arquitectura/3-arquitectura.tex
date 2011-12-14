@@ -132,7 +132,7 @@ El core Nios II/f esta diseñado para ofrecer la mayor performance a las expensa
 En esta seccion se detallara la funcion de cada uno de los bloques que integran el modulo que sera el encargado de gestionar el flujo de datos y la comunicacion con el procesador. 
 
 \subsection{Interfaz de Red}
-A los fines de poder trabajar con un entorno de prueba mas controlado se utlizara un generador de paquetes en remplazo de la interfaz de red propuesta ne la figura XX. 
+A los fines de poder trabajar con un entorno de prueba mas controlado se utlizara un generador de paquetes en remplazo de la interfaz de red propuesta en la figura XX. 
 Este modulo debe ser altamente parametrizable para poder enfrentar el sistema a distintos escenarios. Dentro de los parametros que se necesita variar se encuentran:
 
 \begin{itemize}
@@ -142,17 +142,27 @@ Este modulo debe ser altamente parametrizable para poder enfrentar el sistema a 
 	\item Inicio y parada del flujo de datos. 
 \end{itemize}
 
-En el laboratorio en el cual se desarrollo este proyecto integrador se han desarrollado diferentes generadores y es posible acceder al codigo de los mismos para reusarlos. 
+En el laboratorio en el cual se desarrollo este proyecto integrador se cuenta con el codigo de un generador y se buscara reutilizar dicho codigo.
 
 \subsection{Modulo extractor de Cabeceras}
-Bajo lo expuesto en el capitulo 2, se desprende que no se necesita transmitirle al procesador el paquete de datos entero, sino que solo la informacion presente en la cabecera es necesaria. Por esta razon, la interfaz Red-Procesador solamente enviara al procesador las cabecera de cada paquete y mantendra en espera del resultado los datos correspondientes al payload. 
+Bajo lo expuesto en el capitulo 2, se desprende que no se necesita transmitirle al procesador el paquete de datos entero, sino que solo la informacion presente en la cabecera es util para la clasificacion. Por esta razon, la interfaz Red-CPU solamente enviara al procesador las cabecera de cada paquete y mantendra en espera del resultado los datos correspondientes al payload. 
 
 En la figura XX se puede ver los sub-modulos que componen el extractor de cabeceras, pasando a detallar la funcionalidad de cada uno a continuacion
 
-\subsubsection{Fifo}
+\subsubsection{FIFO}
+A la entrada del modulo se encuentra una FIFO que se encarga de almacenar y poner a disposicion en orden de llegada los datos que emite el generador. Ademas, para poder manipular los paquetes, la FIFO debe almacenar toda la informacion de control que este disponible. 
+Este modulo tambien debe permitir la parametrizacion en la mayor cantidad de sentidos posibles, especialmente se desea poder configurar la cantidad de palabras disponibles que se puede almacenar, ya que la memoria disponible dentro de una FPGA es un recurso critico y se desea encontrar la mejor relacion entre rendimiento y uso de memoria.
+
+
 \subsubsection{Delay Buffer}
+El Componente Delay buffer sera el encargado de ir tomando los datos desde la FIFO y de detectar el inicio y finalizacion de un paquete. Ademas debera mantener almacenado el paquete mientras el software toma una decision. En este modulo es deseable poder configurar la cantidad de palabras que se consideraran parte de la cabecera y que sera enviadas al software. 
+
 \subsubsection{Uplink}
+Este Modulo es el encargado de realizar la comunicacion entre el flujo de datos que proviene de la red y el procesador. Para poder realizar esto el modulo debe entender las señales que utiliza el Bus, Avalon-MM, y poder interrumpir al procesador para enviarles los datos cuando estos esten disponibles. Cuando el procesador responde con el resultado de la clasificacion, este modulo lo almacena y lo envia al modulo write output para que este escriba el resultado de la clasificacion en la etiqueta anexa al paquete correspondiente.
+Eventualmente se desarrollaran varias versiones de este modulo, que envien toda la cabecera o una parte selectiva de ella para optimizar asi el rendimiento.
+
 \subsubsection{Write Output}
+Para finalizar, Write Output, toma la salida de Delay buffer y escribe el resultado que le envia Uplink en la etiqueta que se encuentra anexa a cada una de las palabras del paquete.
 
 \section{Software}
 
