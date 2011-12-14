@@ -128,8 +128,31 @@ El core Nios II/f esta diseñado para ofrecer la mayor performance a las expensa
 \subsection{SOPC}
 
 
-\section{Modulo Gestor de Datos}
-En esta seccion se detallara una 
+\section{Interfaz Red-Procesador}
+En esta seccion se detallara la funcion de cada uno de los bloques que integran el modulo que sera el encargado de gestionar el flujo de datos y la comunicacion con el procesador. 
+
+\subsection{Interfaz de Red}
+A los fines de poder trabajar con un entorno de prueba mas controlado se utlizara un generador de paquetes en remplazo de la interfaz de red propuesta ne la figura XX. 
+Este modulo debe ser altamente parametrizable para poder enfrentar el sistema a distintos escenarios. Dentro de los parametros que se necesita variar se encuentran:
+
+\begin{itemize}
+	\item Tamaño de los paquetes 
+	\item Distancia entre paquetes
+	\item Campos internos de la cabecera IP. 
+	\item Inicio y parada del flujo de datos. 
+\end{itemize}
+
+En el laboratorio en el cual se desarrollo este proyecto integrador se han desarrollado diferentes generadores y es posible acceder al codigo de los mismos para reusarlos. 
+
+\subsection{Modulo extractor de Cabeceras}
+Bajo lo expuesto en el capitulo 2, se desprende que no se necesita transmitirle al procesador el paquete de datos entero, sino que solo la informacion presente en la cabecera es necesaria. Por esta razon, la interfaz Red-Procesador solamente enviara al procesador las cabecera de cada paquete y mantendra en espera del resultado los datos correspondientes al payload. 
+
+En la figura XX se puede ver los sub-modulos que componen el extractor de cabeceras, pasando a detallar la funcionalidad de cada uno a continuacion
+
+\subsubsection{Fifo}
+\subsubsection{Delay Buffer}
+\subsubsection{Uplink}
+\subsubsection{Write Output}
 
 \section{Software}
 
