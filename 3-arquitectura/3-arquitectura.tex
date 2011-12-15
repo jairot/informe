@@ -29,7 +29,7 @@ Varias de estas empresas cuentan con Softcores con distintas capacidades y tecno
 Dentro de los mas conocidos se puede nombrar a la linea Leon de la empresa Aeroflex, LatticeMico32 de Lattice semiconductor o ARM cortex de Freescale. Los IP core pueden estar licenciados de diferentes formas incluidas entre ellas GPL.
  
 \subsubsection{Provistos por la comunidad Open Source}
-La comunidad open source se ha encargado de producir una buena cantidad de softcores, las capacidades y perfomance de los mismos cubre casi todos los rangos. En la pagina web que lleva una lista de este tipo de proyectos, \textit{opencores.com}, se pueden encontrar alrededor de 130 cores. El problema con este tipo de core esta en la poco uniforme calidad de la documentación y en la calidad dudosa de varios de los cores. Sin embargo la flexibilidad para poder modificar la arquitectura a gusto y el costo cero de implementación son ventajas nada despreciables de estos productos. 
+La comunidad open source se ha encargado de producir una buena cantidad de softcores, las capacidades y perfomance de los mismos cubre casi todos los rangos. En la pagina web que lleva una lista de este tipo de proyectos, \textit{opencores.com}, se pueden encontrar alrededor de 130. El problema con este tipo de core esta en la poco uniforme calidad de la documentación y el funcionamiento deficiente de algunos de ellos. Sin embargo la flexibilidad para poder modificar la arquitectura a gusto y el costo cero de implementación son ventajas nada despreciables de estos productos. 
 
 Se destaca el proyecto Openrisc 1200, que tiene una gran comunidad que lo soporta y algún prestigio ganado en este terreno.
 
@@ -57,11 +57,11 @@ Se destaca el proyecto Openrisc 1200, que tiene una gran comunidad que lo soport
 
 \subsection{Criterios de Selección}
 
-Los criterios mas importantes a la hora de seleccionar el Softcore que va a ser utilizado en este proyecto son:
+Los criterios de seleccion usados para elegir el Softcore que va a ser utilizado en este proyecto son:
 \begin{itemize}
-	\item Hardware: se debe contar con el dispositivo necesario para la implementación de estos dispositivos.
+	\item Hardware: se debe contar con el dispositivo necesario para la implementación del Softcore.
 	\item Herramientas de Diseño: la cadena de herramientas necesarias para diseñar el sistema y el software debe ser simple y funcional, para evitar que comprender las herramientas lleve mas tiempo que realizar el proyecto en sí mismo.
-	\item Rendimiento: se desea que el rendimiento sea aceptable y que sea posible optimizarlo a medida de que el proyecto avanza.
+	\item Rendimiento: se desea alcanzar un rendimiento aceptable y que sea posible optimizarlo a medida de que el proyecto avanza.
 \end{itemize}
 
 Bajo estos criterios y teniendo en cuenta que en el laboratorio en que se realiza el presente proyecto integrador es posible acceder a una amplia variedad de kits de desarrollo equipados con FPGAs de Altera, todas las licencias de software y varios proyectos con antecedentes de haber puesto en funcionamiento un Nios II es este el Core seleccionado para el sistema embebido a implementar.
@@ -147,18 +147,27 @@ En el laboratorio en el cual se desarrollo este proyecto integrador se cuenta co
 \subsection{Modulo extractor de Cabeceras}
 Bajo lo expuesto en el capitulo 2, se desprende que no se necesita transmitirle al procesador el paquete de datos entero, sino que solo la información presente en la cabecera es útil para la clasificación. Por esta razón, la interfaz Red-CPU solamente enviara al procesador las cabecera de cada paquete y mantendrá en espera del resultado los datos correspondientes al payload. 
 
-En la figura XX se puede ver los sub-módulos que componen el extractor de cabeceras, pasando a detallar la funcionalidad de cada uno a continuación
+En la figura~\ref{fig:moduloprop} se puede ver los sub-módulos que componen el extractor de cabeceras, pasando a detallar la funcionalidad de cada uno a continuación
+
+\begin{figure}[h]
+  \centering
+	\includegraphics[width=0.90\textwidth]{3-arquitectura/graf/modulo.eps}
+  \caption{Estructura propuesta para el modulo propio}
+  \label{fig:moduloprop}
+\end{figure}
+
+
 
 \subsubsection{FIFO}
 A la entrada del modulo se encuentra una FIFO que se encarga de almacenar y poner a disposición en orden de llegada los datos que emite el generador. Además, para poder manipular los paquetes, la FIFO debe almacenar toda la información de control que este disponible. 
-Este modulo también debe permitir la parametrización en la mayor cantidad de sentidos posibles, especialmente se desea poder configurar la cantidad de palabras disponibles que se puede almacenar, ya que la memoria disponible dentro de una FPGA es un recurso critico y se desea encontrar la mejor relación entre rendimiento y uso de memoria.
+Este modulo también debe permitir la parametrización en la mayor cantidad de sentidos posibles, especialmente se desea poder configurar la cantidad de palabras disponibles que se puede almacenar, ya que la memoria dentro de una FPGA es un recurso critico y se desea encontrar la mejor relación entre rendimiento y uso de memoria.
 
 
 \subsubsection{Delay Buffer}
 El Componente Delay buffer sera el encargado de ir tomando los datos desde la FIFO y de detectar el inicio y finalización de un paquete. Además deberá mantener almacenado el paquete mientras el software toma una decisión. En este modulo es deseable poder configurar la cantidad de palabras que se consideraran parte de la cabecera y que sera enviadas al software. 
 
 \subsubsection{Uplink}
-Este Modulo es el encargado de realizar la comunicación entre el flujo de datos que proviene de la red y el procesador. Para poder realizar esto el modulo debe entender las señales que utiliza el Bus, Avalon-MM, y poder interrumpir al procesador para enviarles los datos cuando estos estén disponibles. Cuando el procesador responde con el resultado de la clasificación, este modulo lo almacena y lo envía al modulo write output para que este escriba el resultado de la clasificación en la etiqueta anexa al paquete correspondiente.
+Este Modulo es el encargado de realizar la comunicación entre el flujo de datos que proviene de la red y el procesador. Para ello debe entender las señales que utiliza el Bus, Avalon-MM, y poder interrumpir al procesador para enviarles los datos cuando estos estén disponibles. Cuando el procesador responde con el resultado de la clasificación, este modulo lo almacena y lo envía  write output para que este escriba el resultado de la clasificación en la etiqueta anexa al paquete correspondiente.
 Eventualmente se desarrollaran varias versiones de este modulo, que envíen toda la cabecera o una parte selectiva de ella para optimizar así el rendimiento.
 
 \subsubsection{Write Output}
