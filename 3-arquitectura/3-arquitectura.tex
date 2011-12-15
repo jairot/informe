@@ -120,10 +120,7 @@ El core Nios II/f esta diseñado para ofrecer la mayor performance a las expensa
 \end{itemize}
 
 
-//No se que mas poner estoy trabado aca//
 
-
-\subsection{Bus Avalon}
 
 \subsection{SOPC}
 
@@ -164,6 +161,55 @@ Eventualmente se desarrollaran varias versiones de este modulo, que envien toda 
 \subsubsection{Write Output}
 Para finalizar, Write Output, toma la salida de Delay buffer y escribe el resultado que le envia Uplink en la etiqueta que se encuentra anexa a cada una de las palabras del paquete.
 
+
+\subsection{Bus Avalon}
+
+Avalon es una familia de interfaces para flujo de datos de alta velocidad, lectura/escritura de registros y memoria, y control de dispositivos "off-chip". Existen varios tipos, cuyo uso depende de las necesidades del diseño a implementar:
+\begin{itemize}
+	\item Avalon ST: Soporta flujo unidireccional de datos, incluyendo flujos multiplexados y paquetes.
+	\item Avalon MM: Interfaz de lectura/escritura basada en memoria, típica de conexiones maestro-esclavo.
+	\item Avalon Conduit Interface: Para señales que no se amoldan a los tipos anteriores.
+	\item Avalon TC: Para dispositivos "off-chip".
+	\item Avalon Interrupt Interface: Permite el envío de interrupciones entre componentes.
+	\item Avalon Clock Interface: Recibe y/o distribuye señales de clock.
+	\item Avalon Reset Interface.
+\end{itemize}
+
+En el diseño correspondiente a este trabajo se optó por utilizar las siguientes interfaces:
+
+\begin{itemize}
+	\item Avalon MM, debido a que los componentes están mapeados en la memoria del sistema.
+	\item Avalon Clock Interface, para proveer señal de reloj al sistema.
+	\item Avalon Interrupt Interface, para el componente que requiere interrumpir al procesador.
+\end{itemize}
+
+\subsubsection{Avalon MM}
+Las señales de dicha interfaz necesarias para este diseño son:
+
+\begin{itemize}
+	\item address: Direcciona los datos enviados hacia y recibidos desde el procesador.
+	\item chipselect: Se usa en combinacion con read/write.
+	\item read: Indica una transferencia de lectura.
+	\item readdata: Los datos transferidos desde el periférico hacia el procesador.
+	\item write: Indica una transferencia de escritura.
+	\item writedata: Los datos trasferidos desde el procesador hacia el periférico. Debe tener el mismo ancho que readdata.
+
+\end{itemize}
+
+\subsubsection{Avalon CLock Interface}
+En este caso, la señal necesaria es
+\begin{itemize}
+	\item clk: Provee clock para sincronización en lógica interna y otras interfaces.
+\end{itemize}
+
+\subsubsection{Avalon Interrupt Interface}
+Para esta interfaz, la señal a utilizar es
+
+\begin{itemize}
+	\item irq: Permite al periférico enviar una señal de interrupción al procesador.
+\end{itemize}
+
+
 \section{Software}
 
 \subsection{NIOS II SBT}
@@ -185,7 +231,7 @@ Para el caso de aplicaciones y librerías de usuario, el SBT genera un makefile 
 
 Cuando se crea un makefile se provee al SBT con una lista de archivos de código fuente y una referencia al directorio donde se almacena el BSP. Luego, la herramienta examina la extensión de cada archivo fuente para determinar el lenguaje de programación. 
 
-Actualmente, los soportados son:
+Actualmente los soportados son:
 
 \begin{itemize}
 	\item C (extensión .c).
