@@ -133,6 +133,20 @@
        inkscape:vp_y="0 : 1000 : 0"
        inkscape:vp_x="0 : 0.5 : 1"
        sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective2876"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective2903"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
   </defs>
   <sodipodi:namedview
      id="base"
@@ -142,8 +156,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.979899"
-     inkscape:cx="406.76935"
-     inkscape:cy="929.31815"
+     inkscape:cx="413.70923"
+     inkscape:cy="992.16423"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="true"
@@ -164,7 +178,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -243,13 +257,13 @@
          y="182.36218">Generador</tspan></text>
     <text
        xml:space="preserve"
-       style="font-size:16px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
-       x="390"
+       style="font-size:13px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+       x="285"
        y="22.362183"
        id="text2853-1"><tspan
          sodipodi:role="line"
          id="tspan2855-2"
-         x="390"
+         x="285"
          y="22.362183">Interfaz Red - Procesador</tspan></text>
     <text
        xml:space="preserve"
@@ -359,5 +373,31 @@
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        d="m 286,170.36218 c -2,4 -2,4 -2,4"
        id="path4941-7" />
+    <rect
+       style="fill:#cccccc;fill-opacity:1;stroke:#000000;stroke-opacity:1"
+       id="rect2866"
+       width="285"
+       height="35"
+       x="345"
+       y="-52.637817" />
+    <text
+       xml:space="preserve"
+       style="font-size:16px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+       x="440"
+       y="-27.637817"
+       id="text2853-8"><tspan
+         sodipodi:role="line"
+         id="tspan2855-50"
+         x="440"
+         y="-27.637817">BUS Avalon</tspan></text>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1.09544516px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 490,42.362183 0,-60"
+       id="path2893"
+       inkscape:connector-type="polyline" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 491,6.3621826 C 488.18154,9.834403 488.18154,9.834403 488.18154,9.834403"
+       id="path4941-6-1" />
   </g>
 </svg>
