@@ -1,11 +1,11 @@
 \chapter{Arquitectura}
-En este capítulos se detallara la arquitectura del proyecto en general, poniendo foco en la selección adecuada de las tecnologías a utilizar y completando mas detalladamente el diseño obtenida en el capitulo anterior.
+En este capítulos se detallara la arquitectura del proyecto en general, poniendo foco en la selección adecuada de las tecnologías a utilizar y completando el diseño obtenido en el capitulo anterior.
 
 \section{Procesador Embebido}
 
-Como se dijo en el capitulo 2, los microprocesadores embebidos en lógica reprogramable se clasifican, básicamente, en dos tipos Hardcore y Softcore. Aunque los Hardcores ofrecen unas mejores prestaciones existen muy pocos dispositivos en el mercado que ofrecen este tipo de módulos y, en general, el costo de este tipo de dispositivos es mayor que el de uno que no cuenta con un hardcore. Por estas razones de ahora en adelante se limitará el estudio a softcores, siempre buscando que lo implementado siga los principios del diseño modular a los fines de facilitar la portabilidad.
+Como se dijo en el capitulo 2, los microprocesadores embebidos en lógica programable se clasifican, básicamente, en dos tipos Hardcore y Softcore. Aunque los Hardcores ofrecen unas mejores prestaciones existen muy pocos dispositivos en el mercado que ofrecen este tipo de módulos y, en general, el costo de estos es mayor que el de uno que no cuenta con un Hardcore. Por estas razones de ahora en adelante se limitará el estudio a Softcores, siempre buscando que lo implementado siga los principios del diseño modular a los fines de facilitar la portabilidad.
 \subsection{Estudio de los softcores disponibles}
-Los SoftCores pueden ser clasificados en tres tipos según su origen
+Los Softcores pueden ser clasificados en tres tipos según su origen
 
 \begin{itemize}
 	\item Provistos por los fabricantes de las FPGA
@@ -14,13 +14,13 @@ Los SoftCores pueden ser clasificados en tres tipos según su origen
 \end{itemize}
 
 \subsubsection{Provistos por los fabricantes de las FPGA}
-Xilinx y Altera, los dos mayores fabricantes de FPGA, proveen un Softcore para integrar en sus dispositivos. La ventaja natural de este tipo de core es que se encuentran altamente integrados en las herramientas de desarrollo de dichos fabricantes, permitiendo montar un sistema embebido en minutos de manera gráfica e intuitiva. Además están a disposición del usuario una buena cantidad de  módulos IP para anexar al procesador y aumentar así sus funcionalidades. 
+Xilinx y Altera, los dos mayores fabricantes de FPGA, proveen un Softcore para integrar en sus dispositivos. La ventaja de este tipo de core es que se encuentran altamente integrados en las herramientas de desarrollo de dichos fabricantes, permitiendo montar un sistema embebido de manera gráfica e intuitiva. Además están a disposición del usuario una buena cantidad de  módulos IP para anexar al procesador y aumentar así sus funcionalidades. 
 
-Dentro de las desventajas esta el hecho de que son dependientes de la plataforma y no es posible implementar el core propietario de Altera en un dispositivo Xilinx, y viseversa. Además se debe pagar una licencia por el uso de estos cores y no se cuenta con la posibilidad de observar o modificar el código de los mismos. 
+Dentro de las desventajas esta el hecho de que son dependientes de la plataforma y no es posible implementar el core propietario de Altera en un dispositivo Xilinx, y viceversa. Además se debe pagar una licencia por el uso de estos cores y no se cuenta con la posibilidad de observar o modificar el código de los mismos. 
 
 Xilinx ofrece a los usuarios de sus dispositivos el MicroBlaze, un procesador RISC de 32 bits con una arquitectura muy similar al MIPS DLX. A nivel herramientas de desarrollo la empresa provee el "Xilinx's EDK(Embedded Development Kit)" que permite generar un sistema embebido completo con las interconexiones necesarias. Es posible correr el sistema operativo GNU/Linux en este tipo de procesador.
 
-Altera por su parte ofrece la linea de Cores NIOS II, también RISC de 32 bits, que cuenta en tres variantes principales Nios II Fast, Economy y Standard y dos variantes especializadas Nios II SC core, para aplicaciones militares y aeroespaciales, y DesignWare IP, para implementar en ASIC. Altera provee además una interfaz de usuario para la construcción del sistema embebido llamado SOPC que se encuentra integrado a la herramienta Quartus y además el Nios II Embedded Design Suite (EDS) que permite diseñar el software requerido para cada aplicacio. Permite la implementación del sistema operativo GNU/Linux.
+Altera por su parte ofrece la linea de Cores NIOS II, también RISC de 32 bits, que cuenta en tres variantes principales Nios II Fast, Economy y Standard y dos variantes especializadas Nios II SC core, para aplicaciones militares y aeroespaciales, y DesignWare IP, para implementar en ASIC. Altera provee además una interfaz de usuario para la construcción del sistema embebido llamado SOPC que se encuentra integrado a la herramienta Quartus y además el Nios II Embedded Design Suite (EDS) que permite diseñar el software requerido para cada aplicación. Soporta GNU/Linux.
 
 \subsubsection{Provistos por empresas distribuidoras de bloques IP}
 Existe una buena cantidad de empresas que se dedican a generar y comercializar bloques de propiedad intelectual (IP Cores o IP Blocks), unidades lógicas reusables que son propiedad intelectual de un individuo o empresa.
@@ -87,36 +87,36 @@ El Nios II es un procesador RISC de 32 bits de propósito general que cuenta con
 Para poder ser implementado en una mayor variedad de dispositivos el Nios II ofrece 3 configuraciones diferentes:  Nios II/f (fast), Nios II/s (standard), and Nios II/e (economy).
 
 \subsubsection{Nios II/e}
-El Core Nios II/e esta diseñado para utilizar la menor cantidad de espacio posible. Esto esto funciona especialmente para FPGA de bajo costo. Tiene las siguientes caracteristicas:
+El Core Nios II/e esta diseñado para utilizar la menor cantidad de espacio posible. Esto esto funciona especialmente para FPGA de bajo costo. Tiene las siguientes características:
 \begin{itemize}
 	\item Espacio de direcciones de hasta 2GB
 	\item Gratuito, no requiere licencia 
 \end{itemize}
 
 \subsubsection{Nios II/s}
-El Nios II/s esta diseñado para mantener un balance entre rendimiento y costo. Entre sus caracteristicas principales estan:
+El Nios II/s esta diseñado para mantener un balance entre rendimiento y costo. Entre sus características principales están:
 
 \begin{itemize}
 	\item Cache de instrucciones
 	\item Espacio de direcciones de hasta 2GB
 	\item Pipeline de 5 etapas
-	\item Predictor de saltos estatico
+	\item Predictor de saltos estático
 	\item Multiplicador y divisor por hardware. 
 \end{itemize}
 
 
 
 \subsubsection{Nios II/f}
-El core Nios II/f esta diseñado para ofrecer la mayor performance a las expensas de un mayor tamaño, medido en unidades logicas, este core tiene las siguientes caracteristicas:
+El core Nios II/f esta diseñado para ofrecer la mayor performance a las expensas de un mayor tamaño, medido en unidades lógicas, este core tiene las siguientes características:
 
 \begin{itemize}
 	\item Cache de instrucciones y de datos separadas
 	\item MMU y MPU opcionales
 	\item Espacio de direcciones de hasta 2GB
 	\item Pipeline de 6 etapas
-	\item Mutiplicador por hardware en un ciclo
+	\item Multiplicador por hardware en un ciclo
 	\item Divisor por hardware opcional
-	\item Predictor de saltos dinamico
+	\item Predictor de saltos dinámico
 \end{itemize}
 
 
@@ -129,11 +129,11 @@ El core Nios II/f esta diseñado para ofrecer la mayor performance a las expensa
 
 
 \section{Interfaz Red-Procesador}
-En esta seccion se detallara la funcion de cada uno de los bloques que integran el modulo que sera el encargado de gestionar el flujo de datos y la comunicacion con el procesador. 
+En esta sección se detallara la función de cada uno de los bloques que integran el modulo que sera el encargado de gestionar el flujo de datos y la comunicación con el procesador. 
 
 \subsection{Interfaz de Red}
-A los fines de poder trabajar con un entorno de prueba mas controlado se utlizara un generador de paquetes en remplazo de la interfaz de red propuesta en la figura XX. 
-Este modulo debe ser altamente parametrizable para poder enfrentar el sistema a distintos escenarios. Dentro de los parametros que se necesita variar se encuentran:
+A los fines de poder trabajar con un entorno de prueba mas controlado se utilizara un generador de paquetes en remplazo de la interfaz de red propuesta en la figura XX. 
+Este modulo debe ser altamente dramatizable para poder enfrentar el sistema a distintos escenarios. Dentro de los parámetros que se necesita variar se encuentran:
 
 \begin{itemize}
 	\item Tamaño de los paquetes 
@@ -142,24 +142,24 @@ Este modulo debe ser altamente parametrizable para poder enfrentar el sistema a 
 	\item Inicio y parada del flujo de datos. 
 \end{itemize}
 
-En el laboratorio en el cual se desarrollo este proyecto integrador se cuenta con el codigo de un generador y se buscara reutilizar dicho codigo.
+En el laboratorio en el cual se desarrollo este proyecto integrador se cuenta con el código de un generador y se buscara reutilizar dicho código.
 
 \subsection{Modulo extractor de Cabeceras}
-Bajo lo expuesto en el capitulo 2, se desprende que no se necesita transmitirle al procesador el paquete de datos entero, sino que solo la informacion presente en la cabecera es util para la clasificacion. Por esta razon, la interfaz Red-CPU solamente enviara al procesador las cabecera de cada paquete y mantendra en espera del resultado los datos correspondientes al payload. 
+Bajo lo expuesto en el capitulo 2, se desprende que no se necesita transmitirle al procesador el paquete de datos entero, sino que solo la información presente en la cabecera es útil para la clasificación. Por esta razón, la interfaz Red-CPU solamente enviara al procesador las cabecera de cada paquete y mantendrá en espera del resultado los datos correspondientes al payload. 
 
-En la figura XX se puede ver los sub-modulos que componen el extractor de cabeceras, pasando a detallar la funcionalidad de cada uno a continuacion
+En la figura XX se puede ver los sub-módulos que componen el extractor de cabeceras, pasando a detallar la funcionalidad de cada uno a continuación
 
 \subsubsection{FIFO}
-A la entrada del modulo se encuentra una FIFO que se encarga de almacenar y poner a disposicion en orden de llegada los datos que emite el generador. Ademas, para poder manipular los paquetes, la FIFO debe almacenar toda la informacion de control que este disponible. 
-Este modulo tambien debe permitir la parametrizacion en la mayor cantidad de sentidos posibles, especialmente se desea poder configurar la cantidad de palabras disponibles que se puede almacenar, ya que la memoria disponible dentro de una FPGA es un recurso critico y se desea encontrar la mejor relacion entre rendimiento y uso de memoria.
+A la entrada del modulo se encuentra una FIFO que se encarga de almacenar y poner a disposición en orden de llegada los datos que emite el generador. Además, para poder manipular los paquetes, la FIFO debe almacenar toda la información de control que este disponible. 
+Este modulo también debe permitir la parametrización en la mayor cantidad de sentidos posibles, especialmente se desea poder configurar la cantidad de palabras disponibles que se puede almacenar, ya que la memoria disponible dentro de una FPGA es un recurso critico y se desea encontrar la mejor relación entre rendimiento y uso de memoria.
 
 
 \subsubsection{Delay Buffer}
-El Componente Delay buffer sera el encargado de ir tomando los datos desde la FIFO y de detectar el inicio y finalizacion de un paquete. Ademas debera mantener almacenado el paquete mientras el software toma una decision. En este modulo es deseable poder configurar la cantidad de palabras que se consideraran parte de la cabecera y que sera enviadas al software. 
+El Componente Delay buffer sera el encargado de ir tomando los datos desde la FIFO y de detectar el inicio y finalización de un paquete. Además deberá mantener almacenado el paquete mientras el software toma una decisión. En este modulo es deseable poder configurar la cantidad de palabras que se consideraran parte de la cabecera y que sera enviadas al software. 
 
 \subsubsection{Uplink}
-Este Modulo es el encargado de realizar la comunicacion entre el flujo de datos que proviene de la red y el procesador. Para poder realizar esto el modulo debe entender las señales que utiliza el Bus, Avalon-MM, y poder interrumpir al procesador para enviarles los datos cuando estos esten disponibles. Cuando el procesador responde con el resultado de la clasificacion, este modulo lo almacena y lo envia al modulo write output para que este escriba el resultado de la clasificacion en la etiqueta anexa al paquete correspondiente.
-Eventualmente se desarrollaran varias versiones de este modulo, que envien toda la cabecera o una parte selectiva de ella para optimizar asi el rendimiento.
+Este Modulo es el encargado de realizar la comunicación entre el flujo de datos que proviene de la red y el procesador. Para poder realizar esto el modulo debe entender las señales que utiliza el Bus, Avalon-MM, y poder interrumpir al procesador para enviarles los datos cuando estos estén disponibles. Cuando el procesador responde con el resultado de la clasificación, este modulo lo almacena y lo envía al modulo write output para que este escriba el resultado de la clasificación en la etiqueta anexa al paquete correspondiente.
+Eventualmente se desarrollaran varias versiones de este modulo, que envíen toda la cabecera o una parte selectiva de ella para optimizar así el rendimiento.
 
 \subsubsection{Write Output}
 Para finalizar, Write Output, toma la salida de Delay buffer y escribe el resultado que le envia Uplink en la etiqueta que se encuentra anexa a cada una de las palabras del paquete.
