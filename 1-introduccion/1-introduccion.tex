@@ -1,8 +1,27 @@
 \chapter{Introdución}
 
-\section{Motivacion}
+\section{Motivación}
 
-+ Problema en Redes
+\subsection{Problema en Redes}
+\subsubsection{Evolucion en los dispositivos de enrutamiento}
+
+En un principio los routers contaban con un bus central compartido, un CPU, memoria y los puertos de entrada y salida. Cada paquete entrante era transferido al CPU por medio del bus compartido. La decisión de forwarding se llevaba a cabo allí y luego el paquete atravesaba nuevamente dicho bus hacia el puerto de salida. La performance de estos routers estaba limitada principalmente por 2 factores: la capacidad de procesamiento de la cpu central (debido a que la búsqueda en la tabla de ruteo es una tarea que consume una alta cantidad de tiempo) y el hecho de que cada paquete tenía que atravesar 2 veces el bus compartido.
+
+Para hacer frente al primer factor algunos fabricantes de routers introdujeron paralelismo mediante múltiples CPUs. Cada una de ellas manipulaba un porción del tráfico entrante. Pero cada paquete tenía todavía que atravesar el bus compartido 2 veces. 
+
+Más adelante el diseño de la arquitectura de routers avanzó un paso más. Una memoria caché de ruteo y capacidad de procesamiento fueron añadidos a cada puerto y las decisiones de forwarding se hacían localmente. De esta manera, cada paquete atraviesa el bus compartido sólamente una vez desde el puerto de entrada hacia el puerto de salida. Aunque cada puerto contaba con capacidad de procesamiento, todas las funciones de control todavía se manejaban por el procesador central.
+
+
+
+
+
+
+
+
+
+Uno de los mayores cuellos de botella en los routers backbone es el cómputo del prefijo más largo para cada paquete entrante.
+
+
 + Solucion con FPGA
 
 \section{Problema Marco}
