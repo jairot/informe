@@ -1,3 +1,32 @@
 \chapter{Introdución}
 
+\section{Motivación}
+
+\subsection{Problema en Redes}
+\subsubsection{Evolucion en los dispositivos de enrutamiento}
+
+En un principio los routers contaban con un bus central compartido, un CPU, memoria y los puertos de entrada y salida. Cada paquete entrante era transferido al CPU por medio del bus compartido. La decisión de forwarding se llevaba a cabo allí y luego el paquete atravesaba nuevamente dicho bus hacia el puerto de salida. La performance de estos routers estaba limitada principalmente por 2 factores: la capacidad de procesamiento de la cpu central (debido a que la búsqueda en la tabla de ruteo es una tarea que consume una alta cantidad de tiempo) y el hecho de que cada paquete tenía que atravesar 2 veces el bus compartido.
+
+Para hacer frente al primer factor algunos fabricantes de routers introdujeron paralelismo mediante múltiples CPUs. Cada una de ellas manipulaba un porción del tráfico entrante. Pero cada paquete tenía todavía que atravesar el bus compartido 2 veces. 
+
+Más adelante el diseño de la arquitectura de routers avanzó un paso más. Una memoria caché de ruteo y capacidad de procesamiento fueron añadidos a cada puerto y las decisiones de forwarding se hacían localmente. De esta manera, cada paquete atraviesa el bus compartido sólamente una vez desde el puerto de entrada hacia el puerto de salida. Aunque cada puerto contaba con capacidad de procesamiento, todas las funciones de control todavía se manejaban por el procesador central.
+
+Aunque con el tiempo la performance de los distintos CPUs han crecido, este crecimiento no ha podido mantener el ritmo del incremento en la capacidad de los enlaces. Es en este contexto donde se ve claramente que hoy por hoy uno de los mayores cuellos de botella en los routers troncales es el cómputo del prefijo más largo para cada paquete. Los protocolos de hoy en día requieren hacer selección de rutas en base no sólo a un campo sino a varios (tales como el número de protocolo, dirección de origen, puerto de destino, etc). El número de accesos a memoria y la velocidad de ésta determinan la rapidez de un algoritmo de búsqueda de ruta (route lookup algorithm).
+
+
++ Solucion con FPGA
+
+\section{Problema Marco}
+
++ Clasificacion
++ Lookup (Estructura de un paquete IP)
+
+\section{Ojetivos}
+\section{Organizacion}
++Estructura del Informe y breve descripcion de los capitulos
+
+
+
+
+
 %\section{Distribucion Lineal}
