@@ -13,13 +13,16 @@ Más adelante el diseño de la arquitectura de routers avanzó un paso más. Una
 
 Aunque con el tiempo la performance de los distintos CPUs han crecido, este crecimiento no ha podido mantener el ritmo del incremento en la capacidad de los enlaces. Es en este contexto donde se ve claramente que hoy por hoy uno de los mayores cuellos de botella en los routers troncales es el cómputo del prefijo más largo para cada paquete. Los protocolos de hoy en día requieren hacer selección de rutas en base no sólo a un campo sino a varios (tales como el número de protocolo, dirección de origen, puerto de destino, etc). El número de accesos a memoria y la velocidad de ésta determinan la rapidez de un algoritmo de búsqueda de ruta (route lookup algorithm).
 
-
-+ Solucion con FPGA
-
-Frente a estas amenazas es necesario contar con soluciones que permitan generar respuestas especificas, en el menor tiempo y con el mejor rendimiento posible. Es entonces donde el campo de la logica recofigurable se perfila como la te
+\subsubsection{Logica reconfigurable como respuesta}
 
 
-Las FPGA nos presentan los diseños mas simples disponibles en la actualidad 
+Para hacer frente a esta brecha entre la necesidad de procesar el flujo creciente de datos de la red y la capacidad de hacerlo, es necesario contar con soluciones que permitan generar respuestas especificas, en el menor tiempo y con el mejor rendimiento posible. Es entonces donde el campo de la logica recofigurable se perfila como la mejor solucion a este problema.
+
+Las FPGA(field-programmable gate array) son un dispositivo de logica reconfigurable que es posibile programar, una o varias veces, usando un lenguaje de descripcion de hardware(HDL). Las FPGAs se utilizan en aplicaciones similares a los ASICs sin embargo son más lentas, tienen un mayor consumo de potencia y no pueden abarcar sistemas tan complejos como ellos. A pesar de esto, tienen un flujo de diseño flexible, sus costes de desarrollo y adquisición son mucho menores para pequeñas cantidades de dispositivos y el tiempo de desarrollo es también menor.
+
+Esta flexibilidad en el flujo de diseño, la posibilidad de probar el diseño de manera instantanea, y la posibilidad de actualizar el diseño aun despues de vendido el producto son los dos puntos principales que posicionan a las FPGA como la herramienta indicada para atacar un problema tan complejo y de una evolucion exponencial como la clasificacion de paquetes. 
+
+
 \section{Problema Marco}
 
 + Clasificacion
