@@ -86,7 +86,12 @@ Considerando los problemas planteados, el objetivo general de este proyecto es e
 Ademas se desea ganar conocimiento acerca las diversas posibilidades que ofrecen las FPGA para la implementacion de este tipo de algoritmos y las opciones con las que se cuenta a la hora de implementar un sistema embebido en este tipo de dispositivos.
 
 \subsection{Objetivos Especificos}
-Implementar un sistema embebido que realize la clasificiacion unidimensional de paquetes mediante una arquitectura mixta, Hardware-Softwarea, en logica reprogramable y que permita contratastar algunos de los algoritmos de clasificacion existentes. 
+\begin{itemize}
+	\item Implementar un sistema embebido que realice la clasificiación unidimensional de paquetes mediante una arquitectura mixta, Hardware-Software, en lógica reprogramable y que permita contratastar algunos de los algoritmos de clasificacion existentes. Dicho sistema debe recibir paquetes ethernet y procesarlos mediante información de control de tal forma que entregue a la salida paquetes factibles de ser colocados en diferentes flujos.
+	\item Implementar como mínimo dos algoritmos de clasificación. Se deberá evitar el uso de recursividad, procurando alcanzar el mejor timing posible para cada paquete entrante.
+	\item Mejorar las algoritmos anteriormente mencionados, poniendo el foco en optimizar el código.
+\end{itemize}
+
 \section{Organizacion}
 +Estructura del Informe y breve descripcion de los capitulos
 
