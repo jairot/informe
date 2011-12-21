@@ -21,6 +21,41 @@ Aunque con el tiempo la performance de los distintos CPUs han crecido, este crec
 + Clasificacion
 + Lookup (Estructura de un paquete IP)
 
+\subsubsection{Datagrama IP}
+
+\begin{figure}[h]
+  \centering
+	\includegraphics[width=1\textwidth]{2-sistema/graf/ip.eps}
+  \caption{Formato de datagrama IP}
+  \label{fig:ip}
+\end{figure}
+
+La PDU del protocolo IP se denomina \textit{datagrama IP} y se compone de los siguientes campos:
+\begin{itemize}
+	\item Versión: indica la versión del protocolo.
+	\item Longitud de la cabecera: longitud de la cabecera expresada en palabras de 32 bits.
+	\item Tipo de servicio: especifica los parámetros de fiabilidad, prioridad, retardo y rendimiento.
+	\item Longitud total: longitud total del datagrama en Bytes.
+	\item Identificador: un número de secuencia que, junto a la dirección origen y destino y el protocolo usuario, se utiliza para identificar de forma unívoca al datagrama.
+	\item Flags: son 3 bits de los cuales solo 2 están definidos. El bit de \textit{no fragmentación} prohíbe la fragmentación cuando está puesto a 1. El bit de \textit{Más datos} se utiliza para fragmentación y reensamblado.
+	\item Desplazamiento del fragmento: indica el lugar donde se sitúa el fragmento dentro del datagrama original, medido en unidades de 64 bits.
+	\item Tiempo de vida: en cada router se decrementa en 1 unidad. Tiene como fin evitar que un datagrama se quede dando vueltas para siempre en la red.
+	\item Protocolo: especifica a que protocolo del nivel de transporte corresponde el datagrama.
+	\item Suma de comprobación de la cabecera: Es el complemento a uno de la suma en complemento a uno de todas las palabras de 16 bits de la cabecera.
+	\item Dirección origen: codificada para permitir una asignación variable de bits para especificar la red y el sistema final conectado a la red especificada.
+	\item Dirección destino: igual que el campo anterior.
+	\item Opciones: contiene las opciones solicitadas por el usuario que envía los datos.
+	\item Relleno: se usa para asegurar que la cabecera del datagrama tenga una longitud múltiplo de 31 bits.
+	\item Datos: debe tener una longitud múltiplo de 8 bits.
+\end{itemize}
+
+\subsubsection{Dirección IP}
+
+Es un número de 32 bit que identifica un dispositivo dentro de una red que utilice el protocolo IP. Las direcciones IP se suelen representar por cuatro números decimales separados por puntos, que equivalen al valor de cada uno de los cuatro bytes que componen la dirección.
+
+Como ocurre en la mayoría de las redes las direcciones IP tienen una estructura jerárquica. Una parte de la dirección corresponde a la red, y la otra al host dentro de la red. Cuando un dispositivo de enrutamiento recibe un datagrama por una de sus interfaces compara la parte de red de la dirección con las entradas contenidas en sus tablas (que normalmente sólo contienen direcciones de red, no de host) y envía el datagrama por la interfaz correspondiente.
+ 
+
 \section{Ojetivos}
 \section{Organizacion}
 +Estructura del Informe y breve descripcion de los capitulos
