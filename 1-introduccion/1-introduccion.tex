@@ -60,7 +60,33 @@ La PDU del protocolo IP se denomina \textit{datagrama IP} y se compone de los si
 Es un número de 32 bit que identifica un dispositivo dentro de una red que utilice el protocolo IP. Las direcciones IP se suelen representar por cuatro números decimales separados por puntos, que equivalen al valor de cada uno de los cuatro bytes que componen la dirección.
 
 Como ocurre en la mayoría de las redes las direcciones IP tienen una estructura jerárquica. Una parte de la dirección corresponde a la red, y la otra al host dentro de la red. Cuando un dispositivo de enrutamiento recibe un datagrama por una de sus interfaces compara la parte de red de la dirección con las entradas contenidas en sus tablas (que normalmente sólo contienen direcciones de red, no de host) y envía el datagrama por la interfaz correspondiente.
- 
+
+Los bits que corresponden a la parte de red conforman lo que se denomina \textit{prefijo de red}.
+
+Existen 3 maneras de representar un prefijo de red:
+
+\begin{itemize}
+	\item Binario con asterisco: por ejemplo, el prefijo 132.239 se denotaría 1000010011101111* (dado que 132 es en binario 10000100 y 239 es 11101111). El asterisco al final denota que los bits restantes pueden ser de cualquier valor.
+	\item Notación A/L, donde A es una dirección IP y L es la longitud del prefijo. Siguiendo el ejemplo anterior, la notación sería 132.239.0.0/16.
+	\item Notación máscara: pe utiliza una dirección de red y una máscara en vez de un prefijo explícito. De esta manera, volviendo al ejemplo anteriormente mencionado, éste puede expresarse como 132.239.0.0 con máscara 255.255.0.0
+\end{itemize}
+
+\subsubsection{Lookup}
+
+El procedimiento que se lleva acabo en un dispositivo de enrutamiento podría describirse de la siguiente manera:
+
+Un paquete llega por una interfaz de entrada. Éste porta una dirección IP determinada. El dispositivo consulta una tabla de forwardeo para determinar la interfaz de salida para el paquete en cuestión. Dicha tabla contiene un conjunto de prefijos con sus correspondientes interfaces de salida. El paquete es correspondido con el prefijo más largo que esté contenido en la dirección de destino y luego es redirigido  a la correspondiente interfaz de salida. Esta tarea de determinar el enlace de salida es denominada \textit{Búsqueda de dirección (address lookup).}
+
+\subsubsection{Clasificación}
+El proceso de categorización de paquetes en flujos se denomina \textbf{clasificación}. Ésta se efectúa en base a un número de campos en la cabecera del paquete, tales como la dirección de origen/destino, puerto de origen/destino, tipo de servicio (TOS), etc. En general, para una clasificación basada en N campos, se dice que la misma es N-dimensional (o multidimensional). El propósito de la misma es clasificar paquetes de acuerdo a un conjunto de reglas dado.
+
+Cada regla \textbf{R} tiene \textbf{F} componentes y el $ f^{vo} $ componente de \textbf{R}, denotado como \textbf{R[f]} es una \textit{expresión de correspondencia de rango} en el $ f^{vo} $ campo del paquete. Si para todo \textit{f} $ \in $ [1, \textit{f}] el $ f^{vo} $ campo de la cabecera de un paquete \textbf{P} satisface la expresión de rango \textbf{R[f]}, \textbf{P} se corresponde con \textbf{R}.
+
+
+
+
+
+
 
 \section{Ojetivos}
 \section{Organizacion}
