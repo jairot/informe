@@ -2,8 +2,7 @@
 
 \section{Motivación}
 
-\subsection{Problema en Redes}
-\subsubsection{Evolución en los dispositivos de enrutamiento}
+\subsection{Evolución en los dispositivos de enrutamiento}
 
 En un principio los enrutadores contaban con un bus central compartido, un CPU, memoria y los puertos de entrada y salida. Cada paquete entrante era transferido al CPU por medio del bus compartido. La decisión de forwarding se llevaba a cabo allí y luego el paquete atravesaba nuevamente dicho bus hacia el puerto de salida. La performance de estos dispositivos estaba limitada principalmente por 2 factores: la capacidad de procesamiento de la CPU central (debido a que la búsqueda en la tabla de ruteo es una tarea que consume una alta cantidad de tiempo) y el hecho de que cada paquete tenía que atravesar 2 veces el bus compartido.
 
@@ -13,7 +12,7 @@ Más adelante el diseño de la arquitectura de enrutadores avanzó un paso más.
 
 Aunque con el tiempo la performance de los distintos CPU han crecido, este crecimiento no ha podido mantener el ritmo del incremento en la capacidad de los enlaces. Es en este contexto donde se ve claramente que hoy por hoy uno de los mayores cuellos de botella en los enrutadores troncales es el cómputo del prefijo más largo para cada paquete. Los protocolos de hoy en día requieren hacer selección de rutas en base no sólo a un campo sino a varios (tales como el número de protocolo, dirección de origen, puerto de destino, etc). El número de accesos a memoria y la velocidad de ésta determinan la rapidez de un algoritmo de búsqueda de ruta (route lookup algorithm).
 
-\subsubsection{Lógica reconfigurable como respuesta}
+\subsection{Lógica reconfigurable como respuesta}
 
 Para hacer frente a esta brecha entre la necesidad de procesar el flujo creciente de datos de la red y la capacidad de hacerlo, es necesario contar con soluciones que permitan generar respuestas especificas, en el menor tiempo y con el mejor rendimiento posible. Es entonces donde el campo de la lógica reconfigurable se perfila como la mejor solución a este problema.
 
@@ -23,7 +22,7 @@ Esta flexibilidad en el flujo de diseño, la posibilidad de probar el diseño de
 
 
 \section{Problema Marco}
-
+\begin{comment}
 \subsubsection{Datagrama IP}
 
 \begin{figure}[h]
@@ -67,6 +66,16 @@ Existen 3 maneras de representar un prefijo de red:
 	\item Notación A/L, donde A es una dirección IP y L es la longitud del prefijo. Siguiendo el ejemplo anterior, la notación sería 132.239.0.0/16.
 	\item Notación máscara: pe utiliza una dirección de red y una máscara en vez de un prefijo explícito. De esta manera, volviendo al ejemplo anteriormente mencionado, éste puede expresarse como 132.239.0.0 con máscara 255.255.0.0
 \end{itemize}
+\end{comment}
+
+La necesidad de procesar cada vez más paquetes de datos lleva a lo que se conoce como clasificación.
+
+\subsubsection{Clasificación}
+El proceso de categorización de paquetes en flujos se denomina \textbf{clasificación}. Ésta se efectúa en base a un número de campos en la cabecera del paquete, tales como la dirección de origen/destino, puerto de origen/destino, tipo de servicio (TOS), etc. En general, para una clasificación basada en N campos, se dice que la misma es N-dimensional (o multidimensional). El propósito de la misma es clasificar paquetes de acuerdo a un conjunto de reglas dado.
+
+Cada regla \textbf{R} tiene \textbf{F} componentes y el $ f^{vo} $ componente de \textbf{R}, denotado como \textbf{R[f]} es una \textit{expresión de correspondencia de rango} en el $ f^{vo} $ campo del paquete. Si para todo \textit{f} $ \in $ [1, \textit{f}] el $ f^{vo} $ campo de la cabecera de un paquete \textbf{P} satisface la expresión de rango \textbf{R[f]}, \textbf{P} se corresponde con \textbf{R}.
+
+Un caso particular de clasificación unidimensional es lo que se conoce como Lookup. 
 
 \subsubsection{Lookup}
 
@@ -74,10 +83,7 @@ El procedimiento que se lleva acabo en un dispositivo de enrutamiento podría de
 
 Un paquete llega por una interfaz de entrada. Éste porta una dirección IP determinada. El dispositivo consulta una tabla de forwardeo para determinar la interfaz de salida para el paquete en cuestión. Dicha tabla contiene un conjunto de prefijos con sus correspondientes interfaces de salida. El paquete es correspondido con el prefijo más largo que esté contenido en la dirección de destino y luego es redirigido  a la correspondiente interfaz de salida. Esta tarea de determinar el enlace de salida es denominada \textit{Búsqueda de dirección (address lookup).}
 
-\subsubsection{Clasificación}
-El proceso de categorización de paquetes en flujos se denomina \textbf{clasificación}. Ésta se efectúa en base a un número de campos en la cabecera del paquete, tales como la dirección de origen/destino, puerto de origen/destino, tipo de servicio (TOS), etc. En general, para una clasificación basada en N campos, se dice que la misma es N-dimensional (o multidimensional). El propósito de la misma es clasificar paquetes de acuerdo a un conjunto de reglas dado.
 
-Cada regla \textbf{R} tiene \textbf{F} componentes y el $ f^{vo} $ componente de \textbf{R}, denotado como \textbf{R[f]} es una \textit{expresión de correspondencia de rango} en el $ f^{vo} $ campo del paquete. Si para todo \textit{f} $ \in $ [1, \textit{f}] el $ f^{vo} $ campo de la cabecera de un paquete \textbf{P} satisface la expresión de rango \textbf{R[f]}, \textbf{P} se corresponde con \textbf{R}.
 
 
 \section{Objetivos}
