@@ -1,0 +1,5 @@
+#!/bin/bash
+
+latex informe.tex
+dvips informe.dvi -o informe.ps
+ps2pdf informe.ps
