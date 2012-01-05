@@ -23,21 +23,17 @@
 \usepackage{amsmath,amsthm, amssymb, latexsym}
 \usepackage{graphicx}
 
-\title[Reconfigurable Network Processing: The FPGA Case] {Reconfigurable Network Processing: \\ The FPGA Case}
+\title[] {Implementación HW/SW de Arquitecturas de Clasifiación de Paquetes Sobre Lógica Reconfigurable.}
 
-\author[Carlos A. Zerbini and Jorge M. Finochietto] {Carlos A. Zerbini and Jorge M. Finochietto}
+\author[] {Jairo N. Trad y Luis R. Romano}
+
 
 \institute[Universidades] % (optional, but mostly needed)
 {
   \scriptsize Laboratorio de Comunicaciones Digitales \\
-  \scriptsize Universidad Nacional de Córdoba, Facultad Ciencias Exactas, Físicas y Naturales \\
-  \vskip2ex
-  \scriptsize Departamento de Ingeniería Electrónica \\
-  \scriptsize Universidad Tecnológica Nacional, Facultad Regional Córdoba \\
+  \scriptsize Universidad Nacional de Córdoba, Facultad Ciencias Exactas, Físicas y Naturales \\ 
 }
 
-\date[12th AST Argentine Symposium on Technology]
-{\scriptsize 12th AST Argentine Symposium on Technology \\ 40th JAIIO \\ UTN Regional Córdoba}
 \AtBeginSubsection[]
 {
   \begin{frame}<beamer>{Agenda}
@@ -100,6 +96,8 @@
 
 \end{frame}
 
+
+
 \subsection{Soluciones}
 \begin{frame}{Soluciones}
 
@@ -116,9 +114,9 @@
   \vskip2ex  
 %    \newcolumntype{V}{>{\centering\arraybackslash} m{.4\linewidth} }
     \begin{tabularx}{\linewidth}{ZZ}
-    \includegraphics[scale=0.45]{figures/packet_vs_flow-crop} 
+%    \includegraphics[scale=0.45]{figures/packet_vs_flow-crop} 
     &
-    \includegraphics[scale=0.2]{figures/network_virtualization_2}
+%    \includegraphics[scale=0.2]{figures/network_virtualization_2}
     \\
     \tiny Agregacion de flujos
     &
@@ -175,11 +173,11 @@
     \center 
     \newcolumntype{V}{>{\centering\arraybackslash} m{.3\linewidth} }
     \begin{tabularx}{\linewidth}{VVV}
-      \includegraphics[scale=0.35]{figures/GPP_based}
+%      \includegraphics[scale=0.35]{figures/GPP_based}
       &
-      \includegraphics[scale=0.35]{figures/NP_based}
+%      \includegraphics[scale=0.35]{figures/NP_based}
       &
-      \includegraphics[scale=0.38]{figures/FPGA_based}
+%      \includegraphics[scale=0.38]{figures/FPGA_based}
       \\
       \tiny Implementación con GPPs
       &
@@ -190,420 +188,249 @@
     \end{tabularx}
 \end{frame}
 
-\subsection{Investigación y Desarrollo}
-\begin{frame}{Investigación y Desarrollo}
-  \begin{block}<+->{Tendencias actuales} 
-    \begin{itemize}
-      \item Arquitecturas {\bf reconfigurables} y {\bf reprogramables} para adaptarse a nuevas aplicaciones
-      \item Arquitecturas {\bf eficientes} para satisfacer exigencias de consumo y velocidad
-      \item Extensión del \emph{Open Software} mediante \emph{Open Hardware}
-      \item {\bf Métricas a evaluar:} paralelismo vs. consumo de memoria/lógica, velocidad
-    \end{itemize}
-      
-%      \vskip1cm
-     \center
-     \includegraphics[scale=0.4]{figures/implementation}
-  \end{block}
-  
-  
-  \begin{block}<+->{Propuestas}  
-    \begin{itemize}
-      \item Procesamiento de {\bf flujos} de paquetes en arquitecturas {\bf reconfigurables}
-      \item Desarrollo de implementaciones {\bf a medida} de la aplicación
-      \item Integración en arquitecturas de procesamiento \emph{asistido por hardware}
-    \end{itemize}
-  \end{block}
+\subsection{Problema marco}
+\begin{frame}{Clasificación de Paquetes}
 
-\end{frame}
-
-
-\begin{frame}{Trabajos Relacionados}
-  \begin{block}<1->{Click Modular Router (MIT)}
-    \begin{itemize}
-    \scriptsize
-      \item Librería de objetos {\bf Software} libre, conectados mediante lenguaje propio
-      \item Ejecutable a nivel de \emph{usuario} o de \emph{kernel}
-      \item Sufre limitaciones por su naturaleza secuencial 
-      \item Migración automática a hardware $\rightarrow$ difícil de lograr
-    \end{itemize}
- 
-%    \center
-%    \includegraphics[scale=0.3]{figures/click}
-
-  \end{block}
-
-  \pause
-
-  \begin{block}<2->{NetFPGA (Stanford)}
-    \begin{itemize}
-    \scriptsize
-     \item Plataforma {\bf Hardware} basada en un FPGA Xilinx Virtex 5
-     \item Versión 10 GbE liberada en 2010
-     \item Sistema base \emph{predefinido} para \emph{incorporación} de funcionalidades
-    \end{itemize}
-    \begin{center}
-      \includegraphics<2->[scale=0.2]{figures/netfpga}
-    \end{center}
-  \end{block}  
-\end{frame}
-
-%\begin{frame}{Nuevas tecnologías (3)}
-%\begin{itemize}
-%\item {\bf Ejemplo 2:} Proyecto NetFPGA - Xilinx Virtex-5 (Xilinx)
-%  \begin{itemize}
-%    \scriptsize
-%    \item hasta 37.440 slices (4 LUTs, 4 FFs)
-%    \item hasta 16 Mbits BRAM
-%    \item Soporta 4x10 GbE / 1 GbE interfaces
-%    \item X8 PCI Express Gen 2 (5Gbps/lane)
-%    \item 20 Configurable GTX Serial Transceivers 
-%    \item Tres x36 QDR II ( CY7C1515JV18)
-%    \item Cuatro x32 RLDRAM II ( MT49H16M36HT-25)
-%  \end{itemize}
-%\end{itemize}
-
-%  \center
-%  \includegraphics[scale=0.3]{figures/netfpga}
-
-%\end{frame}
-
-\section{Procesamiento en Redes}
-\subsection{Introduccion}
-\begin{frame}{Procesamiento en Redes}
-  \begin{block}<+->{Introducción}
+ \begin{block}<+->{Clasificación}   
     \begin{itemize}
       \scriptsize
-      \item {\bf Básico:} Routing $\rightarrow$ lookup, forwarding, queueing
-      \item {\bf Avanzado:} agregación de paquetes, modificación del \emph{camino de datos}
-      \item {\bf Caminos de procesamiento}
-        \begin{itemize}
-        \tiny
-          \item \emph{Fast Data Path:} operaciones a velocidad de línea
-          \item \emph{Slow Data Path:} operaciones menos frecuentes
-        \end{itemize}
-      \item {\bf Bloques de interés:} Clasificación, Almacenamiento, Conmutación, Planificación
+      \item La necesidad de procesar cada vez más paquetes de datos lleva a lo que se conoce como \textit{clasificación.}
+      \item Es el proceso de categorización de paquetes en distintos flujos.
+      \item Efectuada en base a un número de campos de una cabecera.
+      \item En general, para una clasificación basada en N campos, se dice que la misma es N-dimensional (o multidimensional) 
+      \item Un caso en particular de la clasificación unidimensional (N=1) es lo que se conoce como \textit{lookup}.     
     \end{itemize}
-
-    \center  
-    \includegraphics[scale=0.45]{figures/generic_router}
-  \end{block}  
-  
+  \end{block}
 
 \end{frame}
 
-\subsection{Clasificación}
-\begin{frame}{Procesamiento en Redes de Datos}
-  \begin{block}<+->{Clasificación}
-    \begin{itemize}
-      \item Bloques {\bf esenciales} para procesamiento de flujos diferenciados
-      \item Exigencias particulares de \emph{almacenamiento} y \emph{velocidad}
-      \item Extracción \emph{configurable} de encabezados contra \emph{uno} o \emph{múltiples} campos $emph$ storage/rule
-      \item Matching \emph{exacto} (Protocolo, puertos, MAC) o \emph{mejor} matching (LPM, prefijos IP)
-      \item Enfoques de diseño: \emph{algorítmico} (Trees/decomp.) y \emph{arquitectura} (TCAM)
-    \end{itemize}
-  \end{block}
-  
-	\begin{columns}
-		\begin{column}{0.3\textwidth}
-%              \align left
-      \center
-      \includegraphics[scale=0.35]{figures/clas_diagram}
-      \hskip1cm
-%      \tiny Concepto
-    \end{column}
-    \begin{column}{0.7\textwidth}
-      \begin{table}
-%      \caption{Implementation of classification}
-      \label{classification_table}
-      \centering
-      \tiny
-      \begin{tabular}{ p{2cm} @{\hspace{.5cm}} p{2cm} @{\hspace{.5cm}} p{2cm}} 
-      %\begin{tabular}{ p{.315\linewidth} p{.315\linewidth} p{.315\linewidth}} 
-      \hline\noalign{\smallskip}
-      GPPs        & FPGAs         & ASICs \\
-      \noalign{\smallskip}
-      \hline
-      \noalign{\smallskip} 
-      Many rules supported in large and slow SDRAM  & Dedicated registers; low-latency limited internal SRAM; medium-latency external SDRAM & Limited ad-hoc    internal memory; external SDRAM (if interface included) \\
-      \noalign{\smallskip}
-      Intensive algorithms at low speed & Parallel architectures at wire speed & Parallel architectures at wire speed \\
-      \noalign{\smallskip}
-      Fully reprogrammable rules & Fully reprogrammable/ reconfigurable rules & Partially \newline reprogrammable rules \\
-      \noalign{\smallskip}
-      \hline
-      \end{tabular}
-      \end{table}      
-    \end{column}
-  \end{columns}
-      
-%    \item Procedimiento:
-%      \begin{itemize}
-%        \scriptsize
-%        \item almacenamiento de encabezados
-%        \item comparación contra una tabla de \emph{reglas}
-%        \item edición de un campo de \emph{control}
-%      \end{itemize}
-%  \end{itemize}
-  
-%  \vskip1ex
+\begin{frame}{LookUp}
 
-
-\end{frame}
- 
- 
-\subsection{Conmutación (Switching)}
-\begin{frame}{Procesamiento en Redes de Datos}
-  \begin{block}<+->{Conmutación (Switching)}
-    \begin{itemize}
-      \item Múltiples puertos de E/S $\rightarrow$ {\bf Contención}
-%     \item Conmutación de \emph{paquetes} o de \emph{celdas}
-      \item {\bf Time-division Switching:} bus o memoria compartidos. Soporta tráfico \emph{agregado}. 
-      \item {\bf Space-division Switching:} transferencias \emph{simultáneas}. Limitado por efectos \emph{físicos} y \emph{bloqueo interno}.
-    \end{itemize}
-  \end{block}
-  \vskip1ex  
-  
-	\begin{columns}
-		\begin{column}{0.3\textwidth}
-      \center
-      \includegraphics[scale=0.35]{figures/crossbar}
-      \hskip1cm
-    \end{column}
-    
-    \begin{column}{0.7\textwidth}
-      \begin{table}
-%      \caption{Implementation of switching}
-        \label{switching_table}
-        \centering
-        \tiny
-        \begin{tabular}{ p{2cm} @{\hspace{.5cm}} p{2cm} @{\hspace{.5cm}} p{2cm}} 
-          %\begin{tabular}{ p{.315\linewidth} p{.315\linewidth} p{.315\linewidth}} 
-          \hline\noalign{\smallskip}
-          GPPs        & FPGAs         & ASICs \\ 
-          \noalign{\smallskip}
-          \hline
-          \noalign{\smallskip}
-          Shared bus/memory & Time/space division & Time/space division \\
-          \noalign{\smallskip}
-          Low/medium \newline performance & High performance & Very high performance \\
-          \noalign{\smallskip}
-          Little/no optimization possible & Optimization limited by device family & Optimization at design time \\  
-          \noalign{\smallskip}
-          \hline
-        \end{tabular}
-      \end{table}
-    \end{column}
-  \end{columns}
-  
-\end{frame}  
-
-
-\subsection{Almacenamiento (Queueing)}
-\begin{frame}{Procesamiento en Redes de Datos}
- 
-  \begin{block}<+->{Almacenamiento (Queueing)}  
+ \begin{block}<+->{Lookup}   
     \begin{itemize}
       \scriptsize
-      \item Junto con la \emph{Conmutación}, determina desempeño y campo de aplicación
-      \item Los buffers absorben \emph{contención} y aplican políticas de QoS
-      \item Pueden ubicarse en \emph{entrada}, \emph{salida}, \emph{entrada/salida} o \emph{integrada a la matriz de conmutación}
-      \item Almacenamiento de \emph{celdas} o \emph{paquetes} $\rightarrow$ {\bf segmentación/reensamblado}
+      \item Se lleva a cabo en el dispositivo de enrutamiento.
+      \item Un paquete llega por una interfaz de entrada. Éste porta una dirección IP determinada.
+      \item El dispositivo consulta una tabla de forwardeo para determinar la interfaz de salida para el paquete en cuestión
+      \item Dicha tabla contiene un conjunto de prefijos con sus correspondientes interfaces de salida.
+      \item El paquete es correspondido con el prefijo más largo que esté contenido en la dirección de destino y luego es redirigido  a la correspondiente interfaz de salida.
+   
     \end{itemize}
   \end{block}
- 
- 	\begin{columns}
-		\begin{column}{0.3\textwidth}
-      \center
-      \includegraphics[scale=0.23]{figures/queueing}
-      \hskip1cm
-    \end{column}
-    
-    \begin{column}{0.7\textwidth}
-      \begin{table}
-  %      \caption{Implementation of queueing}
-        \label{queueing_table}
-        \tiny
-        \centering
-        \begin{tabular}{ p{2cm} @{\hspace{.4cm}} p{2cm} @{\hspace{.4cm}} p{2cm}} 
-        %\begin{tabular}{ p{.315\linewidth} p{.315\linewidth} p{.315\linewidth}} 
-        \hline\noalign{\smallskip}
-        GPPs        & FPGAs         & ASICs \\ 
-        \noalign{\smallskip}
-        \hline
-        \noalign{\smallskip}
-        System SDRAM & Internal SRAM or external SDRAM & Internal SRAM or external SDRAM \\
-        \noalign{\smallskip}
-        High latency and \newline capacity & Low latency or high \newline capacity & Low latency or High \newline capacity \\
-        \noalign{\smallskip}
-        Centralized & Centralized/distributed & Centralized \\    
-        \noalign{\smallskip}
-        \hline
-        \end{tabular}
-      \end{table}
-    \end{column} 
-  \end{columns}       
+
 \end{frame}
 
-\subsection{Planificación (scheduling)}
-\begin{frame}{Procesamiento en Redes de Datos}
-  \begin{block}<+->{Planificación (Scheduling)} 
+\subsection{Objetivos}
+\begin{frame}{Objetivos}
+\begin{block}<+->{Generales}   
     \begin{itemize}
       \scriptsize
-      \item Surge ante el problema de \emph{contención}
-      \item Distribución Equitativa $\rightarrow$ algoritmo \emph{Round-Robin}
-      \item Se combina usualmente con el efecto de \emph{policers} (entrada) y \emph{shapers} (salida)
-      \item Fuertemente condicionado por la función de \emph{Switching}
+      \item Estudiar las diversas arquitecturas de clasificacion de paquetes para poder encontrar las limitaciones en la implementacion de las mismas tanto en software como en hardware. 
+      \item Ganar conocimiento acerca las diversas posibilidades que ofrecen las FPGA para la implementacion de este tipo de algoritmos y las opciones con las que se cuenta a la hora de implementar un sistema embebido en este tipo de dispositivos.
     \end{itemize}
   \end{block}
   
-  \vskip.5cm
-  
-  \begin{columns}
-		\begin{column}{0.4\textwidth}
-      \center
-      \includegraphics[scale=0.5]{figures/VOQ_scheduling}
-      \hskip1cm
-    \end{column}
-    
-    \begin{column}{0.6\textwidth}
-      \begin{table}
-%      \caption{Implementation of scheduling}
-      \label{scheduling_table}
-      \centering
-      \begin{tabular}{ p{2cm} @{\hspace{.5cm}} p{2cm} @{\hspace{.5cm}} p{1cm}} 
-      %\begin{tabular}{ p{.3\linewidth} p{.3\linewidth} p{.3\linewidth}} 
-      \hline\noalign{\smallskip}
-      GPPs        & FPGAs         & ASICs \\ 
-      \noalign{\smallskip}
-      \hline
-      \noalign{\smallskip}
-      Programmable & Configurable/ \newline Programmable & Fixed \\
-      \noalign{\smallskip}
-      Slow & Medium & Fast \\
-      \noalign{\smallskip}
-      \hline
-      \end{tabular}
-      \end{table}
-    \end{column} 
-  \end{columns}
-
-\end{frame}
-
-
-\section{Caso de Estudio}
-\subsection{Arquitectura planteada}
-\begin{frame}{Caso de Estudio}
-
-\begin{block}<+->{Arquitectura planteada} 
-  \begin{itemize}
-    \scriptsize
-    \item {\bf Premisa:} utilizar sólo \emph{lo necesario} en la \emph{ubicación necesaria}
-    \item Escenario de aplicación $\rightarrow$ {\bf Conmutación entre LAN Virtuales (VLANs)}
-    \item Configuración \emph{Router on a Stick:} múltiples flujos (VLANs) se transportan mediante un \emph{enlace troncal} único
-    \item Los puertos de un \emph{Switch} de Capa 2 se agrupan en LANs virtuales. La conmutación \emph{entre VLANs} se realiza en un \emph{Router} de Capa 3 (FPGA)   
-  \end{itemize}
-\end{block}
-
-\vskip.1cm
-
-  \begin{columns}
-    \begin{column}{0.4\textwidth}
-      \center
-      \includegraphics[scale=0.35]{figures/vlan_scenario}
-%      \hskip.5cm
-    \end{column}
-    \begin{column}{0.6\textwidth}
-      \center
-      \includegraphics[scale=0.3]{figures/case}
-      \hskip6cm
-
-    \end{column}
-  \end{columns}
-
-\end{frame}
-
-
-\subsection{Resultados}
-\begin{frame}{Caso de Estudio}
-
-\begin{block}<+->{Resultados}
-  \center
-
-  \begin{table}[h]
-  \renewcommand{\arraystretch}{1.3}
-  %\caption{Resource utilization for case study}
-  \label{all}
-  \centering
-  \tiny
-  \begin{tabular}{|c|c|c|} \hline
-  Stage & Comb. ALUTs & Registers \\ \hline
-  Classifier (8 rules) & 70 & 231  \\
-  Queuers (3)  & 179 & 84 \\
-  Scheduler  & 180 & 139 \\
-  Editors (2) & 77 & 327 \\ \hline
-  \emph {Total processing stages} & 506 & 781 \\ \hline
-  MAC IP Core and glue logic & 1906 & 1792 \\ \hline
-  \emph {Total resources utilization} & 2412 & 2573 \\ \hline
-     
-  \end{tabular}
-  \end{table}
-
-  \begin{columns}
-	  \begin{column}{0.4\textwidth}
-      \center
-      \includegraphics[scale=0.35]{figures/comb}
-      \hskip1cm
-    \end{column} 
-    
-    \begin{column}{0.4\textwidth}
-      \center
-      \includegraphics[scale=0.35]{figures/bw}
-    \end{column}
-  \end{columns}  
-
-\end{block}
-
-%\item La tecnología de lógica programable es muy apropiada para experimentación con arquitecturas distribuidas por su flexibilidad y buen desempeño
-%\item Esta tecnología se encuentra en pleno desarrollo
-%\item Se investiga la utilización de lenguajes de Alto Nivel (HLLs) para facilitar la programación
-%\item Se comprobó que una arquitectura sin optimizaciones fue capaz de implementar un caso medio de uso
-%\item Se puede lograr buena escalabilidad incorporando las optimizaciones mencionadas
-
-%\end{itemize}
-\end{frame}
-
-\subsection{Conclusiones}
-\begin{frame}{Conclusiones}
-
-  \begin{block}<+->{Experiencia realizada}
+ \begin{block}<+->{Específicos}   
     \begin{itemize}
-      \item La arquitectura conceptual implementada consume menos de 1 \% de recursos en un FPGA \emph{Altera Stratix IIGX}
-      \item Trabajo \emph{sin optimizaciones} a velocidad 10 GbE 
-      \item Sin embargo, su escalabilidad es limitada $\rightarrow$ campo para {\bf optimizaciones}	
+      \scriptsize
+     \item Implementar un sistema embebido que realice la clasificiación unidimensional de paquetes mediante una arquitectura mixta, Hardware-Software, en lógica reprogramable y que permita contratastar algunos de los algoritmos de clasificacion existentes. 
+	\item Implementar como mínimo dos algoritmos de clasificación. 
+	\item Mejorar las algoritmos anteriormente mencionados, poniendo el foco en optimizar el código.
+   
     \end{itemize}
   \end{block}
-    
-  \begin{block}<+->{Expectativas}
+ \end{frame}
+
+\section{Sistema}
+\subsection{Solución Propuesta}
+\begin{frame}{Solución}
+
+... Diagrama de bloques ...
+
+\end{frame}
+
+\subsection{Descripcion funcional de cada bloque}
+\begin{frame}{Descripcion funcional}
+\begin{block}<+->{Microprocesador}   
     \begin{itemize}
-      \item Contrastación de posibles optimizaciones y evaluación de otros escenarios
-      \item Integración con plataforma \emph{software} para migración parcial de funciones 
-      \item La evolución de esta tecnología acompañará el trabajo de optimización
-      \item {\bf Factor limitante:} largos ciclos de implementación $\rightarrow$ {\bf Lenguajes de Alto Nivel (HLLs)}
+      \scriptsize
+     	\item
+    \end{itemize}
+  \end{block}
+  \begin{block}<+->{Bus de interconexión}   
+    \begin{itemize}
+      \scriptsize
+     	\item
+    \end{itemize}
+  \end{block}
+\end{frame}
+\begin{frame}{Descripcion funcional}
+\begin{block}<+->{Memoria}   
+    \begin{itemize}
+      \scriptsize
+     	\item
+    \end{itemize}
+  \end{block}
+  \begin{block}<+->{Dispositivos de E/S}   
+    \begin{itemize}
+      \scriptsize
+     	\item
     \end{itemize}
   \end{block}
 \end{frame}
 
-\begin{frame}{Preguntas}
+\subsection{Algoritmos de Clasificación}
+\begin{frame}{Algoritmos de Clasificación}
+\begin{block}<+->{Linear Lookup (LLU)}   
+    \begin{itemize}
+      \scriptsize
+     	\item
+    \end{itemize}
+  \end{block}
+  \begin{block}<+->{Unibit trie lookup (UTL)}   
+    \begin{itemize}
+      \scriptsize
+     	\item
+    \end{itemize}
+  \end{block}
+\end{frame}
 
-\huge Gracias por su atención, preguntas?
+\subsection{Modulo extractor de cabeceras}
+\begin{frame}{Modulo extractor de cabeceras}
+\begin{block}<+->{Descripción funcional}   
+    \begin{itemize}
+      \scriptsize
+     	\item
+    \end{itemize}
+  \end{block}
+  \begin{block}<+->{Formato de la cabecera}   
+    \begin{itemize}
+      \scriptsize
+     	\item
+    \end{itemize}
+  \end{block}
+\end{frame}
 
-\vskip3ex
+\section{Arquitectura}
+\subsection{Diagrama en bloques: Lineas E/S}
+\begin{frame}{Diagrama en bloques: Lineas E/S}
 
-\small jfinochietto@efn.uncor.edu \\
-\small czerbini@electronica.frc.utn.edu.ar
+---aqui el diagrama ...
 
 \end{frame}
 
+\begin{frame}{Arquitectura}
+  \begin{block}<+->{Interfaz Avalon MM}   
+    \begin{itemize}
+      \scriptsize
+     	\item
+    \end{itemize}
+  \end{block}
+\end{frame}
+
+\section{Implementación}
+\subsection{NIOS II}
+\begin{frame}{Microprocesador NIOS II}
+  \begin{block}<+->{NIOS II}   
+    \begin{itemize}
+      \scriptsize
+     	\item
+    \end{itemize}
+  \end{block}
+\end{frame}
+
+\subsection{Herramientas / Recursos Utilizados}
+\begin{frame}{Herramientas / Recursos Utilizados}
+\begin{block}<+->{Quartus}   
+    \begin{itemize}
+      \scriptsize
+     	\item
+    \end{itemize}
+  \end{block}
+  \begin{block}<+->{Eclipse IDE for NIOS}   
+    \begin{itemize}
+      \scriptsize
+     	\item
+    \end{itemize}
+  \end{block}
+\end{frame}
+
+\subsection{Verificación}
+\begin{frame}{Verificación}
+\begin{block}<+->{Etapas}   
+    \begin{itemize}
+      \scriptsize
+     	\item 1º Paso: Módulo más simple (simpleRW)
+     	\item 2º Paso: Implementación del modulo extractor. Debugging de señales.
+     	\item 3º Paso: Integración extractor-software. LLU y UTL.
+    \end{itemize}
+  \end{block}
+\end{frame}
+
+\section{Resultados}
+\subsection{Introducción}
+\begin{frame}{Introducción}
+  \begin{block}<+->{Presentación de los resultados}   
+    \begin{itemize}
+      \scriptsize
+     	\item     	
+    \end{itemize}
+  \end{block}
+\end{frame}
+
+\subsection{Caso algoritmos unicamente}
+\begin{frame}{Caso algoritmos unicamente} 
+ .. Grafico correspondiente ...
+\end{frame}
+
+\subsection{Caso loopback}
+\begin{frame}{Caso loopback} 
+ .. Grafico correspondiente ...
+\end{frame}
+
+\subsection{Implementacion completa}
+\begin{frame}{Implementación completa: LLU} 
+ .. Graficos retardo mínimo ...
+\end{frame}
+
+
+\begin{frame}{Implementación completa: LLU} 
+ .. Graficos retardo promedio ...
+\end{frame}
+
+
+\begin{frame}{Implementación completa: LLU} 
+ .. Graficos retardo máximo ...
+\end{frame}
+
+
+\begin{frame}{Implementación completa: UTL} 
+ .. Graficos retardo mínimo ...
+\end{frame}
+
+
+\begin{frame}{Implementación completa: UTL} 
+ .. Graficos retardo promedio ...
+\end{frame}
+
+
+\begin{frame}{Implementación completa: UTL} 
+ .. Graficos retardo máximo ...
+\end{frame}
+
+\subsection{Comparativa inter-algortimos}
+\begin{frame}{Comparativa inter-algortimos} 
+ .. Grafico comparativo ...
+\end{frame}
+
+\section{Conclusiones}
+\begin{frame}{Conclusiones} 
+\begin{block}<+->{Conclusiones}   
+    \begin{itemize}
+      \scriptsize
+     	\item     	
+    \end{itemize}
+  \end{block}
+\end{frame}
 
 \end{document}
-
