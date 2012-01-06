@@ -88,7 +88,7 @@
 
       \item Los \emph{enlaces} ofrecen alta capacidad. El \emph{procesamiento} de paquetes es {\bf crítico} y debe optimizarse
 
-      \item El rocesamiento \emph{a velocidad de línea}
+      \item El procesamiento \emph{a velocidad de línea}
 
       \item Paquete Ethernet mínimo $=64 bytes$ $\rightarrow 6 nanosegundos/paquete$  
     \end{itemize}    
@@ -114,9 +114,9 @@
   \vskip2ex  
 %    \newcolumntype{V}{>{\centering\arraybackslash} m{.4\linewidth} }
     \begin{tabularx}{\linewidth}{ZZ}
-%    \includegraphics[scale=0.45]{figures/packet_vs_flow-crop} 
+    \includegraphics[scale=0.45]{figures/packet_vs_flow-crop.eps} 
     &
-%    \includegraphics[scale=0.2]{figures/network_virtualization_2}
+    \includegraphics[scale=0.2]{figures/network_virtualization_2.eps}
     \\
     \tiny Agregacion de flujos
     &
@@ -173,11 +173,11 @@
     \center 
     \newcolumntype{V}{>{\centering\arraybackslash} m{.3\linewidth} }
     \begin{tabularx}{\linewidth}{VVV}
-%      \includegraphics[scale=0.35]{figures/GPP_based}
+      \includegraphics[scale=0.35]{figures/GPP_based.eps}
       &
-%      \includegraphics[scale=0.35]{figures/NP_based}
+      \includegraphics[scale=0.35]{figures/NP_based.eps}
       &
-%      \includegraphics[scale=0.38]{figures/FPGA_based}
+      \includegraphics[scale=0.38]{figures/FPGA_based.eps}
       \\
       \tiny Implementación con GPPs
       &
@@ -198,15 +198,15 @@
       \item Es el proceso de categorización de paquetes en distintos flujos.
       \item Efectuada en base a un número de campos de una cabecera.
       \item En general, para una clasificación basada en N campos, se dice que la misma es N-dimensional (o multidimensional) 
-      \item Un caso en particular de la clasificación unidimensional (N=1) es lo que se conoce como \textit{lookup}.     
+      \item Un caso en particular de la clasificación unidimensional (N=1) es lo que se conoce como \textit{IP lookup}.     
     \end{itemize}
   \end{block}
 
 \end{frame}
 
-\begin{frame}{LookUp}
+\begin{frame}{IP LookUp}
 
- \begin{block}<+->{Lookup}   
+ \begin{block}<+->{IP Lookup}   
     \begin{itemize}
       \scriptsize
       \item Se lleva a cabo en el dispositivo de enrutamiento.
@@ -244,8 +244,8 @@
 \section{Sistema}
 \subsection{Solución Propuesta}
 \begin{frame}{Solución}
-
-... Diagrama de bloques ...
+\center 
+\includegraphics[scale=0.45]{figures/solucion.eps}
 
 \end{frame}
 
@@ -254,27 +254,27 @@
 \begin{block}<+->{Microprocesador}   
     \begin{itemize}
       \scriptsize
-     	\item
+     	\item Recibe una cabecera y la procesa mediante la ejecución de un software de clasificación de paquetes.
     \end{itemize}
   \end{block}
   \begin{block}<+->{Bus de interconexión}   
     \begin{itemize}
       \scriptsize
-     	\item
+     	\item Interconecta los componentes del sistema. 
     \end{itemize}
   \end{block}
-\end{frame}
-\begin{frame}{Descripcion funcional}
 \begin{block}<+->{Memoria}   
     \begin{itemize}
       \scriptsize
-     	\item
+     	\item Almacena el software de clasificación de paquetes.
     \end{itemize}
   \end{block}
-  \begin{block}<+->{Dispositivos de E/S}   
+  \begin{block}<+->{Modulo extractor de cabeceras}   
     \begin{itemize}
       \scriptsize
-     	\item
+     	\item Extrae una cabecera a partir de cada paquete recibido.
+	\item La envía al software de clasificación
+	\item Recibe la información generada por dicho software
     \end{itemize}
   \end{block}
 \end{frame}
@@ -301,19 +301,56 @@
 \end{frame}
 
 \subsection{Modulo extractor de cabeceras}
+
 \begin{frame}{Modulo extractor de cabeceras}
-\begin{block}<+->{Descripción funcional}   
+\center 
+\includegraphics[scale=0.40]{figures/extractor2.eps}
+
+\end{frame}
+\begin{frame}{Descripción funcional}
+\begin{block}<+->{Generador de paquetes}   
     \begin{itemize}
       \scriptsize
-     	\item
+     	\item Genera paquetes de red Ethernet
+	\item Propósito: Simular tráfico proveniente del exterior
     \end{itemize}
   \end{block}
-  \begin{block}<+->{Formato de la cabecera}   
+\begin{block}<+->{FIFO}   
     \begin{itemize}
       \scriptsize
-     	\item
+     	\item Recibe los paquetes generados por el módulo anterior 
     \end{itemize}
   \end{block}
+\begin{block}<+->{Delay Buffer}   
+    \begin{itemize}
+      \scriptsize
+     	\item Va tomando los datos desde la FIFO
+	\item Detecta inicio y finalización de cada paquete
+	\item Envía la cabecera hacia el módulo Uplink
+	\item Mantiene almacenado el paquete mientras el software toma una decisión
+    \end{itemize}
+  \end{block}
+\end{frame}
+\begin{frame}{Descripción funcional (cont)}
+  \begin{block}<+->{Uplink}   
+    \begin{itemize}
+      \scriptsize
+     	\item Encargado de realizar la comunicación entre el flujo de datos que proviene de la red y el procesador
+	\item Genera interrupciones al procesador cuando los datos están disponibles
+	\item Cuando el procesador responde con el resultado de la clasificación, el mismo es almacenado y enviado al módulo Write Output
+    \end{itemize}
+  \end{block}
+\begin{block}<+->{Write Output}   
+    \begin{itemize}
+      \scriptsize
+     	\item Toma la salida de Delay Buffer
+	\item Escribe el resultado que le envía Uplink en la etiqueta que se encuentra anexa en cada una de las palabras del paquete
+    \end{itemize}
+  \end{block}
+\end{frame}
+\begin{frame}{Formato de la cabecera}
+ \center 
+\includegraphics[scale=0.55]{figures/cabecera.eps}
 \end{frame}
 
 \section{Arquitectura}
@@ -358,6 +395,7 @@
     \begin{itemize}
       \scriptsize
      	\item Version de la IDE Eclipse adaptada para trabajar con el microprocesador NIOS II
+	\item Lenguajes utilizados: C,C++
     \end{itemize}	
   \end{block}
 \end{frame}
