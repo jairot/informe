@@ -312,23 +312,24 @@
 \begin{block}<+->{Generador de paquetes}   
     \begin{itemize}
       \scriptsize
-     	\item Genera paquetes de red Ethernet
-	\item Propósito: Simular tráfico proveniente del exterior
+     	\item Genera paquetes de red Ethernet.
+	\item La distancia entre paquetes y el tamaño de los mismos es configurable. 
     \end{itemize}
   \end{block}
 \begin{block}<+->{FIFO}   
     \begin{itemize}
       \scriptsize
-     	\item Recibe los paquetes generados por el módulo anterior 
+     	\item Recibe los paquetes generados por el módulo anterior y los almacena en una memoria interna.
+	\item De tamaño configurable.
     \end{itemize}
   \end{block}
 \begin{block}<+->{Delay Buffer}   
     \begin{itemize}
       \scriptsize
-     	\item Va tomando los datos desde la FIFO
-	\item Detecta inicio y finalización de cada paquete
-	\item Envía la cabecera hacia el módulo Uplink
-	\item Mantiene almacenado el paquete mientras el software toma una decisión
+     	\item Va tomando los datos desde la FIFO.
+	\item Detecta inicio y finalización de cada paquete.
+	\item Envía las primeras 5 palabras del paquete, suficientes para cubir la cabecera IP, a Uplink.
+	\item Mantiene almacenado el paquete mientras el software toma una decisión.
     \end{itemize}
   \end{block}
 \end{frame}
@@ -336,16 +337,16 @@
   \begin{block}<+->{Uplink}   
     \begin{itemize}
       \scriptsize
-     	\item Encargado de realizar la comunicación entre el flujo de datos que proviene de la red y el procesador
-	\item Genera interrupciones al procesador cuando los datos están disponibles
+     	\item Entiende las señales que maneja el Bus y puede interrumpir al Procesador.
+	\item Genera interrupciones al procesador cuando los datos están disponibles.
 	\item Cuando el procesador responde con el resultado de la clasificación, el mismo es almacenado y enviado al módulo Write Output
     \end{itemize}
   \end{block}
 \begin{block}<+->{Write Output}   
     \begin{itemize}
       \scriptsize
-     	\item Toma la salida de Delay Buffer
-	\item Escribe el resultado que le envía Uplink en la etiqueta que se encuentra anexa en cada una de las palabras del paquete
+     	\item Toma la salida de Delay Buffer.
+	\item Escribe el resultado que le envía Uplink en la etiqueta que se encuentra anexa en cada una de las palabras del paquete.
     \end{itemize}
   \end{block}
 \end{frame}
