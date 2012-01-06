@@ -37,7 +37,8 @@
 \AtBeginSubsection[]
 {
   \begin{frame}<beamer>{Agenda}
-    \scriptsize
+  %  \scriptsize
+    \tiny	
     \tableofcontents[currentsection,currentsubsection]
   \end{frame}
 }
@@ -54,6 +55,7 @@
 \end{frame}
 
 \begin{frame}{Agenda}
+  \tiny	
   \tableofcontents
   % You might wish to add the option [pausesections]
 \end{frame}
@@ -280,6 +282,12 @@
   \end{block}
 \end{frame}
 
+\subsection{Formato de la cabecera IP}
+\begin{frame}{Formato de la cabecera}
+ \center 
+\includegraphics[scale=0.55]{figures/cabecera.eps}
+\end{frame}
+
 \subsection{Algoritmos de Clasificación}
 \begin{frame}{Algoritmos de Clasificación}
 \begin{block}<+->{Linear Lookup (LLU)}   
@@ -306,8 +314,8 @@
 \begin{frame}{Modulo extractor de cabeceras}
 \center 
 \includegraphics[scale=0.60]{figures/modulo.eps}
-
 \end{frame}
+
 \begin{frame}{Descripción funcional}
 \begin{block}<+->{Generador de paquetes}   
     \begin{itemize}
@@ -350,26 +358,93 @@
     \end{itemize}
   \end{block}
 \end{frame}
-\begin{frame}{Formato de la cabecera}
- \center 
-\includegraphics[scale=0.55]{figures/cabecera.eps}
-\end{frame}
+
 
 \section{Arquitectura}
-\subsection{Diagrama en bloques: Lineas E/S}
-\begin{frame}{Diagrama en bloques: Lineas E/S}
 
----aqui el diagrama ...
+\subsection{Arquitectura}
+\begin{frame}{Arquitectura}
+  \begin{block}<+->{Avalon}   
+    \begin{itemize}
+      \scriptsize
+     	\item Es una familia de interfaces provista por Altera
+	\item Diferentes tipos, en base a las necesidades (ST, MM, Clock, Interrupt, Conduit, Reset)
+    \end{itemize}
+  \end{block}
+\begin{block}<+->{En este diseño}   
+    \begin{itemize}
+      \scriptsize
+     	\item Avalon MM $\rightarrow$ Los dispositivos están mapeados en memoria
+	\item Avalon Clock Interface $\rightarrow$ Provee señal de clock al sistema
+	\item Avalon Interrupt Interface $\rightarrow$ Permite que el módulo extractor de cabeceras interrumpa al procesador
+	\item Avalon Conduit Interface $\rightarrow$ Permite visualizar resultados fuera de la FPGA
+    \end{itemize}
+  \end{block}
+\end{frame}
+
+\begin{frame}{Señales utilizadas}
+  \begin{block}<+->{Avalon MM}
+  \begin{itemize}
+      \scriptsize
+	\item address: Direcciona los datos enviados a o recibidos desde el procesador.
+	\item chipselect: Se usa en combinacion con read o write.
+	\item read: Indica una transferencia de lectura.
+	\item readdata: Bus por el cual se transfieren los datos desde el preriférico hacia el procesador.
+	\item write: Indica una transferencia de escritura.
+	\item writedata: Bus por el cual se transfieren los datos desde el procesador hacia el periférico.
+   \end{itemize}
+\end{block}	
+
+\begin{block}<+->{Avalon Clock Interface}
+  \begin{itemize}
+      \scriptsize
+	\item clk: Provee clock para la sincronización de señales.	
+   \end{itemize}
+  \end{block}
+\end{frame}
+
+\begin{frame}{Señales utilizadas (cont)}
+  \begin{block}<+->{Avalon Interrupt Interface}
+  \begin{itemize}
+      \scriptsize
+	\item irq: Permite al modulo enviar una señal de interrupción al procesador cuando hay una cabecera lista para ser procesada.
+   \end{itemize}
+\end{block}	
+
+\begin{block}<+->{Avalon Conduit Interface}
+  \begin{itemize}
+      \scriptsize
+	\item export: Permite exportar señales "fuera" de la FPGA. En este caso, se la utiliza para visualizar ciertos resultados de la clasificación por medio del panel de LEDs de la placa de desarrollo.	
+   \end{itemize}
+  \end{block}
+
 
 \end{frame}
 
-\begin{frame}{Arquitectura}
-  \begin{block}<+->{Interfaz Avalon MM}   
-    \begin{itemize}
-      \scriptsize
-    	\item
-    \end{itemize}
-  \end{block}
+\subsection{Diagrama en bloques: Lineas E/S}
+\begin{frame}{Generador}
+\center 
+\includegraphics[scale=0.60]{figures/bloqgenerador.eps}
+\end{frame}
+
+\begin{frame}{FIFO}
+\center 
+\includegraphics[scale=0.60]{figures/bloqfifo.eps}
+\end{frame}
+
+\begin{frame}{Delay Buffer}
+\center 
+\includegraphics[scale=0.60]{figures/bloqdelaybuffer.eps}
+\end{frame}
+
+\begin{frame}{Uplink}
+\center 
+\includegraphics[scale=0.60]{figures/bloquplink.eps}
+\end{frame}
+
+\begin{frame}{Write Output}
+\center 
+\includegraphics[scale=0.60]{figures/bloqwrite.eps}
 \end{frame}
 
 \section{Implementación}

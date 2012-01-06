@@ -8,18 +8,20 @@
 \beamer@sectionintoc {2}{Sistema}{18}{0}{2}
 \beamer@subsectionintoc {2}{1}{Soluci\IeC {\'o}n Propuesta}{18}{0}{2}
 \beamer@subsectionintoc {2}{2}{Descripcion funcional de cada bloque}{20}{0}{2}
-\beamer@subsectionintoc {2}{3}{Algoritmos de Clasificaci\IeC {\'o}n}{25}{0}{2}
-\beamer@subsectionintoc {2}{4}{Modulo extractor de cabeceras}{28}{0}{2}
-\beamer@sectionintoc {3}{Arquitectura}{36}{0}{3}
-\beamer@subsectionintoc {3}{1}{Diagrama en bloques: Lineas E/S}{36}{0}{3}
-\beamer@sectionintoc {4}{Implementaci\IeC {\'o}n}{39}{0}{4}
-\beamer@subsectionintoc {4}{1}{NIOS II}{39}{0}{4}
-\beamer@subsectionintoc {4}{2}{Herramientas / Recursos Utilizados}{41}{0}{4}
-\beamer@subsectionintoc {4}{3}{Verificaci\IeC {\'o}n}{44}{0}{4}
-\beamer@sectionintoc {5}{Resultados}{46}{0}{5}
-\beamer@subsectionintoc {5}{1}{Introducci\IeC {\'o}n}{46}{0}{5}
-\beamer@subsectionintoc {5}{2}{Caso algoritmos unicamente}{48}{0}{5}
-\beamer@subsectionintoc {5}{3}{Caso loopback}{50}{0}{5}
-\beamer@subsectionintoc {5}{4}{Implementacion completa}{52}{0}{5}
-\beamer@subsectionintoc {5}{5}{Comparativa inter-algortimos}{59}{0}{5}
-\beamer@sectionintoc {6}{Conclusiones}{61}{0}{6}
+\beamer@subsectionintoc {2}{3}{Formato de la cabecera IP}{25}{0}{2}
+\beamer@subsectionintoc {2}{4}{Algoritmos de Clasificaci\IeC {\'o}n}{27}{0}{2}
+\beamer@subsectionintoc {2}{5}{Modulo extractor de cabeceras}{30}{0}{2}
+\beamer@sectionintoc {3}{Arquitectura}{37}{0}{3}
+\beamer@subsectionintoc {3}{1}{Arquitectura}{37}{0}{3}
+\beamer@subsectionintoc {3}{2}{Diagrama en bloques: Lineas E/S}{44}{0}{3}
+\beamer@sectionintoc {4}{Implementaci\IeC {\'o}n}{50}{0}{4}
+\beamer@subsectionintoc {4}{1}{NIOS II}{50}{0}{4}
+\beamer@subsectionintoc {4}{2}{Herramientas / Recursos Utilizados}{52}{0}{4}
+\beamer@subsectionintoc {4}{3}{Verificaci\IeC {\'o}n}{55}{0}{4}
+\beamer@sectionintoc {5}{Resultados}{57}{0}{5}
+\beamer@subsectionintoc {5}{1}{Introducci\IeC {\'o}n}{57}{0}{5}
+\beamer@subsectionintoc {5}{2}{Caso algoritmos unicamente}{59}{0}{5}
+\beamer@subsectionintoc {5}{3}{Caso loopback}{61}{0}{5}
+\beamer@subsectionintoc {5}{4}{Implementacion completa}{63}{0}{5}
+\beamer@subsectionintoc {5}{5}{Comparativa inter-algortimos}{70}{0}{5}
+\beamer@sectionintoc {6}{Conclusiones}{72}{0}{6}
