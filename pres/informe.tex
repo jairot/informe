@@ -25,7 +25,7 @@
 
 \title[] {Implementación HW/SW de Arquitecturas de Clasifiación de Paquetes Sobre Lógica Reconfigurable.}
 
-\author[] {Jairo N. Trad y Luis R. Romano}
+\author[] {Jairo Trad y Luis R. Romano}
 
 
 \institute[Universidades] % (optional, but mostly needed)
@@ -88,7 +88,7 @@
 
       \item Los \emph{enlaces} ofrecen alta capacidad. El \emph{procesamiento} de paquetes es {\bf crítico} y debe optimizarse
 
-      \item El rocesamiento \emph{a velocidad de línea}
+      \item El procesamiento \emph{a velocidad de línea}
 
       \item Paquete Ethernet mínimo $=64 bytes$ $\rightarrow 6 nanosegundos/paquete$  
     \end{itemize}    
@@ -140,7 +140,7 @@
     \end{itemize}
   \end{block}
 
-  \begin{block}<+->{Network Processors (NPs)}   
+  \begin{block}<+->{Procesadores de Red (NPs)}   
     \begin{itemize}
       \scriptsize
       \item Múltiples elementos de procesamiento, buena performance para ciertas tareas. IXP(Intel), PowerNP (IBM)
@@ -173,9 +173,9 @@
     \center 
     \newcolumntype{V}{>{\centering\arraybackslash} m{.3\linewidth} }
     \begin{tabularx}{\linewidth}{VVV}
-%      \includegraphics[scale=0.35]{figures/GPP_based}
+%      \includegraphics[scale=0.35]{figures/GPP_based.eps}
       &
-%      \includegraphics[scale=0.35]{figures/NP_based}
+        \includegraphics[scale=0.35]{figures/NP_based}
       &
 %      \includegraphics[scale=0.38]{figures/FPGA_based}
       \\
@@ -198,15 +198,15 @@
       \item Es el proceso de categorización de paquetes en distintos flujos.
       \item Efectuada en base a un número de campos de una cabecera.
       \item En general, para una clasificación basada en N campos, se dice que la misma es N-dimensional (o multidimensional) 
-      \item Un caso en particular de la clasificación unidimensional (N=1) es lo que se conoce como \textit{lookup}.     
+      \item Un caso en particular de la clasificación unidimensional (N=1) utilizando el campo IP es lo que se conoce como \textit{IP Lookup}.     
     \end{itemize}
   \end{block}
 
 \end{frame}
 
-\begin{frame}{LookUp}
+\begin{frame}{IP LookUp}
 
- \begin{block}<+->{Lookup}   
+ \begin{block}<+->{IP Lookup}   
     \begin{itemize}
       \scriptsize
       \item Se lleva a cabo en el dispositivo de enrutamiento.
