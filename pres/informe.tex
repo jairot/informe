@@ -284,13 +284,18 @@
 \begin{block}<+->{Linear Lookup (LLU)}   
     \begin{itemize}
       \scriptsize
-     	\item
+     	\item Prefijos almacenados en una lista enlazada
+	\item Se toma como entrada una determinada dirección de destino y se va comparando nodo a nodo.
+	\item Prefijos ordenados por longitud
+	\item La primer coincidencia es la mejor
     \end{itemize}
   \end{block}
   \begin{block}<+->{Unibit trie lookup (UTL)}   
     \begin{itemize}
       \scriptsize
-     	\item
+     	\item Prefijos almacenados en un arbol
+	\item Cada nodo representa un bit del prefijo
+	\item Se toma como entrada una dirección de destino y se va recorriendo el arbol en base a los bits
     \end{itemize}
   \end{block}
 \end{frame}
@@ -344,14 +349,16 @@
 \begin{block}<+->{Quartus}   
     \begin{itemize}
       \scriptsize
-     	\item
-    \end{itemize}
+     	\item IDE de Altera
+	\item Incluye editor de textos y herramientas para síntesis
+	\item Lenguaje HDL utilizado: Verilog HDL
+    \end{itemize} 
   \end{block}
   \begin{block}<+->{Eclipse IDE for NIOS}   
     \begin{itemize}
       \scriptsize
-     	\item
-    \end{itemize}
+     	\item Version de la IDE Eclipse adaptada para trabajar con el microprocesador NIOS II
+    \end{itemize}	
   \end{block}
 \end{frame}
 
