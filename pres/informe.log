@@ -1,10 +1,14 @@
+<<<<<<< HEAD
 This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=latex 2012.1.2)  6 JAN 2012 17:33
+=======
+This is pdfTeXk, Version 3.141592-1.40.3 (Web2C 7.5.6) (format=latex 2011.3.22)  6 JAN 2012 17:32
+>>>>>>> 56386b87b7902864a65520f969e95c9b935cf371
 entering extended mode
  %&-line parsing enabled.
 **informe.tex
 (./informe.tex
-LaTeX2e <2009/09/24>
-Babel <v3.8l> and hyphenation patterns for english, usenglishmax, dumylang, noh
+LaTeX2e <2005/12/01>
+Babel <v3.8h> and hyphenation patterns for english, usenglishmax, dumylang, noh
 yphenation, loaded.
 (/usr/share/texmf/tex/latex/beamer/base/beamer.cls
 (/usr/share/texmf/tex/latex/beamer/base/beamerbasercs.sty
@@ -81,15 +85,15 @@ Package: keyval 1999/03/16 v1.13 key=value parser (DPC)
 Package: graphicx 1999/02/16 v1.0f Enhanced LaTeX Graphics (DPC,SPQR)
 
 (/usr/share/texmf-texlive/tex/latex/graphics/graphics.sty
-Package: graphics 2009/02/05 v1.0o Standard LaTeX Graphics (DPC,SPQR)
+Package: graphics 2006/02/20 v1.0o Standard LaTeX Graphics (DPC,SPQR)
 
 (/usr/share/texmf-texlive/tex/latex/graphics/trig.sty
 Package: trig 1999/03/16 v1.09 sin cos tan (DPC)
 )
 (/etc/texmf/tex/latex/config/graphics.cfg
-File: graphics.cfg 2009/08/28 v1.8 graphics configuration of TeX Live
+File: graphics.cfg 2007/01/18 v1.5 graphics configuration of teTeX/TeXLive
 )
-Package graphics Info: Driver file: dvips.def on input line 91.
+Package graphics Info: Driver file: dvips.def on input line 90.
 
 (/usr/share/texmf-texlive/tex/latex/graphics/dvips.def
 File: dvips.def 1999/02/16 v3.0i Driver-dependant file (DPC,SPQR)
@@ -269,27 +273,18 @@ Package: xxcolor 2003/10/24 ver 0.1
 \XC@countmixins=\count115
 )
 (/usr/share/texmf-texlive/tex/latex/amsfonts/amssymb.sty
-Package: amssymb 2009/06/22 v3.00
+Package: amssymb 2002/01/22 v2.2d
 
 (/usr/share/texmf-texlive/tex/latex/amsfonts/amsfonts.sty
-Package: amsfonts 2009/06/22 v3.00 Basic AMSFonts support
+Package: amsfonts 2001/10/25 v2.2f
 \@emptytoks=\toks19
 \symAMSa=\mathgroup4
 \symAMSb=\mathgroup5
 LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
-(Font)                  U/euf/m/n --> U/euf/b/n on input line 96.
+(Font)                  U/euf/m/n --> U/euf/b/n on input line 132.
 ))
 (/usr/share/texmf-texlive/tex/latex/geometry/geometry.sty
-Package: geometry 2008/12/21 v4.2 Page Geometry
-
-(/usr/share/texmf-texlive/tex/generic/oberdiek/ifpdf.sty
-Package: ifpdf 2009/04/10 v2.0 Provides the ifpdf switch (HO)
-Package ifpdf Info: pdfTeX in pdf mode not detected.
-)
-(/usr/share/texmf-texlive/tex/generic/oberdiek/ifvtex.sty
-Package: ifvtex 2008/11/04 v1.4 Switches for detecting VTeX and its modes (HO)
-Package ifvtex Info: VTeX not detected.
-)
+Package: geometry 2002/07/08 v3.2 Page Geometry
 \Gm@cnth=\count116
 \Gm@cntv=\count117
 \c@Gm@tempcnt=\count118
@@ -300,103 +295,48 @@ Package ifvtex Info: VTeX not detected.
 \Gm@dimlist=\toks20
 )
 (/usr/share/texmf-texlive/tex/latex/hyperref/hyperref.sty
-Package: hyperref 2009/10/09 v6.79a Hypertext links for LaTeX
-
-(/usr/share/texmf-texlive/tex/generic/ifxetex/ifxetex.sty
-Package: ifxetex 2009/01/23 v0.5 Provides ifxetex conditional
-)
-(/usr/share/texmf-texlive/tex/latex/oberdiek/hycolor.sty
-Package: hycolor 2009/10/02 v1.5 Code for color options of hyperref/bookmark (H
-O)
-
-(/usr/share/texmf-texlive/tex/latex/oberdiek/xcolor-patch.sty
-Package: xcolor-patch 2009/10/02 xcolor patch
-))
+Package: hyperref 2007/02/07 v6.75r Hypertext links for LaTeX
 \@linkdim=\dimen157
 \Hy@linkcounter=\count119
 \Hy@pagecounter=\count120
 
 (/usr/share/texmf-texlive/tex/latex/hyperref/pd1enc.def
-File: pd1enc.def 2009/10/09 v6.79a Hyperref: PDFDocEncoding definition (HO)
+File: pd1enc.def 2007/02/07 v6.75r Hyperref: PDFDocEncoding definition (HO)
 )
-(/usr/share/texmf-texlive/tex/generic/oberdiek/etexcmds.sty
-Package: etexcmds 2007/12/12 v1.2 Prefix for e-TeX command names (HO)
-
-(/usr/share/texmf-texlive/tex/generic/oberdiek/infwarerr.sty
-Package: infwarerr 2007/09/09 v1.2 Providing info/warning/message (HO)
-)
-Package etexcmds Info: Could not find \expanded.
-(etexcmds)             That can mean that you are not using pdfTeX 1.50 or
-(etexcmds)             that some package has redefined \expanded.
-(etexcmds)             In the latter case, load this package earlier.
-)
-(/usr/share/texmf-texlive/tex/latex/latexconfig/hyperref.cfg
+(/etc/texmf/tex/latex/config/hyperref.cfg
 File: hyperref.cfg 2002/06/06 v1.2 hyperref configuration of TeXLive
 )
 (/usr/share/texmf-texlive/tex/latex/oberdiek/kvoptions.sty
-Package: kvoptions 2009/08/13 v3.4 Keyval support for LaTeX options (HO)
-
-(/usr/share/texmf-texlive/tex/generic/oberdiek/kvsetkeys.sty
-Package: kvsetkeys 2009/07/30 v1.5 Key value parser with default handler suppor
-t (HO)
-))
-Package hyperref Info: Option `bookmarks' set `true' on input line 2864.
-Package hyperref Info: Option `bookmarksopen' set `true' on input line 2864.
-Package hyperref Info: Option `implicit' set `false' on input line 2864.
-Package hyperref Info: Hyper figures OFF on input line 2975.
-Package hyperref Info: Link nesting OFF on input line 2980.
-Package hyperref Info: Hyper index ON on input line 2983.
-Package hyperref Info: Plain pages OFF on input line 2990.
-Package hyperref Info: Backreferencing OFF on input line 2995.
+Package: kvoptions 2006/08/22 v2.4 Connects package keyval with LaTeX options (
+HO)
+)
+Package hyperref Info: Option `bookmarks' set `true' on input line 2238.
+Package hyperref Info: Option `bookmarksopen' set `true' on input line 2238.
+Package hyperref Info: Option `implicit' set `false' on input line 2238.
+Package hyperref Info: Hyper figures OFF on input line 2288.
+Package hyperref Info: Link nesting OFF on input line 2293.
+Package hyperref Info: Hyper index ON on input line 2296.
+Package hyperref Info: Plain pages OFF on input line 2303.
+Package hyperref Info: Backreferencing OFF on input line 2308.
 
 Implicit mode OFF; no redefinition of LaTeX internals
-Package hyperref Info: Bookmarks ON on input line 3191.
+Package hyperref Info: Bookmarks ON on input line 2444.
 (/usr/share/texmf-texlive/tex/latex/ltxmisc/url.sty
 \Urlmuskip=\muskip10
-Package: url 2006/04/12  ver 3.3  Verb mode for urls, etc.
+Package: url 2005/06/27  ver 3.2  Verb mode for urls, etc.
 )
-LaTeX Info: Redefining \url on input line 3428.
-
-(/usr/share/texmf-texlive/tex/generic/oberdiek/bitset.sty
-Package: bitset 2007/09/28 v1.0 Data type bit set (HO)
-
-(/usr/share/texmf-texlive/tex/generic/oberdiek/intcalc.sty
-Package: intcalc 2007/09/27 v1.1 Expandable integer calculations (HO)
-)
-(/usr/share/texmf-texlive/tex/generic/oberdiek/bigintcalc.sty
-Package: bigintcalc 2007/11/11 v1.1 Expandable big integer calculations (HO)
-
-(/usr/share/texmf-texlive/tex/generic/oberdiek/pdftexcmds.sty
-Package: pdftexcmds 2009/09/23 v0.6 LuaTeX support for pdfTeX utility functions
- (HO)
-
-(/usr/share/texmf-texlive/tex/generic/oberdiek/ifluatex.sty
-Package: ifluatex 2009/04/17 v1.2 Provides the ifluatex switch (HO)
-Package ifluatex Info: LuaTeX not detected.
-)
-(/usr/share/texmf-texlive/tex/generic/oberdiek/ltxcmds.sty
-Package: ltxcmds 2009/08/05 v1.0 Some LaTeX kernel commands for general use (HO
-)
-)
-Package pdftexcmds Info: LuaTeX not detected.
-Package pdftexcmds Info: \pdf@primitive is available.
-Package pdftexcmds Info: \pdf@ifprimitive is available.
-)))
+LaTeX Info: Redefining \url on input line 2599.
 \Fld@menulength=\count121
 \Field@Width=\dimen158
 \Fld@charsize=\dimen159
-\Field@toks=\toks21
-Package hyperref Info: Hyper figures OFF on input line 4377.
-Package hyperref Info: Link nesting OFF on input line 4382.
-Package hyperref Info: Hyper index ON on input line 4385.
-Package hyperref Info: backreferencing OFF on input line 4392.
-Package hyperref Info: Link coloring OFF on input line 4397.
-Package hyperref Info: Link coloring with OCG OFF on input line 4402.
-Package hyperref Info: PDF/A mode OFF on input line 4407.
+\Choice@toks=\toks21
+\Field@toks=\toks22
+Package hyperref Info: Hyper figures OFF on input line 3102.
+Package hyperref Info: Link nesting OFF on input line 3107.
+Package hyperref Info: Hyper index ON on input line 3110.
+Package hyperref Info: backreferencing OFF on input line 3117.
+Package hyperref Info: Link coloring OFF on input line 3122.
 
-(/usr/share/texmf-texlive/tex/generic/oberdiek/atbegshi.sty
-Package: atbegshi 2008/07/31 v1.9 At begin shipout hook (HO)
-)
 
 Package hyperref Warning: Option `pdfpagelabels' is turned off
 (hyperref)                because \thepage is undefined.
@@ -405,18 +345,18 @@ Hyperref stopped early
 )
 *hyperref using default driver hdvips*
 (/usr/share/texmf-texlive/tex/latex/hyperref/hdvips.def
-File: hdvips.def 2009/10/09 v6.79a Hyperref driver for dvips
+File: hdvips.def 2007/02/07 v6.75r Hyperref driver for dvips
 
 (/usr/share/texmf-texlive/tex/latex/hyperref/pdfmark.def
-File: pdfmark.def 2009/10/09 v6.79a Hyperref definitions for pdfmark specials
-\pdf@docset=\toks22
+File: pdfmark.def 2007/02/07 v6.75r Hyperref definitions for pdfmark specials
+\pdf@docset=\toks23
 \pdf@box=\box39
-\pdf@toks=\toks23
-\pdf@defaulttoks=\toks24
+\pdf@toks=\toks24
+\pdf@defaulttoks=\toks25
 \Fld@listcount=\count122
 ))
 (/usr/share/texmf-texlive/tex/latex/base/size11.clo
-File: size11.clo 2007/10/19 v1.4h Standard LaTeX file (size option)
+File: size11.clo 2005/09/16 v1.4f Standard LaTeX file (size option)
 )
 (/usr/share/texmf/tex/latex/beamer/base/beamerbasecompatibility.sty
 Package: beamerbasecompatibility 2007/01/28  (rcs-revision 1.63)
@@ -460,7 +400,7 @@ Package: beamerbaseframe 2007/01/28  (rcs-revision 1.60)
 \beamer@framebottomskip=\skip44
 \beamer@frametopskipautobreak=\skip45
 \beamer@framebottomskipautobreak=\skip46
-\beamer@envbody=\toks25
+\beamer@envbody=\toks26
 \c@framenumber=\count133
 )
 (/usr/share/texmf/tex/latex/beamer/base/beamerbaseverbatim.sty
@@ -472,8 +412,8 @@ Package: beamerbaseframesize 2007/01/28  (rcs-revision 1.18)
 \beamer@splitbox=\box43
 \beamer@autobreakcount=\count134
 \beamer@autobreaklastheight=\dimen161
-\beamer@frametitletoks=\toks26
-\beamer@framesubtitletoks=\toks27
+\beamer@frametitletoks=\toks27
+\beamer@framesubtitletoks=\toks28
 )
 (/usr/share/texmf/tex/latex/beamer/base/beamerbaseframecomponents.sty
 Package: beamerbaseframecomponents 2007/01/28  (rcs-revision 1.41)
@@ -491,7 +431,7 @@ Package: beamerbasetoc 2007/01/28  (rcs-revision 1.21)
 )
 (/usr/share/texmf/tex/latex/beamer/base/beamerbasetemplates.sty
 Package: beamerbasetemplates 2007/01/28  (rcs-revision 1.51)
-\beamer@sbttoks=\toks28
+\beamer@sbttoks=\toks29
 
 (/usr/share/texmf/tex/latex/beamer/base/beamerbaseauxtemplates.sty
 Package: beamerbaseauxtemplates 2007/01/28  (rcs-revision 1.28)
@@ -515,7 +455,7 @@ Package: beamerbaselocalstructure 2007/01/28  (rcs-revision 1.53)
 
 (/usr/share/texmf-texlive/tex/latex/tools/enumerate.sty
 Package: enumerate 1999/03/05 v3.00 enumerate extensions (DPC)
-\@enLab=\toks29
+\@enLab=\toks30
 )
 \c@figure=\count135
 \c@table=\count136
@@ -528,11 +468,7 @@ Package: beamerbasenavigation 2007/01/28  (rcs-revision 1.36)
 (/usr/share/texmf/tex/latex/beamer/base/beamerbasetheorems.sty
 Package: beamerbasetheorems 2007/01/28  (rcs-revision 1.10)
 
-(/usr/share/texmf-texlive/tex/latex/translator/translator.sty
-Package: translator 2007/03/11 ver 1.00
-
-(/usr/share/texmf-texlive/tex/latex/translator/translator-language-mappings.tex
-)) (/usr/share/texmf-texlive/tex/latex/amsmath/amsmath.sty
+(/usr/share/texmf-texlive/tex/latex/amsmath/amsmath.sty
 Package: amsmath 2000/07/18 v2.13 AMS math features
 \@mathmargin=\skip49
 
@@ -542,7 +478,7 @@ Package: amstext 2000/06/29 v2.01
 
 (/usr/share/texmf-texlive/tex/latex/amsmath/amsgen.sty
 File: amsgen.sty 1999/11/30 v2.0
-\@emptytoks=\toks30
+\@emptytoks=\toks31
 \ex@=\dimen167
 ))
 (/usr/share/texmf-texlive/tex/latex/amsmath/amsbsy.sty
@@ -572,35 +508,35 @@ LaTeX Font Info:    Redeclaring font encoding OMS on input line 568.
 \dotsspace@=\muskip11
 \c@parentequation=\count144
 \dspbrk@lvl=\count145
-\tag@help=\toks31
+\tag@help=\toks32
 \row@=\count146
 \column@=\count147
 \maxfields@=\count148
-\andhelp@=\toks32
+\andhelp@=\toks33
 \eqnshift@=\dimen170
 \alignsep@=\dimen171
 \tagshift@=\dimen172
 \tagwidth@=\dimen173
 \totwidth@=\dimen174
 \lineht@=\dimen175
-\@envbody=\toks33
+\@envbody=\toks34
 \multlinegap=\skip50
 \multlinetaggap=\skip51
-\mathdisplay@stack=\toks34
+\mathdisplay@stack=\toks35
 LaTeX Info: Redefining \[ on input line 2666.
 LaTeX Info: Redefining \] on input line 2667.
 )
 (/usr/share/texmf-texlive/tex/latex/amscls/amsthm.sty
 Package: amsthm 2004/08/06 v2.20
-\thm@style=\toks35
-\thm@bodyfont=\toks36
-\thm@headfont=\toks37
-\thm@notefont=\toks38
-\thm@headpunct=\toks39
+\thm@style=\toks36
+\thm@bodyfont=\toks37
+\thm@headfont=\toks38
+\thm@notefont=\toks39
+\thm@headpunct=\toks40
 \thm@preskip=\skip52
 \thm@postskip=\skip53
 \thm@headsep=\skip54
-\dth@everypar=\toks40
+\dth@everypar=\toks41
 )
 \c@theorem=\count149
 )
@@ -639,13 +575,13 @@ Package: beamercolorthemeorchid 2007/01/28  (rcs-revision 1.3)
 Package: beamercolorthemewhale 2007/01/28  (rcs-revision 1.4)
 ))
 (/usr/share/texmf-texlive/tex/generic/babel/babel.sty
-Package: babel 2008/07/06 v3.8l The Babel package
+Package: babel 2005/11/23 v3.8h The Babel package
 
 (/usr/share/texmf-texlive/tex/generic/babel/english.ldf
 Language: english 2005/03/30 v3.3o English support from the babel system
 
 (/usr/share/texmf-texlive/tex/generic/babel/babel.def
-File: babel.def 2008/07/06 v3.8l Babel common definitions
+File: babel.def 2005/11/23 v3.8h Babel common definitions
 LaTeX Info: Redefining \textlatin on input line 82.
 \babel@savecnt=\count150
 \U@D=\dimen178
@@ -657,9 +593,9 @@ LaTeX Info: Redefining \textlatin on input line 82.
 \l@newzealand = a dialect from \language\l@british 
 ))
 (/usr/share/texmf-texlive/tex/latex/base/inputenc.sty
-Package: inputenc 2008/03/30 v1.1d Input encoding file
-\inpenc@prehook=\toks41
-\inpenc@posthook=\toks42
+Package: inputenc 2006/05/05 v1.1b Input encoding file
+\inpenc@prehook=\toks42
+\inpenc@posthook=\toks43
 
 (/usr/share/texmf-texlive/tex/latex/ucs/utf8x.def
 File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
@@ -671,9 +607,9 @@ Package: ucs 2004/10/17 UCS: Unicode input support
 File: uni-global.def 2004/10/17 UCS: Unicode global data
 )
 \uc@secondtry=\count151
-\uc@combtoks=\toks43
-\uc@combtoksb=\toks44
-\uc@temptokena=\toks45
+\uc@combtoks=\toks44
+\uc@combtoksb=\toks45
+\uc@temptokena=\toks46
 )
 (/usr/share/texmf-texlive/tex/latex/psnfss/times.sty
 Package: times 2005/04/12 PSNFSS-v9.2a (SPQR) 
@@ -686,10 +622,10 @@ File: t1enc.def 2005/09/27 v1.99g Standard LaTeX file
 LaTeX Font Info:    Redeclaring font encoding T1 on input line 43.
 ))
 (/usr/share/texmf-texlive/tex/latex/tools/array.sty
-Package: array 2008/09/09 v2.4c Tabular extension package (FMi)
+Package: array 2005/08/23 v2.4b Tabular extension package (FMi)
 \col@sep=\dimen179
 \extrarowheight=\dimen180
-\NC@list=\toks46
+\NC@list=\toks47
 \extratabsurround=\skip55
 \backup@length=\skip56
 )
@@ -721,7 +657,7 @@ Package: tabularx 1999/01/07 v2.07 `tabularx' package (DPC)
 \TX@target=\dimen197
 \TX@delta=\dimen198
 \TX@cols=\count156
-\TX@ftn=\toks47
+\TX@ftn=\toks48
 )
 (/usr/share/texmf-texlive/tex/latex/base/latexsym.sty
 Package: latexsym 1998/08/17 v2.2e Standard LaTeX package (lasy symbols)
@@ -730,6 +666,7 @@ LaTeX Font Info:    Overwriting symbol font `lasy' in version `bold'
 (Font)                  U/lasy/m/n --> U/lasy/b/n on input line 47.
 )
 
+<<<<<<< HEAD
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 (hyperref)                removing `\begingroup' on input line 51.
 
@@ -776,6 +713,54 @@ Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 (hyperref)                removing `\endgroup' on input line 51.
+=======
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `\begingroup' on input line 50.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `\<let>-command' on input line 50.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `\utf@viii@undeferr' on input line 50.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `\endgroup' on input line 50.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `\begingroup' on input line 50.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `\<let>-command' on input line 50.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `\utf@viii@undeferr' on input line 50.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `\endgroup' on input line 50.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `\begingroup' on input line 50.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `\<let>-command' on input line 50.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `\utf@viii@undeferr' on input line 50.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `\endgroup' on input line 50.
+>>>>>>> 56386b87b7902864a65520f969e95c9b935cf371
 
 (./informe.aux)
 \openout1 = `informe.aux'.
@@ -798,8 +783,6 @@ LaTeX Font Info:    Try loading font information for T1+phv on input line 51.
  (/usr/share/texmf-texlive/tex/latex/psnfss/t1phv.fd
 File: t1phv.fd 2001/06/04 scalable font definitions for T1/phv.
 )
-*geometry auto-detecting driver*
-*geometry detected driver: dvips*
 -------------------- Geometry parameters
 paper: user defined
 landscape: --
@@ -817,7 +800,7 @@ truedimen: --
 includehead: true
 includefoot: true
 includemp: --
-driver: dvips
+driver: 
 -------------------- Page layout dimensions and switches
 \paperwidth  364.19536pt
 \paperheight 273.14662pt
@@ -839,12 +822,17 @@ driver: dvips
 
 (1in=72.27pt, 1cm=28.45pt)
 -----------------------
+<<<<<<< HEAD
 Package hyperref Info: Link coloring OFF on input line 51.
+=======
+Package hyperref Info: Link coloring OFF on input line 50.
+
+>>>>>>> 56386b87b7902864a65520f969e95c9b935cf371
 (/usr/share/texmf-texlive/tex/latex/hyperref/nameref.sty
-Package: nameref 2007/05/29 v2.31 Cross-referencing by name of section
+Package: nameref 2006/12/27 v2.28 Cross-referencing by name of section
 
 (/usr/share/texmf-texlive/tex/latex/oberdiek/refcount.sty
-Package: refcount 2008/08/11 v3.1 Data extraction from references (HO)
+Package: refcount 2006/02/20 v3.0 Data extraction from references (HO)
 )
 \c@section@level=\count157
 )
@@ -855,7 +843,6 @@ LaTeX Info: Redefining \pageref on input line 51.
 \@outlinefile=\write4
 \openout4 = `informe.out'.
 
-\AtBeginShipoutBox=\box53
 LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
 (Font)                  OT1/cmr/m/n --> OT1/cmss/m/n on input line 51.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
@@ -897,16 +884,23 @@ LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
 (Font)                  T1/phv/m/it --> T1/phv/bx/it on input line 51.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
+<<<<<<< HEAD
 (Font)                  T1/pcr/m/n --> T1/pcr/bx/n on input line 51.
 
 (/usr/share/texmf-texlive/tex/latex/translator/translator-theorem-dictionary-En
 glish.dict
 Dictionary: translator-theorem-dictionary, Language: English 
 ) (/usr/share/texmf-texlive/tex/latex/ucs/ucsencs.def
+=======
+(Font)                  T1/pcr/m/n --> T1/pcr/bx/n on input line 50.
+ (/usr/share/texmf-texlive/tex/latex/ucs/ucsencs.def
+>>>>>>> 56386b87b7902864a65520f969e95c9b935cf371
 File: ucsencs.def 2003/11/29 Fixes to fontencodings LGR, T3
-) (./informe.nav) (/usr/share/texmf-texlive/tex/latex/ucs/data/uni-0.def
+)
+(./informe.nav) (/usr/share/texmf-texlive/tex/latex/ucs/data/uni-0.def
 File: uni-0.def 2004/10/17 UCS: Unicode data U+0000..U+00FF
-) [1
+)
+[1
 
 ] (./informe.toc)
 [2
@@ -918,12 +912,12 @@ LaTeX Font Info:    Font shape `T1/phv/bx/n' in size <8> not available
 (Font)              Font shape `T1/phv/b/n' tried instead on input line 99.
 LaTeX Font Info:    Try loading font information for U+msa on input line 99.
  (/usr/share/texmf-texlive/tex/latex/amsfonts/umsa.fd
-File: umsa.fd 2009/06/22 v3.00 AMS symbols A
+File: umsa.fd 2002/01/19 v2.2g AMS font definitions
 )
 LaTeX Font Info:    Try loading font information for U+msb on input line 99.
 
 (/usr/share/texmf-texlive/tex/latex/amsfonts/umsb.fd
-File: umsb.fd 2009/06/22 v3.00 AMS symbols B
+File: umsb.fd 2002/01/19 v2.2g AMS font definitions
 )
 LaTeX Font Info:    Try loading font information for U+lasy on input line 99.
 
@@ -1032,7 +1026,13 @@ File: figures/modulo.eps Graphic file (type eps)
 ]
 [34
 
+<<<<<<< HEAD
 ] [35
+=======
+] (./informe.toc)
+Overfull \vbox (3.46234pt too high) detected at line 359
+ []
+>>>>>>> 56386b87b7902864a65520f969e95c9b935cf371
 
 ] [36
 
@@ -1040,6 +1040,7 @@ File: figures/modulo.eps Graphic file (type eps)
 
 ] [38
 
+<<<<<<< HEAD
 ] [39
 
 ] [40
@@ -1096,9 +1097,24 @@ File: figures/bloqwrite.eps Graphic file (type eps)
 
 ] (./informe.toc)
 [59
+=======
+] (./informe.toc)
+Overfull \vbox (3.46234pt too high) detected at line 376
+ []
 
-] [60
+[39
 
+]
+LaTeX Font Info:    Try loading font information for OMS+phv on input line 392.
+>>>>>>> 56386b87b7902864a65520f969e95c9b935cf371
+
+ (/usr/share/texmf-texlive/tex/latex/psnfss/omsphv.fd
+File: omsphv.fd 
+)
+LaTeX Font Info:    Font shape `OMS/phv/m/n' in size <8> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 392.
+
+<<<<<<< HEAD
 ] (./informe.toc) [61
 
 ] [62
@@ -1123,19 +1139,25 @@ File: figures/bloqwrite.eps Graphic file (type eps)
 ] [71
 
 ] [72
+=======
+>>>>>>> 56386b87b7902864a65520f969e95c9b935cf371
 
-]
-\tf@nav=\write5
-\openout5 = `informe.nav'.
+LaTeX Warning: File `figures/eng_art_issue4_figure5.eps' not found on input lin
+e 392.
 
-\tf@toc=\write6
-\openout6 = `informe.toc'.
 
-\tf@snm=\write7
-\openout7 = `informe.snm'.
+! LaTeX Error: File `figures/eng_art_issue4_figure5.eps' not found.
 
- (./informe.aux) ) 
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.392 \end{frame}
+                 
+? x
+ 
 Here is how much of TeX's memory you used:
+<<<<<<< HEAD
  14137 strings out of 495062
  244819 string characters out of 1182645
  443704 words of memory out of 3000000
@@ -1145,3 +1167,13 @@ Here is how much of TeX's memory you used:
  46i,21n,65p,337b,781s stack positions out of 5000i,500n,10000p,200000b,50000s
 
 Output written on informe.dvi (72 pages, 4221992 bytes).
+=======
+ 12676 strings out of 95087
+ 220451 string characters out of 1183278
+ 396941 words of memory out of 1500000
+ 15475 multiletter control sequences out of 10000+50000
+ 26836 words of font info for 46 fonts, out of 1200000 for 2000
+ 28 hyphenation exceptions out of 8191
+ 46i,21n,65p,337b,779s stack positions out of 5000i,500n,6000p,200000b,5000s
+Output written on informe.dvi (39 pages, 2219888 bytes).
+>>>>>>> 56386b87b7902864a65520f969e95c9b935cf371

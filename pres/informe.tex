@@ -320,23 +320,24 @@
 \begin{block}<+->{Generador de paquetes}   
     \begin{itemize}
       \scriptsize
-     	\item Genera paquetes de red Ethernet
-	\item Propósito: Simular tráfico proveniente del exterior
+     	\item Genera paquetes de red Ethernet.
+	\item La distancia entre paquetes y el tamaño de los mismos es configurable. 
     \end{itemize}
   \end{block}
 \begin{block}<+->{FIFO}   
     \begin{itemize}
       \scriptsize
-     	\item Recibe los paquetes generados por el módulo anterior 
+     	\item Recibe los paquetes generados por el módulo anterior y los almacena en una memoria interna.
+	\item De tamaño configurable.
     \end{itemize}
   \end{block}
 \begin{block}<+->{Delay Buffer}   
     \begin{itemize}
       \scriptsize
-     	\item Va tomando los datos desde la FIFO
-	\item Detecta inicio y finalización de cada paquete
-	\item Envía la cabecera hacia el módulo Uplink
-	\item Mantiene almacenado el paquete mientras el software toma una decisión
+     	\item Va tomando los datos desde la FIFO.
+	\item Detecta inicio y finalización de cada paquete.
+	\item Envía las primeras 5 palabras del paquete, suficientes para cubir la cabecera IP, a Uplink.
+	\item Mantiene almacenado el paquete mientras el software toma una decisión.
     \end{itemize}
   \end{block}
 \end{frame}
@@ -344,16 +345,16 @@
   \begin{block}<+->{Uplink}   
     \begin{itemize}
       \scriptsize
-     	\item Encargado de realizar la comunicación entre el flujo de datos que proviene de la red y el procesador
-	\item Genera interrupciones al procesador cuando los datos están disponibles
+     	\item Entiende las señales que maneja el Bus y puede interrumpir al Procesador.
+	\item Genera interrupciones al procesador cuando los datos están disponibles.
 	\item Cuando el procesador responde con el resultado de la clasificación, el mismo es almacenado y enviado al módulo Write Output
     \end{itemize}
   \end{block}
 \begin{block}<+->{Write Output}   
     \begin{itemize}
       \scriptsize
-     	\item Toma la salida de Delay Buffer
-	\item Escribe el resultado que le envía Uplink en la etiqueta que se encuentra anexa en cada una de las palabras del paquete
+     	\item Toma la salida de Delay Buffer.
+	\item Escribe el resultado que le envía Uplink en la etiqueta que se encuentra anexa en cada una de las palabras del paquete.
     \end{itemize}
   \end{block}
 \end{frame}
@@ -449,11 +450,18 @@
 \section{Implementación}
 \subsection{NIOS II}
 \begin{frame}{Microprocesador NIOS II}
-  \begin{block}<+->{NIOS II}   
+   \begin{block}<+->{NIOS II}	
     \begin{itemize}
-      \scriptsize
-     	\item
+	\scriptsize
+     	\item Procesador RISC de 32 bits de proposito genera diseñado especificamente para la familia de FPGAs de Altera.
+	\item Set de instrucciones, bus de datos y espacio de direcciones de 32 bits.
+	\item Soporte de hasta 32 interrupciones.
+	\item Entorno de desarrollo de software basado en GNU C/C++ integrado a Eclipse.
+	\item Integración con SignalTap® II, el analizador de lógica embebida de Altera permitiendo el análisis  de todas las señales presentes en la FPGA.
+	\item Set de instrucciones compatible entre todos las versiones del procesador Nios II.
+	\item Multiplicación y división en una sola instrucción de 32 x 32 produciendo un resultado de 32-bits.
     \end{itemize}
+	
   \end{block}
 \end{frame}
 
