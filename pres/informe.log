@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=latex 2012.1.2)  6 JAN 2012 18:18
+=======
+This is pdfTeXk, Version 3.141592-1.40.3 (Web2C 7.5.6) (format=latex 2011.3.22)  6 JAN 2012 18:03
+>>>>>>> d27a50dfbabb0ec45c00813d315f1a681761284e
 entering extended mode
  %&-line parsing enabled.
 **informe.tex
@@ -730,6 +734,7 @@ LaTeX Font Info:    Overwriting symbol font `lasy' in version `bold'
 (Font)                  U/lasy/m/n --> U/lasy/b/n on input line 47.
 )
 
+<<<<<<< HEAD
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 (hyperref)                removing `\begingroup' on input line 51.
 
@@ -775,6 +780,53 @@ Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+=======
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `\begingroup' on input line 51.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `\<let>-command' on input line 51.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `\utf@viii@undeferr' on input line 51.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `\endgroup' on input line 51.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `\begingroup' on input line 51.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `\<let>-command' on input line 51.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `\utf@viii@undeferr' on input line 51.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `\endgroup' on input line 51.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `\begingroup' on input line 51.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `\<let>-command' on input line 51.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `\utf@viii@undeferr' on input line 51.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+>>>>>>> d27a50dfbabb0ec45c00813d315f1a681761284e
 (hyperref)                removing `\endgroup' on input line 51.
 
 (./informe.aux)
@@ -840,6 +892,10 @@ driver: dvips
 (1in=72.27pt, 1cm=28.45pt)
 -----------------------
 Package hyperref Info: Link coloring OFF on input line 51.
+<<<<<<< HEAD
+=======
+
+>>>>>>> d27a50dfbabb0ec45c00813d315f1a681761284e
 (/usr/share/texmf-texlive/tex/latex/hyperref/nameref.sty
 Package: nameref 2007/05/29 v2.31 Cross-referencing by name of section
 
@@ -898,18 +954,21 @@ LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
 (Font)                  T1/phv/m/it --> T1/phv/bx/it on input line 51.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
 (Font)                  T1/pcr/m/n --> T1/pcr/bx/n on input line 51.
+<<<<<<< HEAD
 
 (/usr/share/texmf-texlive/tex/latex/translator/translator-theorem-dictionary-En
 glish.dict
 Dictionary: translator-theorem-dictionary, Language: English 
 ) (/usr/share/texmf-texlive/tex/latex/ucs/ucsencs.def
+=======
+ (/usr/share/texmf-texlive/tex/latex/ucs/ucsencs.def
+>>>>>>> d27a50dfbabb0ec45c00813d315f1a681761284e
 File: ucsencs.def 2003/11/29 Fixes to fontencodings LGR, T3
 ) (./informe.nav) (/usr/share/texmf-texlive/tex/latex/ucs/data/uni-0.def
 File: uni-0.def 2004/10/17 UCS: Unicode data U+0000..U+00FF
 ) [1
 
-] (./informe.toc)
-[2
+] (./informe.toc) [2
 
 ] (./informe.toc) [3
 
@@ -917,8 +976,14 @@ File: uni-0.def 2004/10/17 UCS: Unicode data U+0000..U+00FF
 LaTeX Font Info:    Font shape `T1/phv/bx/n' in size <8> not available
 (Font)              Font shape `T1/phv/b/n' tried instead on input line 99.
 LaTeX Font Info:    Try loading font information for U+msa on input line 99.
+<<<<<<< HEAD
  (/usr/share/texmf-texlive/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2009/06/22 v3.00 AMS symbols A
+=======
+
+(/usr/share/texmf-texlive/tex/latex/amsfonts/umsa.fd
+File: umsa.fd 2002/01/19 v2.2g AMS font definitions
+>>>>>>> d27a50dfbabb0ec45c00813d315f1a681761284e
 )
 LaTeX Font Info:    Try loading font information for U+msb on input line 99.
 
@@ -1078,6 +1143,7 @@ File: figures/bloqwrite.eps Graphic file (type eps)
 ] (./informe.toc) [50
 
 ]
+<<<<<<< HEAD
 File: figures/nios2.eps Graphic file (type eps)
  <figures/nios2.eps>
 LaTeX Font Info:    Try loading font information for OMS+phv on input line 467.
@@ -1103,6 +1169,22 @@ File: figures/eclipse.eps Graphic file (type eps)
 File: figures/Quartus.eps Graphic file (type eps)
  <figures/Quartus.eps>
 File: figures/eclipse.eps Graphic file (type eps)
+=======
+LaTeX Font Info:    Try loading font information for OMS+phv on input line 466.
+
+
+(/usr/share/texmf-texlive/tex/latex/psnfss/omsphv.fd
+File: omsphv.fd 
+)
+LaTeX Font Info:    Font shape `OMS/phv/m/n' in size <8> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 466.
+ [51
+
+] (./informe.toc)
+[52
+
+] [53
+>>>>>>> d27a50dfbabb0ec45c00813d315f1a681761284e
 
 <figures/eclipse.eps> [54
 
@@ -1112,11 +1194,19 @@ File: figures/eclipse.eps Graphic file (type eps)
 
 ] (./informe.toc) [57
 
+<<<<<<< HEAD
 ]
 [58
 
 ] (./informe.toc) [59
 
+=======
+] [58
+
+]
+(./informe.toc) [59
+
+>>>>>>> d27a50dfbabb0ec45c00813d315f1a681761284e
 ] [60
 
 ] (./informe.toc) [61
@@ -1126,7 +1216,8 @@ File: figures/eclipse.eps Graphic file (type eps)
 ] (./informe.toc)
 [63
 
-] [64
+]
+[64
 
 ] [65
 
@@ -1147,6 +1238,7 @@ File: figures/eclipse.eps Graphic file (type eps)
 ]
 \tf@nav=\write5
 \openout5 = `informe.nav'.
+<<<<<<< HEAD
 
 \tf@toc=\write6
 \openout6 = `informe.toc'.
@@ -1166,3 +1258,23 @@ Here is how much of TeX's memory you used:
  46i,21n,65p,337b,781s stack positions out of 5000i,500n,10000p,200000b,50000s
 
 Output written on informe.dvi (72 pages, 4436856 bytes).
+=======
+
+\tf@toc=\write6
+\openout6 = `informe.toc'.
+
+\tf@snm=\write7
+\openout7 = `informe.snm'.
+
+ (./informe.aux) ) 
+Here is how much of TeX's memory you used:
+ 12744 strings out of 95087
+ 221177 string characters out of 1183278
+ 410849 words of memory out of 1500000
+ 15519 multiletter control sequences out of 10000+50000
+ 26836 words of font info for 46 fonts, out of 1200000 for 2000
+ 28 hyphenation exceptions out of 8191
+ 46i,21n,65p,337b,779s stack positions out of 5000i,500n,6000p,200000b,5000s
+
+Output written on informe.dvi (72 pages, 4362900 bytes).
+>>>>>>> d27a50dfbabb0ec45c00813d315f1a681761284e
