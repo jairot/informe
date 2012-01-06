@@ -1,4 +1,4 @@
-This is pdfTeXk, Version 3.141592-1.40.3 (Web2C 7.5.6) (format=latex 2011.3.22)  6 JAN 2012 17:56
+This is pdfTeXk, Version 3.141592-1.40.3 (Web2C 7.5.6) (format=latex 2011.3.22)  6 JAN 2012 18:03
 entering extended mode
  %&-line parsing enabled.
 **informe.tex
@@ -786,16 +786,6 @@ LaTeX Info: Redefining \pageref on input line 51.
 \@outlinefile=\write4
 \openout4 = `informe.out'.
 
-
-Overfull \hbox (7.81398pt too wide) in paragraph at lines 16--51
-\T1/phv/m/n/10.95 516da482f1c83befd271df24ec283a034a07d823:pres/informe.out 
- []
-
-
-Overfull \hbox (7.81398pt too wide) in paragraph at lines 16--51
-\T1/phv/m/n/10.95 516da482f1c83befd271df24ec283a034a07d823:pres/informe.out 
- []
-
 LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
 (Font)                  OT1/cmr/m/n --> OT1/cmss/m/n on input line 51.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
@@ -838,20 +828,17 @@ LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
 (Font)                  T1/phv/m/it --> T1/phv/bx/it on input line 51.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
 (Font)                  T1/pcr/m/n --> T1/pcr/bx/n on input line 51.
-(/usr/share/texmf-texlive/tex/latex/ucs/ucsencs.def
+ (/usr/share/texmf-texlive/tex/latex/ucs/ucsencs.def
 File: ucsencs.def 2003/11/29 Fixes to fontencodings LGR, T3
-) (./informe.nav)
-(/usr/share/texmf-texlive/tex/latex/ucs/data/uni-0.def
+)
+(./informe.nav) (/usr/share/texmf-texlive/tex/latex/ucs/data/uni-0.def
 File: uni-0.def 2004/10/17 UCS: Unicode data U+0000..U+00FF
 )
-Underfull \vbox (badness 10000) has occurred while \output is active []
+[1
 
- [1
+] (./informe.toc) [2
 
-]
-[2] (./informe.toc) [3
-
-] (./informe.toc) [4
+] (./informe.toc) [3
 
 ]
 LaTeX Font Info:    Font shape `T1/phv/bx/n' in size <8> not available
@@ -877,12 +864,12 @@ LaTeX Font Info:    Font shape `T1/phv/m/it' in size <6> not available
 (Font)              Font shape `T1/phv/m/sl' tried instead on input line 99.
 LaTeX Font Info:    Font shape `T1/phv/m/it' in size <5> not available
 (Font)              Font shape `T1/phv/m/sl' tried instead on input line 99.
- [5
+ [4
 
-] [6
+] [5
 
 ] (./informe.toc)
-[7
+[6
 
 ] <figures/packet_vs_flow-crop.eps> <figures/network_virtualization_2.eps>
 <figures/packet_vs_flow-crop.eps> <figures/network_virtualization_2.eps>
@@ -891,13 +878,13 @@ File: figures/packet_vs_flow-crop.eps Graphic file (type eps)
 <figures/packet_vs_flow-crop.eps>
 File: figures/network_virtualization_2.eps Graphic file (type eps)
  <figures/network_virtualization_2.eps>
-[8
+[7
+
+] [8
 
 ] [9
 
 ] [10
-
-] [11
 
 ] <figures/GPP_based.eps> <figures/NP_based.eps>
 <figures/FPGA_based.eps> <figures/GPP_based.eps> <figures/NP_based.eps>
@@ -916,68 +903,70 @@ Overfull \hbox (5.27382pt too wide) in alignment at lines 192--192
 [][][] 
  []
 
-[12
+[11
 
-] (./informe.toc) [13
+] (./informe.toc) [12
+
+] [13
 
 ] [14
 
-] [15
+] (./informe.toc) [15
 
-] (./informe.toc) [16
+] [16
 
 ] [17
 
-] [18
-
 ]
-(./informe.toc) [19
+(./informe.toc) [18
 
 ]
 File: figures/solucion.eps Graphic file (type eps)
- <figures/solucion.eps> [20
+ <figures/solucion.eps> [19
 
-] (./informe.toc) [21
+] (./informe.toc) [20
 
-] [22
+] [21
 
 ]
-[23
+[22
+
+] [23
 
 ] [24
 
-] [25
-
-] (./informe.toc) [26
+] (./informe.toc) [25
 
 ]
 File: figures/cabecera.eps Graphic file (type eps)
- <figures/cabecera.eps> [27
+ <figures/cabecera.eps> [26
 
-] (./informe.toc) [28
+] (./informe.toc) [27
+
+] [28
 
 ] [29
 
-] [30
-
-] (./informe.toc) [31
+] (./informe.toc) [30
 
 ]
 File: figures/modulo.eps Graphic file (type eps)
- <figures/modulo.eps> [32
+ <figures/modulo.eps> [31
+
+] [32
 
 ] [33
 
-] [34
-
 ]
-[35
+[34
+
+] [35
 
 ] [36
 
-] [37
+] (./informe.toc) [37
 
-] (./informe.toc) [38
+] [38
 
 ] [39
 
@@ -989,34 +978,32 @@ File: figures/modulo.eps Graphic file (type eps)
 
 ] [43
 
-] [44
-
 ]
-(./informe.toc) [45
+(./informe.toc) [44
 
 ]
 File: figures/bloqgenerador.eps Graphic file (type eps)
- <figures/bloqgenerador.eps> [46
+ <figures/bloqgenerador.eps> [45
 
 ]
 File: figures/bloqfifo.eps Graphic file (type eps)
  <figures/bloqfifo.eps>
-[47
+[46
 
 ]
 File: figures/bloqdelaybuffer.eps Graphic file (type eps)
- <figures/bloqdelaybuffer.eps> [48
+ <figures/bloqdelaybuffer.eps> [47
 
 ]
 File: figures/bloquplink.eps Graphic file (type eps)
- <figures/bloquplink.eps> [49
+ <figures/bloquplink.eps> [48
 
 ]
 File: figures/bloqwrite.eps Graphic file (type eps)
 
-<figures/bloqwrite.eps> [50
+<figures/bloqwrite.eps> [49
 
-] (./informe.toc) [51
+] (./informe.toc) [50
 
 ]
 LaTeX Font Info:    Try loading font information for OMS+phv on input line 466.
@@ -1027,36 +1014,38 @@ File: omsphv.fd
 )
 LaTeX Font Info:    Font shape `OMS/phv/m/n' in size <8> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 466.
- [52
+ [51
 
 ] (./informe.toc)
-[53
+[52
+
+] [53
 
 ] [54
 
-] [55
+] (./informe.toc) [55
 
-] (./informe.toc) [56
+] [56
 
-] [57
+] (./informe.toc) [57
 
-] (./informe.toc) [58
-
-] [59
+] [58
 
 ]
-(./informe.toc) [60
+(./informe.toc) [59
 
-] [61
+] [60
 
-] (./informe.toc) [62
+] (./informe.toc) [61
 
-] [63
+] [62
 
-] (./informe.toc) [64
+] (./informe.toc) [63
 
 ]
-[65
+[64
+
+] [65
 
 ] [66
 
@@ -1066,13 +1055,11 @@ LaTeX Font Info:    Font shape `OMS/phv/m/n' in size <8> not available
 
 ] [69
 
-] [70
+] (./informe.toc) [70
 
-] (./informe.toc) [71
+] [71
 
 ] [72
-
-] [73
 
 ]
 \tf@nav=\write5
@@ -1086,12 +1073,12 @@ LaTeX Font Info:    Font shape `OMS/phv/m/n' in size <8> not available
 
  (./informe.aux) ) 
 Here is how much of TeX's memory you used:
- 12752 strings out of 95087
- 221313 string characters out of 1183278
- 410850 words of memory out of 1500000
- 15527 multiletter control sequences out of 10000+50000
+ 12744 strings out of 95087
+ 221177 string characters out of 1183278
+ 410849 words of memory out of 1500000
+ 15519 multiletter control sequences out of 10000+50000
  26836 words of font info for 46 fonts, out of 1200000 for 2000
  28 hyphenation exceptions out of 8191
  46i,21n,65p,337b,779s stack positions out of 5000i,500n,6000p,200000b,5000s
 
-Output written on informe.dvi (73 pages, 4412352 bytes).
+Output written on informe.dvi (72 pages, 4362900 bytes).

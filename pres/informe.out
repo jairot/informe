@@ -1,25 +1,25 @@
 \BOOKMARK [2][]{Outline0.1}{Motivaci\363n}{}
-\BOOKMARK [3][]{Outline0.1.1.4}{Requerimientos}{Outline0.1}
-\BOOKMARK [3][]{Outline0.1.2.7}{Soluciones}{Outline0.1}
-\BOOKMARK [3][]{Outline0.1.3.13}{Problema marco}{Outline0.1}
-\BOOKMARK [3][]{Outline0.1.4.16}{Objetivos}{Outline0.1}
+\BOOKMARK [3][]{Outline0.1.1.3}{Requerimientos}{Outline0.1}
+\BOOKMARK [3][]{Outline0.1.2.6}{Soluciones}{Outline0.1}
+\BOOKMARK [3][]{Outline0.1.3.12}{Problema marco}{Outline0.1}
+\BOOKMARK [3][]{Outline0.1.4.15}{Objetivos}{Outline0.1}
 \BOOKMARK [2][]{Outline0.2}{Sistema}{}
-\BOOKMARK [3][]{Outline0.2.1.19}{Soluci\363n Propuesta}{Outline0.2}
-\BOOKMARK [3][]{Outline0.2.2.21}{Descripcion funcional de cada bloque}{Outline0.2}
-\BOOKMARK [3][]{Outline0.2.3.26}{Formato de la cabecera IP}{Outline0.2}
-\BOOKMARK [3][]{Outline0.2.4.28}{Algoritmos de Clasificaci\363n}{Outline0.2}
-\BOOKMARK [3][]{Outline0.2.5.31}{Modulo extractor de cabeceras}{Outline0.2}
+\BOOKMARK [3][]{Outline0.2.1.18}{Soluci\363n Propuesta}{Outline0.2}
+\BOOKMARK [3][]{Outline0.2.2.20}{Descripcion funcional de cada bloque}{Outline0.2}
+\BOOKMARK [3][]{Outline0.2.3.25}{Formato de la cabecera IP}{Outline0.2}
+\BOOKMARK [3][]{Outline0.2.4.27}{Algoritmos de Clasificaci\363n}{Outline0.2}
+\BOOKMARK [3][]{Outline0.2.5.30}{Modulo extractor de cabeceras}{Outline0.2}
 \BOOKMARK [2][]{Outline0.3}{Arquitectura}{}
-\BOOKMARK [3][]{Outline0.3.1.38}{Arquitectura}{Outline0.3}
-\BOOKMARK [3][]{Outline0.3.2.45}{Diagrama en bloques: Lineas E/S}{Outline0.3}
+\BOOKMARK [3][]{Outline0.3.1.37}{Arquitectura}{Outline0.3}
+\BOOKMARK [3][]{Outline0.3.2.44}{Diagrama en bloques: Lineas E/S}{Outline0.3}
 \BOOKMARK [2][]{Outline0.4}{Implementaci\363n}{}
-\BOOKMARK [3][]{Outline0.4.1.51}{NIOS II}{Outline0.4}
-\BOOKMARK [3][]{Outline0.4.2.53}{Herramientas / Recursos Utilizados}{Outline0.4}
-\BOOKMARK [3][]{Outline0.4.3.56}{Verificaci\363n}{Outline0.4}
+\BOOKMARK [3][]{Outline0.4.1.50}{NIOS II}{Outline0.4}
+\BOOKMARK [3][]{Outline0.4.2.52}{Herramientas / Recursos Utilizados}{Outline0.4}
+\BOOKMARK [3][]{Outline0.4.3.55}{Verificaci\363n}{Outline0.4}
 \BOOKMARK [2][]{Outline0.5}{Resultados}{}
-\BOOKMARK [3][]{Outline0.5.1.58}{Introducci\363n}{Outline0.5}
-\BOOKMARK [3][]{Outline0.5.2.60}{Caso algoritmos unicamente}{Outline0.5}
-\BOOKMARK [3][]{Outline0.5.3.62}{Caso loopback}{Outline0.5}
-\BOOKMARK [3][]{Outline0.5.4.64}{Implementacion completa}{Outline0.5}
-\BOOKMARK [3][]{Outline0.5.5.71}{Comparativa inter-algortimos}{Outline0.5}
+\BOOKMARK [3][]{Outline0.5.1.57}{Introducci\363n}{Outline0.5}
+\BOOKMARK [3][]{Outline0.5.2.59}{Caso algoritmos unicamente}{Outline0.5}
+\BOOKMARK [3][]{Outline0.5.3.61}{Caso loopback}{Outline0.5}
+\BOOKMARK [3][]{Outline0.5.4.63}{Implementacion completa}{Outline0.5}
+\BOOKMARK [3][]{Outline0.5.5.70}{Comparativa inter-algortimos}{Outline0.5}
 \BOOKMARK [2][]{Outline0.6}{Conclusiones}{}
