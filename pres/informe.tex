@@ -281,7 +281,7 @@
   \end{block}
 \end{frame}
 
-\subsection{Formato de la cabecera IP}
+\subsection{Formato de la cabecera}
 \begin{frame}{Formato de la cabecera}
  \center 
 \includegraphics[scale=0.55]{figures/cabecera.eps}
@@ -467,6 +467,30 @@
 \end{frame}
 
 \subsection{Herramientas / Recursos Utilizados}
+\begin{frame}{Hardware}
+  \begin{block}<+->{Placa de desarrollo DE2} 	
+    \begin{itemize}
+      \scriptsize
+     	\item FPGA: Cyclone II EP2C35F672C6
+	\item USB Blaster integrado, para configuración de FPGA
+	\item Memoria: 8 MB SDRAM, 512 KB SRAM, 4 MB Flash
+	\item Clock de 50 MHz
+     \end{itemize}
+  \end{block}
+
+  \begin{block}<+->{FPGA Cyclone II EP2C35F672C6} 	
+    \begin{itemize}
+      \scriptsize
+     	\item Elementos lógicos: 33216
+	\item Bit totales de RAM: 483840
+	\item Multiplicadores embebidos: 35
+	\item PLLs: 4
+	\item Cantidad máxima de pines definidos por el usuario: 475
+     \end{itemize}
+  \end{block}
+\end{frame}
+
+
 \begin{frame}{Herramientas / Recursos Utilizados}
 \begin{block}<+->{Quartus} 
 	
@@ -516,47 +540,56 @@
 
 \subsection{Caso algoritmos unicamente}
 \begin{frame}{Caso algoritmos unicamente} 
- .. Grafico correspondiente ...
+\center	
+\includegraphics[scale=0.70]{figures/llu-utlsof.eps} 
 \end{frame}
 
 \subsection{Caso loopback}
 \begin{frame}{Caso loopback} 
- .. Grafico correspondiente ...
+\center	
+\includegraphics[scale=0.70]{figures/loop.eps} 
 \end{frame}
 
 \subsection{Implementacion completa}
 \begin{frame}{Implementación completa: LLU} 
- .. Graficos retardo mínimo ...
+\center	
+\includegraphics[scale=0.70]{figures/llumin.eps} 
 \end{frame}
 
 
 \begin{frame}{Implementación completa: LLU} 
- .. Graficos retardo promedio ...
+\center	
+\includegraphics[scale=0.70]{figures/lluprom.eps} 
 \end{frame}
 
 
 \begin{frame}{Implementación completa: LLU} 
- .. Graficos retardo máximo ...
+\center	
+\includegraphics[scale=0.70]{figures/llumax.eps} 
 \end{frame}
 
 
 \begin{frame}{Implementación completa: UTL} 
- .. Graficos retardo mínimo ...
+\center	
+\includegraphics[scale=0.70]{figures/utlmin.eps} 
 \end{frame}
 
 
 \begin{frame}{Implementación completa: UTL} 
- .. Graficos retardo promedio ...
+\center	
+\includegraphics[scale=0.70]{figures/utlprom.eps} 
 \end{frame}
 
 
 \begin{frame}{Implementación completa: UTL} 
- .. Graficos retardo máximo ...
+\center	
+\includegraphics[scale=0.70]{figures/utlmax.eps} 
 \end{frame}
 
 \subsection{Comparativa inter-algortimos}
 \begin{frame}{Comparativa inter-algortimos} 
- .. Grafico comparativo ...
+\center	
+\includegraphics[scale=0.70]{figures/lluvsutl.eps} 
 \end{frame}
 
 \section{Conclusiones}
