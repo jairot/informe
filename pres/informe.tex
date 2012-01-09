@@ -361,8 +361,8 @@
 
 \section{Arquitectura}
 
-\subsection{Arquitectura}
-\begin{frame}{Arquitectura}
+\subsection{Bus Avalon}
+\begin{frame}{Bus Avalon}
   \begin{block}<+->{Avalon}   
     \begin{itemize}
       \scriptsize
@@ -463,6 +463,21 @@
 	\item Multiplicación y división en una sola instrucción de 32 x 32 produciendo un resultado de 32-bits.
     \end{itemize}
 	
+  \end{block}
+\end{frame}
+
+\begin{frame}{Microprocesador NIOS II(cont)}
+\center
+   \begin{block}<+->{NIOS II}
+	Es posible instanciar el procesador NIOS II en 3 diferentes configuraciones:	
+	
+
+    \begin{itemize}
+	\scriptsize
+     	\item Nios II/f, es un core optimizado para alcanzar el maximo rendimiento a expensas del tamaño del mismo.
+	\item Nios II/s, esta diseñado para mantener el balance entre el rendimiento y el espacio ocupado dentro de la FPGA.
+	\item Nios II/e, es un nucleo que busca utilizar la menor cantidad de logica para poder ser implementado en FPGAs de bajo costo.
+    \end{itemize}
   \end{block}
 \end{frame}
 
