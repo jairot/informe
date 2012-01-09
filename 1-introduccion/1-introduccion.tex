@@ -14,11 +14,43 @@ Aunque con el tiempo la performance de los distintos CPU han crecido, este creci
 
 \subsection{Lógica reconfigurable como respuesta}
 
-Para hacer frente a esta brecha entre la necesidad de procesar el flujo creciente de datos de la red y la capacidad de hacerlo, es necesario contar con soluciones que permitan generar respuestas especificas, en el menor tiempo y con el mejor rendimiento posible. Es entonces donde el campo de la lógica reconfigurable se perfila como la mejor solución a este problema.
+Para hacer frente a esta brecha entre la necesidad de procesar el flujo creciente de datos de la red y la capacidad de hacerlo, es necesario contar con soluciones que permitan generar respuestas especificas de manera flexible, en el menor tiempo y con el mejor rendimiento posible.
+
+Las tecnologias que en la actualidad son usadas para solucionar estos problemas, son tres:
+
+Los Circuitos de Propósito Específico (ASICs), que estan formados por cientos de bloques especializados trabajando en paralelo. Aunque cuentan con un altisimo desenpeño, tienen un alto costo inicial y el tiempo para desarrollarlo es grande.
+
+Los Procesadores de Red (NPs), son procesadores especificos para este tipo de problemas, cuentan con múltiples elementos de procesamiento, buena performance para ciertas tareas, Tienen dificultades a la hora de la portabilidad y sus interfaces son propietarias en casi todos los casos.
+\begin{figure}[h]
+  \centering
+      \includegraphics[width=0.5\textwidth]{1-introduccion/graf/NP_based.eps}
+  \caption{Solucion basada en NP}
+  \label{fig:diseno}
+\end{figure}
+\newpage
+
+Los Procesadores de Propósito General (GPPs), utilizan la arquitectura propia de la PC y la adaptan al procesamiento de la red mediante un software especializado. Aunque esta solucion es muy popular por su flexibilidad y su bajo costo, las transiciones con memoria RAM mediante un bus compartido y la naturaleza secuencial de los GPPs son factores limitantes a tener en cuenta. 
+ \begin{figure}[h]
+  \centering
+      \includegraphics[width=0.5\textwidth]{1-introduccion/graf/GPP_based.eps}
+  \caption{Solucion basada en GPP}
+  \label{fig:diseno}
+\end{figure}
+
+Las tecnologias actuales, por las razones anteriormente mencionadas, estan encontrando su limite y es necesario encontrar tecnologias que las remplazen, para poder satisfacer los requerimientos actuales de las redes. 
 
 Las FPGA(field-programmable gate array) son un dispositivo de logica reconfigurable que es posibile programar, una o varias veces, usando un lenguaje de descripcion de hardware(HDL). Las FPGAs se utilizan en aplicaciones similares a los ASICs sin embargo son más lentas, tienen un mayor consumo de potencia y no pueden abarcar sistemas tan complejos como ellos. A pesar de esto, tienen un flujo de diseño flexible, sus costes de desarrollo y adquisición son mucho menores para pequeñas cantidades de dispositivos y el tiempo de desarrollo es también menor.
 
-Esta flexibilidad en el flujo de diseño, la posibilidad de probar el diseño de manera instantanea, y la posibilidad de actualizarlo cuando se lo desee son los dos puntos principales que posicionan a las FPGA como la herramienta indicada para atacar un problema tan complejo y de una evolucion exponencial como la clasificacion de paquetes. 
+Esta flexibilidad en el flujo de diseño, el prototipado rapido y la posibilidad de actualizarlo cuando se lo desee son los dos puntos principales que posicionan a las FPGA como la herramienta indicada para atacar un problema tan complejo y de una evolucion exponencial como la clasificacion de paquetes. 
+ \begin{figure}[h]
+  \centering
+	 \includegraphics[width=0.5\textwidth]{1-introduccion/graf/FPGA_based.eps}
+  \caption{Solucion basada en FPGA}
+  \label{fig:diseno}
+\end{figure}
+
+     
+
 
 
 \section{Problema Marco}
