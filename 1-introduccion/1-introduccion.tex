@@ -1,7 +1,7 @@
 \chapter{Introducción}
 
 \section{Motivación}
-
+\begin{comment}
 \subsection{Evolución en los dispositivos de enrutamiento}
 
 En un principio los enrutadores contaban con un bus central compartido, un CPU, memoria y los puertos de entrada y salida. Cada paquete entrante era transferido al CPU por medio del bus compartido. La decisión de forwarding se llevaba a cabo allí y luego el paquete atravesaba nuevamente dicho bus hacia el puerto de salida. La performance de estos dispositivos estaba limitada principalmente por 2 factores: la capacidad de procesamiento de la CPU central (debido a que la búsqueda en la tabla de ruteo es una tarea que consume una alta cantidad de tiempo) y el hecho de que cada paquete tenía que atravesar 2 veces el bus compartido.
@@ -12,6 +12,39 @@ Más adelante el diseño de la arquitectura de enrutadores avanzó un paso más.
 
 Aunque con el tiempo la performance de los distintos CPU han crecido, este crecimiento no ha podido mantener el ritmo del incremento en la capacidad de los enlaces. Es en este contexto donde se ve claramente que hoy por hoy uno de los mayores cuellos de botella en los enrutadores troncales es el cómputo del prefijo más largo para cada paquete. Los protocolos de hoy en día requieren hacer selección de rutas en base no sólo a un campo sino a varios (tales como el número de protocolo, dirección de origen, puerto de destino, etc). El número de accesos a memoria y la velocidad de ésta determinan la rapidez de un algoritmo de búsqueda de ruta (route lookup algorithm).
 
+\end{comment}
+
+\subsection{Requerimiento de procesamiento en redes}
+\subsubsection{Características del tráfico}
+Es notorio que por estos días las redes de datos están creciendo en complejidad. Basta mirar la cantidad de aplicaciones que aparecen día a día, muchas de ellas con contenido multimedia, lo cual aumenta las exigencias a la hora de determinar la cantidad de datos que se deben transmitir. Todo ello trae aparejado un necesario aumento en la velocidad. 
+
+También es notoria la consolidación que múltiples servicios sobre redes Ethernet, como ser comunicaciòn de voz, video en estándar y alta definición (STV y HDTV), videoconferencias, transacciones en tiempo real, etc.
+
+Además vale mencionar la tendencia actual a la virtualización de servidores. La misma viene dada principalmente por una cuestión de flexibilidad (un servidor físico con gran capacidad computacional puede albergar un número de servidores virtuales) y agilidad (una máquina virtual puede ser creada en cuestion de minutos o a lo sumo horas).
+
+\subsubsection{Procesamiento de paquetes}
+En este contexto puede verse cómo es necesaria la optimización en el procesamiento de los paquetes de datos. Si se habla de procesamiento a velocidad de línea, en una red Ethernet este es, para un paquete de longitud mínima, de unos 6 nanosegundos por paquete.
+
+
+\subsection{Soluciones}
+\subsubsection{Granularidad}
+Lo que se hace actualmente es utilizar paquetes de longitud variable. El peor de los casos se da para los paquetes de longitud mínima (64 bytes en Ethernet). Las nuevas tendencias se canalizan haca la agregación de paquetes en flujos. Dos ejemplos los constituyen MPLS y VLANs.
+
+\begin{figure}[h]
+  \centering
+	\includegraphics[width=0.70\textwidth]{1-introduccion/graf/packet_vs_flow-crop.eps}
+  \caption{Agregacion en flujos}
+  \label{fig:flow}
+\end{figure}
+
+\begin{figure}[h]
+  \centering
+	\includegraphics[width=0.70\textwidth]{1-introduccion/graf/network_virtualization_2.eps}
+  \caption{Virtualización de redes}
+  \label{fig:virt}
+\end{figure}
+
+\begin{comment}
 \subsection{Lógica reconfigurable como respuesta}
 
 Para hacer frente a esta brecha entre la necesidad de procesar el flujo creciente de datos de la red y la capacidad de hacerlo, es necesario contar con soluciones que permitan generar respuestas especificas, en el menor tiempo y con el mejor rendimiento posible. Es entonces donde el campo de la lógica reconfigurable se perfila como la mejor solución a este problema.
@@ -19,7 +52,7 @@ Para hacer frente a esta brecha entre la necesidad de procesar el flujo crecient
 Las FPGA(field-programmable gate array) son un dispositivo de logica reconfigurable que es posibile programar, una o varias veces, usando un lenguaje de descripcion de hardware(HDL). Las FPGAs se utilizan en aplicaciones similares a los ASICs sin embargo son más lentas, tienen un mayor consumo de potencia y no pueden abarcar sistemas tan complejos como ellos. A pesar de esto, tienen un flujo de diseño flexible, sus costes de desarrollo y adquisición son mucho menores para pequeñas cantidades de dispositivos y el tiempo de desarrollo es también menor.
 
 Esta flexibilidad en el flujo de diseño, la posibilidad de probar el diseño de manera instantanea, y la posibilidad de actualizarlo cuando se lo desee son los dos puntos principales que posicionan a las FPGA como la herramienta indicada para atacar un problema tan complejo y de una evolucion exponencial como la clasificacion de paquetes. 
-
+\end{comment}
 
 \section{Problema Marco}
 \begin{comment}
