@@ -505,6 +505,40 @@
   \end{block}
 \end{frame}
 
+\subsection{Algoritmos}
+\begin{frame}{Algoritmos}
+\begin{block}<+->{LLU}   
+    \begin{itemize}
+      \scriptsize
+     	\item Lenguaje: C++
+     	\item Template \emph{list}
+     	\item Cada nodo tiene 3 campos: Dirección de red, Máscara de red e Identificador de decisión
+	\item Lista ordenada en base a longitud de máscara de red. Se recorre con un iterador
+	\item En cada iteración, Realiza un AND con el valor de máscara del nodo que está siendo apuntado
+	\item Si el resultado de la operación es igual al valor de dirección de red de dicho nodo, entonces se retorna con el valor identificador de decisión
+	\item En otro caso, continúa la busqueda en el siguiente nodo
+    \end{itemize}
+  \end{block}
+\end{frame}
+
+\begin{frame}{Algoritmos}
+\begin{block}<+->{UTL}   
+    \begin{itemize}
+      \scriptsize
+     	\item Lenguaje: C++
+     	\item Se implementaron clases propias, donde se definieron las características de los nodos del arbol, como así también las operaciones de inserción y búsqueda
+     	\item Nodo \emph{común} y nodo \emph{decisión}
+	\item Cada nodo tiene 2 campos: \emph{gw} y \emph{zero / one}
+	\item El algoritmo de búsqueda toma como entrada la dirección IP de destino del paquete a clasificar
+	\item Testeo bit a bit de la misma, partiendo con un puntero de recorrido desde el nodo raíz
+	\item Si el bit de la dirección es 0 y el puntero \emph{zero} está apuntando hacia algún nodo, el puntero de recorrido se mueve al nodo apuntado por el puntero zero
+	\item En caso contrario, se mueve al nodo apuntado por el puntero emph{one} (En caso de que exista alguno).
+	\item El puntero de recorrido puede quedar en un nodo común o en un nodo decisión
+	\item En cada iteración se debe guardar el valor de gw en caso de tratarse de un nodo decisión
+    \end{itemize}
+  \end{block}
+\end{frame}
+
 \subsection{Herramientas}
 \begin{frame}{Herramientas de Desarrollo}
 \begin{block}<+->{Quartus} 
@@ -550,6 +584,8 @@
     \end{itemize}
   \end{block}
 \end{frame}
+
+
 
 \section{Resultados}
 \subsection{Introducción}
