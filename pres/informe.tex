@@ -346,6 +346,7 @@
       \scriptsize
      	\item Entiende las señales que maneja el Bus y puede interrumpir al Procesador.
 	\item Genera interrupciones al procesador cuando los datos están disponibles.
+	\item Puede enviar al procesador la cabecera completa o solo una parte, siempre en palabras de 32 bits.
 	\item Cuando el procesador responde con el resultado de la clasificación, el mismo es almacenado y enviado al módulo Write Output
     \end{itemize}
   \end{block}
@@ -440,6 +441,24 @@
 \center 
 \includegraphics[scale=0.60]{figures/bloquplink.eps}
 \end{frame}
+
+\begin{frame}{Uplink}
+  \begin{block}<+->{Uplink}
+	\begin{itemize}
+      \scriptsize
+	\item La primera version de Uplink trasfiere al microprocesador toda la cabecera completa en 15 palabras de 32 bits. 
+	\center
+	\includegraphics[scale=0.20]{figures/15pal.eps}  
+	   \end{itemize}
+	\begin{itemize}
+      \scriptsize
+	\item La segunda version de Uplink trasfiere al microprocesador solo la direccion IP destino en una palabra de 32 bits.
+	\center
+	\includegraphics[scale=0.20]{figures/1pal.eps}
+   \end{itemize}
+\end{block}
+\end{frame}
+
 
 \begin{frame}{Write Output}
 \center 
