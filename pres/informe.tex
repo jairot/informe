@@ -120,9 +120,9 @@
     &
     \includegraphics[scale=0.2]{figures/network_virtualization_2.eps}
     \\
-    \tiny Agregacion de flujos
+    \tiny Agregación de flujos
     &
-    \tiny Virtualizacion de redes
+    \tiny Virtualización de redes
     \\
   \end{tabularx}
 
@@ -196,7 +196,7 @@
   \begin{block}<+->{Sistema en un Chip(SoC)} 
     \begin{itemize}
       \scriptsize
-      \item Son circuitos integrados que contienen todo, o la mayoria, de los modulos que componen un sistema informatico o electronico en un solo componente.
+      \item Son circuitos integrados que contienen todo, o la mayoría, de los módulos que componen un sistema informático o electrónico en un solo componente.
 	%\item Se diferencian de los microcontroladores en que cuentan con una mayor cantidad de memoria, en general externa, permitiendo ejecutar aplicaciones mas grandes y complejas. 
     \end{itemize}      
   \end{block}
@@ -204,8 +204,8 @@
   \begin{block}<+->{FPGA como plataforma para SoC} 
     \begin{itemize}
       \scriptsize
-      \item En la ultima decada la integracion entre FPGAs de proposito general y CPUs tuvo una aceptacion amplia como plataforma de para el desarrollo de SoC.    
-	\item La flexibilidad, el prototipado rapido, el aumento de la cantidad de logica reprogramable de proposito general y la creciente disponibilidad de IP cores fueron elementos determinantes que profundizaron esta tendencia.
+      \item En la ultima década la integración entre FPGAs de propósito general y CPUs tuvo una aceptación amplia como plataforma de para el desarrollo de SoC.    
+	\item La flexibilidad, el prototipado rápido, el aumento de la cantidad de lógica reprogramable de propósito general y la creciente disponibilidad de IP cores fueron elementos determinantes que profundizaron esta tendencia.
 	\center
         \includegraphics[scale=0.35]{figures/soc2.eps} 
 
@@ -258,7 +258,7 @@
       \item El dispositivo consulta una tabla para determinar la interfaz de salida para el paquete en cuestión
       \item Dicha tabla contiene un conjunto de prefijos con sus correspondientes interfaces de salida.
       \item El paquete es correspondido con el prefijo más largo que esté contenido en la dirección de destino y luego es redirigido  a la correspondiente interfaz de salida
-      \item No es una busqueda trivial, ya que no se busca un valor en particular sino un prefijo contenido dentro de un valor. No aplican los algoritmos de búsqueda tradicionales.   
+      \item No es una búsqueda trivial, ya que no se busca un valor en particular sino un prefijo contenido dentro de un valor. No aplican los algoritmos de búsqueda tradicionales.   
     \end{itemize}
   \end{block}
 \end{frame}
@@ -273,15 +273,15 @@
 \begin{block}<+->{Generales}   
     \begin{itemize}
       \scriptsize
-      \item Estudiar los diversos algoritmos de clasificacion de paquetes para poder encontrar las limitaciones en la implementacion de los mismos.
-      \item Considerar una plataforma de logica reprogramable que permita integrar arquitecturas de hardware con software embebido.
+      \item Estudiar los diversos algoritmos de clasificación de paquetes para poder encontrar las limitaciones en la implementación de los mismos.
+      \item Considerar una plataforma de lógica reprogramable que permita integrar arquitecturas de hardware con software embebido.
     \end{itemize}
   \end{block}
   
 \begin{block}<+->{Específicos}   
     \begin{itemize}
       \scriptsize
-     	\item Diseñar un sistema embebido que realice la clasificiación unidimensional de paquetes mediante una arquitectura mixta, Hardware-Software
+     	\item Diseñar un sistema embebido que realice la clasificación unidimensional de paquetes mediante una arquitectura mixta, Hardware-Software
 	\item Implementar dicho sistema en hardware reconfigurable
 	\item Implementar al menos 2 algoritmos conocidos y analizar su performance
 	\item Sugerir mejoras en la implementación de los mismos   
@@ -297,10 +297,10 @@
       \scriptsize
  \pause     	\item Un flujo de paquetes llega a la interfaz de red del dispositivo y es necesario clasificarlo en distintos flujos para que sea redireccionado.
 \pause 	\item Se almacenan en un buffer los paquetes en orden de llegada.
-\pause 	\item Se extrae el primer paquete y se toma la informacion que pertenece a la cabecera, la informacion completa del paquete queda en espera.
-\pause 	\item Se envia al microprocesador la cabecera. 
-\pause 	\item El Microprocesador aplica un algoritmo de clasificacion a cierta informacion de la cabecera y reenvia los resultados al Hardware. 
-\pause 	\item Se anexa a cada palabra del paquete un Tag adjunto con el resultado de la clasificacion y se lo envia hacia la interfaz de salida.
+\pause 	\item Se extrae el primer paquete y se toma la información que pertenece a la cabecera, la información completa del paquete queda en espera.
+\pause 	\item Se envía al microprocesador la cabecera. 
+\pause 	\item El Microprocesador aplica un algoritmo de clasificación a cierta información de la cabecera y reenvía los resultados al Hardware. 
+\pause 	\item Se anexa a cada palabra del paquete un Tag adjunto con el resultado de la clasificación y se lo envía hacia la interfaz de salida.
     \end{enumerate}
 
 \end{frame}
@@ -335,7 +335,7 @@
     \begin{itemize}
       \scriptsize
      	\item Extrae una cabecera a partir de cada paquete recibido.
-	\item La envía al software de clasificaciónd
+	\item La envía al software de clasificación
 	\item Recibe la información generada por dicho software
     \end{itemize}
   \end{block}
@@ -364,7 +364,7 @@
       \scriptsize
      	\item Va tomando los datos desde la FIFO.
 	\item Detecta inicio y finalización de cada paquete.
-	\item Envía las primeras 5 palabras del paquete, suficientes para cubir la cabecera IP, a Uplink.
+	\item Envía las primeras 5 palabras del paquete, suficientes para cubría la cabecera IP, a Uplink.
 	\item Mantiene almacenado el paquete mientras el software toma una decisión.
     \end{itemize}
   \end{block}
@@ -412,7 +412,7 @@
   \begin{block}<+->{Unibit trie lookup (UTL)}   
     \begin{itemize}
       \scriptsize
-     	\item Arbol en el cual cada nodo contiene un \textit{puntero-cero }y un \textit{puntero-uno}
+     	\item Árbol en el cual cada nodo contiene un \textit{puntero-cero }y un \textit{puntero-uno}
 	\item Partiendo del nodo raíz, todos los prefijos que comienzan con 0 son almacenados en el subárbol apuntado por el puntero-cero y aquellos que comienzan con 1 se almacenan en el subárbol apuntado por el puntero-uno.
 	\item Cada subárbol es construido recursivamente de manera similar usando los bits restantes de cada uno de los prefijos
     \end{itemize}
@@ -473,13 +473,13 @@
   \begin{block}<+->{Uplink}
 	\begin{itemize}
       \scriptsize
-	\item La primera version de Uplink trasfiere al microprocesador toda la cabecera completa en 15 palabras de 32 bits. 
+	\item La primera versión de Uplink transfiere al microprocesador toda la cabecera completa en 15 palabras de 32 bits. 
 	\center
 	\includegraphics[scale=0.20]{figures/15pal.eps}  
 	   \end{itemize}
 	\begin{itemize}
       \scriptsize
-	\item La segunda version de Uplink trasfiere al microprocesador solo la direccion IP destino en una palabra de 32 bits.
+	\item La segunda versión de Uplink transfiere al microprocesador solo la dirección IP destino en una palabra de 32 bits.
 	\center
 	\includegraphics[scale=0.20]{figures/1pal.eps}
    \end{itemize}
@@ -500,7 +500,7 @@
    \begin{block}<+->{NIOS II}	
     \begin{itemize}
 	\scriptsize
-     	\item Procesador RISC de 32 bits de proposito genera diseñado especificamente para la familia de FPGAs de Altera.
+     	\item Procesador RISC de 32 bits de propósito genera diseñado específicamente para la familia de FPGAs de Altera.
 	\item Set de instrucciones, bus de datos y espacio de direcciones de 32 bits.
 	\item Soporte de hasta 32 interrupciones.
 	\item Entorno de desarrollo de software basado en GNU C/C++ integrado a Eclipse.
@@ -520,9 +520,9 @@
 
     \begin{itemize}
 	\scriptsize
-     	\item Nios II/f, es un core optimizado para alcanzar el maximo rendimiento a expensas del tamaño del mismo.
+     	\item Nios II/f, es un core optimizado para alcanzar el máximo rendimiento a expensas del tamaño del mismo.
 	\item Nios II/s, esta diseñado para mantener el balance entre el rendimiento y el espacio ocupado dentro de la FPGA.
-	\item Nios II/e, es un nucleo que busca utilizar la menor cantidad de logica para poder ser implementado en FPGAs de bajo costo.
+	\item Nios II/e, es un núcleo que busca utilizar la menor cantidad de lógica para poder ser implementado en FPGAs de bajo costo.
     \end{itemize}
   \end{block}
 \end{frame}
@@ -562,7 +562,7 @@
 	\item Lista ordenada en base a longitud de máscara de red. Se recorre con un iterador
 	\item En cada iteración, Realiza un AND con el valor de máscara del nodo que está siendo apuntado
 	\item Si el resultado de la operación es igual al valor de dirección de red de dicho nodo, entonces se retorna con el valor identificador de decisión
-	\item En otro caso, continúa la busqueda en el siguiente nodo
+	\item En otro caso, continúa la búsqueda en el siguiente nodo
     \end{itemize}
   \end{block}
 \end{frame}
@@ -572,7 +572,7 @@
     \begin{itemize}
       \scriptsize
      	\item Lenguaje: C++
-     	\item Se implementaron clases propias, donde se definieron las características de los nodos del arbol, como así también las operaciones de inserción y búsqueda
+     	\item Se implementaron clases propias, donde se definieron las características de los nodos del árbol, como así también las operaciones de inserción y búsqueda
      	\item Nodo \emph{común} y nodo \emph{decisión}
 	\item Cada nodo tiene 2 campos: \emph{gw} y \emph{zero / one}
 	\item El algoritmo de búsqueda toma como entrada la dirección IP de destino del paquete a clasificar
@@ -602,7 +602,7 @@
 	
     \begin{itemize}
       \scriptsize
-     	\item Version de la IDE Eclipse adaptada para trabajar con el microprocesador NIOS II
+     	\item Versión de la IDE Eclipse adaptada para trabajar con el microprocesador NIOS II
 	\item Lenguajes utilizados: C,C++
     \end{itemize}
 	\center	
@@ -649,8 +649,8 @@
 
 \end{frame}
 
-\subsection{Caso algoritmos unicamente}
-\begin{frame}{Caso algoritmos unicamente} 
+\subsection{Caso algoritmos únicamente}
+\begin{frame}{Caso algoritmos únicamente} 
 \center	
 \includegraphics[scale=0.70]{figures/llu-utlsof.eps} 
 \end{frame}
@@ -661,7 +661,7 @@
 \includegraphics[scale=0.70]{figures/loop.eps} 
 \end{frame}
 
-\subsection{Implementacion completa}
+\subsection{Implementación completa}
 \begin{frame}{Implementación completa: LLU} 
 \center	
 \includegraphics[scale=0.70]{figures/llumin.eps} 
