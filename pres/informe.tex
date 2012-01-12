@@ -342,9 +342,10 @@
 \end{frame}
 \end{comment}
 
-\subsection{Interfaz de Acceso a la Cabecera}
+\subsection{Interfaz de acceso a la cabecera}
 
-\begin{frame}{Interfaz de Acceso a la Cabecera}
+\begin{frame}{Interfaz de acceso a la cabecera}
+
 \center 
 \includegraphics[scale=0.60]{figures/modulo.eps}
 \end{frame}
@@ -387,6 +388,63 @@
   \end{block}
 \end{frame}
 
+\subsection{Algoritmos de Clasificación}
+\begin{frame}{Algoritmos de Clasificación}
+\begin{block}<+->{Linear Lookup (LLU)}   
+    \begin{itemize}
+      \scriptsize     	
+	\item Consiste en una tabla, donde cada entrada contiene un prefijo más un identificador de enlace de salida
+	\item Cuando llega un paquete se examina su dirección IP y se va comparando con cada uno de los prefijos almacenados
+	\item Debe existir igualdad bit a bit entre el prefijo y la dirección IP
+	\item Si esto se cumple para varios prefijos, se opta por el más largo de ellos y el paquete se expide por el enlace asociado a dicho prefijo
+	\item Para optimizar este esquema, los prefijos se almacenan en orden decreciente de longitud, de manera que al encontrar una coincidencia no sea necesario seguir buscando en el resto de la tabla
+    \end{itemize}
+  \end{block}
+\end{frame}
+
+\begin{frame}{Algoritmos de Clasificación}
+\center 
+\includegraphics[scale=0.40]{figures/linear.eps}
+\end{frame}
+
+
+\begin{frame}{Algoritmos de Clasificación}
+  \begin{block}<+->{Unibit trie lookup (UTL)}   
+    \begin{itemize}
+      \scriptsize
+     	\item Arbol en el cual cada nodo contiene un \textit{puntero-cero }y un \textit{puntero-uno}
+	\item Partiendo del nodo raíz, todos los prefijos que comienzan con 0 son almacenados en el subárbol apuntado por el puntero-cero y aquellos que comienzan con 1 se almacenan en el subárbol apuntado por el puntero-uno.
+	\item Cada subárbol es construido recursivamente de manera similar usando los bits restantes de cada uno de los prefijos
+    \end{itemize}
+  \end{block}
+\end{frame}
+
+\begin{frame}{Algoritmos de Clasificación}
+  \begin{block}<+->{Ejemplo}   
+	\begin{center}
+	\begin{tabular}{|c|c|} \hline
+		\textbf{Prefijo} & \textbf{Enlace de salida} \\ \hline
+		101* & S1 \\
+		111* & S2 \\
+		11001* & S3 \\
+		1* & S4 \\
+		0* & S5 \\
+		1000* & S6 \\
+		100000* & S7 \\
+		100* & S8 \\
+		110* & S9 \\	\hline
+	\end{tabular}	
+\end{center}
+
+  \end{block}
+\end{frame}
+
+\begin{frame}{Algoritmos de clasificación}
+\center 
+\includegraphics[scale=0.40]{figures/trie.eps}
+\end{frame}
+
+
 \subsection{Formato de la cabecera}
 \begin{frame}{Formato de la cabecera}
  \center 
@@ -418,64 +476,6 @@
 
 
 \section{Arquitectura}
-\begin{comment}
-\subsection{Bus Avalon}
-\begin{frame}{Bus Avalon}
-  \begin{block}<+->{Avalon}   
-    \begin{itemize}
-      \scriptsize
-     	\item Es una familia de interfaces provista por Altera
-	\item Diferentes tipos, en base a las necesidades (ST, MM, Clock, Interrupt, Conduit, Reset)
-    \end{itemize}
-  \end{block}
-\begin{block}<+->{En este diseño}   
-    \begin{itemize}
-      \scriptsize
-     	\item Avalon MM $\rightarrow$ Los dispositivos están mapeados en memoria
-	\item Avalon Clock Interface $\rightarrow$ Provee señal de clock al sistema
-	\item Avalon Interrupt Interface $\rightarrow$ Permite que el módulo extractor de cabeceras interrumpa al procesador
-	\item Avalon Conduit Interface $\rightarrow$ Permite visualizar resultados fuera de la FPGA
-    \end{itemize}
-  \end{block}
-\end{frame}
-
-\begin{frame}{Señales utilizadas}
-  \begin{block}<+->{Avalon MM}
-  \begin{itemize}
-      \scriptsize
-	\item address: Direcciona los datos enviados a o recibidos desde el procesador.
-	\item chipselect: Se usa en combinacion con read o write.
-	\item read: Indica una transferencia de lectura.
-	\item readdata: Bus por el cual se transfieren los datos desde el preriférico hacia el procesador.
-	\item write: Indica una transferencia de escritura.
-	\item writedata: Bus por el cual se transfieren los datos desde el procesador hacia el periférico.
-   \end{itemize}
-\end{block}	
-
-\begin{block}<+->{Avalon Clock Interface}
-  \begin{itemize}
-      \scriptsize
-	\item clk: Provee clock para la sincronización de señales.	
-   \end{itemize}
-  \end{block}
-\end{frame}
-
-\begin{frame}{Señales utilizadas (cont)}
-  \begin{block}<+->{Avalon Interrupt Interface}
-  \begin{itemize}
-      \scriptsize
-	\item irq: Permite al modulo enviar una señal de interrupción al procesador cuando hay una cabecera lista para ser procesada.
-   \end{itemize}
-\end{block}	
-
-\begin{block}<+->{Avalon Conduit Interface}
-  \begin{itemize}
-      \scriptsize
-	\item export: Permite exportar señales "fuera" de la FPGA. En este caso, se la utiliza para visualizar ciertos resultados de la clasificación por medio del panel de LEDs de la placa de desarrollo.	
-   \end{itemize}
-  \end{block}
-\end{frame}
-\end{comment}
 
 \subsection{Diagrama en bloques: Lineas E/S}
 \begin{frame}{Generador}
