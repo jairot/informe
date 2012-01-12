@@ -214,8 +214,22 @@
 
 
 \subsection{Problema marco}
-\begin{frame}{Dirección IP - Prefijos}
 
+\begin{frame}{Clasificación de Paquetes}
+
+ \begin{block}<+->{Clasificación}   
+    \begin{itemize}
+      \scriptsize
+      \item La necesidad de procesar cada vez más paquetes de datos lleva a lo que se conoce como \textit{clasificación.}
+      \item Es el proceso de categorización de paquetes en distintos flujos.
+      \item Efectuada en base a un número de campos de una cabecera.
+      \item En general, para una clasificación basada en N campos, se dice que la misma es N-dimensional (o multidimensional) 
+      \item Un caso en particular de la clasificación unidimensional (N=1) utilizando el campo IP destino es lo que se conoce como \textit{IP Lookup}.     
+    \end{itemize}
+  \end{block}
+\end{frame}
+
+\begin{frame}{Dirección IP - Prefijos}
  \begin{block}<+->{Dirección IP}   
     \begin{itemize}
       \scriptsize
@@ -232,27 +246,9 @@
       \item Notación máscara: se utiliza una dirección de red y una máscara (132.239.0.0 con máscara 255.255.0.0)
      \end{itemize}
   \end{block}
-
-\end{frame}
-
-
-\begin{frame}{Clasificación de Paquetes}
-
- \begin{block}<+->{Clasificación}   
-    \begin{itemize}
-      \scriptsize
-      \item La necesidad de procesar cada vez más paquetes de datos lleva a lo que se conoce como \textit{clasificación.}
-      \item Es el proceso de categorización de paquetes en distintos flujos.
-      \item Efectuada en base a un número de campos de una cabecera.
-      \item En general, para una clasificación basada en N campos, se dice que la misma es N-dimensional (o multidimensional) 
-      \item Un caso en particular de la clasificación unidimensional (N=1) utilizando el campo IP destino es lo que se conoce como \textit{IP Lookup}.     
-    \end{itemize}
-  \end{block}
-
 \end{frame}
 
 \begin{frame}{IP LookUp}
-
  \begin{block}<+->{IP Lookup}   
     \begin{itemize}
       \scriptsize
@@ -261,11 +257,9 @@
       \item El dispositivo consulta una tabla para determinar la interfaz de salida para el paquete en cuestión
       \item Dicha tabla contiene un conjunto de prefijos con sus correspondientes interfaces de salida.
       \item El paquete es correspondido con el prefijo más largo que esté contenido en la dirección de destino y luego es redirigido  a la correspondiente interfaz de salida
-      \item No es una busqueda trivial, ya que no se busca un valor en particular sino un prefijo contenido dentro de un valor. No aplican los algoritmos de búsqueda tradicionales.
-   
+      \item No es una busqueda trivial, ya que no se busca un valor en particular sino un prefijo contenido dentro de un valor. No aplican los algoritmos de búsqueda tradicionales.   
     \end{itemize}
   \end{block}
-
 \end{frame}
 
 \begin{frame}{Prefijos}
@@ -283,26 +277,16 @@
     \end{itemize}
   \end{block}
   
- \begin{block}<+->{Específicos}   
+\begin{block}<+->{Específicos}   
     \begin{itemize}
       \scriptsize
-     \item Implementar un sistema embebido que realice la clasificiación unidimensional de paquetes mediante una arquitectura mixta, Hardware-Software, en lógica reprogramable y que permita contratastar algunos de los algoritmos de clasificacion existentes. 
-	\item Implementar como mínimo dos algoritmos de clasificación. 
-	\item Mejorar las algoritmos anteriormente mencionados, poniendo el foco en optimizar el código.
-   
+     	\item Diseñar un sistema embebido que realice la clasificiación unidimensional de paquetes mediante una arquitectura mixta, Hardware-Software
+	\item Implementar dicho sistema en hardware reconfigurable
+	\item Analizar la performance de al menos 2 algoritmos conocidos
+	\item Sugerir mejoras en la implementación de los mismos   
     \end{itemize}
   \end{block}
-
- \begin{block}<+->{Específicos}   
-    \begin{itemize}
-      \scriptsize
-     \item Implementar un sistema embebido que realice la clasificiación unidimensional de paquetes mediante una arquitectura mixta, Hardware-Software, en lógica reprogramable y que permita contratastar algunos de los algoritmos de clasificacion existentes. 
-	\item Implementar como mínimo dos algoritmos de clasificación. 
-	\item Mejorar las algoritmos anteriormente mencionados, poniendo el foco en optimizar el código.
-   
-    \end{itemize}
-  \end{block}
- \end{frame}
+\end{frame}
 
 \section{Sistema}
 \subsection{Solución Propuesta}
