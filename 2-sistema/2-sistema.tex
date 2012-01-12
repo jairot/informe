@@ -296,19 +296,7 @@ Considerar una dirección de destino \textit{D}. Para efectuar la búsqueda del 
   \caption{Unibit trie}
   \label{fig:trie}
 \end{figure}
-\begin{comment}
-/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*
 
-{Acá hay que poner algo(Con la bibliografía correspondiente) donde se indique que la implementación de estos esquemas de configuración no es factible en Hardware por}
-
-Uno de los mayores cuellos de botella en los routers lo constituye el cómputo de del prefijo más largo para cada paquete entrante. Esto se debe a que los nuevos protocolos realizan una selección de ruta basados más de un campo en el paquete.Esto trae como consecuencia la necesidad de  efectuar un mayor número de accesos a memoria.
-
-Implementar ciertos esquemas de clasificación en hardware se ve limitado principalmente debido a 2 factores: la complejidad creciente de los mismos y en consecuencia la cantidad de memoria requerida. Respecto al primer factor, éste viene dado a su vez por el creciente tráfico en las redes de datos. Esto trae aparejada la necesidad de aumentar el número de políticas en los esquemas y es por ello que se requiere más cantidad de memoria como se mencionó anteriormente.
-
-Las diversas implementaciones de los mismos en software están ampliamente difundidas y documentadas. Por lo tanto, si se opta por una implementación SW dentro de un sistema embebido, puede utilizarse cualquiera de ellas con leves modificaciones. O bien, hacer una implementación propia basada en alguna de las ya existentes.
-
-/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*
-\end{comment}
 \section{Diseño}
 
 A lo que es posible ver en la figura ~\ref{fig:diseno} es necesario agregarle algún tipo de interfaz de red que permita el ingreso de datos al sistema para luego procesarla. Además, según lo planteado en los objetivos de este trabajo, se desea implementar un sistema operativo o algún tipo de capa de abstracción que permita la ejecución de un Software en el que se realizará dicho procesamiento de estos paquetes. Para vincular estos dos módulos también es necesario un modulo que transporte los datos recibidos por la interfaz de red hacia el software y luego sobreescriba los resultados obtenidos en una etiqueta adjunta a los datos procesados. En la figura ~\ref{fig:diseno2} se puede ver como resulta el diseño propuesto.
