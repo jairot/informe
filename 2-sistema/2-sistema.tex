@@ -55,11 +55,11 @@ Eventualmente se desarrollaran varias versiones de este modulo, que envíen toda
 \subsubsection{Write Output}
 Para finalizar, Write Output, toma la salida de Delay buffer y escribe el resultado que le envia Uplink en la etiqueta que se encuentra anexa a cada una de las palabras del paquete.
 
-\subsection{Algoritmos de Clasificación}
+\section{Algoritmos de Clasificación}
 
 Los algoritmos de clasificación de paquetes que se implementaron fueron los siguientes:
 
-\subsubsection{Búsqueda lineal}
+\subsection{Búsqueda lineal}
 
 El esquema más simple de lookup consiste en una tabla, donde cada entrada contiene un prefijo (expresado en notación máscara) más un identificador de enlace de salida. Cuando llega un paquete se examina su dirección IP y se va comparando con cada uno de los prefijos almacenados. Debe existir igualdad bit a bit entre el prefijo y la dirección IP. Si esto se cumple para varios prefijos, se opta por el más largo de ellos y el paquete se expide por el enlace asociado a dicho prefijo.
 Para optimizar este esquema, los prefijos se almacenan en orden decreciente de longitud, de manera que al encontrar una coincidencia no sea necesario seguir buscando en el resto de la tabla.
@@ -71,7 +71,7 @@ Para optimizar este esquema, los prefijos se almacenan en orden decreciente de l
   \label{fig:linear}
 \end{figure}
 
-\subsubsection {Unibit tries}
+\subsection {Unibit tries}
 
 Un unibit trie es un árbol en el cual cada nodo contiene un \textit{puntero-cero }y un \textit{puntero-uno}. Partiendo del nodo raíz, todos los prefijos que comienzan con 0 son almacenados en el subárbol apuntado por el puntero-cero y aquellos que comienzan con 1 se almacenan en el subárbol apuntado por el puntero-uno.
 
