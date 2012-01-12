@@ -22,6 +22,7 @@
 \newcommand{\pphantom}{\textcolor{ta3aluminium}} % phantom introduces a vertical space in p formatted table columns??!!
 \usepackage{amsmath,amsthm, amssymb, latexsym}
 \usepackage{graphicx}
+\usepackage{verbatim}
 
 \title[] {Implementación HW/SW de Arquitecturas de Clasificación de Paquetes Sobre Lógica Reconfigurable.}
 
@@ -309,7 +310,7 @@
    \includegraphics[scale=0.25]{figures/solucion.eps}
 \end{frame}
 
-
+\begin{comment}
 \subsection{Descripcion funcional bloque a bloque}
 \begin{frame}{Descripcion funcional}
 \begin{block}<+->{Microprocesador}   
@@ -339,53 +340,21 @@
     \end{itemize}
   \end{block}
 \end{frame}
+\end{comment}
 
-\subsection{Formato de la cabecera}
-\begin{frame}{Formato de la cabecera}
- \center 
-\includegraphics[scale=0.55]{figures/cabecera.eps}
-\end{frame}
+\subsection{Interfaz de Acceso a la Cabecera}
 
-\subsection{Algoritmos de Clasificación}
-\begin{frame}{Algoritmos de Clasificación}
-\begin{block}<+->{Linear Lookup (LLU)}   
-    \begin{itemize}
-      \scriptsize
-     	\item Prefijos almacenados en una lista enlazada
-	\item Se toma como entrada una determinada dirección de destino y se va comparando nodo a nodo.
-	\item Prefijos ordenados por longitud
-	\item La primer coincidencia es la mejor
-    \end{itemize}
-  \end{block}
-  \begin{block}<+->{Unibit trie lookup (UTL)}   
-    \begin{itemize}
-      \scriptsize
-     	\item Prefijos almacenados en un arbol
-	\item Cada nodo representa un bit del prefijo
-	\item Se toma como entrada una dirección de destino y se va recorriendo el arbol en base a los bits
-    \end{itemize}
-  \end{block}
-\end{frame}
-
-\subsection{Modulo extractor de cabeceras}
-
-\begin{frame}{Modulo extractor de cabeceras}
+\begin{frame}{Interfaz de Acceso a la Cabecera}
 \center 
 \includegraphics[scale=0.60]{figures/modulo.eps}
 \end{frame}
 
 \begin{frame}{Descripción funcional}
-\begin{block}<+->{Generador de paquetes}   
-    \begin{itemize}
-      \scriptsize
-     	\item Genera paquetes de red Ethernet.
-	\item La distancia entre paquetes y el tamaño de los mismos es configurable. 
-    \end{itemize}
-  \end{block}
+
 \begin{block}<+->{FIFO}   
     \begin{itemize}
       \scriptsize
-     	\item Recibe los paquetes generados por el módulo anterior y los almacena en una memoria interna.
+     	\item Recibe los paquetes y los almacena en una memoria interna.
 	\item De tamaño configurable.
     \end{itemize}
   \end{block}
@@ -418,9 +387,38 @@
   \end{block}
 \end{frame}
 
+\subsection{Formato de la cabecera}
+\begin{frame}{Formato de la cabecera}
+ \center 
+\includegraphics[scale=0.55]{figures/cabecera.eps}
+\end{frame}
+
+\subsection{Algoritmos de Clasificación}
+\begin{frame}{Algoritmos de Clasificación}
+\begin{block}<+->{Linear Lookup (LLU)}   
+    \begin{itemize}
+      \scriptsize
+     	\item Prefijos almacenados en una lista enlazada
+	\item Se toma como entrada una determinada dirección de destino y se va comparando nodo a nodo.
+	\item Prefijos ordenados por longitud
+	\item La primer coincidencia es la mejor
+    \end{itemize}
+  \end{block}
+  \begin{block}<+->{Unibit trie lookup (UTL)}   
+    \begin{itemize}
+      \scriptsize
+     	\item Prefijos almacenados en un arbol
+	\item Cada nodo representa un bit del prefijo
+	\item Se toma como entrada una dirección de destino y se va recorriendo el arbol en base a los bits
+    \end{itemize}
+  \end{block}
+\end{frame}
+
+
+
 
 \section{Arquitectura}
-
+\begin{comment}
 \subsection{Bus Avalon}
 \begin{frame}{Bus Avalon}
   \begin{block}<+->{Avalon}   
@@ -476,9 +474,8 @@
 	\item export: Permite exportar señales "fuera" de la FPGA. En este caso, se la utiliza para visualizar ciertos resultados de la clasificación por medio del panel de LEDs de la placa de desarrollo.	
    \end{itemize}
   \end{block}
-
-
 \end{frame}
+\end{comment}
 
 \subsection{Diagrama en bloques: Lineas E/S}
 \begin{frame}{Generador}
