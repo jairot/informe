@@ -445,35 +445,6 @@
 \end{frame}
 
 
-\subsection{Formato de la cabecera}
-\begin{frame}{Formato de la cabecera}
- \center 
-\includegraphics[scale=0.55]{figures/cabecera.eps}
-\end{frame}
-
-\subsection{Algoritmos de Clasificación}
-\begin{frame}{Algoritmos de Clasificación}
-\begin{block}<+->{Linear Lookup (LLU)}   
-    \begin{itemize}
-      \scriptsize
-     	\item Prefijos almacenados en una lista enlazada
-	\item Se toma como entrada una determinada dirección de destino y se va comparando nodo a nodo.
-	\item Prefijos ordenados por longitud
-	\item La primer coincidencia es la mejor
-    \end{itemize}
-  \end{block}
-  \begin{block}<+->{Unibit trie lookup (UTL)}   
-    \begin{itemize}
-      \scriptsize
-     	\item Prefijos almacenados en un arbol
-	\item Cada nodo representa un bit del prefijo
-	\item Se toma como entrada una dirección de destino y se va recorriendo el arbol en base a los bits
-    \end{itemize}
-  \end{block}
-\end{frame}
-
-
-
 
 \section{Arquitectura}
 
