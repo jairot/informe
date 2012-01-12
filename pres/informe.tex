@@ -291,10 +291,24 @@
 \section{Sistema}
 \subsection{Solución Propuesta}
 \begin{frame}{Solución}
-\center 
-\includegraphics[scale=0.25]{figures/solucion.eps}
+
+    \begin{enumerate}
+      \scriptsize
+ \pause     	\item Un flujo de paquetes llega a la interfaz de red del dispositivo y es necesario clasificarlo en distintos flujos para que sea redireccionado.
+\pause 	\item Se almacenan en un buffer los paquetes en orden de llegada.
+\pause 	\item Se extrae el primer paquete y se toma la informacion que pertenece a la cabecera, la informacion completa del paquete queda en espera.
+\pause 	\item Se envia al microprocesador la cabecera. 
+\pause 	\item El Microprocesador aplica un algoritmo de clasificacion a cierta informacion de la cabecera y reenvia los resultados al Hardware. 
+\pause 	\item Se anexa a cada palabra del paquete un Tag adjunto con el resultado de la clasificacion y se lo envia hacia la interfaz de salida.
+    \end{enumerate}
 
 \end{frame}
+
+\begin{frame}{Arquitectura propuesta}
+   \center 
+   \includegraphics[scale=0.25]{figures/solucion.eps}
+\end{frame}
+
 
 \subsection{Descripcion funcional bloque a bloque}
 \begin{frame}{Descripcion funcional}
@@ -320,7 +334,7 @@
     \begin{itemize}
       \scriptsize
      	\item Extrae una cabecera a partir de cada paquete recibido.
-	\item La envía al software de clasificación
+	\item La envía al software de clasificaciónd
 	\item Recibe la información generada por dicho software
     \end{itemize}
   \end{block}
