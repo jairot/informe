@@ -1,4 +1,109 @@
 \chapter{Sistema}
+
+\section{Solución propuesta}
+
+La solución al problema planteado en el capitulo anterior podría enumerarse de la siguiente manera:
+
+    \begin{enumerate}
+     
+  	\item Un flujo de paquetes llega a la interfaz de red del dispositivo y es necesario clasificarlo en distintos flujos para que sea redireccionado.
+	\item Se almacenan en un buffer los paquetes en orden de llegada.
+	\item Se extrae el primer paquete y se toma la informacion que pertenece a la cabecera, la informacion completa del paquete queda en espera.
+	\item Se envia al microprocesador la cabecera. 
+	\item El Microprocesador aplica un algoritmo de clasificacion a cierta informacion de la cabecera y reenvia los resultados al Hardware. 
+	\item Se anexa a cada palabra del paquete un Tag adjunto con el resultado de la clasificacion y se lo envia hacia la interfaz de salida.
+    \end{enumerate}
+
+ \begin{figure}[h]
+  \centering
+	 \includegraphics[width=0.7\textwidth]{2-sistema/graf/solucion.eps}
+  \caption{Diagrama de la solucion propuesta}
+  \label{fig:solucion}
+\end{figure}
+
+\subsection{Interfaz de acceso a la cabecera}
+Este módulo tiene como función acceder a los campos que conforman la cabecera IP en los paquetes entrantes. La información recolectada es enviada al micrprocesador para que éste lleve a cabo el software de clasificación.
+
+ \begin{figure}[h]
+  \centering
+	 \includegraphics[width=0.7\textwidth]{2-sistema/graf/modulo.eps}
+  \caption{Interfaz de acceso a la cabecera}
+  \label{fig:inter}
+\end{figure}
+
+\subsection{Descripción funcional}
+
+A continuación se describe funcionalmente cada uno de los bloques que conforma esta interfaz.
+\subsubsection{FIFO}
+A la entrada del modulo se encuentra una FIFO que se encarga de almacenar y poner a disposición en orden de llegada los datos que emite el generador. Además, para poder manipular los paquetes, la FIFO debe almacenar toda la información de control que este disponible. 
+Este modulo también debe permitir la parametrización en la mayor cantidad de sentidos posibles, especialmente se desea poder configurar la cantidad de palabras disponibles que se puede almacenar, ya que la memoria dentro de una FPGA es un recurso critico y se desea encontrar la mejor relación entre rendimiento y uso de memoria.
+
+
+\subsubsection{Delay Buffer}
+El Componente Delay buffer sera el encargado de ir tomando los datos desde la FIFO y de detectar el inicio y finalización de un paquete. Además deberá mantener almacenado el paquete mientras el software toma una decisión. En este modulo es deseable poder configurar la cantidad de palabras que se consideraran parte de la cabecera y que sera enviadas al software. 
+
+\subsubsection{Uplink}
+Este Modulo es el encargado de realizar la comunicación entre el flujo de datos que proviene de la red y el procesador. Para ello debe entender las señales que utiliza el Bus, Avalon-MM, y poder interrumpir al procesador para enviarles los datos cuando estos estén disponibles. Cuando el procesador responde con el resultado de la clasificación, este modulo lo almacena y lo envía  write output para que este escriba el resultado de la clasificación en la etiqueta anexa al paquete correspondiente.
+Eventualmente se desarrollaran varias versiones de este modulo, que envíen toda la cabecera o una parte selectiva de ella para optimizar así el rendimiento.
+
+\subsubsection{Write Output}
+Para finalizar, Write Output, toma la salida de Delay buffer y escribe el resultado que le envia Uplink en la etiqueta que se encuentra anexa a cada una de las palabras del paquete.
+
+\subsection{Algoritmos de Clasificación}
+
+Los algoritmos de clasificación de paquetes que se implementaron fueron los siguientes:
+
+\subsubsection{Búsqueda lineal}
+
+El esquema más simple de lookup consiste en una tabla, donde cada entrada contiene un prefijo (expresado en notación máscara) más un identificador de enlace de salida. Cuando llega un paquete se examina su dirección IP y se va comparando con cada uno de los prefijos almacenados. Debe existir igualdad bit a bit entre el prefijo y la dirección IP. Si esto se cumple para varios prefijos, se opta por el más largo de ellos y el paquete se expide por el enlace asociado a dicho prefijo.
+Para optimizar este esquema, los prefijos se almacenan en orden decreciente de longitud, de manera que al encontrar una coincidencia no sea necesario seguir buscando en el resto de la tabla.
+
+\begin{figure}[h]
+  \centering
+	\includegraphics[width=0.80\textwidth]{2-sistema/graf/linear.eps}
+  \caption{Busqueda lineal}
+  \label{fig:linear}
+\end{figure}
+
+\subsubsection {Unibit tries}
+
+Un unibit trie es un árbol en el cual cada nodo contiene un \textit{puntero-cero }y un \textit{puntero-uno}. Partiendo del nodo raíz, todos los prefijos que comienzan con 0 son almacenados en el subárbol apuntado por el puntero-cero y aquellos que comienzan con 1 se almacenan en el subárbol apuntado por el puntero-uno.
+
+Cada subárbol es construido recursivamente de manera similar usando los bits restantes de cada uno de los prefijos.
+
+Considerar la siguiente tabla de ruteo
+
+\begin{center}
+	\begin{tabular}{|c|c|} \hline
+		\textbf{Prefijo} & \textbf{Enlace de salida} \\ \hline
+		101* & S1 \\
+		111* & S2 \\
+		11001* & S3 \\
+		1* & S4 \\
+		0* & S5 \\
+		1000* & S6 \\
+		100000* & S7 \\
+		100* & S8 \\
+		110* & S9 \\	\hline
+	\end{tabular}	
+\end{center}
+
+
+
+
+A la misma le corresponde representación en unibit trie de la figura ~\ref{fig:trie}
+
+Considerar una dirección de destino \textit{D}. Para efectuar la búsqueda del prefijo más largo los bits de \textit{D} son usados para trazar un camino a lo largo del trie. Dicho camino comienza en el nodo raíz y continúa hasta toparse con un puntero vacío o un nodo vacío. Durante el recorrido a través del trie, el algoritmo mantiene un registro del último prefijo encontrado en un nodo en el camino. Cuando la búsqueda falla, ese es el prefijo retornado.
+\newpage
+\begin{figure}[h]
+  \centering
+	\includegraphics[width=0.80\textwidth]{2-sistema/graf/trie.eps}
+  \caption{Unibit trie}
+  \label{fig:trie}
+\end{figure}
+
+\begin{comment}
+
 En este capitulo se introduce brevemente una serie de conceptos que fueron utilizados para la realización del presente proyecto integrador. No se pretende que el lector alcance una comprensión exhaustiva de los mismos, sino que tenga las herramientas necesarias para la correcta interpretación de los capítulos posteriores. De manera paralela al desarrollo de dichos conceptos se introducen los bloques básicos que formaran parte del sistema planteado.
 
 \section{Sistemas Embebidos y Dispositivos Lógicos Programables}
@@ -296,19 +401,7 @@ Considerar una dirección de destino \textit{D}. Para efectuar la búsqueda del 
   \caption{Unibit trie}
   \label{fig:trie}
 \end{figure}
-\begin{comment}
-/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*
 
-{Acá hay que poner algo(Con la bibliografía correspondiente) donde se indique que la implementación de estos esquemas de configuración no es factible en Hardware por}
-
-Uno de los mayores cuellos de botella en los routers lo constituye el cómputo de del prefijo más largo para cada paquete entrante. Esto se debe a que los nuevos protocolos realizan una selección de ruta basados más de un campo en el paquete.Esto trae como consecuencia la necesidad de  efectuar un mayor número de accesos a memoria.
-
-Implementar ciertos esquemas de clasificación en hardware se ve limitado principalmente debido a 2 factores: la complejidad creciente de los mismos y en consecuencia la cantidad de memoria requerida. Respecto al primer factor, éste viene dado a su vez por el creciente tráfico en las redes de datos. Esto trae aparejada la necesidad de aumentar el número de políticas en los esquemas y es por ello que se requiere más cantidad de memoria como se mencionó anteriormente.
-
-Las diversas implementaciones de los mismos en software están ampliamente difundidas y documentadas. Por lo tanto, si se opta por una implementación SW dentro de un sistema embebido, puede utilizarse cualquiera de ellas con leves modificaciones. O bien, hacer una implementación propia basada en alguna de las ya existentes.
-
-/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*
-\end{comment}
 \section{Diseño}
 
 A lo que es posible ver en la figura ~\ref{fig:diseno} es necesario agregarle algún tipo de interfaz de red que permita el ingreso de datos al sistema para luego procesarla. Además, según lo planteado en los objetivos de este trabajo, se desea implementar un sistema operativo o algún tipo de capa de abstracción que permita la ejecución de un Software en el que se realizará dicho procesamiento de estos paquetes. Para vincular estos dos módulos también es necesario un modulo que transporte los datos recibidos por la interfaz de red hacia el software y luego sobreescriba los resultados obtenidos en una etiqueta adjunta a los datos procesados. En la figura ~\ref{fig:diseno2} se puede ver como resulta el diseño propuesto.
@@ -319,7 +412,7 @@ A lo que es posible ver en la figura ~\ref{fig:diseno} es necesario agregarle al
   \caption{Diseño preliminar actualizado.}
   \label{fig:diseno2}
 \end{figure}
-
+\end{comment}
 
 
 
