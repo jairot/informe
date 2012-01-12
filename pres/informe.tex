@@ -191,6 +191,28 @@
 \end{frame}
 
 \subsection{Problema marco}
+\begin{frame}{Dirección IP - Prefijos}
+
+ \begin{block}<+->{Dirección IP}   
+    \begin{itemize}
+      \scriptsize
+      \item Es un número de 32 bit que identifica un dispositivo dentro de una red que utilice el protocolo IP
+      \item Estructura jerárquica. Una parte de la dirección corresponde a la red, y la otra al host dentro de la red
+      \item Los bits que corresponden a la parte de red conforman lo que se denomina \textit{prefijo de red}.
+     \end{itemize}
+  \end{block}
+\begin{block}<+->{Formas de representar un prefijo de red}   
+    \begin{itemize}
+      \scriptsize
+      \item Binario con asterisco (132.239 - 1000010011101111*)
+      \item Notación A/L, donde A es una dirección IP y L es la longitud del prefijo (132.239.0.0/16)
+      \item Notación máscara: se utiliza una dirección de red y una máscara (132.239.0.0 con máscara 255.255.0.0)
+     \end{itemize}
+  \end{block}
+
+\end{frame}
+
+
 \begin{frame}{Clasificación de Paquetes}
 
  \begin{block}<+->{Clasificación}   
@@ -212,14 +234,20 @@
     \begin{itemize}
       \scriptsize
       \item Se lleva a cabo en el dispositivo de enrutamiento.
-      \item Un paquete llega por una interfaz de entrada. Éste porta una dirección IP determinada.
-      \item El dispositivo consulta una tabla de forwardeo para determinar la interfaz de salida para el paquete en cuestión
+      \item Un paquete llega por una interfaz de entrada. Éste porta una dirección IP de destino determinada.
+      \item El dispositivo consulta una tabla para determinar la interfaz de salida para el paquete en cuestión
       \item Dicha tabla contiene un conjunto de prefijos con sus correspondientes interfaces de salida.
-      \item El paquete es correspondido con el prefijo más largo que esté contenido en la dirección de destino y luego es redirigido  a la correspondiente interfaz de salida.
+      \item El paquete es correspondido con el prefijo más largo que esté contenido en la dirección de destino y luego es redirigido  a la correspondiente interfaz de salida
+      \item No es una busqueda trivial, ya que no se busca un valor en particular sino un prefijo contenido dentro de un valor. No aplican los algoritmos de búsqueda tradicionales.
    
     \end{itemize}
   \end{block}
 
+\end{frame}
+
+\begin{frame}{Prefijos}
+\center 
+\includegraphics[scale=0.75]{figures/prefijos.eps}
 \end{frame}
 
 \subsection{Objetivos}
@@ -241,6 +269,17 @@
    
     \end{itemize}
   \end{block}
+
+ \begin{block}<+->{Específicos}   
+    \begin{itemize}
+      \scriptsize
+     \item Implementar un sistema embebido que realice la clasificiación unidimensional de paquetes mediante una arquitectura mixta, Hardware-Software, en lógica reprogramable y que permita contratastar algunos de los algoritmos de clasificacion existentes. 
+	\item Implementar como mínimo dos algoritmos de clasificación. 
+	\item Mejorar las algoritmos anteriormente mencionados, poniendo el foco en optimizar el código.
+   
+    \end{itemize}
+  \end{block}
+ \end{frame}
  \end{frame}
 
 \section{Sistema}
