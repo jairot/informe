@@ -74,10 +74,14 @@ Las tecnologias actuales, por las razones anteriormente mencionadas, estan encon
 
 Las FPGA(field-programmable gate array) son un dispositivo de logica reconfigurable que es posibile programar, una o varias veces, usando un lenguaje de descripcion de hardware(HDL). Las FPGAs se utilizan en aplicaciones similares a los ASICs sin embargo son más lentas, tienen un mayor consumo de potencia y no pueden abarcar sistemas tan complejos como ellos. A pesar de esto, tienen un flujo de diseño flexible, sus costes de desarrollo y adquisición son mucho menores para pequeñas cantidades de dispositivos y el tiempo de desarrollo es también menor.
 
-Esta flexibilidad en el flujo de diseño, la posibilidad de probar el diseño de manera instantanea, y la posibilidad de actualizarlo cuando se lo desee son los dos puntos principales que posicionan a las FPGA como la herramienta indicada para atacar un problema tan complejo y de una evolucion exponencial como la clasificacion de paquetes. 
+\subsubsection{FPGA como plataforma para SoC}
 
+Los Sistemas en un Chip (SoC) son circuitos integrados que contienen todo, o la mayoria, de los modulos que corresponden a un sistema informatico o electronico en un solo componente. Son usados especialmente en el area de sistemas embebidos. Los microcontroladores son tecnicamente SoC, pero se considera que los SoC tienen procedores mas potentes y pueden correr aplicaciones mas complejas, para lo cual necesitan mayor cantidad de memoria que suele estar disponible como chips externos. 
 
-Esta flexibilidad en el flujo de diseño, el prototipado rapido y la posibilidad de actualizarlo cuando se lo desee son los dos puntos principales que posicionan a las FPGA como la herramienta indicada para atacar un problema tan complejo y de una evolucion exponencial como la clasificacion de paquetes. 
+Gracias a la disponibilidad en la ultima decada de Soft-Core CPUs y otros soft IP, se ha producido un punto de infleccion en el uso de FPGAs como plataforma para SoC. Esto llego a un punto de inflexion, mezcla de logros tecnicos y fuerzas de mercado, en el que varios fabricantes como Altera, Cypress Semiconductor, Intel y Xilinx anunciaron la comercializacion de FPGA especificas para el desarrollo de SoC.
+
+Estos avances que facilitan el desarrollo de SoC, la flexibilidad en el flujo de diseño y el prototipado rapido son las condiciones que posicionan a las FPGA como la herramienta indicada para atacar un problema tan complejo como la clasificacion de paquetes. 
+
  \begin{figure}[h]
   \centering
 	 \includegraphics[width=0.5\textwidth]{1-introduccion/graf/FPGA_based.eps}
@@ -183,12 +187,16 @@ Teniendo en cuenta los problemas planteados, el objetivo general de este proyect
 En Particular, se pretende considerar una plataforma de logica reconfigurable que permite intergar arquitecturas de Hardware con Software embebido.
 
 \subsection{Objetivos Especificos}
+
     \begin{itemize}     
+
      	\item Diseñar un sistema embebido que realice la clasificiación unidimensional de paquetes mediante una arquitectura mixta, Hardware-Software
 	\item Implementar dicho sistema en hardware reconfigurable
 	\item Implementar al menos 2 algoritmos conocidos y analizar su performance
 	\item Sugerir mejoras en la implementación de los mismos   
-    \end{itemize}
+
+\end{itemize}
+
 
 \section{Organizacion}
 +Estructura del Informe y breve descripcion de los capitulos
