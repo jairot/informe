@@ -336,26 +336,61 @@
 \begin{frame}{Algoritmos de Clasificación}
 \begin{block}<+->{Linear Lookup (LLU)}   
     \begin{itemize}
-      \scriptsize
-     	\item Prefijos almacenados en una lista enlazada
-	\item Se toma como entrada una determinada dirección de destino y se va comparando nodo a nodo.
-	\item Prefijos ordenados por longitud
-	\item La primer coincidencia es la mejor
-    \end{itemize}
-  \end{block}
-  \begin{block}<+->{Unibit trie lookup (UTL)}   
-    \begin{itemize}
-      \scriptsize
-     	\item Prefijos almacenados en un arbol
-	\item Cada nodo representa un bit del prefijo
-	\item Se toma como entrada una dirección de destino y se va recorriendo el arbol en base a los bits
+      \scriptsize     	
+	\item Consiste en una tabla, donde cada entrada contiene un prefijo más un identificador de enlace de salida
+	\item Cuando llega un paquete se examina su dirección IP y se va comparando con cada uno de los prefijos almacenados
+	\item Debe existir igualdad bit a bit entre el prefijo y la dirección IP
+	\item Si esto se cumple para varios prefijos, se opta por el más largo de ellos y el paquete se expide por el enlace asociado a dicho prefijo
+	\item Para optimizar este esquema, los prefijos se almacenan en orden decreciente de longitud, de manera que al encontrar una coincidencia no sea necesario seguir buscando en el resto de la tabla
     \end{itemize}
   \end{block}
 \end{frame}
 
-\subsection{Modulo extractor de cabeceras}
+\begin{frame}{Algoritmos de Clasificación}
+\center 
+\includegraphics[scale=0.40]{figures/linear.eps}
+\end{frame}
 
-\begin{frame}{Modulo extractor de cabeceras}
+
+\begin{frame}{Algoritmos de Clasificación}
+  \begin{block}<+->{Unibit trie lookup (UTL)}   
+    \begin{itemize}
+      \scriptsize
+     	\item Arbol en el cual cada nodo contiene un \textit{puntero-cero }y un \textit{puntero-uno}
+	\item Partiendo del nodo raíz, todos los prefijos que comienzan con 0 son almacenados en el subárbol apuntado por el puntero-cero y aquellos que comienzan con 1 se almacenan en el subárbol apuntado por el puntero-uno.
+	\item Cada subárbol es construido recursivamente de manera similar usando los bits restantes de cada uno de los prefijos
+    \end{itemize}
+  \end{block}
+\end{frame}
+
+\begin{frame}{Algoritmos de Clasificación}
+  \begin{block}<+->{Ejemplo}   
+	\begin{center}
+	\begin{tabular}{|c|c|} \hline
+		\textbf{Prefijo} & \textbf{Enlace de salida} \\ \hline
+		101* & S1 \\
+		111* & S2 \\
+		11001* & S3 \\
+		1* & S4 \\
+		0* & S5 \\
+		1000* & S6 \\
+		100000* & S7 \\
+		100* & S8 \\
+		110* & S9 \\	\hline
+	\end{tabular}	
+\end{center}
+
+  \end{block}
+\end{frame}
+
+\begin{frame}{Algoritmos de clasificación}
+\center 
+\includegraphics[scale=0.40]{figures/trie.eps}
+\end{frame}
+
+\subsection{Interfaz de acceso a la cabecera}
+
+\begin{frame}{Interfaz de acceso a la cabecera}
 \center 
 \includegraphics[scale=0.60]{figures/modulo.eps}
 \end{frame}
