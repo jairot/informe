@@ -17,6 +17,19 @@
    sodipodi:docname="solucion.svg">
   <defs
      id="defs4">
+    <marker
+       inkscape:stockid="Arrow1Mend"
+       orient="auto"
+       refY="0.0"
+       refX="0.0"
+       id="Arrow1Mend"
+       style="overflow:visible;">
+      <path
+         id="path3722"
+         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1.0pt;marker-start:none;"
+         transform="scale(0.4) rotate(180) translate(10,0)" />
+    </marker>
     <inkscape:perspective
        sodipodi:type="inkscape:persp3d"
        inkscape:vp_x="0 : 526.18109 : 1"
@@ -157,6 +170,20 @@
        inkscape:vp_y="0 : 1000 : 0"
        inkscape:vp_x="0 : 0.5 : 1"
        sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective2894"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective2916"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
   </defs>
   <sodipodi:namedview
      id="base"
@@ -166,8 +193,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.54"
-     inkscape:cx="327.6562"
-     inkscape:cy="561.63026"
+     inkscape:cx="296.12283"
+     inkscape:cy="243.90338"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="true"
@@ -190,7 +217,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -200,9 +227,9 @@
      id="layer1"
      transform="translate(0,-308.2677)">
     <rect
-       style="fill:#f2f2f2;stroke:#000000;stroke-width:0.92295825;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       style="fill:#f2f2f2;stroke:#000000;stroke-width:0.95257938;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
        id="rect3792"
-       width="920"
+       width="980"
        height="880"
        x="40"
        y="212.36218" />
@@ -211,12 +238,12 @@
        id="rect2816"
        width="214.28572"
        height="198.33398"
-       x="371.55008"
+       x="445.71429"
        y="374.0282" />
     <rect
-       style="fill:#b3b3b3;fill-opacity:1;stroke:#000000;stroke-width:0.85364181;stroke-opacity:1"
+       style="fill:#b3b3b3;fill-opacity:1;stroke:#000000;stroke-width:0.9452489;stroke-opacity:1"
        id="rect3590"
-       width="663.97528"
+       width="814.12848"
        height="95.790474"
        x="165.87151"
        y="622.36218" />
@@ -228,32 +255,32 @@
        x="164.28571"
        y="752.36218" />
     <rect
-       style="fill:#cccccc;fill-opacity:1;stroke:#000000;stroke-opacity:1"
+       style="fill:#cccccc;fill-opacity:1;stroke:#000000;stroke-width:1.38027978;stroke-opacity:1"
        id="rect3592-2"
-       width="165.71429"
+       width="315.71429"
        height="145.71428"
        x="664.28571"
        y="752.36218" />
     <text
        xml:space="preserve"
-       style="font-size:22;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
-       x="384.24063"
-       y="474.69458"
+       style="font-size:22px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+       x="460"
+       y="472.36218"
        id="text3664"><tspan
          sodipodi:role="line"
          id="tspan3666"
-         x="384.24063"
-         y="474.69458">Microprocesador</tspan></text>
+         x="460"
+         y="472.36218">Microprocesador</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:40px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
-       x="288.52716"
-       y="682.29053"
+       x="340"
+       y="672.36218"
        id="text3693"><tspan
          sodipodi:role="line"
          id="tspan3695"
-         x="288.52716"
-         y="682.29053">Bus de interconexion</tspan></text>
+         x="340"
+         y="672.36218">Bus de interconexion</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:28px;font-style:normal;font-weight:normal;text-align:center;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
@@ -271,66 +298,59 @@
     <text
        xml:space="preserve"
        style="font-size:24px;font-style:normal;font-weight:normal;text-align:center;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
-       x="744.13281"
-       y="812.36218"
+       x="819.13281"
+       y="817.36218"
        id="text3881"><tspan
          sodipodi:role="line"
-         id="tspan3883"
-         x="744.13281"
-         y="812.36218">Extractor de</tspan><tspan
+         x="819.13281"
+         y="817.36218"
+         id="tspan3885">Interfaz de acceso</tspan><tspan
          sodipodi:role="line"
-         x="744.13281"
-         y="842.36218"
-         id="tspan3885">cabeceras</tspan></text>
-    <path
-       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="m 480,314.09448 0,-50"
-       id="path2907"
-       transform="translate(0,308.2677)"
-       inkscape:connector-type="polyline" />
+         x="819.13281"
+         y="847.36218"
+         id="tspan4550">a la cabecera</tspan></text>
     <rect
        id="rect2842"
        width="210"
        height="40"
-       x="370"
-       y="14.094482"
-       transform="translate(0,308.2677)"
+       x="450"
+       y="322.36218"
        style="fill:#cccccc;stroke:#000000;stroke-opacity:1" />
     <rect
        style="fill:#cccccc;stroke:#000000;stroke-opacity:1"
        id="rect3616"
        width="70"
        height="60"
-       x="420"
+       x="500"
        y="242.36218" />
     <rect
        style="fill:#cccccc;stroke:#000000;stroke-opacity:1"
        id="rect3618"
        width="70"
        height="60"
-       x="430"
+       x="510"
        y="252.36218" />
     <rect
        style="fill:#cccccc;fill-opacity:1;stroke:#000000;stroke-width:1.00887001;stroke-opacity:1"
        id="rect3592-1-1"
        width="165.71429"
        height="148.31071"
-       x="414.28571"
+       x="439.28571"
        y="752.36218" />
     <text
        xml:space="preserve"
        style="font-size:28px;font-style:normal;font-weight:normal;text-align:center;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
-       x="489.87891"
+       x="519.87891"
        y="832.36218"
        id="text3875-6"><tspan
          sodipodi:role="line"
-         x="489.87891"
+         x="519.87891"
          y="832.36218"
          id="tspan3642-8">I/O</tspan></text>
     <rect
-       style="fill:#cccccc;fill-opacity:1;stroke:#000000;stroke-opacity:1"
+       style="fill:#cccccc;fill-opacity:1;stroke:#000000;stroke-width:0.96935815;stroke-opacity:1"
        id="rect3592-2-7"
-       width="165.71429"
+       width="155.71429"
        height="145.71428"
        x="664.28571"
        y="932.36218" />
@@ -343,15 +363,11 @@
          sodipodi:role="line"
          x="747.71094"
          y="982.36218"
-         id="tspan3885-5">Generador </tspan><tspan
+         id="tspan3726">Interfaz de </tspan><tspan
          sodipodi:role="line"
          x="743.89062"
          y="1012.3622"
-         id="tspan3728">de</tspan><tspan
-         sodipodi:role="line"
-         x="743.89062"
-         y="1042.3622"
-         id="tspan3726">Paquetes</tspan></text>
+         id="tspan2880">Red</tspan></text>
     <rect
        style="fill:#cccccc;fill-opacity:1;stroke:#000000;stroke-width:1.00887001;stroke-opacity:1"
        id="rect3592-1-6"
@@ -369,30 +385,6 @@
          x="251.14062"
          y="1202.3622"
          id="tspan3642-6">Memoria</tspan></text>
-    <path
-       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="m 245,409.09448 0,35"
-       id="path3782"
-       transform="translate(0,308.2677)"
-       inkscape:connector-type="polyline" />
-    <path
-       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;display:inline"
-       d="m 495,409.09448 0,35"
-       id="path3784"
-       transform="translate(0,308.2677)"
-       inkscape:connector-type="polyline" />
-    <path
-       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="m 745,409.09448 0,35"
-       id="path3786"
-       transform="translate(0,308.2677)"
-       inkscape:connector-type="polyline" />
-    <path
-       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;display:inline"
-       d="m 745,589.09448 0,35"
-       id="path3788"
-       transform="translate(0,308.2677)"
-       inkscape:connector-type="polyline" />
     <path
        style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:1,1;stroke-dashoffset:0"
        d="m 245,594.09448 0,220"
@@ -412,30 +404,98 @@
     <text
        xml:space="preserve"
        style="font-size:8px;font-style:normal;font-weight:normal;text-align:center;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
-       x="466.58594"
+       x="546.58594"
        y="272.36218"
        id="text3798"><tspan
          sodipodi:role="line"
          id="tspan3800"
-         x="467.85938"
+         x="547.85938"
          y="272.36218">Algoritmos </tspan><tspan
          sodipodi:role="line"
-         x="466.58594"
+         x="546.58594"
          y="282.36218"
          id="tspan3802">de</tspan><tspan
          sodipodi:role="line"
-         x="466.58594"
+         x="546.58594"
          y="292.36218"
          id="tspan3804">clasificación</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:14px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
-       x="410"
+       x="490"
        y="347.36218"
        id="text3806"><tspan
          sodipodi:role="line"
          id="tspan3808"
-         x="410"
+         x="490"
          y="347.36218">Sistema Operativo</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:18px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+       x="820.37036"
+       y="740.39081"
+       id="text2882"
+       transform="translate(0,308.2677)"><tspan
+         sodipodi:role="line"
+         id="tspan2884"
+         x="820.37036"
+         y="740.39081" /></text>
+    <rect
+       style="fill:#cccccc;fill-opacity:1;stroke:#000000;stroke-width:0.93771547;stroke-opacity:1"
+       id="rect3592-2-7-5"
+       width="145.71429"
+       height="145.71428"
+       x="834.28571"
+       y="932.36218" />
+    <text
+       xml:space="preserve"
+       style="font-size:24px;font-style:normal;font-weight:normal;text-align:center;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+       x="909.89844"
+       y="982.36218"
+       id="text3881-8-4"><tspan
+         sodipodi:role="line"
+         x="913.71875"
+         y="982.36218"
+         id="tspan3726-8">Interfaz de </tspan><tspan
+         sodipodi:role="line"
+         x="909.89844"
+         y="1012.3622"
+         id="tspan2880-1">Red</tspan></text>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;display:inline;marker-end:url(#Arrow1Mend)"
+       d="m 905,589.09448 0,35"
+       id="path2936"
+       transform="translate(0,308.2677)"
+       inkscape:connector-type="polyline" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow1Mend)"
+       d="m 740,624.09448 0,-35"
+       id="path4352"
+       transform="translate(0,308.2677)"
+       inkscape:connector-type="polyline" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 550,264.09448 0,50"
+       id="path4538"
+       transform="translate(0,308.2677)"
+       inkscape:connector-type="polyline" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;display:inline"
+       d="m 245,409.09448 0,35"
+       id="path4540"
+       transform="translate(0,308.2677)"
+       inkscape:connector-type="polyline" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 520,409.09448 0,35"
+       id="path4544"
+       transform="translate(0,308.2677)"
+       inkscape:connector-type="polyline" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;display:inline"
+       d="m 815,409.09448 0,35"
+       id="path4546"
+       transform="translate(0,308.2677)"
+       inkscape:connector-type="polyline" />
   </g>
 </svg>
