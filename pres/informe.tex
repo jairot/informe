@@ -443,14 +443,19 @@
 
 \subsection{Diagrama en bloques: Lineas E/S}
 \begin{frame}{Generador}
-\center 
-\includegraphics[scale=0.60]{figures/bloqgenerador.eps}
+  \begin{block}<+->{FIFO}
+	\begin{itemize}
+      \scriptsize
+	\item Se trata de una FIFO estándar, adaptada de un codigo disponible en Opencores.
+	\item Almacena palabras de 72 bits, 64 de la palabra correspondiente al paquete y 8  bits de control.
+	\item Es posible parametrizar la cantidad de palabras, en potencias de 2, que esta FIFO almacena.
+	\center
+	\includegraphics[scale=0.40]{figures/bloqfifo.eps}
+	   \end{itemize}
+\end{block}
+
 \end{frame}
 
-\begin{frame}{FIFO}
-\center 
-\includegraphics[scale=0.60]{figures/bloqfifo.eps}
-\end{frame}
 
 \begin{frame}{Delay Buffer}
  \begin{tabularx}{\linewidth}{Z|Z}
