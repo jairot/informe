@@ -74,13 +74,9 @@
 
     \begin{itemize}
       \item Las redes de datos crecen en {\bf Complejidad:} nuevas aplicaciones, multimedia
-
       \item Las redes de datos crecen en {\bf Velocidad:} $n \times 100 Gbps\ (1Tbps@2015)$
-
-      \item {\bf Consolidación} de múltiples servicios sobre redes Ethernet
-      
+      \item {\bf Consolidación} de múltiples servicios sobre redes Ethernet      
       \item Redes \emph{Locales}, \emph{Metropolitanas} y \emph{Extensas} utilizan {\bf Conmutación de Paquetes}
-
       \item Adopción de tecnologías para \emph{virtualización} en redes y servidores
     \end{itemize}
     
@@ -88,11 +84,8 @@
     
   \begin{block}<+->{Procesamiento de Paquetes}
     \begin{itemize}
-
       \item Los \emph{enlaces} ofrecen alta capacidad. El \emph{procesamiento} de paquetes es {\bf crítico} y debe optimizarse
-
       \item El procesamiento \emph{a velocidad de línea}
-
       \item Paquete Ethernet mínimo $=64 bytes$ $\rightarrow 6 nanosegundos/paquete$  
     \end{itemize}    
   \end{block}
@@ -465,13 +458,24 @@
 
 
 \begin{frame}{Delay Buffer}
-\center 
-\includegraphics[scale=0.60]{figures/bloqdelaybuffer.eps}
+ \begin{tabularx}{\linewidth}{Z|Z}
+    \includegraphics[scale=0.40]{figures/bloqdelaybuffer.eps} 
+    &
+    \includegraphics[scale=0.25]{figures/estdelay.eps}
+    \\
+  \end{tabularx}
+
 \end{frame}
 
+
+
 \begin{frame}{Uplink}
-\center 
-\includegraphics[scale=0.60]{figures/bloquplink.eps}
+ \begin{tabularx}{\linewidth}{Z|Z}
+    \includegraphics[scale=0.40]{figures/bloquplink.eps} 
+    &
+    \includegraphics[scale=0.35]{figures/estuplink.eps}
+    \\
+  \end{tabularx}
 \end{frame}
 
 \begin{frame}{Uplink}
