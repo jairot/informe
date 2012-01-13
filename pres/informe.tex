@@ -512,25 +512,12 @@
 	\item Integración con SignalTap® II, el analizador de lógica embebida de Altera permitiendo el análisis  de todas las señales presentes en la FPGA.
 	\item Set de instrucciones compatible entre todos las versiones del procesador Nios II.
 	\item Multiplicación y división en una sola instrucción de 32 x 32 produciendo un resultado de 32-bits.
+	\item Se utilizará la versión que ofrezca una mejor performance
     \end{itemize}
 	
   \end{block}
 \end{frame}
 
-\begin{frame}{Microprocesador NIOS II(cont)}
-\center
-   \begin{block}<+->{NIOS II}
-	Es posible instanciar el procesador NIOS II en 3 diferentes configuraciones:	
-	
-
-    \begin{itemize}
-	\scriptsize
-     	\item Nios II/f, es un core optimizado para alcanzar el máximo rendimiento a expensas del tamaño del mismo.
-	\item Nios II/s, esta diseñado para mantener el balance entre el rendimiento y el espacio ocupado dentro de la FPGA.
-	\item Nios II/e, es un núcleo que busca utilizar la menor cantidad de lógica para poder ser implementado en FPGAs de bajo costo.
-    \end{itemize}
-  \end{block}
-\end{frame}
 
 \subsection{Hardware}
 \begin{frame}{Hardware}
@@ -593,6 +580,12 @@
   \end{block}
 \end{frame}
 	
+\begin{frame}{Algoritmos}
+
+	\center	
+	\includegraphics[scale=0.30]{figures/lluimp.eps}  
+
+\end{frame}
 
 \begin{frame}{Algoritmos}
 \begin{block}<+->{UTL}   
@@ -605,12 +598,13 @@
 	\item El algoritmo de búsqueda toma como entrada la dirección IP de destino del paquete a clasificar
 	\item Testeo bit a bit de la misma, partiendo con un puntero de recorrido desde el nodo raíz
 	\item Si el bit de la dirección es 0 y el puntero \emph{zero} está apuntando hacia algún nodo, el puntero de recorrido se mueve al nodo apuntado por el puntero zero
-	\item En caso contrario, se mueve al nodo apuntado por el puntero emph{one} (En caso de que exista alguno).
+	\item En caso contrario, se mueve al nodo apuntado por el puntero \emph{one} (En caso de que exista alguno).
 	\item El puntero de recorrido puede quedar en un nodo común o en un nodo decisión
 	\item En cada iteración se debe guardar el valor de gw en caso de tratarse de un nodo decisión
     \end{itemize}
   \end{block}
 \end{frame}
+
 
 \begin{frame}{Algoritmos - UTL}
 \begin{block}<+->{trienode.h}   
@@ -633,6 +627,13 @@
     \end{itemize}
   \end{block}
 \end{frame}	
+
+\begin{frame}{Algoritmos}
+
+	\center	
+	\includegraphics[scale=0.50]{figures/utlimp.eps}  
+
+\end{frame}
 
 \subsection{Herramientas}
 \begin{frame}{Herramientas de Desarrollo}
