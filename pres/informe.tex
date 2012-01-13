@@ -567,6 +567,28 @@
   \end{block}
 \end{frame}
 
+\begin{frame}{Algoritmos - LLU}
+\begin{block}<+->{iproute.h}   
+    \begin{itemize}
+      \scriptsize
+     	\item unsigned int addr
+     	\item unsigned int mask
+     	\item unsigned int gw
+    \end{itemize}
+  \end{block}
+
+\begin{block}<+->{iplookup.h}   
+    \begin{itemize}
+      \scriptsize
+     	\item list<iproute> table
+	\item void order()
+	\item int addEntry (unsigned int addr, unsigned int mask, int gw)
+	\item unsigned int showGateway (unsigned int addr)
+    \end{itemize}
+  \end{block}
+\end{frame}
+	
+
 \begin{frame}{Algoritmos}
 \begin{block}<+->{UTL}   
     \begin{itemize}
@@ -584,6 +606,28 @@
     \end{itemize}
   \end{block}
 \end{frame}
+
+\begin{frame}{Algoritmos - UTL}
+\begin{block}<+->{trienode.h}   
+    \begin{itemize}
+      \scriptsize
+     	\item int id;
+     	\item PtrTrienode zero;
+     	\item PtrTrienode one;
+    \end{itemize}
+  \end{block}
+
+\begin{block}<+->{trie.h}   
+    \begin{itemize}
+      \scriptsize
+     	\item PtrTrienode root;
+	\item PtrTrienode actual;
+	\item PtrTrienode padre;
+	\item void insert (unsigned int netAddress, unsigned int mask, int id)
+	\item int search (unsigned int address)
+    \end{itemize}
+  \end{block}
+\end{frame}	
 
 \subsection{Herramientas}
 \begin{frame}{Herramientas de Desarrollo}
@@ -646,55 +690,114 @@
 		\item Para la obtencion de los datos que corresponden al sistema completo se utilizo el Script Python/Bash.
 	\end{enumerate}
   \end{block}
-
 \end{frame}
 
 \subsection{Caso algoritmos únicamente}
+\begin{frame}{Caso algoritmos únicamente}
+\begin{block}<+->{Algoritmos únicamente}   
+    \begin{itemize}
+      \scriptsize
+     	\item Retardo de búsqueda en función de la posición en la tabla de enrutamiento
+     	\item Independiente al modulo extracto de cabeceras
+	\item En el eje de las abscisas se expresa la ubicación en una tabla de 100 elementos del prefijo mas largo
+	\item En las ordenadas se puede observar el tiempo de búsqueda en ciclos de reloj
+    \end{itemize}
+  \end{block}
+\end{frame}
+
 \begin{frame}{Caso algoritmos únicamente} 
 \center	
 \includegraphics[scale=0.70]{figures/llu-utlsof.eps} 
 \end{frame}
 
 \subsection{Caso loopback}
+
+\begin{frame}{Caso loopback} 
+\begin{block}<+->{Caso loopback}   
+    \begin{itemize}
+      \scriptsize
+     	\item Finalidad: encontrar los limites superiores del sistema
+     	\item el software solo se limita a recibir los datos e inmediatamente después confirma el procesamiento y envía los resultados de regreso al hardware
+	\item Pruebas correspondientes para las dos versiones de Uplink
+	\item Abscisas: cantidad de paquetes por segundo
+	\item Ordenadas: cantidad de paquetes perdidos en valores porcentuales
+	\item Se procesó una cantidad constante de paquetes, 9000, y luego se contrasto este valor con un contador global que el Generador estampa en la ultima palabra de cada paquete
+    \end{itemize}
+  \end{block}
+\end{frame}
+
 \begin{frame}{Caso loopback} 
 \center	
 \includegraphics[scale=0.70]{figures/loop.eps} 
 \end{frame}
 
 \subsection{Implementación completa}
-\begin{frame}{Implementación completa: LLU} 
+\begin{frame}{Implementación completa} 
+ \begin{block}<+->{Implementación completa}   
+    \begin{itemize}
+      \scriptsize
+     	\item Se consideraran tres puntos en las curvas que indican los tiempos de accesos del algoritmos
+     	\item Un punto mínimo que corresponde al menor tiempo de acceso
+	\item Un punto promedio que ejercita 10 entradas equidistantes a lo largo de la tabla
+	\item punto máximo que indica el peor tiempo de acceso posible para un algoritmo dado	
+    \end{itemize}
+  \end{block}
+\end{frame}
+
+\begin{frame}{Implementación completa: LLU (mínimo)} 
 \center	
 \includegraphics[scale=0.70]{figures/llumin.eps} 
 \end{frame}
 
 
-\begin{frame}{Implementación completa: LLU} 
+\begin{frame}{Implementación completa: LLU (promedio)} 
 \center	
 \includegraphics[scale=0.70]{figures/lluprom.eps} 
 \end{frame}
 
 
-\begin{frame}{Implementación completa: LLU} 
+\begin{frame}{Implementación completa: LLU (máximo)} 
 \center	
 \includegraphics[scale=0.70]{figures/llumax.eps} 
 \end{frame}
 
+\begin{frame}{Implementación completa: LLU} 
+ \begin{block}<+->{LLU}   
+    \begin{itemize}
+      \scriptsize
+     	\item La diferencia en la cantidad de paquetes que pueden ser transmitidos sin errores en el mejor caso entre el modulo que envía una palabra al procesador y el que envía toda la cabecera, es considerable
+     	\item A medida que aumenta la profundidad de búsqueda en la tabla estos valores convergen
+	\item Resultado esperable, ya que para accesos muy lentos a la tabla el retardo introducido por el Hardware se vuelve despreciable
+    \end{itemize}
+  \end{block}
+\end{frame}
 
-\begin{frame}{Implementación completa: UTL} 
+\begin{frame}{Implementación completa: UTL (mínimo)} 
 \center	
 \includegraphics[scale=0.70]{figures/utlmin.eps} 
 \end{frame}
 
 
-\begin{frame}{Implementación completa: UTL} 
+\begin{frame}{Implementación completa: UTL (promedio)} 
 \center	
 \includegraphics[scale=0.70]{figures/utlprom.eps} 
 \end{frame}
 
 
-\begin{frame}{Implementación completa: UTL} 
+\begin{frame}{Implementación completa: UTL (máximo)} 
 \center	
 \includegraphics[scale=0.70]{figures/utlmax.eps} 
+\end{frame}
+
+\begin{frame}{Implementación completa: UTL} 
+ \begin{block}<+->{UTL}   
+    \begin{itemize}
+      \scriptsize
+     	\item Existe una menor diferencia entre la máxima cantidad de paquetes que pueden ser transmitidos sin error en cada uno de los 3 puntos elegidos
+     	\item También la diferencia entre enviar el paquete entero y solo la IP destino se reduce
+	\item Cuando el tiempo de acceso es uniforme el impacto de la mejoras del Hardware tiende a ser menor
+    \end{itemize}
+  \end{block}
 \end{frame}
 
 \subsection{Comparativa inter-algortimos}
