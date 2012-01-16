@@ -1,3 +1,94 @@
 \chapter{Implementación}
 
+\section{Algoritmos de clasificación}
+
+Se implementaron 2 algoritmos de clasificacion: Busqueda lineal y Busqueda en árbol unibit.
+
+El software utilizado para realizar las pruebas consistió en 2 proyectos por separado. Uno para cada tipo de búsqueda en la tabla.
+
+El mismo fue desarrollado en lenguaje c++, por presentar éste ciertas facilidades para las implementaciones llevadas a cabo. Puntualmente se sacó ventaja de un STL container (list) para implementar la búsqueda lineal. La característica utilizada en este caso fue el ordenamiento de la lista con sólo una llamada a función.
+
+Para efectuar el intercambio de datos con el hardware se hizo uso de las macros IOWR e IORD, las cuales escriben y leen respectivamente los datos hacia/desde un componente conectado al bus Avalon MM. La razón de haber usado dichas macros yace en el hecho de que las mismas no son puestas en caché. Esta característica se torna indispensable en este diseño, ya que en el mismo no se puede leer un dato sin saber si está verdaderamente disponible en el bus.
+
+
+\subsection {Búsqueda lineal}
+
+Se implementaron 2 clases. 
+
+\begin{itemize}
+	\item \textit{iproute.h}: define el contenido de cada nodo de la lista (entrada en la tabla de ruteo).
+	\item \textit{iplookup.h} -  contiene la lista que constituye la tabla de ruteo en sí, así como también las funciones de inserción y búsqueda. También contiene la función que crea una tabla de ruteo de 100 entradas.
+\end{itemize}
+
+Los nodos de la lista contienen 3 campos:
+
+\begin{itemize}
+	\item Dirección de red (entero de 32 bit sin signo)
+	\item Máscara de red (entero de 32 bit sin signo)
+	\item Identificador de decisión (entero de 32 bit con signo)
+\end{itemize}
+
+Como se le dió prioridad a los prefijos de red más largos, se debió sobrecargar el operador de comparación ( > ) para que la función sort pudiese ordenar en base a la longitud de máscara. De esa manera, los nodos que contenían valores de máscara más grandes quedaban en las primeras posiciones de la lista.
+
+La función de inserción toma como entrada una dirección, una máscara y un identificador de decisión. Luego instancia una entrada con dichos elementos y la inserta en la lista.
+
+Cuando la función encargada del lookup recibe una dirección IP de destino, realiza los siguientes pasos:
+
+\begin{itemize}
+	\item Coloca un iterador al comienzo de la lista.
+	\item Realiza un AND con el valor de máscara del nodo que está siendo apuntado. Si el resultado de la operación es igual al valor de dirección de red de dicho nodo, entonces se retorna con el valor identificador de decisión. En otro caso, continúa la busqueda en el siguiente nodo.
+\end{itemize}
+
+\subsection {Busqueda en Arbol unibit}
+
+Se implementaron 2 clases. 
+
+\begin{itemize}
+	\item \textit{trienode.h}: define las características de cada nodo del árbol.
+	\item \textit{trie.h}: contiene el árbol unibit, como así tambien las funciones de búsqueda e inserción de nodos. También contiene una función para la creación de la tabla de ruteo de 100 valores.
+\end{itemize}
+
+
+En este contexto, pueden existir 2 tipos de nodo:
+
+\begin{itemize}
+	\item Común: no está asociado a una decisión.
+	\item Decisión: contiene un valor que identifica a la decisión a tomar. 
+\end{itemize}
+
+Cada nodo cuenta con los siguientes campos:
+\begin{itemize}
+	\item gw: es un identificador de la decisión a tomar. En los nodos no asociados a una decision (nodos comunes), tiene el valor estipulado en la macro NONE.
+    \item zero / one: Son punteros a nodo, asociados a los bits 0/1 del prefijo que se esté leyendo.
+
+\end{itemize}
+
+La función de inserción toma como entrada una dirección y una máscara de red, así como también un valor de decisión asociado a la entrada en tabla. Partiendo con un puntero de recorrido desde el nodo raíz, el procedimiento se encuentra contenido en un bucle controlado por la longitud de la máscara de red. Es decir, en cada iteración se hace un testeo de bit de dicha máscara. Si éste es igual a uno, la iteración se lleva a cabo. En ella, se hace un testeo de bit pero de la dirección de red. Si el mismo es igual a cero, se desplaza el puntero de recorrido hacia el nodo apuntado por \textit{zero}. En caso de no existir dicho nodo, se lo crea y recién ahí se desplaza el puntero de recorrido. Un procedimiento análogo se lleva a cabo en caso de que el testeo de bit sea igual a uno.
+Una vez finalizado el bucle, se escribe el valor de decisión en el nodo que esté siendo apuntado por el puntero de recorrido.
+
+
+El algoritmo de búsqueda toma como entrada la dirección IP de destino del paquete a clasificar. Luego de ello, va haciendo un testeo bit a bit de la misma, partiendo con un puntero de recorrido desde el nodo raíz. Si el bit de la dirección es 0 y el puntero zero está apuntando hacia algún nodo, el puntero de recorrido se mueve al nodo apuntado por el puntero zero. En caso contrario, se mueve al nodo apuntado por el puntero one (En caso de que exista alguno). Esto se repite nodo a nodo, hasta que ocurre alguna de las siguientes situaciones:
+
+\begin{itemize}
+    	\item     El puntero de recorrido queda varado en un nodo decision, con lo cual se retorna el valor de gw.
+    	\item El puntero de recorrido queda varado en un nodo común. 
+\end{itemize}
+
+
+
+Contemplando esta última posibilidad, el algoritmo hace que en cada nodo se chequee si se trata de un nodo decisión. En dicho caso, se almacena el campo gw en una variable y se continua el recorrido. Si se da un caso en el cual el nodo de recorrido queda apuntando a un nodo comun y luego de testear un bit se determina que el mismo no tiene un nodo asociado (es decir, que alguno de los punteros zero / one esté en NULL) la función retorna la variable anteriormente mencionada. 
+
+\subsection {Cache}
+
+Se implementó una cache directa. La misma consta de una tabla hash de 16 entradas. Las colisiones se resuelven por reemplazo directo. La misma fue testeada con ambos algoritmos mencionados anteriormente. Para ello, se agregó una lógica adicional que consistió en:
+
+\begin{itemize}
+	\item Al tomar una direccion IP, chequear primero si el valor de decisión se encuentra en caché.
+	\item Si está, retornar dicho valor.
+	\item En otro caso, efectuar el lookup y almacenar el valor de decisión en caché.
+\end{itemize}
+
+Para evitar el overhead introducido por el uso de clases, se optó por el uso de estructuras para la implementación de este último enfoque.
+
+
 %\section{Distribucion Lineal}
