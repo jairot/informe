@@ -1,14 +1,44 @@
 \chapter{Arquitectura}
 
 \section{Generador}
-\includegraphics[scale=0.60]{3-arquitectura/graf/bloqgenerador.eps}
 
+Con la intencion de simplificar el desarrollo y el futuro debuging del proyecto se remplazo la interfaz de red por un generador de paquetes.
+
+\begin{figure}[H]
+  \centering
+	\includegraphics[scale=0.60]{3-arquitectura/graf/bloqgenerador.eps}
+  \caption{Modulo generador de Paquetes}
+  \label{fig:gen}
+\end{figure}
+
+
+El mismo cuenta con las siguientes capacidades
+
+\begin{itemize}
+	\item Permite iniciar la generacion de paquetes desde un switch externo.
+	\item Es posible parametrizar la distancia, en ciclos de clock, entre la generacion de un paquete y el siguiente.
+	\item Puede generar una cantidad variable de paquetes, con valores diferentes en sus campos.
+	\item Mantiene un contador global de la cantidad de paquetes generados y lo imprime en la ultima palabra del payload de cada uno.
+\end{itemize}
+
+Este modulo es una version adaptada del generador usado en el proyecto integrador de (Referencia a la tesis de santiago?), que a su vez es una version mejorada de un generador que esta disponible en opencores
 
 
 \section{Interfaz de Acceso a la Cabecera}
+En base a la figura~\ref{fig:inter} se pasara a describir de manera detallada la estructura y el funcionamiento de cada uno de los modulos que componen la Interfaz de Acceso a la Cabecera. 
 
 \subsection{FIFO}
+Se trata de una FIFO estándar, basada en un codigo disponible en OpenCores, que soporta palabras de 72 bits, 64 del paquete y 8 de control. Como capacidad extra se le agrego un mecanismo para controlar la integridad de los paquetes que ingresan, aceptando solo los que pueden ser almacenados completamente en la memoria interna. 
+
+\begin{figure}[H]
+  \centering
+	\includegraphics[scale=0.60]{3-arquitectura/graf/bloqfifo.eps}
+  \caption{FIFO}
+  \label{fig:gen}
+\end{figure}
+
 \subsection{Delay Buffer}
+Este modulo fue desarrollado integramente para este proyecto, esta compuesto por un registro de desplazamiento interno, que cuenta con 8 posiciones de 72 bits cada una. Su funcion principal es detectar la llegada de un paquete a la fifo, cargar 5 palabras, correspondientes a la cabecera, y enviarle una copia a Uplink. Este modulo permite, ademas, desacoplar el flujo de datos de la comunicacion 
 \subsection{Uplink}
 \subsubsection{15 palabras}
 \subsubsection{1 palabra}
