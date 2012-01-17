@@ -94,15 +94,21 @@ Contemplando esta última posibilidad, el algoritmo hace que en cada nodo se che
 
 \subsection {Cache}
 
-Se implementó una cache directa. La misma consta de una tabla hash de 16 entradas. Las colisiones se resuelven por reemplazo directo. La misma fue testeada con ambos algoritmos mencionados anteriormente. Para ello, se agregó una lógica adicional que consistió en:
+Se implementó una cache directa. La misma consta de una tabla hash de 16 entradas, aunque este tamaño puede ser modificado mediante la macro CACHE\_SIZE. Las colisiones se resuelven por reemplazo directo. La misma fue testeada con ambos algoritmos mencionados anteriormente. Para ello, se agregó una lógica adicional que consistió en:
 
 \begin{itemize}
 	\item Al tomar una direccion IP, chequear primero si el valor de decisión se encuentra en caché.
 	\item Si está, retornar dicho valor.
-	\item En otro caso, efectuar el lookup y almacenar el valor de decisión en caché.
+	\item En otro caso, efectuar el lookup y almacenar el valor de decisión en caché. Para dicho almacenamiento, se efectúa un hash en la dirección IP, que consiste en calcular el resto de la división entre dicha dirección y el valor de CACHE\_SIZE. El resultado es utilizado como índice para el almacenamiento en la tabla.
 \end{itemize}
 
-Para evitar el overhead introducido por el uso de clases, se optó por el uso de estructuras para la implementación de este último enfoque.
+Para evitar el overhead introducido por el uso de clases, se optó por una implementación basada en una estructura, a la cual se denominó \textit{HashEntry}. La misma cuenta con los siguientes campos:
+
+\begin{itemize}
+	\item address: Dirección IP almacenada.
+	\item gw: Identificador de decisión.
+	\item empty: Indica si la entrada de tabla está vacía.
+\end{itemize}
 
 \section{Hardware}
 
