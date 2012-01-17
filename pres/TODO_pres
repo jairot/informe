@@ -1,20 +1,7 @@
-Motivacion
-1- Nuevas tecnologias: Agregar filmina de SOC en FPGA{HECHO! el grafico no me convence}
-2- Ip lookup: Busqueda por prefijo agregar poque los algorimos de busqueda son distintos a los "regulares"(Luis) {DONE}
-3- Objetivos especificos: Diseño implementacion analisis. sugerir mejoras en la IMPLEMENTACIon(Luis) {DONE}
-
-Solucion
-1- Solucion Propuesta: Explicar procedimentalmente (Poner algo sobre la cabecera IP!){Done, faltan graficos}
-2- Cambiar el dibujo de la arquitectura propuesta y poner intefazes de entrada y salida
-3- Renombrar el MEC como Interfaz de acceso a la Cabecera(Todo el documento)
-4- Subir el modulo extractor de cabecera y dejarlo despues de la arquitectura prpuesta
-5- Explayarse en los algoritmos, mas que nada graficamente
 
 Arquitectura
-1- Sacar bus avalon
-2- Reducir fifo y generador
-3- Agregar maquinas de Estado y mejor descripcion de Delay buffer, uplink y write output
+1- Aclarar graficamente lo de la arquitetura {Relacion datos control con el grafico de la IAC
 
 Implementacion
 
-REDISEÑAR 
+Agregar cosas en verificacion?¿
