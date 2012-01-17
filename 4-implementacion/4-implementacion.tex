@@ -63,17 +63,31 @@ Cada nodo cuenta con los siguientes campos:
 
 \end{itemize}
 
-La función de inserción toma como entrada una dirección y una máscara de red, así como también un valor de decisión asociado a la entrada en tabla. Partiendo con un puntero de recorrido desde el nodo raíz, el procedimiento se encuentra contenido en un bucle controlado por la longitud de la máscara de red. Es decir, en cada iteración se hace un testeo de bit de dicha máscara. Si éste es igual a uno, la iteración se lleva a cabo. En ella, se hace un testeo de bit pero de la dirección de red. Si el mismo es igual a cero, se desplaza el puntero de recorrido hacia el nodo apuntado por \textit{zero}. En caso de no existir dicho nodo, se lo crea y recién ahí se desplaza el puntero de recorrido. Un procedimiento análogo se lleva a cabo en caso de que el testeo de bit sea igual a uno.
-Una vez finalizado el bucle, se escribe el valor de decisión en el nodo que esté siendo apuntado por el puntero de recorrido.
-
-
-El algoritmo de búsqueda toma como entrada la dirección IP de destino del paquete a clasificar. Luego de ello, va haciendo un testeo bit a bit de la misma, partiendo con un puntero de recorrido desde el nodo raíz. Si el bit de la dirección es 0 y el puntero zero está apuntando hacia algún nodo, el puntero de recorrido se mueve al nodo apuntado por el puntero zero. En caso contrario, se mueve al nodo apuntado por el puntero one (En caso de que exista alguno). Esto se repite nodo a nodo, hasta que ocurre alguna de las siguientes situaciones:
-
+La función de inserción toma como entrada una dirección y una máscara de red, así como también un valor de decisión asociado a la entrada en tabla. Lleva a cabo los siguientes pasos:
 \begin{itemize}
-    	\item     El puntero de recorrido queda varado en un nodo decision, con lo cual se retorna el valor de gw.
-    	\item El puntero de recorrido queda varado en un nodo común. 
+	\item Partiendo con un puntero de recorrido desde el nodo raíz, el procedimiento se encuentra contenido en un bucle controlado por la longitud de la máscara de red. Es decir, en cada iteración se hace un testeo de bit de dicha máscara. 
+	\item Si éste es igual a uno, la iteración se lleva a cabo.
+	\item En ella, se hace un testeo de bit pero de la dirección de red.
+	\item Si el mismo es igual a cero, se desplaza el puntero de recorrido hacia el nodo apuntado por \textit{zero}.
+	\item En caso de no existir dicho nodo, se lo crea y recién ahí se desplaza el puntero de recorrido.
+	\item Un procedimiento análogo se lleva a cabo en caso de que el testeo de bit sea igual a uno.
+	\item Una vez finalizado el bucle, se escribe el valor de decisión en el nodo que esté siendo apuntado por el puntero de recorrido.
 \end{itemize}
 
+
+El algoritmo de búsqueda toma como entrada la dirección IP de destino del paquete a clasificar. Luego de ello realiza las siguientes acciones:
+\begin{itemize}
+	\item Va haciendo un testeo bit a bit de dicha dirección, partiendo con un puntero de recorrido desde el nodo raíz.
+	\item Si el bit de la dirección es 0 y el puntero zero está apuntando hacia algún nodo, el puntero de recorrido se mueve al nodo apuntado por el puntero zero.
+	\item En caso contrario, se mueve al nodo apuntado por el puntero one (En caso de que exista alguno).
+\end{itemize}
+
+Esto se repite nodo a nodo, hasta que ocurre alguna de las siguientes situaciones:
+
+\begin{itemize}
+    	\item El puntero de recorrido queda varado en un nodo decision, con lo cual se retorna el valor de gw.
+    	\item El puntero de recorrido queda varado en un nodo común. 
+\end{itemize}
 
 
 Contemplando esta última posibilidad, el algoritmo hace que en cada nodo se chequee si se trata de un nodo decisión. En dicho caso, se almacena el campo gw en una variable y se continua el recorrido. Si se da un caso en el cual el nodo de recorrido queda apuntando a un nodo comun y luego de testear un bit se determina que el mismo no tiene un nodo asociado (es decir, que alguno de los punteros zero / one esté en NULL) la función retorna la variable anteriormente mencionada. 
@@ -89,6 +103,85 @@ Se implementó una cache directa. La misma consta de una tabla hash de 16 entrad
 \end{itemize}
 
 Para evitar el overhead introducido por el uso de clases, se optó por el uso de estructuras para la implementación de este último enfoque.
+
+\section{Hardware}
+
+El hardware utilizado fue la placa de desarrollo DE2, cuyas características principales son:
+
+\begin{itemize}
+	\item FPGA: Cyclone II EP2C35F672C6
+	\item USB Blaster integrado, para configuración de FPGA
+	\item Memoria: 8 MB SDRAM, 512 KB SRAM, 4 MB Flash
+	\item Clock de 50 MHz
+\end{itemize}
+
+Para una descripción más detallada, referirse al Apéndice A.
+
+A su vez, la FPGA incluida en esta placa cuenta con estas características:
+
+\begin{itemize}
+	\item Elementos lógicos: 33216
+	\item Bit totales de RAM: 483840
+	\item Multiplicadores embebidos: 35
+	\item PLLs: 4
+	\item Cantidad máxima de pines definidos por el usuario: 475
+\end{itemize}
+
+
+\section{Microprocesador NIOS II}
+El Nios II es un procesador RISC de 32 bits de propósito general que cuenta con las siguientes especificaciones:
+\begin{itemize}
+	\item Set de instrucciones, bus de datos y espacio de direcciones de 32 bits.
+	\item 32 registros de propósito general.
+	\item Soporte de hasta 32 interrupciones.
+	\item Controlador de interrupciones externas para soportar una mayor cantidad de interrupciones.
+	\item Multiplicación y división en una sola instrucción de 32 x 32 produciendo un resultado de 32-bits.
+	\item Instrucciones dedicadas para multiplicaciones con resultados de 64 y 128 bits.
+	\item Acceso a una variedad de periféricos e interfases a memorias  y periféricos fuera del chip.
+	\item Modulo de depurado asistido por hardware.
+	\item Unidad de manejo de memoria (MMU) opcional para soportar sistemas operativos mas complejos.
+	\item Unidad de protección de memoria (MPU) opcional.
+	\item Entorno de desarrollo de software basado en GNU C/C++ integrado a Eclipse.
+	\item Integración con SignalTap® II, el analizador de lógica embebida de Altera permitiendo el análisis de tiempo real de todas las señales presentes en la FPGA.
+	\item Set de instrucciones compatible entre todos las versiones del procesador Nios II.
+\end{itemize}
+
+Para poder ser implementado en una mayor variedad de dispositivos el Nios II ofrece 3 configuraciones diferentes:  Nios II/f (fast), Nios II/s (standard), and Nios II/e (economy).
+
+\subsubsection{Nios II/e}
+El Core Nios II/e esta diseñado para utilizar la menor cantidad de espacio posible. Esto esto funciona especialmente para FPGA de bajo costo. Tiene las siguientes características:
+\begin{itemize}
+	\item Espacio de direcciones de hasta 2GB
+	\item Gratuito, no requiere licencia 
+\end{itemize}
+
+\subsubsection{Nios II/s}
+El Nios II/s esta diseñado para mantener un balance entre rendimiento y costo. Entre sus características principales están:
+
+\begin{itemize}
+	\item Cache de instrucciones
+	\item Espacio de direcciones de hasta 2GB
+	\item Pipeline de 5 etapas
+	\item Predictor de saltos estático
+	\item Multiplicador y divisor por hardware. 
+\end{itemize}
+
+\subsubsection{Nios II/f}
+El core Nios II/f esta diseñado para ofrecer la mayor performance a las expensas de un mayor tamaño, medido en unidades lógicas, este core tiene las siguientes características:
+
+\begin{itemize}
+	\item Cache de instrucciones y de datos separadas
+	\item MMU y MPU opcionales
+	\item Espacio de direcciones de hasta 2GB
+	\item Pipeline de 6 etapas
+	\item Multiplicador por hardware en un ciclo
+	\item Divisor por hardware opcional
+	\item Predictor de saltos dinámico
+\end{itemize}
+
+En vista de que este último ofrece la mayor performance y el hardware utilizado es capaz de soportarlo, se optó por el mismo para ser instanciado en el sistema.
+
+
 
 
 %\section{Distribucion Lineal}
