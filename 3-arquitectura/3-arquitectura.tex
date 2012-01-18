@@ -38,10 +38,93 @@ Se trata de una FIFO estándar, basada en un codigo disponible en OpenCores, que
 \end{figure}
 
 \subsection{Delay Buffer}
-Este modulo fue desarrollado integramente para este proyecto, esta compuesto por un registro de desplazamiento interno, que cuenta con 8 posiciones de 72 bits cada una. Su funcion principal es detectar la llegada de un paquete a la fifo, cargar 5 palabras, correspondientes a la cabecera, y enviarle una copia a Uplink. Este modulo permite, ademas, desacoplar el flujo de datos de la comunicacion 
+Este modulo fue desarrollado integramente para este proyecto, esta compuesto por un registro de desplazamiento interno, que cuenta con 8 posiciones de 72 bits cada una. Su funcion principal es detectar la llegada de un paquete a la fifo, cargar 5 palabras, correspondientes a la cabecera, y enviarle una copia a Uplink. Este modulo permite, ademas, desacoplar el flujo de datos de la comunicacion con el Microprocesador.
+
+La implementacion de este modulo esta formada por una maquina de estados(Figura~\ref{fig:dbstate}) descripta a continuacion:
+
+\begin{figure}[H]
+  \centering
+	\includegraphics[scale=0.50]{3-arquitectura/graf/estdelaycompleto.eps}
+  \caption{Maquina de estados de Delay Buffer}
+  \label{fig:dbstate}
+\end{figure}
+
+\begin{itemize}
+	\item IDLE: Es el estado inicial en el que se encuentra la maquina, cuando se detecta la presencia de datos en la fifo pasa a SOP.
+	\item SOP: Este estado es el encargado de validar la integridad de los paquetes, permitiendo iniciar el proceso solo cuando lo que hay en la entrada del bus de datos es un indicador de Inicio de Paquete(SOP)
+	\item LOAD, WAIT1, WAIT3: Estos tres estados se alternan para ir sacando de la fijo las 5 palabras correspondientes a la cabecera, implementan ademas mecanismos para manejar paquetes mas pequeños que 5 palabras.
+	\item ENABLE, HOLD: Son los estados que se encargan de poner a disposicion de Uplink la Cabecera completa y quedar a la espera de los resultados.
+	\item WAIT2, UNLOAD: Estos estados se encargan de extraer de la FIFO las palabras restantes del paquete desplazando los espacios de memoria ya cargados. 
+	\item OUTPUT: Se encarga de vaciar el registro de desplazamiento llenandolo de ceros a medida que se va poniendo las palabras del paquete a la salida. 
+\end{itemize}
+
+La ubicacion de los datos en el registro de desplazamiento interno es representativo del funcionamiento del sistema y se muestra graficamente en las figura~\ref{fig:regdata}
+\begin{figure}[H]
+  \centering
+	\includegraphics[scale=0.70]{3-arquitectura/graf/regdespl01.eps}
+
+
+	\includegraphics[scale=0.70]{3-arquitectura/graf/regdespl02.eps}
+  \caption{Datos en el Registro de desplazamiento en cada estado }
+  \label{fig:regdata}
+\end{figure}
+
+
+
+
+A continuacion se presentan las señales que integran el modulo, con su correspondiente descripcion:
+
+\begin{figure}[H]
+  \centering
+	\includegraphics[scale=0.60]{3-arquitectura/graf/bloqdelaybuffer.eps}
+  \caption{Delay Buffer}
+  \label{fig:dbuffer}
+\end{figure}
+
+
+\begin{table}
+	\begin{tabular}{|c|c|p{9cm}|} \hline
+\rowcolor[gray]{0.1} \textcolor{white}{Nombre} & \textcolor{white}{Activo} & \textcolor{white}{Descripción}\\ \hline
+\rowcolor[gray]{0.75} i\_data[71:0]	& N/A & Palabra de 72 bits que viene de la fifo\\ \hline
+\rowcolor[gray]{0.75} i\_shift\_en & High & Indica la disponibilidad de los resultados de la clasificación\\ \hline
+\rowcolor[gray]{0.75} i\_fifo\_empty & Low & Señala la presencia de datos en en la FIFO\\ \hline
+\rowcolor[gray]{0.9} o\_data & N/A & Salida conectada a la ultima posicion del registro de desplazamiento\\ \hline
+\rowcolor[gray]{0.9} o\_header[359:0] & N/A & Bus interno por el que puede viajar las 5 palabras de la cabecera en un solo ciclo\\ \hline
+\rowcolor[gray]{0.9} o\_header\_rdy & High & Indica la disponibilidad de la cabecera en oheader \\ \hline
+\rowcolor[gray]{0.9} o\_fifo\_ren & High & Sirve para indicar a la fifo que se necesita una palabra nueva\\ \hline
+ i\_clk & N/A & Señal de Reloj\\ \hline
+ i\_rst & High & Reset\\ \hline
+	\end{tabular}
+	\caption{Señales de Delay Buffer}
+	\label{tab:sigdb}
+\end{table}
+
+
 \subsection{Uplink}
-\subsubsection{15 palabras}
-\subsubsection{1 palabra}
+El modulo Uplink lleva la comunicacion entre el procesador y el resto de la Interfaz de acceso a la cabecera. Esta configurado para trabajar con las señales del bus Avalon(Apendice XX) y en caso de que se desee portar esta interfaz para interactuar con otro tipo de bus, solo es necesario modificar este bloque. A continuacion se puede ver la maquina de estado mediante la cual se implemento este modulo:
+
+
+Se prepararon dos versiones de Uplink, una que transfiere al procesador la cabecera completa en 15 palabras de 32 bits y otra que solo envia una palabra de 32bits correspondiente a la Ip Destino. 
+
+\begin{figure}[H]
+  \centering
+	\includegraphics[scale=0.40]{3-arquitectura/graf/15pal.eps}
+
+
+	\includegraphics[scale=0.40]{3-arquitectura/graf/1pal.eps}
+  \caption{Diferentes Versiones de Uplink }
+  \label{fig:up151}
+\end{figure}
+
+A continuacion se muestran las señales que componen el modulo con su correspondiente descripcion.
+
+\begin{figure}[H]
+  \centering
+	\includegraphics[scale=0.60]{3-arquitectura/graf/bloquplink.eps}
+  \caption{Uplink}
+  \label{fig:bloquplink}
+\end{figure}
+
 \subsection{Write output}
 
 
