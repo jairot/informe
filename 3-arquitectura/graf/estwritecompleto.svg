@@ -14,7 +14,7 @@
    id="svg4770"
    version="1.1"
    inkscape:version="0.47 r22583"
-   sodipodi:docname="estuplinkcompleto.svg">
+   sodipodi:docname="estwritecompleto.svg">
   <defs
      id="defs4772">
     <marker
@@ -47,7 +47,7 @@
      inkscape:pageshadow="2"
      inkscape:zoom="0.7"
      inkscape:cx="403.60625"
-     inkscape:cy="966.15818"
+     inkscape:cy="737.58675"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="true"
@@ -68,7 +68,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -99,49 +99,17 @@
     <path
        sodipodi:type="arc"
        style="fill:#cccccc;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
-       id="path5558"
-       sodipodi:cx="360"
-       sodipodi:cy="92.362183"
-       sodipodi:rx="80"
-       sodipodi:ry="60"
-       d="m 440,92.362183 a 80,60 0 1 1 -160,0 80,60 0 1 1 160,0 z"
-       transform="matrix(1,0,0,1.1666667,380,544.6063)" />
-    <path
-       transform="matrix(1,0,0,1.1666667,220,814.6063)"
-       d="m 440,92.362183 a 80,60 0 1 1 -160,0 80,60 0 1 1 160,0 z"
-       sodipodi:ry="60"
-       sodipodi:rx="80"
-       sodipodi:cy="92.362183"
-       sodipodi:cx="360"
-       id="path5560"
-       style="fill:#cccccc;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
-       sodipodi:type="arc" />
-    <path
-       sodipodi:type="arc"
-       style="fill:#cccccc;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
        id="path5562"
        sodipodi:cx="360"
        sodipodi:cy="92.362183"
        sodipodi:rx="80"
        sodipodi:ry="60"
        d="m 440,92.362183 a 80,60 0 1 1 -160,0 80,60 0 1 1 160,0 z"
-       transform="matrix(1,0,0,1.1666667,-365,539.6063)" />
+       transform="matrix(1,0,0,1.1666667,-240,262.6063)" />
     <path
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow1Mend)"
-       d="M 440,72.362183 C 551.93485,103.58701 585.87012,185.13414 580,292.36218"
+       d="M 440,92.362183 C 551.93485,123.58701 585.87012,185.13414 580,292.36218"
        id="path5564"
-       inkscape:connector-type="polyline"
-       sodipodi:nodetypes="cc" />
-    <path
-       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow1Mend)"
-       d="m 660,392.36218 c 70.30894,35.06156 89.54584,99.30714 80,180"
-       id="path5566"
-       inkscape:connector-type="polyline"
-       sodipodi:nodetypes="cc" />
-    <path
-       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow1Mend)"
-       d="m 740,732.36218 c -0.36632,75.67031 -3.46935,182.87759 -80,190"
-       id="path5570"
        inkscape:connector-type="polyline"
        sodipodi:nodetypes="cc" />
     <path
@@ -149,15 +117,9 @@
        d="m 280,92.362183 0,0"
        id="path5576"
        inkscape:connector-type="polyline" />
-    <path
-       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-mid:none;marker-end:url(#Arrow1Mend)"
-       d="m 500,912.36218 c -208.35357,-213.97069 -139.14713,-382.68703 0,-540"
-       id="path5578"
-       inkscape:connector-type="polyline"
-       sodipodi:nodetypes="cc" />
     <text
        xml:space="preserve"
-       style="font-size:32;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+       style="font-size:28;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
        x="324.28571"
        y="100.93361"
        id="text6417"><tspan
@@ -167,24 +129,14 @@
          y="100.93361">IDLE</tspan></text>
     <text
        id="text6421"
-       y="382.36218"
-       x="530"
-       style="font-size:32px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+       y="376.36218"
+       x="544"
+       style="font-size:24px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
        xml:space="preserve"><tspan
-         y="382.36218"
-         x="530"
+         y="376.36218"
+         x="544"
          id="tspan6423"
-         sodipodi:role="line">READ</tspan></text>
-    <text
-       xml:space="preserve"
-       style="font-size:32px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
-       x="700"
-       y="662.36218"
-       id="text6425"><tspan
-         sodipodi:role="line"
-         id="tspan6427"
-         x="700"
-         y="662.36218">WAIT</tspan></text>
+         sodipodi:role="line">READY</tspan></text>
     <text
        id="text6429"
        y="932.36218"
@@ -207,24 +159,24 @@
          y="652.36218">WRITE</tspan></text>
     <text
        xml:space="preserve"
-       style="font-size:18;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
-       x="557.14288"
-       y="111.6479"
+       style="font-size:18px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+       x="560"
+       y="152.36218"
        id="text6437"><tspan
          sodipodi:role="line"
          id="tspan6439"
-         x="557.14288"
-         y="111.6479">Data_avail = 1</tspan></text>
+         x="560"
+         y="152.36218">i_shift_en = 1</tspan></text>
     <text
        xml:space="preserve"
-       style="font-size:18;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
-       x="735"
-       y="455.93362"
+       style="font-size:18px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+       x="960"
+       y="412.36218"
        id="text6441"><tspan
          sodipodi:role="line"
          id="tspan6443"
-         x="735"
-         y="455.93362">clk</tspan></text>
+         x="960"
+         y="412.36218">clk</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:18;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
@@ -235,47 +187,47 @@
          id="tspan6447"
          x="740.71429"
          y="808.79077">! NIOS_CS &amp; ! NIOS_RD</tspan></text>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow1Mend)"
+       d="m 580,452.36218 c -142.6335,112.34823 -294.52822,127.45366 -460,0"
+       id="path2891"
+       inkscape:connector-type="polyline"
+       sodipodi:nodetypes="cc" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow1Mend)"
+       d="M 111.42857,296.6479 C 108.61362,169.54724 153.49843,90.146331 280,92.362183"
+       id="path2893"
+       inkscape:connector-type="polyline"
+       sodipodi:nodetypes="cc" />
     <text
-       xml:space="preserve"
-       style="font-size:18;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
-       x="140"
-       y="952.36218"
-       id="text6449"><tspan
-         sodipodi:role="line"
-         id="tspan6451"
-         x="140"
-         y="952.36218">J = 14</tspan></text>
-    <text
-       xml:space="preserve"
-       style="font-size:18;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
-       x="307.85715"
-       y="633.79077"
-       id="text6453"><tspan
-         sodipodi:role="line"
-         id="tspan6455"
-         x="307.85715"
-         y="633.79077">J &lt; 14</tspan></text>
-    <text
-       id="text6457"
-       y="292.36218"
-       x="-140"
-       style="font-size:18;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+       id="text3857"
+       y="372.36218"
+       x="46"
+       style="font-size:24px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
        xml:space="preserve"><tspan
-         y="292.36218"
-         x="-140"
-         id="tspan6459"
-         sodipodi:role="line">! NIOS_CS &amp; ! NIOS_WR</tspan></text>
-    <path
-       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow1Mend)"
-       d="M 500,952.36218 C 174.28571,975.21933 20.952383,915.21932 0,732.36218"
-       id="path2849"
-       inkscape:connector-type="polyline"
-       sodipodi:nodetypes="cc" />
-    <path
-       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow1Mend)"
-       d="M 0,572.36218 C -2.393772,281.2263 65.393721,105.58572 280,92.362183"
-       id="path2851"
-       inkscape:connector-type="polyline"
-       sodipodi:nodetypes="cc" />
+         y="372.36218"
+         x="46"
+         id="tspan3859"
+         sodipodi:role="line">OVERWRITE</tspan></text>
+    <text
+       id="text3861"
+       y="572.36218"
+       x="320"
+       style="font-size:18px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+       xml:space="preserve"><tspan
+         y="572.36218"
+         x="320"
+         id="tspan3863"
+         sodipodi:role="line">SOP = 1</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:18px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+       x="20"
+       y="152.36218"
+       id="text3865"><tspan
+         sodipodi:role="line"
+         id="tspan3867"
+         x="20"
+         y="152.36218">EOP = 1</tspan></text>
   </g>
 </svg>
