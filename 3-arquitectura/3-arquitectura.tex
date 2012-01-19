@@ -61,10 +61,15 @@ La implementacion de este modulo esta formada por una maquina de estados(Figura~
 La ubicacion de los datos en el registro de desplazamiento interno es representativo del funcionamiento del sistema y se muestra graficamente en las figura~\ref{fig:regdata}
 \begin{figure}[H]
   \centering
+
 	\includegraphics[scale=0.70]{3-arquitectura/graf/regdespl01.eps}
 
 
+   \hspace{1\linewidth}
 	\includegraphics[scale=0.70]{3-arquitectura/graf/regdespl02.eps}
+
+
+
   \caption{Datos en el Registro de desplazamiento en cada estado }
   \label{fig:regdata}
 \end{figure}
@@ -106,12 +111,19 @@ El modulo Uplink lleva la comunicacion entre el procesador y el resto de la Inte
 
 Se prepararon dos versiones de Uplink, una que transfiere al procesador la cabecera completa en 15 palabras de 32 bits y otra que solo envia una palabra de 32bits correspondiente a la Ip Destino. 
 
+
+
 \begin{figure}[H]
   \centering
+   \subfloat[15 palabras]{
 	\includegraphics[scale=0.40]{3-arquitectura/graf/15pal.eps}
+	        \label{fig:up151:a}         
+    }
 
-
-	\includegraphics[scale=0.40]{3-arquitectura/graf/1pal.eps}
+    \subfloat[1 palabra]{
+        \label{fig:up151:b}         %% Etiqueta para la primera subfigura
+	\includegraphics[scale=0.40]{3-arquitectura/graf/1pal.eps}}
+   \hspace{0.1\linewidth}
   \caption{Diferentes Versiones de Uplink }
   \label{fig:up151}
 \end{figure}
