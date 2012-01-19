@@ -47,7 +47,7 @@
      inkscape:pageshadow="2"
      inkscape:zoom="0.7"
      inkscape:cx="403.60625"
-     inkscape:cy="737.58675"
+     inkscape:cy="909.01532"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="true"
@@ -68,7 +68,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -138,26 +138,6 @@
          id="tspan6423"
          sodipodi:role="line">READY</tspan></text>
     <text
-       id="text6429"
-       y="932.36218"
-       x="530"
-       style="font-size:32px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
-       xml:space="preserve"><tspan
-         y="932.36218"
-         x="530"
-         id="tspan6431"
-         sodipodi:role="line">HOLD</tspan></text>
-    <text
-       xml:space="preserve"
-       style="font-size:32px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
-       x="-60"
-       y="652.36218"
-       id="text6433"><tspan
-         sodipodi:role="line"
-         id="tspan6435"
-         x="-60"
-         y="652.36218">WRITE</tspan></text>
-    <text
        xml:space="preserve"
        style="font-size:18px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
        x="560"
@@ -167,26 +147,6 @@
          id="tspan6439"
          x="560"
          y="152.36218">i_shift_en = 1</tspan></text>
-    <text
-       xml:space="preserve"
-       style="font-size:18px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
-       x="960"
-       y="412.36218"
-       id="text6441"><tspan
-         sodipodi:role="line"
-         id="tspan6443"
-         x="960"
-         y="412.36218">clk</tspan></text>
-    <text
-       xml:space="preserve"
-       style="font-size:18;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
-       x="740.71429"
-       y="808.79077"
-       id="text6445"><tspan
-         sodipodi:role="line"
-         id="tspan6447"
-         x="740.71429"
-         y="808.79077">! NIOS_CS &amp; ! NIOS_RD</tspan></text>
     <path
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow1Mend)"
        d="m 580,452.36218 c -142.6335,112.34823 -294.52822,127.45366 -460,0"
