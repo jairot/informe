@@ -28,7 +28,17 @@ En este contexto puede verse cómo es necesaria la optimización en el procesami
 
 \subsection{Soluciones}
 \subsubsection{Granularidad}
-Lo que se hace actualmente es utilizar paquetes de longitud variable. El peor de los casos se da para los paquetes de longitud mínima (64 bytes en Ethernet). Las nuevas tendencias se canalizan haca la agregación de paquetes en flujos. Dos ejemplos los constituyen MPLS y VLANs.
+Lo que se hace actualmente es utilizar paquetes de longitud variable. El peor de los casos se da para los paquetes de longitud mínima (64 bytes en Ethernet). Tramas más grandes se traducen en una sobrecarga de paquetes menor en los servidores. A su vez, menos paquetes significa menos interrupciones y menos carga de trabajo en la CPU. Menos interrupciones significa menor delay en el bus de cada servidor. Una menor cantidad de paquetes también significa menos sobrecarga de red en términos de cabeceras y formatos de trama.
+
+Las nuevas tendencias se canalizan haca la agregación de paquetes en flujos. Dos ejemplos los constituyen MPLS y VLANs.
+
+
+Larger frames translate into less packet overhead on the server.
+Less packets means fewer interrupts on the server and a smaller CPU load.
+Less interrupts means less delay on the server bus.
+Larger frames provide better buffer utilisation and forwarding performance in switches.
+Less packets means less routing CPU/performance used
+Less packets means less network overhead in terms of headers and frame formats melding to better utilisation.
 
 \begin{figure}[h]
   \centering
