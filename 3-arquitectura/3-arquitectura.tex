@@ -93,7 +93,7 @@ A continuacion se presentan las señales que integran el modulo, con su correspo
 \rowcolor[gray]{0.75} i\_data[71:0]	& N/A & Palabra de 72 bits que viene de la fifo\\ \hline
 \rowcolor[gray]{0.75} i\_shift\_en & High & Indica la disponibilidad de los resultados de la clasificación\\ \hline
 \rowcolor[gray]{0.75} i\_fifo\_empty & Low & Señala la presencia de datos en en la FIFO\\ \hline
-\rowcolor[gray]{0.9} o\_data & N/A & Salida conectada a la ultima posicion del registro de desplazamiento\\ \hline
+\rowcolor[gray]{0.9} o\_data[71:0] & N/A & Salida conectada a la ultima posicion del registro de desplazamiento\\ \hline
 \rowcolor[gray]{0.9} o\_header[359:0] & N/A & Bus interno por el que puede viajar las 5 palabras de la cabecera en un solo ciclo\\ \hline
 \rowcolor[gray]{0.9} o\_header\_rdy & High & Indica la disponibilidad de la cabecera en oheader \\ \hline
 \rowcolor[gray]{0.9} o\_fifo\_ren & High & Sirve para indicar a la fifo que se necesita una palabra nueva\\ \hline
@@ -111,8 +111,6 @@ El modulo Uplink lleva la comunicacion entre el procesador y el resto de la Inte
 
 Se prepararon dos versiones de Uplink, una que transfiere al procesador la cabecera completa en 15 palabras de 32 bits y otra que solo envia una palabra de 32bits correspondiente a la Ip Destino. 
 
-
-
 \begin{figure}[H]
   \centering
    \subfloat[15 palabras]{
@@ -128,15 +126,29 @@ Se prepararon dos versiones de Uplink, una que transfiere al procesador la cabec
   \label{fig:up151}
 \end{figure}
 
-A continuacion se muestran las señales que componen el modulo con su correspondiente descripcion.
+Este modulo implementa la maquina de estados que se puede ver en la figura~\ref{fig:inter} y descripta a continuacion:
 
 \begin{figure}[H]
   \centering
-	\includegraphics[scale=0.60]{3-arquitectura/graf/bloquplink.eps}
+	\includegraphics[scale=0.45]{3-arquitectura/graf/estuplinkcompleto.eps}
+  \caption{Uplink}
+  \label{fig:estuplink}
+\end{figure}
+
+\begin{itemize}
+	\item IDLE: Es el estado inicial en el que se encuentra la maquina, hasta que recibe la confirmacion de que la cabecera esta disponible.
+	\item READ,HOLD,WAIT: Estos estados se alternan para interrumpir y transmitir 1 o 15 palabras de 32bits al procesador.
+	\item WRITE: Es el estado encargado de esperar que el procesador envie los resultados, para luego darle aviso a los otros componentes de la disponibilidad de los mismos.
+\end{itemize}
+
+En al tabla que sigue se puede ver las señales que componen el modulo con su correspondiente descripcion:
+
+\begin{figure}[H]
+  \centering
+	\includegraphics[scale=0.55]{3-arquitectura/graf/bloquplink.eps}
   \caption{Uplink}
   \label{fig:bloquplink}
 \end{figure}
-
 	
 \begin{table}
 	\begin{tabular}{|c|c|c|p{6cm}|} \hline
@@ -158,13 +170,48 @@ A continuacion se muestran las señales que componen el modulo con su correspond
 	\label{tab:sigup}
 \end{table}
 
-
+\newpage
 
 \subsection{Write output}
 
+Este modulo es el que se encarga de tomar el resultado emitido por el microprocesador y de estamparlo en los campos de control anexos a cada una de las palabras del paquete. Se puede ver en la figura~\ref{fig:inter} el diagrama de estados mediante el cual esta implementado este modulo y se describe cada estado a continuacion:
 
+\begin{figure}[H]
+  \centering
+	\includegraphics[scale=0.45]{3-arquitectura/graf/estwritecompleto.eps}
+  \caption{Diagrama de Estados de Write Output}
+  \label{fig:estuplink}
+\end{figure}
 
+\begin{itemize}
+	\item IDLE: Es el estado inicial en el que se encuentra la maquina, hasta que recibe la confirmacion de que los resultados estan disponibles.
+	\item READY: Espera que Delay Buffer le transmita la palabra correspondiente a un SOP. 
+	\item OVERWRITE: Escribe el resultado en el tag adjunto a cada palabra hasta que encuentra la palabra correspondiente a un EOP. 
+\end{itemize}
 
+Se detalla las señales de Entrada/Salida del modulo y su funcion:
+
+\begin{figure}[H]
+  \centering
+	\includegraphics[scale=0.55]{3-arquitectura/graf/bloqwrite.eps}
+  \caption{Uplink}
+  \label{fig:bloquplink}
+\end{figure}
+	
+
+\begin{table}
+	\begin{tabular}{|c|c|p{9cm}|} \hline
+\rowcolor[gray]{0.1} \textcolor{white}{Nombre} & \textcolor{white}{Activo} & \textcolor{white}{Descripción}\\ \hline
+\rowcolor[gray]{0.75} i\_data[71:0]	& N/A & Palabra de 72 bits que viene Delay Buffer\\ \hline
+\rowcolor[gray]{0.75} i\_shift\_en & High & Indica la disponibilidad de los resultados de la clasificación\\ \hline
+\rowcolor[gray]{0.75} i\_result[32:0] & N/A! & Esta conectado a NIOS\_DATAout y guarda lo escrito por el procesador mientras i\_shift\_en esta activa \\ \hline
+\rowcolor[gray]{0.9} o\_data[71:0] & N/A & Salida de las palabras con el resultado anexo\\ \hline
+ i\_clk & N/A & Señal de Reloj\\ \hline
+ i\_rst & High & Reset\\ \hline
+	\end{tabular}
+	\caption{Señales de Write Output}
+	\label{tab:sigwo}
+\end{table}
 
 
 \begin{comment}
