@@ -92,6 +92,29 @@ Esto se repite nodo a nodo, hasta que ocurre alguna de las siguientes situacione
 
 Contemplando esta última posibilidad, el algoritmo hace que en cada nodo se chequee si se trata de un nodo decisión. En dicho caso, se almacena el campo gw en una variable y se continua el recorrido. Si se da un caso en el cual el nodo de recorrido queda apuntando a un nodo comun y luego de testear un bit se determina que el mismo no tiene un nodo asociado (es decir, que alguno de los punteros zero / one esté en NULL) la función retorna la variable anteriormente mencionada. 
 
+Cabe mencionar también que la ruta por defecto se inserta en el nodo raíz del arbol.
+
+\begin{figure}[H]
+  \centering
+	\includegraphics[scale=0.50]{4-implementacion/graf/lluinsert09.eps}
+  \caption{Ejemplo de inserción de prefijos en árbol unibit}
+  \label{fig:lluinsert}
+\end{figure}
+
+En la figura ~\ref{fig:lluinsert} se encuentra ejemplificada la inserción de 3 prefijos más la ruta por defecto. 
+
+Comenzando por el nodo raíz, se inserta el prefijo 1100*. Para ello es necesaria la creación de 4 nodos hijos, uno por cada bit del prefijo. 
+
+A continuación es insertado el prefijo 100*. Para el primer bit ya se encuentra creado el nodo, por lo cual se crean los 2 restantes necesarios.
+
+Luego se inserta el prefijo 11*. Como anteriormente se había insertado el 1100* los nodos necesarios ya existen, por lo cual la inserción es trivial.
+
+Por último en el nodo raíz se inserta la ruta por defecto (S4 en este ejemplo).
+
+Tomando como ejemplo alguna dirección IP que comienze con 1100, puede verse que la búsqueda tomará el camino \textit{Raíz - one - one - zero - zero} y culminará en el nodo cuyo identificador de decisión es S1. 
+
+Vale la pena considerar qué sucede si la dirección IP comienza con 1101. En este caso el camino que seguirá la búsqueda es \textit{Raiz - one - one - zero} y el puntero de recorrido quedará varado allí, ya que no existe en dicho punto un nodo asociado al puntero one. Vale recordar que en cada iteración, el algoritmo de búsqueda chequea si el nodo apuntado por el puntero de recorrido es decisión. Para este caso puede verse que en la segunda iteración (cuando se ha recorrido \textit{Raíz - one - one}) el algoritmo se encuentra parado en un nodo decisión y por lo tanto almacena el valor contenido en dicho nodo y procede a continuar. Cuando se encuentre varado en el próximo, lo que hará es retornar con el valor mencionado anteriormente. 
+
 \subsection {Cache}
 
 Se implementó una cache directa. La misma consta de una tabla hash de 16 entradas, aunque este tamaño puede ser modificado mediante la macro CACHE\_SIZE. Las colisiones se resuelven por reemplazo directo. La misma fue testeada con ambos algoritmos mencionados anteriormente. Para ello, se agregó una lógica adicional que consistió en:
