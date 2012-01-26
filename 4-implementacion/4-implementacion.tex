@@ -209,6 +209,23 @@ El core Nios II/f esta diseñado para ofrecer la mayor performance a las expensa
 \end{itemize}
 
 En vista de que este último ofrece la mayor performance y el hardware utilizado es capaz de soportarlo, se optó por el mismo para ser instanciado en el sistema.
+\subsection{Verificación}
+
+\begin{table}
+	\begin{tabular}{|>{\columncolor[gray]{0.8}}l|p{9cm}|} \hline
+\multicolumn{2}{|>{\columncolor[gray]{0.8}}l|}{\textbf{Caso de Prueba: Funcionalidad del SoC}}\\ \hline
+Propósito  & 1) sarasasa
+2)sasas
+\\ \hline
+ Prerequisitos  & Indica la disponibilidad de los resultados de la clasificación\\ \hline
+ Datos de Prueba & Señala la presencia de datos en en la FIFO\\ \hline
+ Pasos & Salida conectada a la ultima posicion del registro de desplazamiento\\ \hline
+ Resultados Esperados & Bus interno por el que puede viajar las 5 palabras de la cabecera en un solo ciclo\\ \hline
+ Evaluación de la Prueba  & Indica la disponibilidad de la cabecera en oheader \\ \hline
+	\end{tabular}
+	\caption{Caso de Prueba: Funcionalidad del SoC}
+	\label{tab:testsoc}
+\end{table}
 
 
 \subsection{Verificación y síntesis}
