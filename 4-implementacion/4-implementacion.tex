@@ -133,6 +133,39 @@ Para evitar el overhead introducido por el uso de clases, se optó por una imple
 	\item empty: Indica si la entrada de tabla está vacía.
 \end{itemize}
 
+\section{ISR}
+
+Como se mencionó anteriormente, el módulo Uplink envía interrupciones al procesador. A fin de poder procesarlas en el software se implementó una ISR (Interrupt Service Routine) que hace uso de 3 elementos principales:
+
+\begin{itemize}
+	\item \textit{store\_array}: Es un buffer en el cual se van almacenando las palabras enviadas por el módulo Uplink.
+	\item \textit{i}: Es un subíndice que sirve para moverse dentro del buffer anteriormente mencionado.
+	\item \textit{flag}: Es un indicador que se incrementa cada vez que se produce una interrupción.
+\end{itemize}
+
+\textit{store\_array} está implementado como una matriz de enteros, y tiene 3 columnas. De esta manera, cada fila cuenta con con 96 bits de los cuales se utilizan 72 de ellos para almacenar las palabras enviadas por Uplink.
+
+Cada vez que el procesador recibe una interrupción, lleva a cabo la lectura del valor recibido y la almacena en \textit{store\_array}, en el lugar indicado por \textit{i}. Luego el subíndice se incrementa, al igual que \textit{flag}.
+
+En la función principal (main) existe una variable llamada \textit{flag2}. A ésta se le asigna el valor de \textit{flag}. Al producirse una interrupción, el valor de \textit{flag} se modifica y por lo tanto la condición de igualdad entre \textit{flag} y \textit{flag2} ya no se cumple. En ese momento se utilizan los valores almacenados en \textit{store\_array} para llevar a cabo el algoritmo de clasificación. Dichos valores a utilizar dependerán de la versión de Uplink que se esté utilizando:
+
+\begin{itemize}
+	\item Para la versión que envía quince palabras de 32 bits, es necesario esperar a la quinta palabra de 96 bits en \textit{store\_array} para poder localizar la dirección IP de destino, necesaria para realizar la clasificación. En la figura ~\ref{fig:ip15pal} se muestra cómo está localizada dicha dirección. 
+	\item Para la versión que envía sólo una palabra de 32 bits, el procedimiento es trivial ya que esa misma palabra es la dirección IP de destino.
+\end{itemize}
+
+
+Una vez llevado a cabo el procedimiento de clasificación, \textit{flag2} es puesto de nuevo al valor de \textit{flag }y el proceso se repite.
+
+
+\begin{figure}[H]
+  \centering
+	\includegraphics[scale=0.10]{4-implementacion/graf/ip15pal.eps}
+  \caption{Ubicación de la dirección IP dentro de una palabra de 96 bits en store\_array, para la versión de Uplink que envía 15 palabras de 32 bits}
+  \label{fig:ip15pal}
+\end{figure}
+
+
 \section{Hardware}
 
 El hardware utilizado fue la placa de desarrollo DE2, cuyas características principales son:
