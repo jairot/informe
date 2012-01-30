@@ -290,10 +290,34 @@ Preparar un software que cuente con la Rutina de Interrupcion correspondiente y 
  Resultados Esperados & En la consola debe aparecer repetidamente el valor que fue puesto en el Hardware. \\ \hline
  Evaluación de la Prueba  & El resultado de la prueba fue exitoso.\\ \hline
 	\end{tabular}
-	\caption{Caso de Prueba: Funcionalidad del SoC}
+	\caption{Caso de Prueba: Interrupcion, Envio y Recepción de datos}
 	\label{tab:testsoc}
 \end{table}
 
+\begin{table}
+	\begin{tabular}{|>{\columncolor[gray]{0.8}}l|p{9cm}|} \hline
+\multicolumn{2}{|>{\columncolor[gray]{0.8}}l|}{\textbf{Caso de Prueba: Integridad del paquete }}\\ \hline
+Propósito  & 1) Comprobar mediante un Custom Component simple el funcionamiento de las interrupciones.
+
+2) Enviar y recibir un dato Estatico por el bus sin errores. 
+\\ \hline
+ Prerequisitos  & Se debe contar con el Soc Completo y funcional.\\ \hline
+ Datos de Prueba & Se prepara un Componente propio simple que interrumpe, envia un dato y espera que el procesador le responda con le mismo dato. 
+
+Preparar un software que cuente con la Rutina de Interrupcion correspondiente y que cuando reciba un dato responda con el mismo de manera inmediata, ademas de imprimirlo por consola.
+ \\ \hline
+ Pasos & 1) Programar la FPGA con el sistema completo.
+
+2) Descargar el Software al Microprocesador.
+
+3) Iniciar la consola del NIOS II .
+\\ \hline
+ Resultados Esperados & En la consola debe aparecer repetidamente el valor que fue puesto en el Hardware. \\ \hline
+ Evaluación de la Prueba  & El resultado de la prueba fue exitoso.\\ \hline
+	\end{tabular}
+	\caption{Caso de Prueba: Integridad del paquete}
+	\label{tab:testsoc}
+\end{table}
 
 
 
