@@ -323,6 +323,30 @@ Se prepara el software para que lea la cabecera completa, imprima lo leido en co
 	\label{tab:testsoc}
 \end{table}
 
+\begin{table}
+	\begin{tabular}{|>{\columncolor[gray]{0.8}}l|p{9cm}|} \hline
+\multicolumn{2}{|>{\columncolor[gray]{0.8}}l|}{\textbf{Caso de Prueba: Retardo de lookup }}\\ \hline
+Propósito  & 1) Medir el retardo de cada algoritmo en acceder a distintas partes de la tabla de ruteo. 
+
+\\ \hline
+ Prerequisitos  & Se debe contar con el software necesario para la clasificación de paquetes.\\ \hline
+ Datos de Prueba & Se generan dentro del mismo software una tabla de ruteo y otra tabla que contendrá las direcciones para efectuar el test. 
+
+Se prepara el software para que imprima lo leido en consola. 
+ \\ \hline
+ Pasos & 1) Programar la FPGA con el sistema completo.
+
+2) Descargar el Software al Microprocesador.
+
+3) Iniciar la consola del NIOS II .
+\\ \hline
+ Resultados Esperados & En la consola debe aparecer la dirección leída y el retardo para dicha dirección. \\ \hline
+ Evaluación de la Prueba  & El resultado de la prueba fue exitoso.\\ \hline
+	\end{tabular}
+	\caption{Caso de Prueba: Integridad del paquete}
+	\label{tab:testsoc}
+\end{table}
+
 
 
 \newpage
