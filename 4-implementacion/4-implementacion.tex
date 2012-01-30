@@ -305,7 +305,7 @@ Propósito  & 1) Comprobar que la cabecera llega completa y sin errores al softw
 
 4) Comprobar que el paquete pasa sin errores por todo el sistema. 
 \\ \hline
- Prerequisitos  & Se debe contar con la Interfaz de acceso a la cabecera completa y funcional, el generador y el software necesario .\\ \hline
+ Prerequisitos  & Se debe contar con la Interfaz de acceso a la cabecera completa y funcional, el generador, el software necesario y se debe conectar la salida de Write Output a los LEDs de la placa .\\ \hline
  Datos de Prueba & Se configura el Generador con la cantidad que la cantidad de ciclos de reloj entre paquetes sea la maxima. 
 
 Se prepara el software para que lea la cabecera completa, imprima lo leido en consola y responda automaticamente con un resultado conocido. 
@@ -316,7 +316,7 @@ Se prepara el software para que lea la cabecera completa, imprima lo leido en co
 
 3) Iniciar la consola del NIOS II .
 \\ \hline
- Resultados Esperados & En la consola debe aparecer repetidamente el valor que fue puesto en el Hardware. \\ \hline
+ Resultados Esperados & En la consola debe aparecer impresa la cabecera del paquete tal cual los valores predefinidos y en los LEDs debe aparecer al final de cada paquete el numero de paquete y el resultado conocido escrito.  \\ \hline
  Evaluación de la Prueba  & El resultado de la prueba fue exitoso.\\ \hline
 	\end{tabular}
 	\caption{Caso de Prueba: Integridad del paquete}
