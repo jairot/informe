@@ -329,14 +329,15 @@ Se prepara el software para que lea la cabecera completa, imprima lo leido en co
 Propósito  & 1) Medir el retardo de cada algoritmo en acceder a distintas partes de la tabla de ruteo. 
 
 \\ \hline
- Prerequisitos  & Se debe contar con el software necesario para la clasificación de paquetes.\\ \hline
+ Prerequisitos  & Se debe contar con el software necesario para la clasificación de paquetes. Las pruebas se efectúan para cada algortimo por serprado. Se debe contar con un SoC que incluya un timer que luego será instanciado en el software para medir los retardos en el acceso.
+ \\ \hline
  Datos de Prueba & Se generan dentro del mismo software una tabla de ruteo y otra tabla que contendrá las direcciones para efectuar el test. 
 
 Se prepara el software para que imprima lo leido en consola. 
  \\ \hline
  Pasos & 1) Programar la FPGA con el sistema completo.
 
-2) Descargar el Software al Microprocesador.
+2) Descargar el Software al Microprocesador. 
 
 3) Iniciar la consola del NIOS II .
 \\ \hline
