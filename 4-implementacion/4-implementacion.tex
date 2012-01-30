@@ -297,14 +297,18 @@ Preparar un software que cuente con la Rutina de Interrupcion correspondiente y 
 \begin{table}
 	\begin{tabular}{|>{\columncolor[gray]{0.8}}l|p{9cm}|} \hline
 \multicolumn{2}{|>{\columncolor[gray]{0.8}}l|}{\textbf{Caso de Prueba: Integridad del paquete }}\\ \hline
-Propósito  & 1) Comprobar mediante un Custom Component simple el funcionamiento de las interrupciones.
+Propósito  & 1) Comprobar que la cabecera llega completa y sin errores al software. 
 
-2) Enviar y recibir un dato Estatico por el bus sin errores. 
+2) Verificar que el paquete sale del sistema completo.
+
+3) Validar la correcta escritura del resultado en el tag Adjunto.
+
+4) Comprobar que el paquete pasa sin errores por todo el sistema. 
 \\ \hline
- Prerequisitos  & Se debe contar con el Soc Completo y funcional.\\ \hline
- Datos de Prueba & Se prepara un Componente propio simple que interrumpe, envia un dato y espera que el procesador le responda con le mismo dato. 
+ Prerequisitos  & Se debe contar con la Interfaz de acceso a la cabecera completa y funcional, el generador y el software necesario .\\ \hline
+ Datos de Prueba & Se configura el Generador con la cantidad que la cantidad de ciclos de reloj entre paquetes sea la maxima. 
 
-Preparar un software que cuente con la Rutina de Interrupcion correspondiente y que cuando reciba un dato responda con el mismo de manera inmediata, ademas de imprimirlo por consola.
+Se prepara el software para que lea la cabecera completa, imprima lo leido en consola y responda automaticamente con un resultado conocido. 
  \\ \hline
  Pasos & 1) Programar la FPGA con el sistema completo.
 
