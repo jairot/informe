@@ -243,7 +243,7 @@ El core Nios II/f esta diseñado para ofrecer la mayor performance a las expensa
 
 En vista de que este último ofrece la mayor performance y el hardware utilizado es capaz de soportarlo, se optó por el mismo para ser instanciado en el sistema.
 \subsection{Verificación}
-\newpage
+Se muestran a continuacion varios casos de prueba que se realizaron para verificar el correcto funcionamiento del sistema.
 \begin{table}
 	\begin{tabular}{|>{\columncolor[gray]{0.8}}l|p{9cm}|} \hline
 \multicolumn{2}{|>{\columncolor[gray]{0.8}}l|}{\textbf{Caso de Prueba: Funcionalidad del SoC}}\\ \hline
@@ -268,7 +268,6 @@ Se usara un Software en C que va incrementando e imprimiendo en consola un valor
 	\caption{Caso de Prueba: Funcionalidad del SoC}
 	\label{tab:testsoc}
 \end{table}
-\newpage
 \begin{table}
 	\begin{tabular}{|>{\columncolor[gray]{0.8}}l|p{9cm}|} \hline
 \multicolumn{2}{|>{\columncolor[gray]{0.8}}l|}{\textbf{Caso de Prueba: Interrupcion, Envio y Recepción de datos}}\\ \hline
@@ -293,7 +292,6 @@ Preparar un software que cuente con la Rutina de Interrupcion correspondiente y 
 	\caption{Caso de Prueba: Interrupcion, Envio y Recepción de datos}
 	\label{tab:enviorecepcion}
 \end{table}
-\newpage
 \begin{table}
 	\begin{tabular}{|>{\columncolor[gray]{0.8}}l|p{9cm}|} \hline
 \multicolumn{2}{|>{\columncolor[gray]{0.8}}l|}{\textbf{Caso de Prueba: Integridad del paquete }}\\ \hline
@@ -322,7 +320,6 @@ Se prepara el software para que lea la cabecera completa, imprima lo leido en co
 	\caption{Caso de Prueba: Integridad del paquete}
 	\label{tab:integridad}
 \end{table}
-\newpage
 \begin{table}
 	\begin{tabular}{|>{\columncolor[gray]{0.8}}l|p{9cm}|} \hline
 \multicolumn{2}{|>{\columncolor[gray]{0.8}}l|}{\textbf{Caso de Prueba: Retardo de lookup }}\\ \hline
@@ -349,8 +346,7 @@ Se prepara el software para que imprima lo leido en consola.
 \end{table}
 
 \newpage
-La figura ~\ref{fig:fpga} muestra el porcentaje de uso de los recursos de la FPGA utilizada.
-\newpage
+La figura ~\ref{fig:fpga} muestra el porcentaje de uso de los recursos de la FPGA utilizada para una FIFO con 4096 posiciones de memoria.
 \begin{figure}[H]
   \centering
 	\includegraphics[scale=0.70]{4-implementacion/graf/fpga.eps}
