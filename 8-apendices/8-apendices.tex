@@ -265,3 +265,33 @@ El archivo de cabecera \_regs.h define las siguientes macros de acceso para el c
 Cabe mencionar que las los valores leídos/escritos mediante las macros de acceso a registro (IORD e IOWR) no trabajan con la caché del microprocesador.
 En este contexto, es necesario destacar esto ya que los valores intercambiados entre el módulo software y el gestor de datos tienen que ser leidos/escritos sólamente si estos están en el bus.
 
+\chapter{Apéndice D}
+\section*{SOPC Builder}
+
+SOPC Builder es una herramienta que posibilita la definición y generación de Sistemas en Chips Programables (system-on-a-programable-chip, SoPC) en mucho menos tiempo que requieren los métodos manuales tradicionales de integración. Es parte del software Quartus II.
+
+\subsection*{Componentes a medida (custom components)}
+
+Además de una lista de componentes que ya están preparados para funcionar, SOPC Builder ofrece la posibilidad de crear componentes personalizados. Esto se efectúa importando módulos creados en algún HDL.
+
+ Para integrarlos al diseño del sistema se siguen los siguientes pasos:
+\begin{enumerate}
+	\item Determinar las interfaces necesarias para interactuar con el componente.
+	\item Crear la lógica del componente con algún HDL.
+	\item Usar el editor de componentes de SOPC Builder para crear el componente a partir de los archivos HDL.
+	\item Instanciar el componente en el sistema 
+\end{enumerate}
+
+\begin{figure}[H]
+  \centering
+	\includegraphics[width=0.90\textwidth]{8-apendices/graf/sopc1.eps}
+  \caption{Ventana principal del SOPC Builder}
+  \label{fig:sopc1}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+	\includegraphics[width=0.60\textwidth]{8-apendices/graf/sopc2.eps}
+  \caption{Generador de componentes}
+  \label{fig:sopc2}
+\end{figure}
