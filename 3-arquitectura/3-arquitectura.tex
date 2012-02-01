@@ -1,17 +1,17 @@
 \chapter{Arquitectura}
 
-Para ilustrar el funcionamiento del sistema se puede observar en el grafico a continuacion el estado de los datos y los bits de control del paquete en cada uno de los modulos que integran la Interfaz de Acceso a la Cabecera.
+Para ilustrar el funcionamiento del sistema se puede observar en el gráfico a continuación el estado de los datos y los bits de control del paquete en cada uno de los módulos que integran la Interfaz de Acceso a la Cabecera.
 
 \begin{figure}[H]
   \centering
 	\includegraphics[scale=0.60]{3-arquitectura/graf/moduloexp.eps}
-  \caption{Estado de los datos en cada uno de los modulos de la Interfaz}
+  \caption{Estado de los datos en cada uno de los módulos de la Interfaz}
   \label{fig:interfaz1}
 \end{figure}
 
 \section{Generador}
 
-Con la intencion de simplificar el desarrollo y el futuro debuging del proyecto se remplazo la interfaz de red por un generador de paquetes.
+Con la intención de simplificar el desarrollo y el futuro Debugging del proyecto se remplazo la interfaz de red por un generador de paquetes.
 
 \begin{figure}[H]
   \centering
@@ -24,20 +24,20 @@ Con la intencion de simplificar el desarrollo y el futuro debuging del proyecto 
 El mismo cuenta con las siguientes capacidades
 
 \begin{itemize}
-	\item Permite iniciar la generacion de paquetes desde un switch externo.
-	\item Es posible parametrizar la distancia, en ciclos de clock, entre la generacion de un paquete y el siguiente.
+	\item Permite iniciar la generación de paquetes desde un switch externo.
+	\item Es posible parametrizar la distancia, en ciclos de clock, entre la generación de un paquete y el siguiente.
 	\item Puede generar una cantidad variable de paquetes, con valores diferentes en sus campos.
-	\item Mantiene un contador global de la cantidad de paquetes generados y lo imprime en la ultima palabra del payload de cada uno.
+	\item Mantiene un contador global de la cantidad de paquetes generados y lo imprime en la ultima palabra del Payload de cada uno.
 \end{itemize}
 
-Este modulo es una version adaptada del generador usado en el proyecto integrador de (Referencia a la tesis de santiago?), que a su vez es una version mejorada de un generador que esta disponible en opencores
+Este modulo es una versión adaptada del generador usado en el proyecto integrador de (Referencia a la tesis de santiago?), que a su vez es una versión mejorada de un generador que esta disponible en apencares
 
 
 \section{Interfaz de Acceso a la Cabecera}
-En base a la figura~\ref{fig:inter} se pasara a describir de manera detallada la estructura y el funcionamiento de cada uno de los modulos que componen la Interfaz de Acceso a la Cabecera. 
+En base a la figura~\ref{fig:inter} se pasara a describir de manera detallada la estructura y el funcionamiento de cada uno de los módulos que componen la Interfaz de Acceso a la Cabecera. 
 
 \subsection{FIFO}
-Se trata de una FIFO estándar, basada en un codigo disponible en OpenCores, que soporta palabras de 72 bits, 64 del paquete y 8 de control. Como capacidad extra se le agrego un mecanismo para controlar la integridad de los paquetes que ingresan, aceptando solo los que pueden ser almacenados completamente en la memoria interna. 
+Se trata de una FIFO estándar, basada en un código disponible en OpenCores, que soporta palabras de 72 bits, 64 del paquete y 8 de control. Como capacidad extra se le agrego un mecanismo para controlar la integridad de los paquetes que ingresan, aceptando solo los que pueden ser almacenados completamente en la memoria interna. 
 
 \begin{figure}[H]
   \centering
@@ -47,9 +47,9 @@ Se trata de una FIFO estándar, basada en un codigo disponible en OpenCores, que
 \end{figure}
 
 \subsection{Delay Buffer}
-Este modulo fue desarrollado integramente para este proyecto, esta compuesto por un registro de desplazamiento interno, que cuenta con 8 posiciones de 72 bits cada una. Su funcion principal es detectar la llegada de un paquete a la fifo, cargar 5 palabras, correspondientes a la cabecera, y enviarle una copia a Uplink. Este modulo permite, ademas, desacoplar el flujo de datos de la comunicacion con el Microprocesador.
+Este modulo fue desarrollado íntegramente para este proyecto, esta compuesto por un registro de desplazamiento interno, que cuenta con 8 posiciones de 72 bits cada una. Su función principal es detectar la llegada de un paquete a la FIFO, cargar 5 palabras, correspondientes a la cabecera, y enviarle una copia a Uplink. Este modulo permite, además, desacoplar el flujo de datos de la comunicación con el Microprocesador.
 
-La implementacion de este modulo esta formada por una maquina de estados(Figura~\ref{fig:dbstate}) descripta a continuacion:
+La implementación de este modulo esta formada por una maquina de estados(Figura~\ref{fig:dbstate}) descripta a continuación:
 
 \begin{figure}[H]
   \centering
@@ -59,15 +59,15 @@ La implementacion de este modulo esta formada por una maquina de estados(Figura~
 \end{figure}
 
 \begin{itemize}
-	\item IDLE: Es el estado inicial en el que se encuentra la maquina, cuando se detecta la presencia de datos en la fifo pasa a SOP.
+	\item IDLE: Es el estado inicial en el que se encuentra la maquina, cuando se detecta la presencia de datos en la FIFO pasa a SOP.
 	\item SOP: Este estado es el encargado de validar la integridad de los paquetes, permitiendo iniciar el proceso solo cuando lo que hay en la entrada del bus de datos es un indicador de Inicio de Paquete(SOP)
-	\item LOAD, WAIT1, WAIT3: Estos tres estados se alternan para ir sacando de la fijo las 5 palabras correspondientes a la cabecera, implementan ademas mecanismos para manejar paquetes mas pequeños que 5 palabras.
-	\item ENABLE, HOLD: Son los estados que se encargan de poner a disposicion de Uplink la Cabecera completa y quedar a la espera de los resultados.
+	\item LOAD, WAIT1, WAIT3: Estos tres estados se alternan para ir sacando de la fijo las 5 palabras correspondientes a la cabecera, implementan además mecanismos para manejar paquetes mas pequeños que 5 palabras.
+	\item ENABLE, HOLD: Son los estados que se encargan de poner a disposición de Uplink la Cabecera completa y quedar a la espera de los resultados.
 	\item WAIT2, UNLOAD: Estos estados se encargan de extraer de la FIFO las palabras restantes del paquete desplazando los espacios de memoria ya cargados. 
-	\item OUTPUT: Se encarga de vaciar el registro de desplazamiento llenandolo de ceros a medida que se va poniendo las palabras del paquete a la salida. 
+	\item OUTPUT: Se encarga de vaciar el registro de desplazamiento llenándolo de ceros a medida que se va poniendo las palabras del paquete a la salida. 
 \end{itemize}
 
-La ubicacion de los datos en el registro de desplazamiento interno es representativo del funcionamiento del sistema y se muestra graficamente en las figura~\ref{fig:regdata}
+La ubicación de los datos en el registro de desplazamiento interno es representativo del funcionamiento del sistema y se muestra gráficamente en las figura~\ref{fig:regdata}
 \begin{figure}[H]
   \centering
 
@@ -86,7 +86,7 @@ La ubicacion de los datos en el registro de desplazamiento interno es representa
 
 
 
-A continuacion se presentan las señales que integran el modulo, con su correspondiente descripcion:
+A continuación se presentan las señales que integran el modulo, con su correspondiente descripción:
 
 \begin{figure}[H]
   \centering
@@ -99,10 +99,10 @@ A continuacion se presentan las señales que integran el modulo, con su correspo
 \begin{table}
 	\begin{tabular}{|c|c|p{9cm}|} \hline
 \rowcolor[gray]{0.1} \textcolor{white}{Nombre} & \textcolor{white}{Activo} & \textcolor{white}{Descripción}\\ \hline
-\rowcolor[gray]{0.75} i\_data[71:0]	& N/A & Palabra de 72 bits que viene de la fifo\\ \hline
+\rowcolor[gray]{0.75} i\_data[71:0]	& N/A & Palabra de 72 bits que viene de la FIFO\\ \hline
 \rowcolor[gray]{0.75} i\_shift\_en & High & Indica la disponibilidad de los resultados de la clasificación\\ \hline
 \rowcolor[gray]{0.75} i\_fifo\_empty & Low & Señala la presencia de datos en en la FIFO\\ \hline
-\rowcolor[gray]{0.9} o\_data[71:0] & N/A & Salida conectada a la ultima posicion del registro de desplazamiento\\ \hline
+\rowcolor[gray]{0.9} o\_data[71:0] & N/A & Salida conectada a la ultima posición del registro de desplazamiento\\ \hline
 \rowcolor[gray]{0.9} o\_header[359:0] & N/A & Bus interno por el que puede viajar las 5 palabras de la cabecera en un solo ciclo\\ \hline
 \rowcolor[gray]{0.9} o\_header\_rdy & High & Indica la disponibilidad de la cabecera en oheader \\ \hline
 \rowcolor[gray]{0.9} o\_fifo\_ren & High & Sirve para indicar a la fifo que se necesita una palabra nueva\\ \hline
@@ -115,10 +115,10 @@ A continuacion se presentan las señales que integran el modulo, con su correspo
 
 
 \subsection{Uplink}
-El modulo Uplink lleva la comunicacion entre el procesador y el resto de la Interfaz de acceso a la cabecera. Esta configurado para trabajar con las señales del bus Avalon(Apendice XX) y en caso de que se desee portar esta interfaz para interactuar con otro tipo de bus, solo es necesario modificar este bloque. A continuacion se puede ver la maquina de estado mediante la cual se implemento este modulo:
+El modulo Uplink lleva la comunicación entre el procesador y el resto de la Interfaz de acceso a la cabecera. Esta configurado para trabajar con las señales del bus Avalon(Apéndice B) y en caso de que se desee portar esta interfaz para interactuar con otro tipo de bus, solo es necesario modificar este bloque. A continuación se puede ver la maquina de estado mediante la cual se implemento este modulo:
 
 
-Se prepararon dos versiones de Uplink, una que transfiere al procesador la cabecera completa en 15 palabras de 32 bits y otra que solo envia una palabra de 32bits correspondiente a la Ip Destino. 
+Se prepararon dos versiones de Uplink, una que transfiere al procesador la cabecera completa en 15 palabras de 32 bits y otra que solo envía una palabra de 32bits correspondiente a la IP Destino. 
 
 \begin{figure}[H]
   \centering
@@ -135,7 +135,7 @@ Se prepararon dos versiones de Uplink, una que transfiere al procesador la cabec
   \label{fig:up151}
 \end{figure}
 
-Este modulo implementa la maquina de estados que se puede ver en la figura~\ref{fig:inter} y descripta a continuacion:
+Este modulo implementa la maquina de estados que se puede ver en la figura~\ref{fig:inter} y descripta a continuación:
 
 \begin{figure}[H]
   \centering
@@ -145,12 +145,12 @@ Este modulo implementa la maquina de estados que se puede ver en la figura~\ref{
 \end{figure}
 
 \begin{itemize}
-	\item IDLE: Es el estado inicial en el que se encuentra la maquina, hasta que recibe la confirmacion de que la cabecera esta disponible.
+	\item IDLE: Es el estado inicial en el que se encuentra la maquina, hasta que recibe la confirmación de que la cabecera esta disponible.
 	\item READ,HOLD,WAIT: Estos estados se alternan para interrumpir y transmitir 1 o 15 palabras de 32bits al procesador.
-	\item WRITE: Es el estado encargado de esperar que el procesador envie los resultados, para luego darle aviso a los otros componentes de la disponibilidad de los mismos.
+	\item WRITE: Es el estado encargado de esperar que el procesador envié los resultados, para luego darle aviso a los otros componentes de la disponibilidad de los mismos.
 \end{itemize}
 
-En al tabla que sigue se puede ver las señales que componen el modulo con su correspondiente descripcion:
+En al tabla que sigue se puede ver las señales que componen el modulo con su correspondiente descripción:
 
 \begin{figure}[H]
   \centering
@@ -162,7 +162,7 @@ En al tabla que sigue se puede ver las señales que componen el modulo con su co
 \begin{table}
 	\begin{tabular}{|c|c|c|p{6cm}|} \hline
 \rowcolor[gray]{0.1} \textcolor{white}{Nombre} & \textcolor{white}{I/O} & \textcolor{white}{Activo} & \textcolor{white}{Descripción}\\ \hline
-\rowcolor[gray]{0.75} i\_data[359:0] & Input & N/A & Bus interno por donde Delay Buffer envia la cabecera entera en un ciclo\\ \hline
+\rowcolor[gray]{0.75} i\_data[359:0] & Input & N/A & Bus interno por donde Delay Buffer envía la cabecera entera en un ciclo\\ \hline
 \rowcolor[gray]{0.75} data\_avail & Input & High & Señala la disponibilidad de la Cabecera\\ \hline
 \rowcolor[gray]{0.75} NIOS\_DATAout[31:0] & Input & N/A & Bus de datos desde el procesador\\ \hline
 \rowcolor[gray]{0.75} NIOS\_ADDR[2:0] & Input & N/A & Bus de direcciones Avalon\\ \hline
@@ -170,8 +170,8 @@ En al tabla que sigue se puede ver las señales que componen el modulo con su co
 \rowcolor[gray]{0.75} NIOS\_RDn & Input & Low & Indica que el procesador esta leyendo los datos presentes en NIOS\_DATAin \\ \hline
 \rowcolor[gray]{0.75} NIOS\_WRn & Input & Low & Señala la disponibilidad de datos en NIOS\_DATAout\\ \hline
 \rowcolor[gray]{0.9} NIOS\_DATAin[31:0] & Output & N/A & Bus de datos de entrada al procesador\\ \hline
-\rowcolor[gray]{0.9} shift\_en & Output & High & Avisa a los otros componentes que ya estan listos los resultados\\ \hline
-\rowcolor[gray]{0.9} irq\_port & Output & High & Señal de Interrupcion\\ \hline
+\rowcolor[gray]{0.9} shift\_en & Output & High & Avisa a los otros componentes que ya están listos los resultados\\ \hline
+\rowcolor[gray]{0.9} irq\_port & Output & High & Señal de Interrupción\\ \hline
  NIOS\_CLK, & Input & N/A & Señal de Reloj\\ \hline
  rst & Input & High & Reset\\ \hline
 	\end{tabular}
@@ -183,7 +183,7 @@ En al tabla que sigue se puede ver las señales que componen el modulo con su co
 
 \subsection{Write output}
 
-Este modulo es el que se encarga de tomar el resultado emitido por el microprocesador y de estamparlo en los campos de control anexos a cada una de las palabras del paquete. Se puede ver en la figura~\ref{fig:inter} el diagrama de estados mediante el cual esta implementado este modulo y se describe cada estado a continuacion:
+Este modulo es el que se encarga de tomar el resultado emitido por el microprocesador y de estamparlo en los campos de control anexos a cada una de las palabras del paquete. Se puede ver en la figura~\ref{fig:inter} el diagrama de estados mediante el cual esta implementado este modulo y se describe cada estado a continuación:
 
 \begin{figure}[H]
   \centering
@@ -193,12 +193,12 @@ Este modulo es el que se encarga de tomar el resultado emitido por el microproce
 \end{figure}
 
 \begin{itemize}
-	\item IDLE: Es el estado inicial en el que se encuentra la maquina, hasta que recibe la confirmacion de que los resultados estan disponibles.
+	\item IDLE: Es el estado inicial en el que se encuentra la maquina, hasta que recibe la confirmación de que los resultados están disponibles.
 	\item READY: Espera que Delay Buffer le transmita la palabra correspondiente a un SOP. 
-	\item OVERWRITE: Escribe el resultado en el tag adjunto a cada palabra hasta que encuentra la palabra correspondiente a un EOP. 
+	\item OVERWRITE: Escribe el resultado en el Tag adjunto a cada palabra hasta que encuentra la palabra correspondiente a un EOP. 
 \end{itemize}
 
-Se detalla las señales de Entrada/Salida del modulo y su funcion:
+Se detalla las señales de Entrada/Salida del modulo y su función:
 
 \begin{figure}[H]
   \centering
@@ -230,7 +230,7 @@ En este capítulos se detallara la arquitectura del proyecto en general, poniend
 \section{Procesador Embebido}
 
 Como se dijo en el capitulo 2, los microprocesadores embebidos en lógica programable se clasifican, básicamente, en dos tipos Hardcore y Softcore. Aunque los Hardcores ofrecen unas mejores prestaciones existen muy pocos dispositivos en el mercado que ofrecen este tipo de módulos y, en general, el costo de estos es mayor que el de uno que no cuenta con un Hardcore. Por estas razones de ahora en adelante se limitará el estudio a Softcores, siempre buscando que lo implementado siga los principios del diseño modular a los fines de facilitar la portabilidad.
-\subsection{Estudio de los softcores disponibles}
+\subsection{Estudio de los Softcores disponibles}
 Los Softcores pueden ser clasificados en tres tipos según su origen
 
 \begin{itemize}
@@ -255,7 +255,7 @@ Varias de estas empresas cuentan con Softcores con distintas capacidades y tecno
 Dentro de los mas conocidos se puede nombrar a la linea Leon de la empresa Aeroflex, LatticeMico32 de Lattice semiconductor o ARM cortex de Freescale. Los IP core pueden estar licenciados de diferentes formas incluidas entre ellas GPL.
  
 \subsubsection{Provistos por la comunidad Open Source}
-La comunidad open source se ha encargado de producir una buena cantidad de softcores, las capacidades y perfomance de los mismos cubre casi todos los rangos. En la pagina web que lleva una lista de este tipo de proyectos, \textit{opencores.com}, se pueden encontrar alrededor de 130. El problema con este tipo de core esta en la poco uniforme calidad de la documentación y el funcionamiento deficiente de algunos de ellos. Sin embargo la flexibilidad para poder modificar la arquitectura a gusto y el costo cero de implementación son ventajas nada despreciables de estos productos. 
+La comunidad open source se ha encargado de producir una buena cantidad de Softcores, las capacidades y perfomance de los mismos cubre casi todos los rangos. En la pagina web que lleva una lista de este tipo de proyectos, \textit{OpenCores.com}, se pueden encontrar alrededor de 130. El problema con este tipo de core esta en la poco uniforme calidad de la documentación y el funcionamiento deficiente de algunos de ellos. Sin embargo la flexibilidad para poder modificar la arquitectura a gusto y el costo cero de implementación son ventajas nada despreciables de estos productos. 
 
 Se destaca el proyecto Openrisc 1200, que tiene una gran comunidad que lo soporta y algún prestigio ganado en este terreno.
 
@@ -277,13 +277,13 @@ Se destaca el proyecto Openrisc 1200, que tiene una gran comunidad que lo soport
 		Lattice Mico32 & Lattice Mico32 & Propietaria & 6 & 1 & no & no & Indep. \\ \hline
 		Cortex-M1 & ARMv6 & Propietaria & 3 & 1 & no & no & Xilinx, Altera \\ \hline
 	\end{tabular}
-	\caption{Comparativa softcores}
+	\caption{Comparativa Softcores}
 	\label{tab:comp}
 \end{table}
 
 \subsection{Criterios de Selección}
 
-Los criterios de seleccion usados para elegir el Softcore que va a ser utilizado en este proyecto son:
+Los criterios de selección usados para elegir el Softcore que va a ser utilizado en este proyecto son:
 \begin{itemize}
 	\item Hardware: se debe contar con el dispositivo necesario para la implementación del Softcore.
 	\item Herramientas de Diseño: la cadena de herramientas necesarias para diseñar el sistema y el software debe ser simple y funcional, para evitar que comprender las herramientas lleve mas tiempo que realizar el proyecto en sí mismo.
@@ -312,7 +312,7 @@ El Nios II es un procesador RISC de 32 bits de propósito general que cuenta con
 	\item Set de instrucciones compatible entre todos las versiones del procesador Nios II.
 \end{itemize}
 
-Para poder ser implementado en una mayor variedad de dispositivos el Nios II ofrece 3 configuraciones diferentes:  Nios II/f (fast), Nios II/s (standard), and Nios II/e (economy).
+Para poder ser implementado en una mayor variedad de dispositivos el Nios II ofrece 3 configuraciones diferentes:  Nios II/f (fast), Nios II/s (Standard), and Nios II/e (Economy).
 
 \subsubsection{Nios II/e}
 El Core Nios II/e esta diseñado para utilizar la menor cantidad de espacio posible. Esto esto funciona especialmente para FPGA de bajo costo. Tiene las siguientes características:
@@ -328,7 +328,7 @@ El Nios II/s esta diseñado para mantener un balance entre rendimiento y costo. 
 	\item Cache de instrucciones
 	\item Espacio de direcciones de hasta 2GB
 	\item Pipeline de 5 etapas
-	\item Predictor de saltos estático
+	\item Productor de saltos estático
 	\item Multiplicador y divisor por hardware. 
 \end{itemize}
 
@@ -370,7 +370,7 @@ Este modulo debe ser altamente dramatizable para poder enfrentar el sistema a di
 En el laboratorio en el cual se desarrollo este proyecto integrador se cuenta con el código de un generador y se buscara reutilizar dicho código.
 
 \subsection{Modulo extractor de Cabeceras}
-Bajo lo expuesto en el capitulo 2, se desprende que no se necesita transmitirle al procesador el paquete de datos entero, sino que solo la información presente en la cabecera es útil para la clasificación. Por esta razón, la interfaz Red-CPU solamente enviara al procesador las cabecera de cada paquete y mantendrá en espera del resultado los datos correspondientes al payload. 
+Bajo lo expuesto en el capitulo 2, se desprende que no se necesita transmitirle al procesador el paquete de datos entero, sino que solo la información presente en la cabecera es útil para la clasificación. Por esta razón, la interfaz Red-CPU solamente enviara al procesador las cabecera de cada paquete y mantendrá en espera del resultado los datos correspondientes al Payload. 
 
 En la figura~\ref{fig:moduloprop} se puede ver los sub-módulos que componen el extractor de cabeceras, pasando a detallar la funcionalidad de cada uno a continuación
 
@@ -396,7 +396,7 @@ Este Modulo es el encargado de realizar la comunicación entre el flujo de datos
 Eventualmente se desarrollaran varias versiones de este modulo, que envíen toda la cabecera o una parte selectiva de ella para optimizar así el rendimiento.
 
 \subsubsection{Write Output}
-Para finalizar, Write Output, toma la salida de Delay buffer y escribe el resultado que le envia Uplink en la etiqueta que se encuentra anexa a cada una de las palabras del paquete.
+Para finalizar, Write Output, toma la salida de Delay buffer y escribe el resultado que le envía Uplink en la etiqueta que se encuentra anexa a cada una de las palabras del paquete.
 
 
 \subsection{Bus Avalon}
@@ -546,7 +546,7 @@ Los tipos de periféricos cubiertos son:
 
 Todos los periféricos, ya sean de Altera o de terceros, deben proveer un archivo de cabecera que defina la interfaz de bajo nivel del dispositivo con el hardware. 
 
-Ciertos dispositivos tienen características específicas de hardware con requierimientos de uso que no se adaptan bien a una API de propósito general. La HAL maneja dichos requerimientos mediante la función ioctl(), cuyas opciones dependerán del periférico en cuestión.
+Ciertos dispositivos tienen características específicas de hardware con requerimientos de uso que no se adaptan bien a una API de propósito general. La HAL maneja dichos requerimientos mediante la función ioctl(), cuyas opciones dependerán del periférico en cuestión.
 
 Algunos periféricos proveen funciones de acceso dedicadas que no están basadas en el modelo genérico de la HAL. En ese caso, se debe proveer un archivo de cabecera con dichas funciones.
 
@@ -564,7 +564,7 @@ La creación y administración de proyectos basados en la HAL están altamente l
   \label{fig:halsof}
 \end{figure}
 
-La figura ~\ref{fig:halsof} muestra el diagrama en bloques de un software basado en la HAL. Todo programa de este tipo consta de dos proyectos. El ćodigo de aplicación específico se encuentra en uno de ellos, el cual depende a su vez de otro proyecto BSP separado.
+La figura ~\ref{fig:halsof} muestra el diagrama en bloques de un software basado en la HAL. Todo programa de este tipo consta de dos proyectos. El código de aplicación específico se encuentra en uno de ellos, el cual depende a su vez de otro proyecto BSP separado.
 
 EL primero contiene todo el código que el programador desarrolla. El segundo, toda la información necesaria para la interacción hardware-software. Este último a su vez depende del hardware del sistema, cuya información se encuentra en un archivo generado por la herramienta SOPC Builder.
 
@@ -581,7 +581,7 @@ El archivo system.h provee una descripción completa del software del sistema ba
 El SBT genera un archivo \textbf{system.h} para cada proyecto BSP, cuyo contenido dependerá del archivo .sopcinfo mencionado anteriormente en este capítulo.
 
 \subsubsection{Acceso al hardware}
-El software accede al hardware a través de macros que abstraen la interfaz mapeada en memoria al dispositivo. Todos los componentes proveen un directorio que define el hardware y el software del periférico en cuestión. En esta carpeta se encuentra un archivo de cabecera que define la interfaz con el hardware y su nombre es $<componente>$\_regs.h, el cual se incluye en el subdirectorio inc. Por ejemplo, el componente JTAG UART define su interfaz en el archivo $<Directorio Instalacion Altera>$/ip/altera/sopc\_builder\_ip/
+El software accede al hardware a través de macros que abstraen la interfaz mapeada en memoria al dispositivo. Todos los componentes proveen un directorio que define el hardware y el software del periférico en cuestión. En esta carpeta se encuentra un archivo de cabecera que define la interfaz con el hardware y su nombre es $<componente>$\_regs.h, el cual se incluye en el subdirectorio inc. Por ejemplo, el componente JTAG UART define su interfaz en el archivo $<Directorio Instalación Altera>$/ip/altera/sopc\_builder\_ip/
 
 altera\_avalon\_jtag\_uart/inc/altera\_avalon\_jtag\_uart\_regs.h.
 
@@ -604,17 +604,17 @@ El archivo de cabecera \_regs.h define las siguientes macros de acceso para el c
 \end{itemize}
 
 Cabe mencionar que las los valores leídos/escritos mediante las macros de acceso a registro (IORD e IOWR) no trabajan con la caché del microprocesador.
-En este contexto, es necesario destacar esto ya que los valores intercambiados entre el módulo software y el gestor de datos tienen que ser leidos/escritos sólamente si estos están en el bus.
+En este contexto, es necesario destacar esto ya que los valores intercambiados entre el módulo software y el gestor de datos tienen que ser leidos/escritos solamente si estos están en el bus.
 
 \subsubsection{Criterio de selección: HAL vs. Sistema Operativo}
 
-La razón de utilizar la HAL en vez de un sistema operativo, yace principalmente en la mayor simplicidad de uso que ésta presenta. En el caso de haber optado por el segundo enfoque hubiese sido necesario el desarrollo de drivers para el manejo de los dispositivos, con la complejidad que ello implica. La HAL, por otra parte, ofrece un conjunto de funciones de la librería estándar ANSI C para la interacción con el hardware del diseño, además de un conjuto de macros de fácil utilización, lo cual hace que dicha tarea sea significativamente más simple.
+La razón de utilizar la HAL en vez de un sistema operativo, yace principalmente en la mayor simplicidad de uso que ésta presenta. En el caso de haber optado por el segundo enfoque hubiese sido necesario el desarrollo de drivers para el manejo de los dispositivos, con la complejidad que ello implica. La HAL, por otra parte, ofrece un conjunto de funciones de la librería estándar ANSI C para la interacción con el hardware del diseño, además de un conjunto de macros de fácil utilización, lo cual hace que dicha tarea sea significativamente más simple.
 
 
 \begin{comment}
 \subsection {Algoritmos de clasificación}
 
-Se implementaron 2 algoritmos de clasificacion: Busqueda lineal y Busqueda en árbol unibit.
+Se implementaron 2 algoritmos de clasificación: Búsqueda lineal y Búsqueda en árbol unibit.
 
 El software utilizado para realizar las pruebas consistió en 2 proyectos por separado. Uno para cada tipo de búsqueda en la tabla.
 
@@ -633,18 +633,18 @@ Se implementó en una lista enlazada, creada a partir del template list de c++. 
 	\item Identificador de decisión (entero de 32 bit con signo)
 \end{itemize}
 
-Como se le dió prioridad a los prefijos de red más largos, se debió sobrecargar el operador de comparación ( > ) para que la función sort pudiese ordenar en base a la longitud de máscara. De esa manera, los nodos que contenían valores de máscara más grandes quedaban en las primeras posiciones de la lista.
+Como se le dio prioridad a los prefijos de red más largos, se debió sobrecargar el operador de comparación ( > ) para que la función sort pudiese ordenar en base a la longitud de máscara. De esa manera, los nodos que contenían valores de máscara más grandes quedaban en las primeras posiciones de la lista.
 
 Cuando la función encargada del lookup recibe una dirección IP de destino, realiza los siguientes pasos:
 
 \begin{itemize}
 	\item Coloca un iterador al comienzo de la lista.
-	\item Realiza un AND con el valor de máscara del nodo que está siendo apuntado. Si el resultado de la operación es igual al valor de dirección de red de dicho nodo, entonces se retorna con el valor identificador de decisión. En otro caso, continúa la busqueda en el siguiente nodo.
+	\item Realiza un AND con el valor de máscara del nodo que está siendo apuntado. Si el resultado de la operación es igual al valor de dirección de red de dicho nodo, entonces se retorna con el valor identificador de decisión. En otro caso, continúa la búsqueda en el siguiente nodo.
 \end{itemize}
 
-\subsubsection {Busqueda en Arbol unibit}
+\subsubsection {Búsqueda en Árbol unibit}
 
-Se implementó una clase en la cual se definieron las características de los nodos del arbol, como así también las operaciones de inserción y búsqueda.
+Se implementó una clase en la cual se definieron las características de los nodos del árbol, como así también las operaciones de inserción y búsqueda.
 
 En este contexto, pueden existir 2 tipos de nodo:
 
@@ -655,7 +655,7 @@ En este contexto, pueden existir 2 tipos de nodo:
 
 Cada nodo cuenta con los siguientes campos:
 \begin{itemize}
-	\item gw: es un identificador de la decisión a tomar. En los nodos no asociados a una decision, tiene el valor estipulado en la macro NONE.
+	\item gw: es un identificador de la decisión a tomar. En los nodos no asociados a una decisión, tiene el valor estipulado en la macro NONE.
     \item zero / one: Son punteros a nodo, asociados a los bits 0/1 del prefijo que se esté leyendo.
 
 \end{itemize}
@@ -666,20 +666,20 @@ Cada nodo cuenta con los siguientes campos:
 El algoritmo de búsqueda toma como entrada la dirección IP de destino del paquete a clasificar. Luego de ello, va haciendo un testeo bit a bit de la misma, partiendo con un puntero de recorrido desde el nodo raíz. Si el bit de la dirección es 0 y el puntero zero está apuntando hacia algún nodo, el puntero de recorrido se mueve al nodo apuntado por el puntero zero. En caso contrario, se mueve al nodo apuntado por el puntero one (En caso de que exista alguno). Esto se repite nodo a nodo, hasta que ocurre alguna de las siguientes situaciones:
 
 \begin{itemize}
-    	\item     El puntero de recorrido queda varado en un nodo decision, con lo cual se retorna el valor de gw.
+    	\item     El puntero de recorrido queda varado en un nodo decisión, con lo cual se retorna el valor de gw.
     	\item El puntero de recorrido queda varado en un nodo común. 
 \end{itemize}
 
 
 
-Contemplando esta última posibilidad, el algoritmo hace que en cada nodo se chequee si se trata de un nodo decisión. En dicho caso, se almacena el campo gw en una variable y se continua el recorrido. Si se da un caso en el cual el nodo de recorrido queda apuntando a un nodo comun y luego de testear un bit se determina que el mismo no tiene un nodo asociado (es decir, que alguno de los punteros zero / one esté en NULL) la función retorna la variable anteriormente mencionada. 
+Contemplando esta última posibilidad, el algoritmo hace que en cada nodo se chequee si se trata de un nodo decisión. En dicho caso, se almacena el campo gw en una variable y se continua el recorrido. Si se da un caso en el cual el nodo de recorrido queda apuntando a un nodo común y luego de testear un bit se determina que el mismo no tiene un nodo asociado (es decir, que alguno de los punteros zero / one esté en NULL) la función retorna la variable anteriormente mencionada. 
 
 \subsection {Cache}
 
 Se implementó una cache directa. La misma consta de una tabla hash de 16 entradas. Las colisiones se resuelven por reemplazo directo. La misma fue testeada con ambos algoritmos mencionados anteriormente. Para ello, se agregó una lógica adicional que consistió en:
 
 \begin{itemize}
-	\item Al tomar una direccion IP, chequear primero si el valor de decisión se encuentra en caché.
+	\item Al tomar una dirección IP, chequear primero si el valor de decisión se encuentra en caché.
 	\item Si está, retornar dicho valor.
 	\item En otro caso, efectuar el lookup y almacenar el valor de decisión en caché.
 \end{itemize}
@@ -690,7 +690,7 @@ Para evitar el overhead introducido por el uso de clases, se optó por el uso de
 <<<<<<< HEAD
 \begin{center}
 	\begin{tabular}{|c|c|c|p{2.3cm}|p{2.3cm}|c|c|c|} \hline
-		\textbf{Core} & \textbf{Arquitectura} & \textbf{Licencia} & \textbf{Profundidad del Pipeline} & \textbf{Ciclos por Instruccion} & \textbf{MMU} & \textbf{FPU} & \textbf{FPGA}\\ \hline
+		\textbf{Core} & \textbf{Arquitectura} & \textbf{Licencia} & \textbf{Profundidad del Pipeline} & \textbf{Ciclos por Instrucción} & \textbf{MMU} & \textbf{FPU} & \textbf{FPGA}\\ \hline
 		MicroBlaze & MicroBlaze & Propietaria &	3,5 & 1 & Opt & Opt & Xilinx\\ \hline
 		
 	\end{tabular} 
@@ -705,11 +705,11 @@ Para evitar el overhead introducido por el uso de clases, se optó por el uso de
 
 \subsubsection*{NIOS II}
 
-Es un microprocesador softcore. Esto significa que el mismo es instanciado usando la lógica propia de la FPGA. En este diseño, ejecuta un software de clasificación de paquetes que se almacena en una memoria SDRAM en la placa de desarrollo.
+Es un microprocesador Softcore. Esto significa que el mismo es instanciado usando la lógica propia de la FPGA. En este diseño, ejecuta un software de clasificación de paquetes que se almacena en una memoria SDRAM en la placa de desarrollo.
 
 \subsubsection*{PLL}
 
-Este módulo toma como entrada una señal de clocl de 50 MHZ de frecuencia y la bifurca en 2: Una de ellas alimentará al módulo que oficia de interfaz con la memoria SDRAM y la otra hará lo propio con el resto de los componentes del sistema. Estas señales están defasadas entre sí 60º con el fin de evitar el skew producido por la diferencia entre la llegada del clock a la memoria y al resto del sistema.
+Este módulo toma como entrada una señal de CLock de 50 MHZ de frecuencia y la bifurca en 2: Una de ellas alimentará al módulo que oficia de interfaz con la memoria SDRAM y la otra hará lo propio con el resto de los componentes del sistema. Estas señales están desfasadas entre sí 60º con el fin de evitar el SW producido por la diferencia entre la llegada del clock a la memoria y al resto del sistema.
 
 \subsubsection*{Timer}
 
@@ -717,7 +717,7 @@ Módulo utilizado para llevar estadísticas de retardo dentro del software.
 
 \subsubsection*{JTAG UART}
 
-Este módulo permite interactuar con el sistema vía USB. Esto implica tanto la configuracion de la FPGA, como también la posibilidad de ver la ejecución del software en una consola.
+Este módulo permite interactuar con el sistema vía USB. Esto implica tanto la configuración de la FPGA, como también la posibilidad de ver la ejecución del software en una consola.
 
 \subsubsection*{Interfaz con SDRAM}
 
@@ -736,7 +736,7 @@ Este módulo extrae cabeceras de paquetes Ethernet y las envía al software, don
 
 \section{Parte SW}
 
-Se implementaron 2 algoritmos de clasificacion: Busqueda lineal y Busqueda en árbol unibit.
+Se implementaron 2 algoritmos de clasificación: Búsqueda lineal y Búsqueda en árbol unibit.
 
 El software utilizado para realizar las pruebas consistió en 2 proyectos por separado. Uno para cada tipo de búsqueda en la tabla.
 
@@ -757,21 +757,21 @@ Se implementó en una lista enlazada, creada a partir del template list de c++. 
 	\item Identificador de decisión (entero de 32 bit con signo)
 \end{itemize}
 
-Como se le dió prioridad a los prefijos de red más largos, se debió sobrecargar el operador de comparación ( > ) para que la función sort pudiese ordenar en base a la longitud de máscara. De esa manera, los nodos que contenían valores de máscara más grandes quedaban en las primeras posiciones de la lista.
+Como se le dio prioridad a los prefijos de red más largos, se debió sobrecargar el operador de comparación ( > ) para que la función sort pudiese ordenar en base a la longitud de máscara. De esa manera, los nodos que contenían valores de máscara más grandes quedaban en las primeras posiciones de la lista.
 
 Cuando la función encargada del lookup recibe una dirección IP de destino, realiza los siguientes pasos:
 
 \begin{itemize}
 	\item Coloca un iterador al comienzo de la lista.
-	\item Realiza un AND con el valor de máscara del nodo que está siendo apuntado. Si el resultado de la operación es igual al valor de dirección de red de dicho nodo, entonces se retorna con el valor identificador de decisión. En otro caso, continúa la busqueda en el siguiente nodo.
+	\item Realiza un AND con el valor de máscara del nodo que está siendo apuntado. Si el resultado de la operación es igual al valor de dirección de red de dicho nodo, entonces se retorna con el valor identificador de decisión. En otro caso, continúa la búsqueda en el siguiente nodo.
 \end{itemize}
 
-\subsection {Busqueda en Arbol unibit}
+\subsection {Búsqueda en Árbol unibit}
 
-Se implementó una clase en la cual se definieron las características de los nodos del arbol, como así también las operaciones de inserción y búsqueda.
+Se implementó una clase en la cual se definieron las características de los nodos del árbol, como así también las operaciones de inserción y búsqueda.
 Cada nodo cuenta con los siguientes campos:
 \begin{itemize}
-	\item gw: es un identificador de la decisión a tomar. En los nodos no asociados a una decision, tiene el valor estipulado en la macro NONE.
+	\item gw: es un identificador de la decisión a tomar. En los nodos no asociados a una decisión, tiene el valor estipulado en la macro NONE.
     \item zero / one: Son punteros a nodo, asociados a los bits 0/1 del prefijo que se esté leyendo.
 
 \end{itemize}
@@ -788,20 +788,20 @@ En este contexto, pueden existir 2 tipos de nodo:
 El algoritmo de búsqueda toma como entrada la dirección IP de destino del paquete a clasificar. Luego de ello, va haciendo un testeo bit a bit de la misma, partiendo con un puntero de recorrido desde el nodo raíz. Si el bit de la dirección es 0 y el puntero zero está apuntando hacia algún nodo, el puntero de recorrido se mueve al nodo apuntado por el puntero zero. En caso contrario, se mueve al nodo apuntado por one (En caso de que exista). Esto se repite nodo a nodo, hasta que:
 
 \begin{itemize}
-    	\item     El puntero de recorrido queda varado en un nodo decision, con lo cual se retorna el valor de gw. Ó
+    	\item     El puntero de recorrido queda varado en un nodo decisión, con lo cual se retorna el valor de gw. Ó
     	\item El puntero de recorrido queda varado en un nodo común. 
 \end{itemize}
 
 
 
-Contemplando esta última posibilidad, el algoritmo hace que en cada nodo se chequee si se trata de un nodo decisión. En dicho caso, se almacena el campo gw en una variable y se continua el recorrido. Si se da un caso en el cual el nodo de recorrido queda apuntando a un nodo comun y luego de testear un bit se determina que el mismo no tiene un nodo asociado (es decir, que alguno de los punteros zero / one esté en NULL) la función retorna la variable anteriormente mencionada. 
+Contemplando esta última posibilidad, el algoritmo hace que en cada nodo se chequee si se trata de un nodo decisión. En dicho caso, se almacena el campo gw en una variable y se continua el recorrido. Si se da un caso en el cual el nodo de recorrido queda apuntando a un nodo común y luego de testear un bit se determina que el mismo no tiene un nodo asociado (es decir, que alguno de los punteros zero / one esté en NULL) la función retorna la variable anteriormente mencionada. 
 
 \subsection {Cache}
 
 Se implementó una cache directa. La misma consta de una tabla hash de 16 entradas. Las colisiones se resuelven por reemplazo directo. La misma fue testeada con ambos algoritmos mencionados anteriormente. Para ello, se agregó una lógica adicional que consistió en:
 
 \begin{itemize}
-	\item Al tomar una direccion IP, chequear primero si el valor de decisión se encuentra en caché.
+	\item Al tomar una dirección IP, chequear primero si el valor de decisión se encuentra en caché.
 	\item Si está, retornar dicho valor.
 	\item En otro caso, efectuar el lookup y almacenar el valor de decisión en caché.
 \end{itemize}

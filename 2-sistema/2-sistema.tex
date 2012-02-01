@@ -2,19 +2,19 @@
 
 \section{Solución propuesta}
 
-Para el problema planteado en el capitulo anterior, se propone, de manera procedimental, la siguiente solucion: 
+Para el problema planteado en el capitulo anterior, se propone, de manera procedimental, la siguiente solución: 
 
     \begin{enumerate}
   	\item Un flujo de paquetes llega a la interfaz de red del dispositivo y es necesario clasificarlo en distintos flujos para que sea redireccionado.
 	\item Se almacenan en un buffer los paquetes en orden de llegada.
-	\item Se extrae el primer paquete y se toma la informacion que pertenece a la cabecera, la informacion completa del paquete queda en espera.
-	\item Se envia al microprocesador la cabecera. 
-	\item El Microprocesador aplica un algoritmo de clasificacion a cierta informacion de la cabecera y reenvia los resultados al Hardware. 
-	\item Se anexa a cada palabra del paquete un Tag adjunto con el resultado de la clasificacion y se lo envia hacia la interfaz de salida.
+	\item Se extrae el primer paquete y se toma la información que pertenece a la cabecera, la información completa del paquete queda en espera.
+	\item Se envía al microprocesador la cabecera. 
+	\item El Microprocesador aplica un algoritmo de clasificación a cierta información de la cabecera y reenvía los resultados al Hardware. 
+	\item Se anexa a cada palabra del paquete un Tag adjunto con el resultado de la clasificación y se lo envía hacia la interfaz de salida.
     \end{enumerate}
 
 \section{Arquitectura propuesta}
-Para implementar la soluccion propuesta se propone la utilizacion de la arquitectura de la figura~\ref{fig:solucion}
+Para implementar la solución propuesta se propone la utilización de la arquitectura de la figura~\ref{fig:solucion}
  \begin{figure}[h]
   \centering
 	 \includegraphics[width=0.7\textwidth]{2-sistema/graf/solucion.eps}
@@ -23,7 +23,7 @@ Para implementar la soluccion propuesta se propone la utilizacion de la arquitec
 \end{figure}
 
 \subsection{Interfaz de acceso a la cabecera}
-Este módulo tiene como función acceder a los campos que conforman la cabecera IP en los paquetes entrantes. La información recolectada es enviada al micrprocesador para que éste lleve a cabo el software de clasificación.
+Este módulo tiene como función acceder a los campos que conforman la cabecera IP en los paquetes entrantes. La información recolectada es enviada al microprocesador para que éste lleve a cabo el software de clasificación.
 
 \newpage
 
@@ -48,11 +48,11 @@ Este modulo también debe permitir la parametrización en la mayor cantidad de s
 El Componente Delay buffer sera el encargado de ir tomando los datos desde la FIFO y de detectar el inicio y finalización de un paquete. Además deberá mantener almacenado el paquete mientras el software toma una decisión. En este modulo es deseable poder configurar la cantidad de palabras que se consideraran parte de la cabecera y que sera enviadas al software. 
 
 \subsubsection{Uplink}
-Este Modulo es el encargado de realizar la comunicación entre el flujo de datos que proviene de la red y el procesador. Para ello debe entender las señales que utiliza el Bus, Avalon-MM, y poder interrumpir al procesador para enviarles los datos cuando estos estén disponibles. Cuando el procesador responde con el resultado de la clasificación, este modulo lo almacena y lo envía  write output para que este escriba el resultado de la clasificación en la etiqueta anexa al paquete correspondiente.
+Este Modulo es el encargado de realizar la comunicación entre el flujo de datos que proviene de la red y el procesador. Para ello debe entender las señales que utiliza el Bus, Avalon-MM, y poder interrumpir al procesador para enviarles los datos cuando estos estén disponibles. Cuando el procesador responde con el resultado de la clasificación, este modulo lo almacena y lo envía  Write output para que este escriba el resultado de la clasificación en la etiqueta anexa al paquete correspondiente.
 Eventualmente se desarrollaran varias versiones de este modulo, que envíen toda la cabecera o una parte selectiva de ella para optimizar así el rendimiento.
 
 \subsubsection{Write Output}
-Para finalizar, Write Output, toma la salida de Delay buffer y escribe el resultado que le envia Uplink en la etiqueta que se encuentra anexa a cada una de las palabras del paquete.
+Para finalizar, Write Output, toma la salida de Delay buffer y escribe el resultado que le envía Uplink en la etiqueta que se encuentra anexa a cada una de las palabras del paquete.
 
 \section{Algoritmos de Clasificación}
 
@@ -66,13 +66,13 @@ Para optimizar este esquema, los prefijos se almacenan en orden decreciente de l
 \begin{figure}[h]
   \centering
 	\includegraphics[width=0.80\textwidth]{2-sistema/graf/linear.eps}
-  \caption{Busqueda lineal}
+  \caption{Búsqueda lineal}
   \label{fig:linear}
 \end{figure}
 
 \subsection {Unibit tries}
 
-Un unibit trie es un árbol en el cual cada nodo contiene un \textit{puntero-cero }y un \textit{puntero-uno}. Partiendo del nodo raíz, todos los prefijos que comienzan con 0 son almacenados en el subárbol apuntado por el puntero-cero y aquellos que comienzan con 1 se almacenan en el subárbol apuntado por el puntero-uno.
+Un Unibit trie es un árbol en el cual cada nodo contiene un \textit{puntero-cero }y un \textit{puntero-uno}. Partiendo del nodo raíz, todos los prefijos que comienzan con 0 son almacenados en el subárbol apuntado por el puntero-cero y aquellos que comienzan con 1 se almacenan en el subárbol apuntado por el puntero-uno.
 
 Cada subárbol es construido recursivamente de manera similar usando los bits restantes de cada uno de los prefijos.
 
@@ -96,7 +96,7 @@ Considerar la siguiente tabla de ruteo
 
 
 
-A la misma le corresponde representación en unibit trie de la figura ~\ref{fig:trie}
+A la misma le corresponde representación en Unibit trie de la figura ~\ref{fig:trie}
 
 Considerar una dirección de destino \textit{D}. Para efectuar la búsqueda del prefijo más largo los bits de \textit{D} son usados para trazar un camino a lo largo del trie. Dicho camino comienza en el nodo raíz y continúa hasta toparse con un puntero vacío o un nodo vacío. Durante el recorrido a través del trie, el algoritmo mantiene un registro del último prefijo encontrado en un nodo en el camino. Cuando la búsqueda falla, ese es el prefijo retornado.
 \newpage
@@ -140,7 +140,7 @@ El sistema embebido que sera generado a partir de este proyecto no sera la excep
 
 \subsection{Dispositivos Lógicos Programables}
 Los dispositivos lógicos pueden ser clasificados en dos categorías, fijos y programables. Los fijos son permanentes, están preparados para realizar una o una variedad especifica de funciones y una vez manufacturados no pueden ser modificados.
-En cambio, los dispositivos lógicos programables, de ahora en adelante referenciados como PLD, ofrecen la posibilidad de ser reprogramados en cualquier momento con cualquier función lógica que el usuario requiere y que sea soportado por el dispositivo en cuestión.	
+En cambio, los dispositivos lógicos programables, de ahora en adelante referenciados como PLD, ofrecen la posibilidad de ser programados en cualquier momento con cualquier función lógica que el usuario requiere y que sea soportado por el dispositivo en cuestión.	
 
 Existen dos grandes tipos de PLD, FPGA y CPLD. Los CPLD ofrecen una capacidad lógica pequeña, pero con unas características de temporización predecibles lo que los hace dispositivos ideales para aplicaciones de control y cualquier otra tarea de tiempo real. Además su consumo de potencia reducido y su bajo costo los posicionan muy bien en el campo de los dispositivos portátiles.
 Por otro lado las FPGA ofrecen una mayor densidad lógica y un mejor rendimiento. Actualmente es posible encontrar hasta 2 millones de celdas lógicas en una FPGA comercial. Además estos dispositivos ofrece módulos embebidos como tranceptores, memoria o microprocesadores. Todo esto le permite a las FPGA ser usadas en una amplia variedad de aplicaciones como procesamiento de datos, instrumentación, telecomunicaciones y procesamiento de señales.
@@ -150,7 +150,7 @@ En el presente proyecto se enfocará el desarrollo sobre FPGA ya que se dispone 
 
 \subsection{Sistemas embebidos en Lógica Programable}
 
-La tecnología que forma parte de las FPGA esta disponible desde mediados de los 80. Inicialmente eran usadas en su mayoría como contenedores de la lógica de interconexion que rodea a aplicaciones de microprocesadores. 
+La tecnología que forma parte de las FPGA esta disponible desde mediados de los 80. Inicialmente eran usadas en su mayoría como contenedores de la lógica de interconexión que rodea a aplicaciones de microprocesadores. 
 En los últimos años las FPGA se utilizaron para el procesamiento de señales y como una alternativa a los DSP de propósito general.
 
 Actualmente existe un interés particular por el uso de las FPGA como plataforma para sistemas embebidos, especialmente en aplicaciones que no justifican el costo de un ASIC. Esto es posible gracias a dos tendencias observadas en los últimos años, el incremento de la cantidad de elementos lógicos disponibles en cada dispositivo y la evolución de las Herramientas de Software provistas por los fabricantes. En el figura~\ref{figa:elementoslogicos} es posible ver el aumento de la cantidad de elementos lógicos, o celdas lógicas, disponibles en dispositivos de alta gama de las dos empresas mas importantes del sector.
@@ -287,7 +287,7 @@ La unidad máxima de transferencia (Maximum Transfer Unit - MTU) se define como 
 En este contexto, pueden distinguirse 2 tipos de fragmentación:
 
 \begin{itemize}
-	\item Fragmentación en ruta: se produce cuando un datagrama es creado por un host en una red con un valor determinado de MTU y en su camino hacia el host de destino ha de pasar por otra red con una MTU menor. En estos casos el router que hace la transición a la red de MTU menor ha de fragmentar los datagramas para que no excedan el tamaño de la nueva red.
+	\item Fragmentación en ruta: se produce cuando un datagrama es creado por un host en una red con un valor determinado de MTU y en su camino hacia el host de destino ha de pasar por otra red con una MTU menor. En estos casos el enrutador que hace la transición a la red de MTU menor ha de fragmentar los datagramas para que no excedan el tamaño de la nueva red.
 	\item Fragmentación en origen: se produce como consecuencia del diseño de la aplicación (es decir, cuando ésta trabaja con bloques de datos mayores al MTU del protocolo de enlace de datos).	
 \end{itemize}
 
@@ -309,7 +309,7 @@ La PDU del protocolo IP se denomina \textit{datagrama IP} y se compone de los si
 	\item Identificador: un número de secuencia que, junto a la dirección origen y destino y el protocolo usuario, se utiliza para identificar de forma unívoca al datagrama.
 	\item Flags: son 3 bits de los cuales solo 2 están definidos. El bit de \textit{no fragmentación} prohíbe la fragmentación cuando está puesto a 1. El bit de \textit{Más datos} se utiliza para fragmentación y reensamblado.
 	\item Desplazamiento del fragmento: indica el lugar donde se sitúa el fragmento dentro del datagrama original, medido en unidades de 64 bits.
-	\item Tiempo de vida: en cada router se decrementa en 1 unidad. Tiene como fin evitar que un datagrama se quede dando vueltas para siempre en la red.
+	\item Tiempo de vida: en cada enrutador se decrementa en 1 unidad. Tiene como fin evitar que un datagrama se quede dando vueltas para siempre en la red.
 	\item Protocolo: especifica a que protocolo del nivel de transporte corresponde el datagrama.
 	\item Suma de comprobación de la cabecera: Es el complemento a uno de la suma en complemento a uno de todas las palabras de 16 bits de la cabecera.
 	\item Dirección origen: codificada para permitir una asignación variable de bits para especificar la red y el sistema final conectado a la red especificada.
@@ -339,7 +339,7 @@ Los bits que corresponden a la parte de red conforman lo que se denomina \textit
 
 La forma más común de representar una dirección IP es en lo que se denomina \textit{notación punto-decimal}. Esto es, cada uno de los cuatro octetos que conforman la dirección se colocan en base decimal separados por puntos.
 
-Las máscaras permiten extraer de forma sencilla la parte de red o de host de una dirección. Por ejemplo un router que ha de enviar un datagrama puede realizar un AND entre la dirección de destino y la máscara correspondiente, con lo que extraerá la parte de red de la dirección.
+Las máscaras permiten extraer de forma sencilla la parte de red o de host de una dirección. Por ejemplo un enrutador que ha de enviar un datagrama puede realizar un AND entre la dirección de destino y la máscara correspondiente, con lo que extraerá la parte de red de la dirección.
 
 Existen además direcciones (no redes) clase D cuyos primeros cuatro bits valen 1110. Las direcciones clase D se utilizan para definir grupos multicast. El grupo queda definido por los 28 bits siguientes. Puede haber hasta 268435456 direcciones multicast en Internet. Las direcciones clase D nunca puede aparecer como direcciones de origen de un datagrama.
 
