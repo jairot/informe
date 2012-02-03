@@ -205,7 +205,7 @@ Los tipos de periféricos cubiertos son:
 
 Todos los periféricos, ya sean de Altera o de terceros, deben proveer un archivo de cabecera que defina la interfaz de bajo nivel del dispositivo con el hardware. 
 
-Ciertos dispositivos tienen características específicas de hardware con requierimientos de uso que no se adaptan bien a una API de propósito general. La HAL maneja dichos requerimientos mediante la función ioctl(), cuyas opciones dependerán del periférico en cuestión.
+Ciertos dispositivos tienen características específicas de hardware con requerimientos de uso que no se adaptan bien a una API de propósito general. La HAL maneja dichos requerimientos mediante la función ioctl(), cuyas opciones dependerán del periférico en cuestión.
 
 Algunos periféricos proveen funciones de acceso dedicadas que no están basadas en el modelo genérico de la HAL. En ese caso, se debe proveer un archivo de cabecera con dichas funciones.
 
@@ -223,7 +223,7 @@ La creación y administración de proyectos basados en la HAL están altamente l
   \label{fig:halsof}
 \end{figure}
 
-La figura ~\ref{fig:halsof} muestra el diagrama en bloques de un software basado en la HAL. Todo programa de este tipo consta de dos proyectos. El ćodigo de aplicación específico se encuentra en uno de ellos, el cual depende a su vez de otro proyecto BSP separado.
+La figura ~\ref{fig:halsof} muestra el diagrama en bloques de un software basado en la HAL. Todo programa de este tipo consta de dos proyectos. El código de aplicación específico se encuentra en uno de ellos, el cual depende a su vez de otro proyecto BSP separado.
 
 EL primero contiene todo el código que el programador desarrolla. El segundo, toda la información necesaria para la interacción hardware-software. Este último a su vez depende del hardware del sistema, cuya información se encuentra en un archivo generado por la herramienta SOPC Builder.
 
@@ -263,14 +263,14 @@ El archivo de cabecera \_regs.h define las siguientes macros de acceso para el c
 \end{itemize}
 
 Cabe mencionar que las los valores leídos/escritos mediante las macros de acceso a registro (IORD e IOWR) no trabajan con la caché del microprocesador.
-En este contexto, es necesario destacar esto ya que los valores intercambiados entre el módulo software y el gestor de datos tienen que ser leidos/escritos sólamente si estos están en el bus.
+En este contexto, es necesario destacar esto ya que los valores intercambiados entre el módulo software y el gestor de datos tienen que ser leidos/escritos solamente si estos están en el bus.
 
 \chapter{Apéndice D}
 \section*{SOPC Builder}
 
-SOPC Builder es una herramienta que posibilita la definición y generación de Sistemas en Chips Programables (system-on-a-programable-chip, SoPC) en mucho menos tiempo que requieren los métodos manuales tradicionales de integración. Es parte del software Quartus II.
+SOPC Builder es una herramienta que posibilita la definición y generación de Sistemas en Chips Programables (system-on-a-programable-chip, SOPC) en mucho menos tiempo que requieren los métodos manuales tradicionales de integración. Es parte del software Quartus II.
 
-\subsection*{Componentes a medida (custom components)}
+\subsection*{Componentes a medida (Custom Component)}
 
 Además de una lista de componentes que ya están preparados para funcionar, SOPC Builder ofrece la posibilidad de crear componentes personalizados. Esto se efectúa importando módulos creados en algún HDL.
 

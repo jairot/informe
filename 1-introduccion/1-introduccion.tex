@@ -4,11 +4,11 @@
 \begin{comment}
 \subsection{Evolución en los dispositivos de enrutamiento}
 
-En un principio los enrutadores contaban con un bus central compartido, un CPU, memoria y los puertos de entrada y salida. Cada paquete entrante era transferido al CPU por medio del bus compartido. La decisión de forwarding se llevaba a cabo allí y luego el paquete atravesaba nuevamente dicho bus hacia el puerto de salida. La performance de estos dispositivos estaba limitada principalmente por 2 factores: la capacidad de procesamiento de la CPU central (debido a que la búsqueda en la tabla de ruteo es una tarea que consume una alta cantidad de tiempo) y el hecho de que cada paquete tenía que atravesar 2 veces el bus compartido.
+En un principio los enrutadores contaban con un bus central compartido, un CPU, memoria y los puertos de entrada y salida. Cada paquete entrante era transferido al CPU por medio del bus compartido. La decisión de reenvío se llevaba a cabo allí y luego el paquete atravesaba nuevamente dicho bus hacia el puerto de salida. La performance de estos dispositivos estaba limitada principalmente por 2 factores: la capacidad de procesamiento de la CPU central (debido a que la búsqueda en la tabla de ruteo es una tarea que consume una alta cantidad de tiempo) y el hecho de que cada paquete tenía que atravesar 2 veces el bus compartido.
 
 Para hacer frente al primer factor algunos fabricantes de enrutadores introdujeron paralelismo mediante múltiples CPU. Cada una de ellas manipulaba un porción del tráfico entrante. Pero cada paquete tenía todavía que atravesar el bus compartido 2 veces. 
 
-Más adelante el diseño de la arquitectura de enrutadores avanzó un paso más. Una memoria caché de ruteo y capacidad de procesamiento fueron añadidos a cada puerto y las decisiones de forwarding se hacían localmente. De esta manera, cada paquete atraviesa el bus compartido solamente una vez desde el puerto de entrada hacia el puerto de salida. Aunque cada puerto contaba con capacidad de procesamiento, todas las funciones de control todavía se manejaban por el procesador central.
+Más adelante el diseño de la arquitectura de enrutadores avanzó un paso más. Una memoria caché de ruteo y capacidad de procesamiento fueron añadidos a cada puerto y las decisiones de reenvío se hacían localmente. De esta manera, cada paquete atraviesa el bus compartido solamente una vez desde el puerto de entrada hacia el puerto de salida. Aunque cada puerto contaba con capacidad de procesamiento, todas las funciones de control todavía se manejaban por el procesador central.
 
 Aunque con el tiempo la performance de los distintos CPU han crecido, este crecimiento no ha podido mantener el ritmo del incremento en la capacidad de los enlaces. Es en este contexto donde se ve claramente que hoy por hoy uno de los mayores cuellos de botella en los enrutadores troncales es el cómputo del prefijo más largo para cada paquete. Los protocolos de hoy en día requieren hacer selección de rutas en base no sólo a un campo sino a varios (tales como el número de protocolo, dirección de origen, puerto de destino, etc). El número de accesos a memoria y la velocidad de ésta determinan la rapidez de un algoritmo de búsqueda de ruta (route lookup algorithm).
 
@@ -18,9 +18,11 @@ Aunque con el tiempo la performance de los distintos CPU han crecido, este creci
 \subsubsection{Características del tráfico}
 Es notorio que por estos días las redes de datos están creciendo en complejidad. Basta mirar la cantidad de aplicaciones que aparecen día a día, muchas de ellas con contenido multimedia, lo cual aumenta las exigencias a la hora de determinar la cantidad de datos que se deben transmitir. Todo ello trae aparejado un necesario aumento en la velocidad. 
 
-También es notoria la consolidación que múltiples servicios sobre redes Ethernet, como ser comunicación de voz, video en estándar y alta definición (STV y HDTV), videoconferencias, transacciones en tiempo real, etc.
 
-Además vale mencionar la tendencia actual a la virtualización de servidores. La misma viene dada principalmente por una cuestión de flexibilidad (un servidor físico con gran capacidad computacional puede albergar un número de servidores virtuales) y agilidad (una máquina virtual puede ser creada en cuestion de minutos o a lo sumo horas).
+También es notoria la consolidación que múltiples servicios sobre redes Ethernet, como ser comunicación de voz, vídeo en estándar y alta definición (STV y HDTV), videoconferencias, transacciones en tiempo real, etc.
+
+
+Además vale mencionar la tendencia actual a la virtualización de servidores. La misma viene dada principalmente por una cuestión de flexibilidad (un servidor físico con gran capacidad computacional puede albergar un número de servidores virtuales) y agilidad (una máquina virtual puede ser creada en cuestión de minutos o a lo sumo horas).
 
 \subsubsection{Procesamiento de paquetes}
 En este contexto puede verse cómo es necesaria la optimización en el procesamiento de los paquetes de datos. Si se habla de procesamiento a velocidad de línea, en una red Ethernet este es, para un paquete de longitud mínima, de unos 6 nanosegundos por paquete.
@@ -36,7 +38,7 @@ Las nuevas tendencias se canalizan haca la agregación de paquetes en flujos. Do
 \begin{figure}[h]
   \centering
 	\includegraphics[width=0.70\textwidth]{1-introduccion/graf/packet_vs_flow-crop.eps}
-  \caption{Agregacion en flujos}
+  \caption{Agregación en flujos}
   \label{fig:flow}
 \end{figure}
 
@@ -52,43 +54,43 @@ Las nuevas tendencias se canalizan haca la agregación de paquetes en flujos. Do
 
 Para hacer frente a esta brecha entre la necesidad de procesar el flujo creciente de datos de la red y la capacidad de hacerlo, es necesario contar con soluciones que permitan generar respuestas especificas de manera flexible, en el menor tiempo y con el mejor rendimiento posible.
 
-Las tecnologias que en la actualidad son usadas para solucionar estos problemas, son tres:
+Las tecnologías que en la actualidad son usadas para solucionar estos problemas, son tres:
 
-Los Circuitos de Propósito Específico (ASICs), que estan formados por cientos de bloques especializados trabajando en paralelo. Aunque cuentan con un altisimo desenpeño, tienen un alto costo inicial y el tiempo para desarrollarlo es grande.
+Los Circuitos de Propósito Específico (ASICs), que están formados por cientos de bloques especializados trabajando en paralelo. Aunque cuentan con un altísimo desempeño, tienen un alto costo inicial y el tiempo para desarrollarlo es grande.
 
-Los Procesadores de Red (NPs), son procesadores especificos para este tipo de problemas, cuentan con múltiples elementos de procesamiento, buena performance para ciertas tareas, Tienen dificultades a la hora de la portabilidad y sus interfaces son propietarias en casi todos los casos.
+Los Procesadores de Red (NPs), son procesadores específicos para este tipo de problemas, cuentan con múltiples elementos de procesamiento, buena performance para ciertas tareas, Tienen dificultades a la hora de la portabilidad y sus interfaces son propietarias en casi todos los casos.
 \begin{figure}[h]
   \centering
       \includegraphics[width=0.5\textwidth]{1-introduccion/graf/NP_based.eps}
-  \caption{Solucion basada en NP}
+  \caption{Solución basada en NP}
   \label{fig:diseno}
 \end{figure}
 \newpage
 
-Los Procesadores de Propósito General (GPPs), utilizan la arquitectura propia de la PC y la adaptan al procesamiento de la red mediante un software especializado. Aunque esta solucion es muy popular por su flexibilidad y su bajo costo, las transiciones con memoria RAM mediante un bus compartido y la naturaleza secuencial de los GPPs son factores limitantes a tener en cuenta. 
+Los Procesadores de Propósito General (GPPs), utilizan la arquitectura propia de la PC y la adaptan al procesamiento de la red mediante un software especializado. Aunque esta solución es muy popular por su flexibilidad y su bajo costo, las transiciones con memoria RAM mediante un bus compartido y la naturaleza secuencial de los GPPs son factores limitantes a tener en cuenta. 
  \begin{figure}[h]
   \centering
       \includegraphics[width=0.5\textwidth]{1-introduccion/graf/GPP_based.eps}
-  \caption{Solucion basada en GPP}
+  \caption{Solución basada en GPP}
   \label{fig:diseno}
 \end{figure}
 
-Las tecnologias actuales, por las razones anteriormente mencionadas, estan alcanzando su limite y es necesario encontrar tecnologias que las remplazen, para poder satisfacer los requerimientos actuales de las redes. 
+Las tecnologías actuales, por las razones anteriormente mencionadas, están alcanzando su limite y es necesario encontrar tecnologías que las reemplacen, para poder satisfacer los requerimientos actuales de las redes. 
 
-Las FPGA(field-programmable gate array) son dispositivos de logica reconfigurable que es posibile programar, una o varias veces, usando un lenguaje de descripcion de hardware(HDL). Las FPGAs se utilizan en aplicaciones similares a los ASICs sin embargo son más lentas, tienen un mayor consumo de potencia y no pueden abarcar sistemas tan complejos como ellos. A pesar de esto, tienen un flujo de diseño flexible, sus costes de desarrollo y adquisición son mucho menores para pequeñas cantidades de dispositivos y el tiempo de desarrollo es también menor.
+Las FPGA(field-programmable gate array) son dispositivos de lógica reconfigurable que es posible programar, una o varias veces, usando un lenguaje de Descripcion de hardware(HDL). Las FPGAs se utilizan en aplicaciones similares a los ASICs sin embargo son más lentas, tienen un mayor consumo de potencia y no pueden abarcar sistemas tan complejos como ellos. A pesar de esto, tienen un flujo de diseño flexible, sus costes de desarrollo y adquisición son mucho menores para pequeñas cantidades de dispositivos y el tiempo de desarrollo es también menor.
 
 \subsubsection{FPGA como plataforma para SoC}
 
-Los Sistemas en un Chip (SoC) son circuitos integrados que contienen todo, o la mayoria, de los modulos que corresponden a un sistema informatico o electronico en un solo componente. Son usados especialmente en el area de sistemas embebidos. Los microcontroladores son tecnicamente SoC, pero se considera que los SoC tienen procedores mas potentes y pueden correr aplicaciones mas complejas, para lo cual necesitan mayor cantidad de memoria que suele estar disponible como chips externos. 
+Los Sistemas en un Chip (SoC) son circuitos integrados que contienen todo, o la mayoría, de los módulos que corresponden a un sistema informático o electrónico en un solo componente. Son usados especialmente en el área de sistemas embebidos. Los microcontroladores son técnicamente SoC, pero se considera que los SoC tienen procesadores mas potentes y pueden correr aplicaciones mas complejas, para lo cual necesitan mayor cantidad de memoria que suele estar disponible como chips externos. 
 
-Gracias a la disponibilidad en la ultima decada de Soft-Core CPUs y otros soft IP, se ha producido un punto de infleccion en el uso de FPGAs como plataforma para SoC; Mezcla de logros tecnicos y fuerzas de mercado, varios fabricantes como Altera, Cypress Semiconductor, Intel y Xilinx anunciaron la comercializacion de FPGA con facilidades para el desarrollo de SoC.
+Gracias a la disponibilidad en la ultima década de Soft-Core CPUs y otros Soft IP, se ha producido un punto de infección en el uso de FPGAs como plataforma para SoC; Mezcla de logros técnicos y fuerzas de mercado, varios fabricantes como Altera, Cypress Semiconductor, Intel y Xilinx anunciaron la comercialización de FPGA con facilidades para el desarrollo de SoC.
 
-Estos avances que simplifican el desarrollo de SoC, la flexibilidad en el flujo de diseño y el prototipado rapido son las condiciones que posicionan a las FPGA como la herramienta indicada para atacar un problema tan complejo como la clasificacion de paquetes. 
+Estos avances que simplifican el desarrollo de SoC, la flexibilidad en el flujo de diseño y el prototipado rápido son las condiciones que posicionan a las FPGA como la herramienta indicada para atacar un problema tan complejo como la clasificación de paquetes. 
 
  \begin{figure}[h]
   \centering
 	 \includegraphics[width=0.5\textwidth]{1-introduccion/graf/FPGA_based.eps}
-  \caption{Solucion basada en FPGA}
+  \caption{Solución basada en FPGA}
   \label{fig:diseno}
 \end{figure}
 
@@ -117,7 +119,7 @@ La PDU del protocolo IP se denomina \textit{datagrama IP} y se compone de los si
 	\item Identificador: un número de secuencia que, junto a la dirección origen y destino y el protocolo usuario, se utiliza para identificar de forma unívoca al datagrama.
 	\item Flags: son 3 bits de los cuales solo 2 están definidos. El bit de \textit{no fragmentación} prohíbe la fragmentación cuando está puesto a 1. El bit de \textit{Más datos} se utiliza para fragmentación y reensamblado.
 	\item Desplazamiento del fragmento: indica el lugar donde se sitúa el fragmento dentro del datagrama original, medido en unidades de 64 bits.
-	\item Tiempo de vida: en cada router se decrementa en 1 unidad. Tiene como fin evitar que un datagrama se quede dando vueltas para siempre en la red.
+	\item Tiempo de vida: en cada enrutador se decrementa en 1 unidad. Tiene como fin evitar que un datagrama se quede dando vueltas para siempre en la red.
 	\item Protocolo: especifica a que protocolo del nivel de transporte corresponde el datagrama.
 	\item Suma de comprobación de la cabecera: Es el complemento a uno de la suma en complemento a uno de todas las palabras de 16 bits de la cabecera.
 	\item Dirección origen: codificada para permitir una asignación variable de bits para especificar la red y el sistema final conectado a la red especificada.
@@ -186,14 +188,14 @@ Un paquete llega por una interfaz de entrada. Éste porta una dirección IP dete
 
 \section{Objetivos}
 \subsection{Objetivos Generales}
-Teniendo en cuenta los problemas planteados, el objetivo general de este proyecto es estudiar los diversos algoritmos de clasificacion de paquetes para poder encontrar las limitaciones en la implementacion de los mismos tanto en software como en hardware. 
-En Particular, se pretende considerar una plataforma de logica reconfigurable que permite intergar arquitecturas de Hardware con Software embebido.
+Teniendo en cuenta los problemas planteados, el objetivo general de este proyecto es estudiar los diversos algoritmos de clasificación de paquetes para poder encontrar las limitaciones en la implementación de los mismos tanto en software como en hardware. 
+En Particular, se pretende considerar una plataforma de lógica reconfigurable que permite integrar arquitecturas de Hardware con Software embebido.
 
-\subsection{Objetivos Especificos}
+\subsection{Objetivos Específicos}
 
     \begin{itemize}     
 
-     	\item Diseñar un sistema embebido que realice la clasificiación unidimensional de paquetes mediante una arquitectura mixta, Hardware-Software
+     	\item Diseñar un sistema embebido que realice la clasificación unidimensional de paquetes mediante una arquitectura mixta, Hardware-Software
 	\item Implementar dicho sistema en hardware reconfigurable
 	\item Implementar al menos 2 algoritmos conocidos y analizar su performance
 	\item Sugerir mejoras en la implementación de los mismos   
@@ -201,9 +203,9 @@ En Particular, se pretende considerar una plataforma de logica reconfigurable qu
 \end{itemize}
 
 
-\section{Organizacion}
+\section{Organización}
 
-En el Capitulo 2 se estudiara, a nivel funcional, una solucion propuesta para este tipo de problemas. A continuacion se presentara de manera detallada la Arquitectura digital de los modulos que componen el sistema. En el Capitulo 4 se describira la metodologia y los recursos utilizados para implementar este proyecto y en el Capitulo 5 se presentan las diferentes curvas resultantes de la ejecucion de esta implementacion.
+En el Capitulo 2 se estudiara, a nivel funcional, una solución propuesta para este tipo de problemas. A continuación se presentara de manera detallada la Arquitectura digital de los módulos que componen el sistema. En el Capitulo 4 se describirá la metodología y los recursos utilizados para implementar este proyecto y en el Capitulo 5 se presentan las diferentes curvas resultantes de la ejecución de esta implementación.
 
 
 

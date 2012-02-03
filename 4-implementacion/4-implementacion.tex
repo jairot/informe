@@ -2,7 +2,7 @@
 
 \section{Algoritmos de clasificación}
 
-Se implementaron 2 algoritmos de clasificacion: Busqueda lineal y Busqueda en árbol unibit.
+Se implementaron 2 algoritmos de clasificación: Búsqueda lineal y Búsqueda en árbol unibit.
 
 El software utilizado para realizar las pruebas consistió en 2 proyectos por separado. Uno para cada tipo de búsqueda en la tabla.
 
@@ -28,7 +28,7 @@ Los nodos de la lista contienen 3 campos:
 	\item Identificador de decisión (entero de 32 bit con signo)
 \end{itemize}
 
-Como se le dió prioridad a los prefijos de red más largos, se debió sobrecargar el operador de comparación ( > ) para que la función sort pudiese ordenar en base a la longitud de máscara. De esa manera, los nodos que contenían valores de máscara más grandes quedaban en las primeras posiciones de la lista.
+Como se le dio prioridad a los prefijos de red más largos, se debió sobrecargar el operador de comparación ( > ) para que la función sort pudiese ordenar en base a la longitud de máscara. De esa manera, los nodos que contenían valores de máscara más grandes quedaban en las primeras posiciones de la lista.
 
 La función de inserción toma como entrada una dirección, una máscara y un identificador de decisión. Luego instancia una entrada con dichos elementos y la inserta en la lista.
 
@@ -36,16 +36,16 @@ Cuando la función encargada del lookup recibe una dirección IP de destino, rea
 
 \begin{itemize}
 	\item Coloca un iterador al comienzo de la lista.
-	\item Realiza un AND con el valor de máscara del nodo que está siendo apuntado. Si el resultado de la operación es igual al valor de dirección de red de dicho nodo, entonces se retorna con el valor identificador de decisión. En otro caso, continúa la busqueda en el siguiente nodo.
+	\item Realiza un AND con el valor de máscara del nodo que está siendo apuntado. Si el resultado de la operación es igual al valor de dirección de red de dicho nodo, entonces se retorna con el valor identificador de decisión. En otro caso, continúa la búsqueda en el siguiente nodo.
 \end{itemize}
 
-\subsection {Busqueda en Arbol unibit}
+\subsection {Búsqueda en Árbol unibit}
 
 Se implementaron 2 clases. 
 
 \begin{itemize}
 	\item \textit{trienode.h}: define las características de cada nodo del árbol.
-	\item \textit{trie.h}: contiene el árbol unibit, como así tambien las funciones de búsqueda e inserción de nodos. También contiene una función para la creación de la tabla de ruteo de 100 valores.
+	\item \textit{trie.h}: contiene el árbol unibit, como así también las funciones de búsqueda e inserción de nodos. También contiene una función para la creación de la tabla de ruteo de 100 valores.
 \end{itemize}
 
 
@@ -58,7 +58,7 @@ En este contexto, pueden existir 2 tipos de nodo:
 
 Cada nodo cuenta con los siguientes campos:
 \begin{itemize}
-	\item gw: es un identificador de la decisión a tomar. En los nodos no asociados a una decision (nodos comunes), tiene el valor estipulado en la macro NONE.
+	\item gw: es un identificador de la decisión a tomar. En los nodos no asociados a una decisión (nodos comunes), tiene el valor estipulado en la macro NONE.
     \item zero / one: Son punteros a nodo, asociados a los bits 0/1 del prefijo que se esté leyendo.
 
 \end{itemize}
@@ -85,14 +85,14 @@ El algoritmo de búsqueda toma como entrada la dirección IP de destino del paqu
 Esto se repite nodo a nodo, hasta que ocurre alguna de las siguientes situaciones:
 
 \begin{itemize}
-    	\item El puntero de recorrido queda varado en un nodo decision, con lo cual se retorna el valor de gw.
+    	\item El puntero de recorrido queda varado en un nodo decisión, con lo cual se retorna el valor de gw.
     	\item El puntero de recorrido queda varado en un nodo común. 
 \end{itemize}
 
 
-Contemplando esta última posibilidad, el algoritmo hace que en cada nodo se chequee si se trata de un nodo decisión. En dicho caso, se almacena el campo gw en una variable y se continua el recorrido. Si se da un caso en el cual el nodo de recorrido queda apuntando a un nodo comun y luego de testear un bit se determina que el mismo no tiene un nodo asociado (es decir, que alguno de los punteros zero / one esté en NULL) la función retorna la variable anteriormente mencionada. 
+Contemplando esta última posibilidad, el algoritmo hace que en cada nodo se chequee si se trata de un nodo decisión. En dicho caso, se almacena el campo gw en una variable y se continua el recorrido. Si se da un caso en el cual el nodo de recorrido queda apuntando a un nodo común y luego de testear un bit se determina que el mismo no tiene un nodo asociado (es decir, que alguno de los punteros zero / one esté en NULL) la función retorna la variable anteriormente mencionada. 
 
-Cabe mencionar también que la ruta por defecto se inserta en el nodo raíz del arbol.
+Cabe mencionar también que la ruta por defecto se inserta en el nodo raíz del árbol.
 
 \begin{figure}[H]
   \centering
@@ -111,16 +111,16 @@ Luego se inserta el prefijo 11*. Como anteriormente se había insertado el 1100*
 
 Por último en el nodo raíz se inserta la ruta por defecto (S4 en este ejemplo).
 
-Tomando como ejemplo alguna dirección IP que comienze con 1100, puede verse que la búsqueda tomará el camino \textit{Raíz - one - one - zero - zero} y culminará en el nodo cuyo identificador de decisión es S1. 
+Tomando como ejemplo alguna dirección IP que comienza con 1100, puede verse que la búsqueda tomará el camino \textit{Raíz - one - one - zero - zero} y culminará en el nodo cuyo identificador de decisión es S1. 
 
-Vale la pena considerar qué sucede si la dirección IP comienza con 1101. En este caso el camino que seguirá la búsqueda es \textit{Raiz - one - one - zero} y el puntero de recorrido quedará varado allí, ya que no existe en dicho punto un nodo asociado al puntero one. Vale recordar que en cada iteración, el algoritmo de búsqueda chequea si el nodo apuntado por el puntero de recorrido es decisión. Para este caso puede verse que en la segunda iteración (cuando se ha recorrido \textit{Raíz - one - one}) el algoritmo se encuentra parado en un nodo decisión y por lo tanto almacena el valor contenido en dicho nodo y procede a continuar. Cuando se encuentre varado en el próximo, lo que hará es retornar con el valor mencionado anteriormente. 
+Vale la pena considerar qué sucede si la dirección IP comienza con 1101. En este caso el camino que seguirá la búsqueda es \textit{Raíz - one - one - zero} y el puntero de recorrido quedará varado allí, ya que no existe en dicho punto un nodo asociado al puntero one. Vale recordar que en cada iteración, el algoritmo de búsqueda chequea si el nodo apuntado por el puntero de recorrido es decisión. Para este caso puede verse que en la segunda iteración (cuando se ha recorrido \textit{Raíz - one - one}) el algoritmo se encuentra parado en un nodo decisión y por lo tanto almacena el valor contenido en dicho nodo y procede a continuar. Cuando se encuentre varado en el próximo, lo que hará es retornar con el valor mencionado anteriormente. 
 
 \subsection {Cache}
 
 Se implementó una cache directa. La misma consta de una tabla hash de 16 entradas, aunque este tamaño puede ser modificado mediante la macro CACHE\_SIZE. Las colisiones se resuelven por reemplazo directo. La misma fue testeada con ambos algoritmos mencionados anteriormente. Para ello, se agregó una lógica adicional que consistió en:
 
 \begin{itemize}
-	\item Al tomar una direccion IP, chequear primero si el valor de decisión se encuentra en caché.
+	\item Al tomar una dirección IP, chequear primero si el valor de decisión se encuentra en caché.
 	\item Si está, retornar dicho valor.
 	\item En otro caso, efectuar el lookup y almacenar el valor de decisión en caché. Para dicho almacenamiento, se efectúa un hash en la dirección IP, que consiste en calcular el resto de la división entre dicha dirección y el valor de CACHE\_SIZE. El resultado es utilizado como índice para el almacenamiento en la tabla.
 \end{itemize}
@@ -208,7 +208,7 @@ El Nios II es un procesador RISC de 32 bits de propósito general que cuenta con
 	\item Set de instrucciones compatible entre todos las versiones del procesador Nios II.
 \end{itemize}
 
-Para poder ser implementado en una mayor variedad de dispositivos el Nios II ofrece 3 configuraciones diferentes:  Nios II/f (fast), Nios II/s (standard), and Nios II/e (economy).
+Para poder ser implementado en una mayor variedad de dispositivos el Nios II ofrece 3 configuraciones diferentes:  Nios II/f (fast), Nios II/s (Standard), and Nios II/e (Economy).
 
 \subsubsection{Nios II/e}
 El Core Nios II/e esta diseñado para utilizar la menor cantidad de espacio posible. Esto esto funciona especialmente para FPGA de bajo costo. Tiene las siguientes características:
@@ -242,43 +242,44 @@ El core Nios II/f esta diseñado para ofrecer la mayor performance a las expensa
 \end{itemize}
 
 En vista de que este último ofrece la mayor performance y el hardware utilizado es capaz de soportarlo, se optó por el mismo para ser instanciado en el sistema.
-\subsection{Verificación}
-Se muestran a continuacion varios casos de prueba que se realizaron para verificar el correcto funcionamiento del sistema.
+
+\section{Verificación}
+Se muestran a continuación varios casos de prueba que se realizaron para verificar el correcto funcionamiento del sistema.
 \begin{table}
 	\begin{tabular}{|>{\columncolor[gray]{0.8}}l|p{9cm}|} \hline
 \multicolumn{2}{|>{\columncolor[gray]{0.8}}l|}{\textbf{Caso de Prueba: Funcionalidad del SoC}}\\ \hline
 Propósito  & 1) Verificar la funcionalidad completa de System on Chip. 
 
-2) Probar la correcta ejecucion de software en el Nios II.
+2) Probar la correcta ejecución de software en el Nios II.
 
 3) Comprobar el funcionamiento de las E/S del procesador. 
 \\ \hline
- Prerequisitos  & Se debe haber sintetizado el sistema completo y compilado sin errores el software.\\ \hline
- Datos de Prueba & Se preparara un sistema basico que incluye un Nios II/f, la interfaz de memoria y un PIO conectado a los LEDs de la placa.
+ Prerrequisitos  & Se debe haber sintetizado el sistema completo y compilado sin errores el software.\\ \hline
+ Datos de Prueba & Se preparara un sistema básico que incluye un Nios II/f, la interfaz de memoria y un PIO conectado a los LEDs de la placa.
 
-Se usara un Software en C que va incrementando e imprimiendo en consola un valor entero mientras envia este valor, en binario, al PIO y por extension a los LED.  \\ \hline
+Se usara un Software en C que va incrementando e imprimiendo en consola un valor entero mientras envía este valor, en binario, al PIO y por extensión a los LED.  \\ \hline
  Pasos & 1) Programar la FPGA con el sistema completo.
 
 2) Descargar el Software al Microprocesador.
 
 3) Iniciar la consola del NIOS II .\\ \hline
  Resultados Esperados & El valor del contador que se imprime por consola debe coincidir con el valor mostrado por los LED.\\ \hline
- Evaluación de la Prueba  & El resultado de la ejecucion fue exitoso. \\ \hline
+ Evaluación de la Prueba  & El resultado de la ejecución fue exitoso. \\ \hline
 	\end{tabular}
 	\caption{Caso de Prueba: Funcionalidad del SoC}
 	\label{tab:testsoc}
 \end{table}
 \begin{table}
 	\begin{tabular}{|>{\columncolor[gray]{0.8}}l|p{9cm}|} \hline
-\multicolumn{2}{|>{\columncolor[gray]{0.8}}l|}{\textbf{Caso de Prueba: Interrupcion, Envio y Recepción de datos}}\\ \hline
+\multicolumn{2}{|>{\columncolor[gray]{0.8}}l|}{\textbf{Caso de Prueba: Interrupción, Envió y Recepción de datos}}\\ \hline
 Propósito  & 1) Comprobar mediante un Custom Component simple el funcionamiento de las interrupciones.
 
-2) Enviar y recibir un dato Estatico por el bus sin errores. 
+2) Enviar y recibir un dato Estático por el bus sin errores. 
 \\ \hline
- Prerequisitos  & Se debe contar con el Soc Completo y funcional.\\ \hline
- Datos de Prueba & Se prepara un Componente propio simple que interrumpe, envia un dato y espera que el procesador le responda con le mismo dato. 
+ Prerrequisitos  & Se debe contar con el SoC Completo y funcional.\\ \hline
+ Datos de Prueba & Se prepara un Componente propio simple que interrumpe, envía un dato y espera que el procesador le responda con le mismo dato. 
 
-Preparar un software que cuente con la Rutina de Interrupcion correspondiente y que cuando reciba un dato responda con el mismo de manera inmediata, ademas de imprimirlo por consola.
+Preparar un software que cuente con la Rutina de Interrupción correspondiente y que cuando reciba un dato responda con el mismo de manera inmediata, además de imprimirlo por consola.
  \\ \hline
  Pasos & 1) Programar la FPGA con el sistema completo.
 
@@ -289,7 +290,7 @@ Preparar un software que cuente con la Rutina de Interrupcion correspondiente y 
  Resultados Esperados & En la consola debe aparecer repetidamente el valor que fue puesto en el Hardware. \\ \hline
  Evaluación de la Prueba  & El resultado de la prueba fue exitoso.\\ \hline
 	\end{tabular}
-	\caption{Caso de Prueba: Interrupcion, Envio y Recepción de datos}
+	\caption{Caso de Prueba: Interrupción, Envió y Recepción de datos}
 	\label{tab:enviorecepcion}
 \end{table}
 \begin{table}
@@ -303,10 +304,10 @@ Propósito  & 1) Comprobar que la cabecera llega completa y sin errores al softw
 
 4) Comprobar que el paquete pasa sin errores por todo el sistema. 
 \\ \hline
- Prerequisitos  & Se debe contar con la Interfaz de acceso a la cabecera completa y funcional, el generador, el software necesario y se debe conectar la salida de Write Output a los LEDs de la placa .\\ \hline
- Datos de Prueba & Se configura el Generador con la cantidad que la cantidad de ciclos de reloj entre paquetes sea la maxima. 
+ Prerrequisitos  & Se debe contar con la Interfaz de acceso a la cabecera completa y funcional, el generador, el software necesario y se debe conectar la salida de Write Output a los LEDs de la placa .\\ \hline
+ Datos de Prueba & Se configura el Generador con la cantidad que la cantidad de ciclos de reloj entre paquetes sea la máxima. 
 
-Se prepara el software para que lea la cabecera completa, imprima lo leido en consola y responda automaticamente con un resultado conocido. 
+Se prepara el software para que lea la cabecera completa, imprima lo leído en consola y responda automáticamente con un resultado conocido. 
  \\ \hline
  Pasos & 1) Programar la FPGA con el sistema completo.
 
@@ -326,11 +327,11 @@ Se prepara el software para que lea la cabecera completa, imprima lo leido en co
 Propósito  & 1) Medir el retardo de cada algoritmo en acceder a distintas partes de la tabla de ruteo. 
 
 \\ \hline
- Prerequisitos  & Se debe contar con el software necesario para la clasificación de paquetes. Las pruebas se efectúan para cada algortimo por serprado. Se debe contar con un SoC que incluya un timer que luego será instanciado en el software para medir los retardos en el acceso.
+ Prerrequisitos  & Se debe contar con el software necesario para la clasificación de paquetes. Las pruebas se efectúan para cada algoritmo por separado. Se debe contar con un SoC que incluya un timer que luego será instanciado en el software para medir los retardos en el acceso.
  \\ \hline
  Datos de Prueba & Se generan dentro del mismo software una tabla de ruteo y otra tabla que contendrá las direcciones para efectuar el test. 
 
-Se prepara el software para que imprima lo leido en consola. 
+Se prepara el software para que imprima lo leído en consola. 
  \\ \hline
  Pasos & 1) Programar la FPGA con el sistema completo.
 
