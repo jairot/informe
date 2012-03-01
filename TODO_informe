@@ -3,4 +3,29 @@ Cache!
 Apendices
 Hacer un Apendice de lo usado para hacer los Test bench???
 
+--- NUEVO ---
 
+Titulo: Implementacion de arquitectura mixta de clasificacion...
+
+Cap 1:
+-Corregir fragmentacion del texto. Las 4 secciones resultantes son: Motivación, Problema marco, Objetivos y Organización.
+-La sección motivación debe cubrir desde "problema en redes" hasta "solucion en fpga"
+-Revisar referencias a figuras
+-Relacionar la redacción de cada tema con el objeto de la tesis
+-Referenciar imágees
+-Revisar claridad en las imágenes
+
+Cap Sistema:
+-Hablar sobre los esquemas de clasificación 100% HW y 100% SW. Remarcar que la solución de nuestro trabajo implementa un esquema mixto.
+-Reemplazar "Arquitectura propuesta" por "Esquema propuesto"
+
+Cap Arquitectura:
+-Falta gráfico que explique bits de datos y bits de control.
+
+Cap Implementación
+-En cuanto a recursos utilizados, usar valores absolutos en vez de porcentajes.
+-En lo que respecta a cache, el grafico debe comparar mejor caso en LLU y UTL, con el caso caché
+
+Cap Conclusiones
+-Mencionar la relación con los ejes de la carrera
+-Mencionar la exposición en CRUNIC
