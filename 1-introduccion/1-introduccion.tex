@@ -15,7 +15,7 @@ Aunque con el tiempo la performance de los distintos CPU han crecido, este creci
 \end{comment}
 
 \subsection{Requerimiento de procesamiento en redes}
-\subsubsection{Características del tráfico}
+%\subsubsection{Características del tráfico}
 Es notorio que por estos días las redes de datos están creciendo en complejidad. Basta mirar la cantidad de aplicaciones que aparecen día a día, muchas de ellas con contenido multimedia, lo cual aumenta las exigencias a la hora de determinar la cantidad de datos que se deben transmitir. Todo ello trae aparejado un necesario aumento en la velocidad. 
 
 
@@ -24,15 +24,19 @@ También es notoria la consolidación que múltiples servicios sobre redes Ether
 
 Además vale mencionar la tendencia actual a la virtualización de servidores. La misma viene dada principalmente por una cuestión de flexibilidad (un servidor físico con gran capacidad computacional puede albergar un número de servidores virtuales) y agilidad (una máquina virtual puede ser creada en cuestión de minutos o a lo sumo horas).
 
-\subsubsection{Procesamiento de paquetes}
 En este contexto puede verse cómo es necesaria la optimización en el procesamiento de los paquetes de datos. Si se habla de procesamiento a velocidad de línea, en una red Ethernet este es, para un paquete de longitud mínima, de unos 6 nanosegundos por paquete.
 
 
 \subsection{Soluciones}
-\subsubsection{Granularidad}
+\subsubsection{Actualidad y tendencias}
 Lo que se hace actualmente es utilizar paquetes de longitud variable. El peor de los casos se da para los paquetes de longitud mínima (64 bytes en Ethernet). Tramas más grandes se traducen en una sobrecarga de paquetes menor en los servidores. A su vez, menos paquetes significa menos interrupciones y menos carga de trabajo en la CPU. Menos interrupciones significa menor delay en el bus de cada servidor. Una menor cantidad de paquetes también significa menos sobrecarga de red en términos de cabeceras y formatos de trama.
 
 Las nuevas tendencias se canalizan haca la agregación de paquetes en flujos. Dos ejemplos los constituyen MPLS y VLANs.
+
+MPLS son las siglas de \textit{Multiprotocol Label Switching}. Es un mecanismo en redes de telecomunicaciones de alta performance que transporta datos de nodo a nodo basado en etiquetas en vez de direcciones de red, con el fin de evitar búsquedas complejas en una tabla de ruteo. Dichas etiquetas identifican enlaces virtuales (paths) entre nodos. Es capaz de encapsular paquetes de varios protocolos de red.
+
+Las VLANs son redes lógicamente independientes que están conectadas a un mismo conmutador físico. Su funcionamiento se basa en un etiquetado dentro de las tramas de enlace de datos.
+
 
 
 \begin{figure}[h]
@@ -146,14 +150,11 @@ Existen 3 maneras de representar un prefijo de red:
 \end{itemize}
 \end{comment}
 
-La necesidad de procesar cada vez más paquetes de datos lleva a lo que se conoce como clasificación.
-
-\subsubsection{Clasificación}
-El proceso de categorización de paquetes en flujos se denomina \textbf{clasificación}. Ésta se efectúa en base a un número de campos en la cabecera del paquete, tales como la dirección de origen/destino, puerto de origen/destino, tipo de servicio (TOS), etc. En general, para una clasificación basada en N campos, se dice que la misma es N-dimensional (o multidimensional). El propósito de la misma es clasificar paquetes de acuerdo a un conjunto de reglas dado.
+La necesidad de procesar cada vez más paquetes de datos lleva a lo que se conoce como \textit{clasificación}. Ésta consiste en la categorización de paquetes en flujos se denomina. Se efectúa en base a un número de campos en la cabecera del paquete, tales como la dirección de origen/destino, puerto de origen/destino, tipo de servicio (TOS), etc. En general, para una clasificación basada en N campos, se dice que la misma es N-dimensional (o multidimensional). El propósito de la misma es clasificar paquetes de acuerdo a un conjunto de reglas dado.
 
 Cada regla \textbf{R} tiene \textbf{F} componentes y el $ f^{vo} $ componente de \textbf{R}, denotado como \textbf{R[f]} es una \textit{expresión de correspondencia de rango} en el $ f^{vo} $ campo del paquete. Si para todo \textit{f} $ \in $ [1, \textit{f}] el $ f^{vo} $ campo de la cabecera de un paquete \textbf{P} satisface la expresión de rango \textbf{R[f]}, \textbf{P} se corresponde con \textbf{R}.
 
-Un caso particular de clasificación unidimensional es lo que se conoce como IP Lookup. 
+Un caso particular de clasificación unidimensional es lo que se conoce como IP Lookup. Es el caso que se abordará en este trabajo.
 
 \subsubsection{Dirección IP}
 
@@ -176,6 +177,8 @@ Existen 3 maneras de representar un prefijo de red:
 El procedimiento que se lleva acabo en un dispositivo de enrutamiento podría describirse de la siguiente manera:
 
 Un paquete llega por una interfaz de entrada. Éste porta una dirección IP determinada. El dispositivo consulta una tabla para determinar la interfaz de salida para el paquete en cuestión. Dicha tabla contiene un conjunto de prefijos con sus correspondientes interfaces de salida. El paquete es correspondido con el prefijo más largo que esté contenido en la dirección de destino y luego es redirigido  a la correspondiente interfaz de salida. Esta tarea de determinar el enlace de salida es denominada \textit{Búsqueda de dirección (address lookup).}
+
+En la figura ~\ref{fig:prefijos} puede observarse una dirección IP como así también 3 prefijos de diferentes longitudes. Tanto éstos como la dirección están representados por sus bits. En el procedimiento de address lookup la interfaz seleccionada sería aquella asociada al prefijo más largo.
 
  \begin{figure}[h]
   \centering
