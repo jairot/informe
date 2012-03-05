@@ -1,6 +1,6 @@
 \chapter{Sistema}
 
-Entre de dispositivos que realizan la clasificacion de paquetes se encuentran soluciones implementadas de manera completa en hardware, FPGA, ASIC u otra plataforma, o implementadas, procesador de proposito general mediande, completamente en software. La intencion de de este proyecto integrador, como puede verse de manera grafica en la figura~\ref{fig:hwsw}, es complementar las ventajas de ambos mundos maximizandolas y reduciendo asi las desventajas de utilizar el hardware o el software por separado. 
+Entre de dispositivos que realizan la clasificacion de paquetes se encuentran soluciones implementadas de manera completa en hardware, FPGA, ASIC u otra plataforma, o implementadas, procesador de proposito general mediante, completamente en software. La intencion de de este proyecto integrador, como puede verse de manera grafica en la figura~\ref{fig:hwsw}, es complementar las ventajas de ambos mundos maximizandolas y reduciendo asi las desventajas de utilizar el hardware o el software por separado. 
 
  \begin{figure}[h]
   \centering
@@ -24,7 +24,7 @@ Para el problema planteado en el capitulo anterior, se propone, de manera proced
     \end{enumerate}
 
 \section{Esquema propuesto}
-Para implementar la se propone el diagra de la figura~\ref{fig:solucion}
+Para implementar la solucion se propone el hardware descripto en el diagrama de la figura~\ref{fig:solucion}
  \begin{figure}[h]
   \centering
 	 \includegraphics[width=0.7\textwidth]{2-sistema/graf/solucion.eps}
@@ -72,7 +72,7 @@ Los algoritmos de clasificación de paquetes que se implementaron fueron los sig
 \subsection{Búsqueda lineal}
 
 El esquema más simple de lookup consiste en una tabla, donde cada entrada contiene un prefijo (expresado en notación máscara) más un identificador de enlace de salida. Cuando llega un paquete se examina su dirección IP y se va comparando con cada uno de los prefijos almacenados. Debe existir igualdad bit a bit entre el prefijo y la dirección IP. Si esto se cumple para varios prefijos, se opta por el más largo de ellos y el paquete se expide por el enlace asociado a dicho prefijo.
-Para optimizar este esquema, los prefijos se almacenan en orden decreciente de longitud, de manera que al encontrar una coincidencia no sea necesario seguir buscando en el resto de la tabla.
+Para optimizar este esquema, los prefijos se almacenan en orden decreciente de longitud, de manera que al encontrar una coincidencia no sea necesario seguir buscando en el resto de la tabla. 
 
 \begin{figure}[h]
   \centering
@@ -81,6 +81,7 @@ Para optimizar este esquema, los prefijos se almacenan en orden decreciente de l
   \label{fig:linear}
 \end{figure}
 
+\newpage
 \subsection {Unibit tries}
 
 Un Unibit trie es un árbol en el cual cada nodo contiene un \textit{puntero-cero }y un \textit{puntero-uno}. Partiendo del nodo raíz, todos los prefijos que comienzan con 0 son almacenados en el subárbol apuntado por el puntero-cero y aquellos que comienzan con 1 se almacenan en el subárbol apuntado por el puntero-uno.
