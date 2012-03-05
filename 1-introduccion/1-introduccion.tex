@@ -1,6 +1,14 @@
 \chapter{Introducción}
 
-\section{Motivación}
+En la actualidad las redes de datos están creciendo en complejidad. Basta mirar el incremento en la la cantidad de aplicaciones web que ofrecen contenido multimedia, para determinar que no solo crece el volumen de los datos, sino que tambien se requiere una mayor velocidad y confiabilidad en la transmisión. 
+
+También es notoria la consolidación de múltiples servicios sobre redes Ethernet, como ser comunicación de voz, vídeo en estándar y alta definición (STV y HDTV), videoconferencias, transacciones en tiempo real, etc.
+
+En este contexto puede verse cómo es necesaria la optimización en el procesamiento de los paquetes de datos. Esto debe darse bajo la premisa de que no alcanza con proveer soluciones rapidas, sino que tambien se debe dotar a las mismas con un buen grado de flexibilidad y escalablidad que permitan sostener el ritmo actual de crecimiento.
+
+
+
+\section{Contexto}
 \begin{comment}
 \subsection{Evolución en los dispositivos de enrutamiento}
 
@@ -16,28 +24,11 @@ Aunque con el tiempo la performance de los distintos CPU han crecido, este creci
 
 %\subsection{Requerimiento de procesamiento en redes}
 %\subsubsection{Características del tráfico}
-Es notorio que por estos días las redes de datos están creciendo en complejidad. Basta mirar la cantidad de aplicaciones que aparecen día a día, muchas de ellas con contenido multimedia, lo cual aumenta las exigencias a la hora de determinar la cantidad de datos que se deben transmitir. Todo ello trae aparejado un necesario aumento en la velocidad. 
+
+En lo que respecta a las tecnologías de red, las nuevas tendencias se canalizan hacia la agregación de paquetes en flujos. Dos ejemplos los constituyen MPLS y VLANs.
 
 
-También es notoria la consolidación de múltiples servicios sobre redes Ethernet, como ser comunicación de voz, vídeo en estándar y alta definición (STV y HDTV), videoconferencias, transacciones en tiempo real, etc.
-
-
-Además vale mencionar la tendencia actual a la virtualización de servidores. La misma viene dada principalmente por una cuestión de flexibilidad (un servidor físico con gran capacidad computacional puede albergar un número de servidores virtuales) y agilidad (una máquina virtual puede ser creada en cuestión de minutos o a lo sumo horas).
-
-En este contexto puede verse cómo es necesaria la optimización en el procesamiento de los paquetes de datos. Si se habla de procesamiento a velocidad de línea, en una red Ethernet este es, para un paquete de longitud mínima, de unos 6 nanosegundos por paquete.
-
-
-%\subsection{Soluciones}
-%\subsubsection{Actualidad y tendencias}
-Lo que se hace actualmente es utilizar paquetes de longitud variable. El peor de los casos se da para los paquetes de longitud mínima (64 bytes en Ethernet). Tramas más grandes se traducen en una sobrecarga de paquetes menor en los servidores. A su vez, menos paquetes significa menos interrupciones y menos carga de trabajo en la CPU. Menos interrupciones significa menor delay en el bus de cada servidor. Una menor cantidad de paquetes también significa menos sobrecarga de red en términos de cabeceras y formatos de trama.
-
-Las nuevas tendencias se canalizan haca la agregación de paquetes en flujos. Dos ejemplos los constituyen MPLS y VLANs.
-
-MPLS son las siglas de \textit{Multiprotocol Label Switching}. Es un mecanismo en redes de telecomunicaciones de alta performance que transporta datos de nodo a nodo basado en etiquetas en vez de direcciones de red, con el fin de evitar búsquedas complejas en una tabla de ruteo. Dichas etiquetas identifican enlaces virtuales (paths) entre nodos. Es capaz de encapsular paquetes de varios protocolos de red.
-
-Las VLANs son redes lógicamente independientes que están conectadas a un mismo conmutador físico. Su funcionamiento se basa en un etiquetado dentro de las tramas de enlace de datos.
-
-
+MPLS son las siglas de \textit{Multiprotocol Label Switching}. Es un mecanismo en redes de telecomunicaciones de alta performance que transporta datos de nodo a nodo basado en etiquetas en vez de direcciones de red, con el fin de evitar búsquedas complejas en una tabla de ruteo. Dichas etiquetas identifican enlaces virtuales entre nodos. Es capaz de encapsular paquetes de varios protocolos de red.
 
 \begin{figure}[h]
   \centering
@@ -45,6 +36,10 @@ Las VLANs son redes lógicamente independientes que están conectadas a un mismo
   \caption{Agregación en flujos}
   \label{fig:flow}
 \end{figure}
+
+
+Las VLANs son redes lógicamente independientes que están conectadas a un mismo conmutador físico. Su funcionamiento se basa en un etiquetado dentro de las tramas de enlace de datos.
+
 
 \begin{figure}[h]
   \centering
@@ -56,13 +51,13 @@ Las VLANs son redes lógicamente independientes que están conectadas a un mismo
 
 %\subsection{Lógica reconfigurable como respuesta}
 
-Para hacer frente a esta brecha entre la necesidad de procesar el flujo creciente de datos de la red y la capacidad de hacerlo, es necesario contar con soluciones que permitan generar respuestas especificas de manera flexible, en el menor tiempo y con el mejor rendimiento posible.
+En cuanto al Hardware necesario para hacer frente a esta brecha entre la necesidad de procesar el flujo creciente de datos de la red y la capacidad de hacerlo, se busca contar con soluciones que permitan generar respuestas especificas de manera flexible, en el menor tiempo y con el mejor rendimiento posible.
 
-Las tecnologías que en la actualidad son usadas para solucionar estos problemas, son tres:
+Las tecnologías que en la actualidad son usadas para implementar soluciones a estos problemas, son tres:
 
 Los Circuitos de Propósito Específico (ASICs), que están formados por cientos de bloques especializados trabajando en paralelo. Aunque cuentan con un altísimo desempeño, tienen un alto costo inicial y el tiempo para desarrollarlo es grande.
 
-Los Procesadores de Red (NPs), son procesadores específicos para este tipo de problemas, cuentan con múltiples elementos de procesamiento, buena performance para ciertas tareas, Tienen dificultades a la hora de la portabilidad y sus interfaces son propietarias en casi todos los casos.
+Los Procesadores de Red (NPs), son procesadores específicos para este tipo de problemas, cuentan con múltiples elementos de procesamiento, buena performance para ciertas tareas, aunque tienen dificultades a la hora de la portabilidad y sus interfaces son propietarias en casi todos los casos.
 \begin{figure}[h]
   \centering
       \includegraphics[width=0.5\textwidth]{1-introduccion/graf/NP_based.eps}
@@ -87,7 +82,7 @@ Las FPGA(field-programmable gate array) son dispositivos de lógica reconfigurab
 
 Los Sistemas en un Chip (SoC) son circuitos integrados que contienen todo, o la mayoría, de los módulos que corresponden a un sistema informático o electrónico en un solo componente. Son usados especialmente en el área de sistemas embebidos. Los microcontroladores son técnicamente SoC, pero se considera que los SoC tienen procesadores mas potentes y pueden correr aplicaciones mas complejas, para lo cual necesitan mayor cantidad de memoria que suele estar disponible como chips externos. 
 
-Gracias a la disponibilidad en la ultima década de Soft-Core CPUs y otros Soft IP, se ha producido un punto de infección en el uso de FPGAs como plataforma para SoC; Mezcla de logros técnicos y fuerzas de mercado, varios fabricantes como Altera, Cypress Semiconductor, Intel y Xilinx anunciaron la comercialización de FPGA con facilidades para el desarrollo de SoC.
+Gracias a la disponibilidad en la ultima década de Soft-Core CPUs y otros Soft IP, se ha producido un punto de inflección en el uso de FPGAs como plataforma para SoC; Mezcla de logros técnicos y fuerzas de mercado, varios fabricantes como Altera, Cypress Semiconductor, Intel y Xilinx anunciaron la comercialización de FPGA con facilidades para el desarrollo de SoC.
 
 Estos avances que simplifican el desarrollo de SoC, la flexibilidad en el flujo de diseño y el prototipado rápido son las condiciones que posicionan a las FPGA como la herramienta indicada para atacar un problema tan complejo como la clasificación de paquetes. 
 
