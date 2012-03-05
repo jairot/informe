@@ -93,6 +93,13 @@ Se presenta a modo de comparación un gráfico que contiene el mínimo, el máxi
 
 \newpage
 \section{Cache}
- 
-¿Que ponemos acá?
+
+La cache desarrollada para este proyecto esta pensada a los fines de satisfacer la posibilidad de que varios paquetes consecutivos tengan una direccion de IP destino. Con la implementacion utilizada se logro un tiempo de acceso uniforme de alrededor de 1000 ciclos por segundo. En el grafico ~\ref{fig:cachecomp} se puede ver como el peor caso del algoritmo LLU soporta hasta 10000 paquetes por segundo sin cache y hasta 700000 paquetes por segundo con la cache. Aunque este ejemplo solo analiza el caso en el que son todos Hits, es posible ver la mejora sustancial que implica una cache. 
+
+\begin{figure}[!h]
+  \centering
+	\includegraphics[width=0.7\textwidth]{5-resultados/graf/cachecomp.eps}
+  \caption{Cache }
+  \label{fig:cachecomp}
+\end{figure}
 
