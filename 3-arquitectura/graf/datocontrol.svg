@@ -58,7 +58,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -238,7 +238,7 @@
          sodipodi:role="line"
          id="tspan3748"
          x="240"
-         y="252.36218">Bits 0 - 2: Módulo.</tspan><tspan
+         y="252.36218">Bits 0 - 2: Identificador de interfaz de salida.</tspan><tspan
          sodipodi:role="line"
          x="240"
          y="287.36218"
