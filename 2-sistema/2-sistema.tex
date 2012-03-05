@@ -1,6 +1,6 @@
 \chapter{Sistema}
 
-Entre de dispositivos que realizan la clasificacion de paquetes se encuentran soluciones implementadas de manera completa en hardware, FPGA, ASIC u otra plataforma, o implementadas, procesador de proposito general mediante, completamente en software. La intencion de de este proyecto integrador, como puede verse de manera grafica en la figura~\ref{fig:hwsw}, es complementar las ventajas de ambos mundos maximizandolas y reduciendo asi las desventajas de utilizar el hardware o el software por separado. 
+Entre los dispositivos que realizan la clasificacion de paquetes se encuentran soluciones implementadas de manera completa en hardware, FPGA, ASIC u otra plataforma, o implementadas, procesador de proposito general mediante, completamente en software. La intencion de de este proyecto integrador, como puede verse de manera grafica en la figura~\ref{fig:hwsw}, es complementar las ventajas de ambos mundos maximizandolas y reduciendo asi las desventajas de utilizar el hardware o el software por separado. 
 
  \begin{figure}[h]
   \centering
@@ -110,7 +110,7 @@ Considerar la siguiente tabla de ruteo
 
 A la misma le corresponde representación en Unibit trie de la figura ~\ref{fig:trie}
 
-Considerar una dirección de destino \textit{D}. Para efectuar la búsqueda del prefijo más largo los bits de \textit{D} son usados para trazar un camino a lo largo del trie. Dicho camino comienza en el nodo raíz y continúa hasta toparse con un puntero vacío o un nodo vacío. Durante el recorrido a través del trie, el algoritmo mantiene un registro del último prefijo encontrado en un nodo en el camino. Cuando la búsqueda falla, ese es el prefijo retornado.
+Considerar una dirección de destino \textit{D}. Para efectuar la búsqueda del prefijo más largo los bits de \textit{D} son usados para trazar un camino a lo largo del trie. Dicho camino comienza en el nodo raíz y continúa hasta toparse con un puntero vacío o un nodo vacío. Durante el recorrido a través del trie, el algoritmo mantiene un registro del último prefijo encontrado en un nodo en el camino. Cuando la búsqueda termina en un puntero vacío, ese es el prefijo retornado.
 \newpage
 \begin{figure}[h]
   \centering
