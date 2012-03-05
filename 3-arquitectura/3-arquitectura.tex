@@ -33,7 +33,7 @@ Con la intención de simplificar el desarrollo y el futuro Debugging del proyect
 El mismo cuenta con las siguientes capacidades
 
 \begin{itemize}
-	\item Permite iniciar la generación de paquetes desde un switch externo.
+	\item Permite iniciar la generación de paquetes desde un interruptor externo.
 	\item Es posible parametrizar la distancia, en ciclos de clock, entre la generación de un paquete y el siguiente.
 	\item Puede generar una cantidad variable de paquetes, con valores diferentes en sus campos.
 	\item Mantiene un contador global de la cantidad de paquetes generados y lo imprime en la ultima palabra del Payload de cada uno.
@@ -69,7 +69,7 @@ La implementación de este modulo esta formada por una maquina de estados(Figura
 \begin{itemize}
 	\item IDLE: Es el estado inicial en el que se encuentra la maquina, cuando se detecta la presencia de datos en la FIFO pasa a SOP.
 	\item SOP: Este estado es el encargado de validar la integridad de los paquetes, permitiendo iniciar el proceso solo cuando lo que hay en la entrada del bus de datos es un indicador de Inicio de Paquete(SOP)
-	\item LOAD, WAIT1, WAIT3: Estos tres estados se alternan para ir sacando de la fijo las 5 palabras correspondientes a la cabecera, implementan además mecanismos para manejar paquetes mas pequeños que 5 palabras.
+	\item LOAD, WAIT1, WAIT3: Estos tres estados se alternan para ir sacando de la FIFO las 5 palabras correspondientes a la cabecera, implementan además mecanismos para manejar paquetes mas pequeños que 5 palabras.
 	\item ENABLE, HOLD: Son los estados que se encargan de poner a disposición de Uplink la Cabecera completa y quedar a la espera de los resultados.
 	\item WAIT2, UNLOAD: Estos estados se encargan de extraer de la FIFO las palabras restantes del paquete desplazando los espacios de memoria ya cargados. 
 	\item OUTPUT: Se encarga de vaciar el registro de desplazamiento llenándolo de ceros a medida que se va poniendo las palabras del paquete a la salida. 
