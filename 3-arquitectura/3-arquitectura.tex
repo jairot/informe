@@ -1,11 +1,20 @@
 \chapter{Arquitectura}
 
-Para ilustrar el funcionamiento del sistema se puede observar en el gráfico a continuación el estado de los datos y los bits de control del paquete en cada uno de los módulos que integran la Interfaz de Acceso a la Cabecera.
+A todas las palabras de todos los paquetes que ingresan a la interfaz de acceso a la cabecera, se le anexan 8 bits que contienen el valor de los campos de control que corresponden a esa palabra y ademas 3 bits libres en donde se pondra la etiqueta con los resultados de lo procesado en el software. En la figura\ref{fig:datocontrol}  es posible ver el valor de cada uno de estos campos.
+
+\begin{figure}[H]
+  \centering
+	\includegraphics[scale=0.40]{3-arquitectura/graf/datocontrol.eps}
+  \caption{Bits de Control anexados a cada palabra}
+  \label{fig:datocontrol}
+\end{figure}
+
+Para ilustrar el funcionamiento del sistema se puede observar en la figura~\ref{fig:interfaz1} el estado de los datos y los bits de control del paquete en cada uno de los módulos que integran la Interfaz de Acceso a la Cabecera.
 
 \begin{figure}[H]
   \centering
 	\includegraphics[scale=0.60]{3-arquitectura/graf/moduloexp.eps}
-  \caption{Estado de los datos en cada uno de los módulos de la Interfaz}
+  \caption{Estado del campo de control}
   \label{fig:interfaz1}
 \end{figure}
 
