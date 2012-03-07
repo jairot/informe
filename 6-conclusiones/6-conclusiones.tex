@@ -1,14 +1,23 @@
 \chapter{Conclusiones}
 
-En primer lugar, puede concluirse que existe factibilidad en la integración de módulos que realizan procesamiento de paquetes por hardware con aquellos que lo llevan a cabo por software.
 
-Como se pudo ver en este trabajo la arquitectura utilizada es claramente modular y por lo tanto propicia para la integración de nuevos módulos. Esto último resulta fundamental por estos días debido a las crecientes necesidades en velocidad y ancho de banda.
+Se puede concluir que es factible implementar una arquitectura de clasificacion de paquetes en logica reprogramable combinando las velocidad del procesamiento de paquetes por Hardware con la escalabilidad y estabilidad que permite el Software. 
 
-Por otra parte, el hecho de no haber llevado a cabo pruebas con una interfaz de red real es compensado con el módulo \textit{ad-hoc} generador de paquetes, el cual brinda la posibilidad de generar tráfico Ethernet a la hora de realizar los testeos.
+Consideramos que la complejidad de este tipo de proyecto reside en la implemetacion del SoC y, mas especificamente, en la curva de aprendizaje pronunciada que presentan las herramientas utilizadas para desarrollar este tipo de Sistemas. En un futuro se espera que las herramientas maduren para asi permitir una mayor fluidez y simplicidad en el diseño y puesta en marcha de este tipo de componentes. 
 
-Se pudieron estudiar diversos algoritmos de clasificación para luego implementar 2 de ellos sobre una lógica reconfigurable y analizar comparativamente su performance.
+Por otro lado, la integración de modulos propios a un BUS pre-determinado depende fuertemente de la calidad de la documentacion que este BUS presenta, es por ello que a la hora de seleccionar un Microprocesador para integrar un SoC en logica reprogramable es fundamental revisar la documentacion y saber que se cuenta ademas con una comunidad activa y colaborativa que puedo asistir a los diseñadores durante el proceso de implementacion. 
 
-Es posible efectuar mejoras en los esquemas implementados. Para el caso de una búsqueda lineal, puede implementarse una cola con prioridades para evitar el uso de templates y el overhead que ello implica. El el caso de la búsqueda en árbol puede optarse por un esquema multibit, que evite la expansión excesiva del árbol que contiene los prefijos 
+El conjunto de conocimientos necesarios para realizar la implementacion comprende el desarrollo de Hardware, desarollo de Software y conocimiento de Redes, precisamente los tres ejes de Ingenieria en Computacion, la carrera para la cual se desarrollo este Proyecto integrador. 
+
+Aunque se trata de una implementación experimental, la performance del sistema no se encuentra alejada de la que alcanzan los productos que se encuentran presentes en el mercado actual, y combinado con otros desarrollos realizados en el Laboratorio de Comunicaciones Digitales es posible alcanzar un producto acabado y con capacidades de resolver situaciones de la realidad.
+
+Se destaca la Arquitectura modular implementada que, junto con el desarrollo en C++ del software, permite portar la misma a otras plataformas.
+
+Tambien es bueno señalar que se presento una version reducida de este proyecto en CRUNIC2011.
+
+Por ultimo, los Autores de este proyecto entienden que durante la realizacion del mismo pudieron aplicar los conceptos aprendidos durante la Carerra de Ingenieria en Computacion y desarrollar nuevas competencias. 
+
+
 
 \subsubsection{Trabajos Futuros}
 
