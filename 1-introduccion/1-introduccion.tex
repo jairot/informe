@@ -1,10 +1,10 @@
 \chapter{Introducción}
 
-En la actualidad las redes de datos están creciendo en complejidad. Basta mirar el incremento en la la cantidad de aplicaciones web que ofrecen contenido multimedia, para determinar que no solo crece el volumen de los datos, sino que tambien se requiere una mayor velocidad y confiabilidad en la transmisión. 
+En la actualidad las redes de datos están creciendo en complejidad. Basta mirar el incremento en la cantidad de aplicaciones web que ofrecen contenido multimedia, para determinar que no solo crece el volumen de los datos, sino que ademas se requiere una mayor velocidad y confiabilidad en la transmisión. 
 
-También es notoria la consolidación de múltiples servicios sobre redes Ethernet, como ser comunicación de voz, vídeo en estándar y alta definición (STV y HDTV), videoconferencias, transacciones en tiempo real, etc.
+También es notoria la consolidación de múltiples servicios sobre redes Ethernet, tales como comunicación de voz, video en estándar y alta definición, videoconferencias, transacciones en tiempo real, etc.
 
-En este contexto puede verse cómo es necesaria la optimización en el procesamiento de los paquetes de datos. Esto debe darse bajo la premisa de que no alcanza con proveer soluciones rapidas, sino que tambien se debe dotar a las mismas con un buen grado de flexibilidad y escalablidad que permitan sostener el ritmo actual de crecimiento.
+En este contexto puede verse como es necesaria la optimización en el procesamiento de los paquetes de datos. Esto debe darse bajo la premisa de que no alcanza con proveer soluciones rápidas, sino que también se debe dotar a las mismas de un buen grado de flexibilidad y escalablidad que permitan sostener el ritmo actual de crecimiento.
 
 
 
@@ -25,10 +25,7 @@ Aunque con el tiempo la performance de los distintos CPU han crecido, este creci
 %\subsection{Requerimiento de procesamiento en redes}
 %\subsubsection{Características del tráfico}
 
-En lo que respecta a las tecnologías de red, las nuevas tendencias se canalizan hacia la agregación de paquetes en flujos. Dos ejemplos los constituyen MPLS y VLANs.
-
-
-MPLS son las siglas de \textit{Multiprotocol Label Switching}. Es un mecanismo en redes de telecomunicaciones de alta performance que transporta datos de nodo a nodo basado en etiquetas en vez de direcciones de red, con el fin de evitar búsquedas complejas en una tabla de ruteo. Dichas etiquetas identifican enlaces virtuales entre nodos. Es capaz de encapsular paquetes de varios protocolos de red.
+En lo que respecta a las tecnologías de red, las nuevas tendencias se canalizan hacia la agregación de paquetes en flujos. Dos ejemplos los constituyen conmutación multi-protocolo mediante etiquetas (\textit{Multiprotocol Label Switching}, MPLS) y redes virtuales  de área local (\textit{Virtual LAN}, VLANs). MPLS es un mecanismo en redes de telecomunicaciones de alta performance que transporta datos de nodo a nodo basado en etiquetas en lugar de direcciones de red, con el fin de evitar búsquedas complejas en una tabla de ruteo. Dichas etiquetas se aplican en el inicio de la transmision e identifican enlaces virtuales entre nodos. También es capaz de encapsular paquetes de varios protocolos de red.
 
 \begin{figure}[h]
   \centering
@@ -36,9 +33,7 @@ MPLS son las siglas de \textit{Multiprotocol Label Switching}. Es un mecanismo e
   \caption{Encabezado MPLS}
   \label{fig:flow}
 \end{figure}
-
-
-Las VLANs son redes lógicamente independientes que están conectadas a un mismo conmutador físico. Su funcionamiento se basa en un etiquetado dentro de las tramas de enlace de datos. El estándar IEEE 802.1Q es el que domina el mundo de las VLANs.
+Las VLANs son redes virtuales, lógicamente independientes, que están conectadas a un mismo conmutador físico. Su funcionamiento se basa en un etiquetado dentro de las tramas de enlace de datos. El estándar IEEE 802.1Q es el que domina el mundo de las VLANs.
 
 
 \begin{figure}[h]
@@ -51,13 +46,11 @@ Las VLANs son redes lógicamente independientes que están conectadas a un mismo
 
 %\subsection{Lógica reconfigurable como respuesta}
 
-En cuanto al Hardware necesario para hacer frente a esta brecha entre la necesidad de procesar el flujo creciente de datos de la red y la capacidad de hacerlo, se busca contar con soluciones que permitan generar respuestas especificas de manera flexible, en el menor tiempo y con el mejor rendimiento posible.
+En cuanto al hardware necesario para hacer frente a esta brecha entre la necesidad de procesar el flujo creciente de datos de la red y la capacidad de hacerlo, se busca contar con soluciones que permitan generar respuestas específicas de manera flexible, en el menor tiempo y con el mejor rendimiento posible. Las tecnologías que en la actualidad son usadas para implementar soluciones a estos problemas, son tres:
 
-Las tecnologías que en la actualidad son usadas para implementar soluciones a estos problemas, son tres:
+\emph{Los Circuitos Integrados de Propósito Específico (\textit{Application-Specific Integrated Circuit}, ASIC), están formados por cientos de bloques especializados trabajando en paralelo. Aunque cuentan con un muy buen desempeño, tienen un alto costo inicial y el tiempo para desarrollarlos es grande.}
 
-Los Circuitos de Propósito Específico (ASICs), que están formados por cientos de bloques especializados trabajando en paralelo. Aunque cuentan con un altísimo desempeño, tienen un alto costo inicial y el tiempo para desarrollarlo es grande.
-
-Los Procesadores de Red (NPs), son procesadores específicos para este tipo de problemas, cuentan con múltiples elementos de procesamiento, buena performance para ciertas tareas, aunque tienen dificultades a la hora de la portabilidad y sus interfaces son propietarias en casi todos los casos.
+\emph{Los Procesadores de Red (Network Processors, NPs), específicos para este tipo de problemas, ya que cuentan con múltiples elementos de procesamiento, buena performance para ciertas tareas, aunque tienen dificultades de portabilidad debido a que sus interfaces son propietarias en casi todos los casos.}
 \begin{figure}[h]
   \centering
       \includegraphics[width=0.5\textwidth]{1-introduccion/graf/NP_based.eps}
@@ -66,7 +59,7 @@ Los Procesadores de Red (NPs), son procesadores específicos para este tipo de p
 \end{figure}
 \newpage
 
-Los Procesadores de Propósito General (GPPs), utilizan la arquitectura propia de la PC y la adaptan al procesamiento de la red mediante un software especializado. Aunque esta solución es muy popular por su flexibilidad y su bajo costo, las transiciones con memoria RAM mediante un bus compartido y la naturaleza secuencial de los GPPs son factores limitantes a tener en cuenta. 
+\emph{Los Procesadores de Propósito General (General Purpose Processors,GPPs), utilizan la arquitectura propia de la PC y la adaptan al procesamiento de red mediante un software especializado. Aunque esta solución es muy popular por su flexibilidad y su bajo costo, las transacciones con memoria RAM mediante un bus compartido y la naturaleza secuencial de los GPPs son factores limitantes a tener en cuenta. }
  \begin{figure}[h]
   \centering
       \includegraphics[width=0.5\textwidth]{1-introduccion/graf/GPP_based.eps}
@@ -74,17 +67,16 @@ Los Procesadores de Propósito General (GPPs), utilizan la arquitectura propia d
   \label{fig:diseno}
 \end{figure}
 
-Las tecnologías actuales, por las razones anteriormente mencionadas, están alcanzando su limite y es necesario encontrar tecnologías que las reemplacen, para poder satisfacer los requerimientos actuales de las redes. 
+Las tecnologías actuales, por las razones anteriormente mencionadas, están alcanzando su límite y es necesario encontrar tecnologías que las reemplacen o que cubran sus falencias, para poder satisfacer los requerimientos actuales de las redes. 
 
-Las FPGA(field-programmable gate array) son dispositivos de lógica reconfigurable que es posible programar, una o varias veces, usando un lenguaje de Descripcion de hardware(HDL). Las FPGAs se utilizan en aplicaciones similares a los ASICs sin embargo son más lentas, tienen un mayor consumo de potencia y no pueden abarcar sistemas tan complejos como ellos. A pesar de esto, tienen un flujo de diseño flexible, sus costes de desarrollo y adquisición son mucho menores para pequeñas cantidades de dispositivos y el tiempo de desarrollo es también menor.
+Los FPGAs (Field-Programmable Gate Array) son dispositivos de lógica reconfigurable que es posible programar, una o varias veces, usando un lenguaje de descripción de hardware(\textit{Hardware Description Language}, HDL). Las FPGAs se utilizan en aplicaciones similares a los ASICs; sin embargo son más lentas, tienen un mayor consumo de potencia y no pueden abarcar sistemas tan complejos como los ASICs. A pesar de esto, tienen un flujo de diseño flexible, sus costes de desarrollo y adquisición son mucho menores para pequeñas cantidades de dispositivos y el tiempo de desarrollo es también menor.
 
 %\subsubsection{FPGA como plataforma para SoC}
 
-Los Sistemas en un Chip (SoC) son circuitos integrados que contienen todo, o la mayoría, de los módulos que corresponden a un sistema informático o electrónico en un solo componente. Son usados especialmente en el área de sistemas embebidos. Los microcontroladores son técnicamente SoC, pero se considera que los SoC tienen procesadores mas potentes y pueden correr aplicaciones mas complejas, para lo cual necesitan mayor cantidad de memoria que suele estar disponible como chips externos. 
+Los Sistemas en un Chip (\textit{System on Chip}, SoC) son circuitos integrados que contienen todo, o la mayoría, de los módulos que corresponden a un sistema informático o electrónico en un solo componente. Son usados especialmente en el área de sistemas embebidos. Los microcontroladores son técnicamente SoC, pero se considera que los SoC tienen procesadores mas potentes y pueden correr aplicaciones mas complejas, para lo cual necesitan mayor cantidad de memoria que suele estar disponible como chips externos. 
 
-Gracias a la disponibilidad en la ultima década de Soft-Core CPUs y otros Soft IP, se ha producido un punto de inflección en el uso de FPGAs como plataforma para SoC; Mezcla de logros técnicos y fuerzas de mercado, varios fabricantes como Altera, Cypress Semiconductor, Intel y Xilinx anunciaron la comercialización de FPGA con facilidades para el desarrollo de SoC.
-
-Estos avances que simplifican el desarrollo de SoC, la flexibilidad en el flujo de diseño y el prototipado rápido son las condiciones que posicionan a las FPGA como la herramienta indicada para atacar un problema tan complejo como la clasificación de paquetes. 
+Gracias a la disponibilidad en la ultima década de Soft-Core CPUs y otros Soft IP, se ha producido un punto de inflección en el uso de FPGAs como plataforma para SoC. Como resultado de la combinacion de logros técnicos y fuerzas de mercado, varios fabricantes como Altera, Cypress Semiconductor, Intel y Xilinx anunciaron la comercialización de FPGA con facilidades para el desarrollo de SoC.
+Estos avances que simplifican el desarrollo de SoC, la flexibilidad en el flujo de diseño y el prototipado rápido son las condiciones que posicionan a las FPGAs como la herramienta indicada para atacar un problema tan complejo como la clasificación de paquetes. 
 
  \begin{figure}[h]
   \centering
