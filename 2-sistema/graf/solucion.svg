@@ -192,9 +192,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.54"
-     inkscape:cx="296.12283"
-     inkscape:cy="243.90338"
+     inkscape:zoom="0.76367532"
+     inkscape:cx="513.05816"
+     inkscape:cy="49.66398"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="true"
@@ -227,19 +227,19 @@
      id="layer1"
      transform="translate(0,-308.2677)">
     <rect
-       style="fill:#f2f2f2;stroke:#000000;stroke-width:0.95257938;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       style="fill:#f2f2f2;stroke:#000000;stroke-width:1.13076067;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
        id="rect3792"
        width="980"
-       height="880"
+       height="1240"
        x="40"
-       y="212.36218" />
+       y="-147.63782" />
     <rect
-       style="fill:#999999;fill-opacity:1;stroke:#000000;stroke-width:1.00301647;stroke-opacity:1"
+       style="fill:#999999;fill-opacity:1;stroke:#000000;stroke-width:1.3588146;stroke-opacity:1"
        id="rect2816"
-       width="214.28572"
-       height="198.33398"
-       x="445.71429"
-       y="374.0282" />
+       width="300"
+       height="260"
+       x="400"
+       y="312.36218" />
     <rect
        style="fill:#b3b3b3;fill-opacity:1;stroke:#000000;stroke-width:0.9452489;stroke-opacity:1"
        id="rect3590"
@@ -263,14 +263,14 @@
        y="752.36218" />
     <text
        xml:space="preserve"
-       style="font-size:22px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
-       x="460"
-       y="472.36218"
+       style="font-size:36px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+       x="400"
+       y="452.36218"
        id="text3664"><tspan
          sodipodi:role="line"
          id="tspan3666"
-         x="460"
-         y="472.36218">Microprocesador</tspan></text>
+         x="400"
+         y="452.36218">Microprocesador</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:40px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
@@ -311,25 +311,25 @@
          id="tspan4550">a la cabecera</tspan></text>
     <rect
        id="rect2842"
-       width="210"
-       height="40"
-       x="450"
-       y="322.36218"
-       style="fill:#cccccc;stroke:#000000;stroke-opacity:1" />
+       width="410"
+       height="60"
+       x="350"
+       y="232.36218"
+       style="fill:#cccccc;stroke:#000000;stroke-width:1.71130693;stroke-opacity:1" />
     <rect
-       style="fill:#cccccc;stroke:#000000;stroke-opacity:1"
+       style="fill:#cccccc;stroke:#000000;stroke-width:4;stroke-opacity:1"
        id="rect3616"
-       width="70"
-       height="60"
-       x="500"
-       y="242.36218" />
+       width="280"
+       height="240"
+       x="380"
+       y="-67.637817" />
     <rect
-       style="fill:#cccccc;stroke:#000000;stroke-opacity:1"
+       style="fill:#cccccc;stroke:#000000;stroke-width:4;stroke-opacity:1"
        id="rect3618"
-       width="70"
-       height="60"
-       x="510"
-       y="252.36218" />
+       width="280"
+       height="240"
+       x="420"
+       y="-27.637817" />
     <rect
        style="fill:#cccccc;fill-opacity:1;stroke:#000000;stroke-width:1.00887001;stroke-opacity:1"
        id="rect3592-1-1"
@@ -394,41 +394,41 @@
     <text
        xml:space="preserve"
        style="font-size:40px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
-       x="80"
-       y="292.36218"
+       x="60"
+       y="-107.63782"
        id="text3794"><tspan
          sodipodi:role="line"
          id="tspan3796"
-         x="80"
-         y="292.36218">FPGA</tspan></text>
+         x="60"
+         y="-107.63782">FPGA</tspan></text>
     <text
        xml:space="preserve"
-       style="font-size:8px;font-style:normal;font-weight:normal;text-align:center;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
-       x="546.58594"
-       y="272.36218"
+       style="font-size:32px;font-style:normal;font-weight:normal;text-align:center;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+       x="566.34375"
+       y="52.362183"
        id="text3798"><tspan
          sodipodi:role="line"
          id="tspan3800"
-         x="547.85938"
-         y="272.36218">Algoritmos </tspan><tspan
+         x="571.4375"
+         y="52.362183">Algoritmos </tspan><tspan
          sodipodi:role="line"
-         x="546.58594"
-         y="282.36218"
+         x="566.34375"
+         y="92.362183"
          id="tspan3802">de</tspan><tspan
          sodipodi:role="line"
-         x="546.58594"
-         y="292.36218"
+         x="566.34375"
+         y="132.36218"
          id="tspan3804">clasificación</tspan></text>
     <text
        xml:space="preserve"
-       style="font-size:14px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
-       x="490"
-       y="347.36218"
+       style="font-size:28px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+       x="420"
+       y="272.36218"
        id="text3806"><tspan
          sodipodi:role="line"
          id="tspan3808"
-         x="490"
-         y="347.36218">Sistema Operativo</tspan></text>
+         x="420"
+         y="272.36218">Sistema Operativo</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:18px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
