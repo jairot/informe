@@ -57,14 +57,14 @@ A la entrada del módulo se encuentra una FIFO que se encarga de almacenar y pon
 Este módulo también debe permitir la parametrización en la mayor cantidad de sentidos posibles, especialmente se desea poder configurar la cantidad de palabras a almacenar, ya que la memoria dentro de un FPGA es un recurso crítico y se desea encontrar la mejor relación entre rendimiento y consumo de recursos.
 
 \subsubsection{Delay Buffer}
-El Componente Delay buffer sera el encargado de ir tomando los datos desde la FIFO y de detectar el inicio y finalización de un paquete. Además deberá mantener almacenado el paquete mientras el software toma una decisión. En este módulo es deseable poder configurar la cantidad de palabras que se consideraran parte de la cabecera y que sera enviadas al software. 
+Este componente será el encargado de ir tomando los datos desde la FIFO y de detectar el inicio y finalización de un paquete. Además deberá mantener almacenada la cabecera del paquete mientras el software toma una decisión. En este módulo es deseable configurar la cantidad de palabras que se considerarán parte de la cabecera y que seran enviadas al microprocesador.
 
 \subsubsection{Uplink}
-Este módulo es el encargado de realizar la comunicación entre el flujo de datos que proviene de la red y el procesador. Para ello debe entender las señales que utiliza el Bus, Avalon-MM, y poder interrumpir al procesador para enviarles los datos cuando estos estén disponibles. Cuando el procesador responde con el resultado de la clasificación, este módulo lo almacena y lo envía  Write output para que este escriba el resultado de la clasificación en la etiqueta anexa al paquete correspondiente.
-Eventualmente se desarrollaran varias versiones de este módulo, que envíen toda la cabecera o una parte selectiva de ella para optimizar así el rendimiento.
+Este módulo es el encargado de gestionar las transacciones con el microprocesador. Para ello debe entender las señales que utiliza el bus y poder interrumpir al procesador para enviarle los datos cuando estos estén disponibles. Asimismo cuando el procesador responde con el resultado de la clasificación, Uplink lo almacena y lo envía al módulo Write output para que este escriba el resultado de la clasificación en la etiqueta anexa al paquete correspondiente.
+Eventualmente se desarrollaran varias versiones de este módulo, que envíen toda la cabecera o una parte selectiva de ella buscando optimizar el rendimiento.
 
 \subsubsection{Write Output}
-Para finalizar, Write Output, toma la salida de Delay buffer y escribe el resultado que le envía Uplink en la etiqueta que se encuentra anexa a cada una de las palabras del paquete.
+Para finalizar este módulo toma la salida de Delay Buffer y escribe el resultado que le envía Uplink en la etiqueta que se encuentra anexa a cada una de las palabras del paquete.
 
 \section{Algoritmos de Clasificación}
 
@@ -72,8 +72,8 @@ Los algoritmos de clasificación de paquetes que se implementaron fueron los sig
 
 \subsection{Búsqueda lineal}
 
-El esquema más simple de lookup consiste en una tabla, donde cada entrada contiene un prefijo (expresado en notación máscara) más un identificador de enlace de salida. Cuando llega un paquete se examina su dirección IP y se va comparando con cada uno de los prefijos almacenados. Debe existir igualdad bit a bit entre el prefijo y la dirección IP. Si esto se cumple para varios prefijos, se opta por el más largo de ellos y el paquete se expide por el enlace asociado a dicho prefijo.
-Para optimizar este esquema, los prefijos se almacenan en orden decreciente de longitud, de manera que al encontrar una coincidencia no sea necesario seguir buscando en el resto de la tabla. 
+El esquema más simple de lookup consiste en una tabla, donde cada entrada contiene un prefijo (expresado en notación máscara) mas un identificador de enlace de salida. Cuando llega un paquete se examina su dirección IP y se va comparando con cada uno de los prefijos almacenados. Para que exista correspondencia debe existir igualdad bit a bit entre el prefijo y la dirección IP. Si esto se cumple para varios prefijos, se opta por el más largo de ellos y el paquete se expide por el enlace asociado a dicho prefijo.
+Para optimizar este esquema, los prefijos se almacenan en orden decreciente de longitud, como se muestra en la figura~\ref{fig:linear}, de manera que al encontrar una coincidencia no sea necesario seguir buscando en el resto de la tabla. 
 
 \begin{figure}[h]
   \centering
@@ -85,12 +85,9 @@ Para optimizar este esquema, los prefijos se almacenan en orden decreciente de l
 \newpage
 \subsection {Unibit tries}
 
-Un Unibit trie es un árbol en el cual cada nodo contiene un \textit{puntero-cero }y un \textit{puntero-uno}. Partiendo del nodo raíz, todos los prefijos que comienzan con 0 son almacenados en el subárbol apuntado por el puntero-cero y aquellos que comienzan con 1 se almacenan en el subárbol apuntado por el puntero-uno.
-
-Cada subárbol es construido recursivamente de manera similar usando los bits restantes de cada uno de los prefijos.
-
-Considerar la siguiente tabla de ruteo
-
+Un Unibit trie es un árbol en el cual cada nodo contiene un \textit{puntero-cero }y un \textit{puntero-uno}. Partiendo del nodo raíz, todos los prefijos que comienzan con 0 son almacenados en el subárbol apuntado por el puntero-cero y aquellos que comienzan con 1 se almacenan en el subárbol apuntado por el puntero-uno.Cada subárbol es construido recursivamente de manera similar usando los bits restantes de cada uno de los prefijos.
+Considerar la siguiente tabla de enrutamiento:
+\begin{table}[h]
 \begin{center}
 	\begin{tabular}{|c|c|} \hline
 		\textbf{Prefijo} & \textbf{Enlace de salida} \\ \hline
@@ -103,16 +100,17 @@ Considerar la siguiente tabla de ruteo
 		100000* & S7 \\
 		100* & S8 \\
 		110* & S9 \\	\hline
-	\end{tabular}	
+	\end{tabular}
+	\caption{Tabla de prefijos y enlaces de salida}
+	\label{tab:prefgw}	
 \end{center}
+\end{table}
 
 
 
+A la misma le corresponde la representación en Unibit trie de la figura~\ref{fig:trie}.
+Sea una dirección de destino \textit{D}. Para efectuar la búsqueda del prefijo más largo, los bits de \textit{D} son usados para trazar un camino a lo largo del trie. Dicho camino comienza en el nodo raíz y continúa hasta encontrar un puntero vacío o un nodo vacío. Durante el recorrido a través del trie, el algoritmo mantiene un registro del último enlace encontrado en un nodo del camino recorrido(que es el mas largo hasta el momento). En el caso de que la búsqueda terminara este es el prefijo retornado.
 
-A la misma le corresponde representación en Unibit trie de la figura~\ref{fig:trie}
-
-Considerar una dirección de destino \textit{D}. Para efectuar la búsqueda del prefijo más largo los bits de \textit{D} son usados para trazar un camino a lo largo del trie. Dicho camino comienza en el nodo raíz y continúa hasta toparse con un puntero vacío o un nodo vacío. Durante el recorrido a través del trie, el algoritmo mantiene un registro del último prefijo encontrado en un nodo en el camino. Cuando la búsqueda termina en un puntero vacío, ese es el prefijo retornado.
-\newpage
 \begin{figure}[h]
   \centering
 	\includegraphics[width=0.80\textwidth]{2-sistema/graf/trie.eps}
