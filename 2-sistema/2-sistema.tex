@@ -1,11 +1,11 @@
 \chapter{Sistema}
 
-Entre de dispositivos que realizan la clasificacion de paquetes se encuentran soluciones implementadas de manera completa en hardware, FPGA, ASIC u otra plataforma, o implementadas, procesador de proposito general mediante, completamente en software. La intención de de este proyecto integrador, como puede verse de manera grafica en la figura~\ref{fig:hwsw}, es complementar las ventajas de ambos mundos maximizandolas y reduciendo asi las desventajas de utilizar el hardware o el software por separado. 
+Entre de dispositivos que realizan la clasificación de paquetes se encuentran soluciones implementadas de manera completa en hardware, FPGA, ASIC u otra plataforma, como por ejemplo NetFPGA[], o implementadas, procesador de propósito general mediante, completamente en software, que es el caso de Click[]. La intención de este proyecto integrador, como puede verse de manera gráfica en la figura~\ref{fig:hwsw}, es complementar las ventajas de ambos mundos maximizándolas y reduciendo así las desventajas de utilizar el hardware o el software por separado. 
 
 
  \begin{figure}[h]
   \centering
-	 \includegraphics[width=0.7\textwidth]{2-sistema/graf/interseccion.eps}
+	 \includegraphics[width=0.6\textwidth]{2-sistema/graf/interseccion.eps}
   \caption{Arquitectura mixta}
   \label{fig:hwsw}
 \end{figure}
@@ -13,35 +13,36 @@ Entre de dispositivos que realizan la clasificacion de paquetes se encuentran so
 
 \section{Solución propuesta}
 
-Para el problema planteado en el capitulo anterior, se propone, de manera procedimental, la siguiente solución: 
+Para el problema planteado en el capítulo anterior se propone, de manera funcional, la siguiente solución: 
 
     \begin{enumerate}
   	\item Un flujo de paquetes llega a la interfaz de red del dispositivo y es necesario clasificarlo en distintos flujos para que sea redireccionado.
-	\item Se almacenan en un buffer los paquetes en orden de llegada.
-	\item Se extrae el primer paquete y se toma la información que pertenece a la cabecera, la información completa del paquete queda en espera.
-	\item Se envía al microprocesador la cabecera. 
-	\item El Microprocesador aplica un algoritmo de clasificación a cierta información de la cabecera y reenvía los resultados al Hardware. 
-	\item Se anexa a cada palabra del paquete un Tag adjunto con el resultado de la clasificación y se lo envía hacia la interfaz de salida.
+	\item Se almacenan los paquetes en un buffer segun el orden de llegada.
+	\item Se extrae el primer paquete y se toma la información que pertenece a la cabecera; La información completa del paquete queda en espera.
+	\item Se envía la cabecera al microprocesador.
+	\item El microprocesador aplica un algoritmo de clasificación a cierta información de la cabecera y reenvía los resultados al hardware. 
+	\item Se envia el paquete a la interfaz de salida, anexandole a cada palabra un tag adjunto con el resultado de la clasificación.
     \end{enumerate}
-
+\newpage
 \section{Esquema propuesto}
 Para implementar la solucion se propone el hardware descripto en el diagrama de la figura~\ref{fig:solucion}
  \begin{figure}[h]
   \centering
-	 \includegraphics[width=0.8\textwidth]{2-sistema/graf/solucion.eps}
+	 \includegraphics[width=0.6\textwidth]{2-sistema/graf/solucion.eps}
   \caption{Diagrama de la arquitectura propuesta}
   \label{fig:solucion}
 \end{figure}
 
-\newpage
+De los módulos mencionados, es necesario poner especial atención en el diseño de la interfaz de acceso a la cabecera.
+
 \subsection{Interfaz de acceso a la cabecera}
-Este módulo tiene como función acceder a los campos que conforman la cabecera IP en los paquetes entrantes. La información recolectada es enviada al microprocesador para que éste lleve a cabo el software de clasificación.
+Este módulo tiene como función acceder a los campos que conforman la cabecera IP en los paquetes entrantes. La información recolectada es enviada al microprocesador para que este implemente el software de clasificación.
 
 \newpage
 
  \begin{figure}[h]
   \centering
-	 \includegraphics[width=0.7\textwidth]{2-sistema/graf/modulo.eps}
+	 \includegraphics[width=0.6\textwidth]{2-sistema/graf/modulo.eps}
   \caption{Interfaz de acceso a la cabecera}
   \label{fig:inter}
 \end{figure}
@@ -50,18 +51,17 @@ Este módulo tiene como función acceder a los campos que conforman la cabecera 
 
 %\subsection{Descripción funcional}
 
-A continuación se describe funcionalmente cada uno de los bloques que conforma esta interfaz.
-\subsubsection{FIFO}
-A la entrada del modulo se encuentra una FIFO que se encarga de almacenar y poner a disposición en orden de llegada los datos que emite el generador. Además, para poder manipular los paquetes, la FIFO debe almacenar toda la información de control que este disponible. 
-Este modulo también debe permitir la parametrización en la mayor cantidad de sentidos posibles, especialmente se desea poder configurar la cantidad de palabras disponibles que se puede almacenar, ya que la memoria dentro de una FPGA es un recurso critico y se desea encontrar la mejor relación entre rendimiento y uso de memoria.
-
+A continuación se describe funcionalmente cada uno de los bloques que conforma la interfaz, ilustrada en la figura~\ref{fig:inter}
+\subsubsection{Cola de espera FIFO\textit{(First in First out)}}
+A la entrada del módulo se encuentra una FIFO que se encarga de almacenar y poner a disposición en orden de llegada los datos que emite el generador. Además, para poder manipular los paquetes, la FIFO debe almacenar toda la información de control disponible a su entrada.
+Este módulo también debe permitir la parametrización en la mayor cantidad de sentidos posibles, especialmente se desea poder configurar la cantidad de palabras a almacenar, ya que la memoria dentro de un FPGA es un recurso crítico y se desea encontrar la mejor relación entre rendimiento y consumo de recursos.
 
 \subsubsection{Delay Buffer}
-El Componente Delay buffer sera el encargado de ir tomando los datos desde la FIFO y de detectar el inicio y finalización de un paquete. Además deberá mantener almacenado el paquete mientras el software toma una decisión. En este modulo es deseable poder configurar la cantidad de palabras que se consideraran parte de la cabecera y que sera enviadas al software. 
+El Componente Delay buffer sera el encargado de ir tomando los datos desde la FIFO y de detectar el inicio y finalización de un paquete. Además deberá mantener almacenado el paquete mientras el software toma una decisión. En este módulo es deseable poder configurar la cantidad de palabras que se consideraran parte de la cabecera y que sera enviadas al software. 
 
 \subsubsection{Uplink}
-Este Modulo es el encargado de realizar la comunicación entre el flujo de datos que proviene de la red y el procesador. Para ello debe entender las señales que utiliza el Bus, Avalon-MM, y poder interrumpir al procesador para enviarles los datos cuando estos estén disponibles. Cuando el procesador responde con el resultado de la clasificación, este modulo lo almacena y lo envía  Write output para que este escriba el resultado de la clasificación en la etiqueta anexa al paquete correspondiente.
-Eventualmente se desarrollaran varias versiones de este modulo, que envíen toda la cabecera o una parte selectiva de ella para optimizar así el rendimiento.
+Este módulo es el encargado de realizar la comunicación entre el flujo de datos que proviene de la red y el procesador. Para ello debe entender las señales que utiliza el Bus, Avalon-MM, y poder interrumpir al procesador para enviarles los datos cuando estos estén disponibles. Cuando el procesador responde con el resultado de la clasificación, este módulo lo almacena y lo envía  Write output para que este escriba el resultado de la clasificación en la etiqueta anexa al paquete correspondiente.
+Eventualmente se desarrollaran varias versiones de este módulo, que envíen toda la cabecera o una parte selectiva de ella para optimizar así el rendimiento.
 
 \subsubsection{Write Output}
 Para finalizar, Write Output, toma la salida de Delay buffer y escribe el resultado que le envía Uplink en la etiqueta que se encuentra anexa a cada una de las palabras del paquete.
@@ -109,7 +109,7 @@ Considerar la siguiente tabla de ruteo
 
 
 
-A la misma le corresponde representación en Unibit trie de la figura ~\ref{fig:trie}
+A la misma le corresponde representación en Unibit trie de la figura~\ref{fig:trie}
 
 Considerar una dirección de destino \textit{D}. Para efectuar la búsqueda del prefijo más largo los bits de \textit{D} son usados para trazar un camino a lo largo del trie. Dicho camino comienza en el nodo raíz y continúa hasta toparse con un puntero vacío o un nodo vacío. Durante el recorrido a través del trie, el algoritmo mantiene un registro del último prefijo encontrado en un nodo en el camino. Cuando la búsqueda termina en un puntero vacío, ese es el prefijo retornado.
 \newpage
@@ -422,7 +422,7 @@ Considerar una dirección de destino \textit{D}. Para efectuar la búsqueda del 
 
 \section{Diseño}
 
-A lo que es posible ver en la figura ~\ref{fig:diseno} es necesario agregarle algún tipo de interfaz de red que permita el ingreso de datos al sistema para luego procesarla. Además, según lo planteado en los objetivos de este trabajo, se desea implementar un sistema operativo o algún tipo de capa de abstracción que permita la ejecución de un Software en el que se realizará dicho procesamiento de estos paquetes. Para vincular estos dos módulos también es necesario un modulo que transporte los datos recibidos por la interfaz de red hacia el software y luego sobreescriba los resultados obtenidos en una etiqueta adjunta a los datos procesados. En la figura ~\ref{fig:diseno2} se puede ver como resulta el diseño propuesto.
+A lo que es posible ver en la figura ~\ref{fig:diseno} es necesario agregarle algún tipo de interfaz de red que permita el ingreso de datos al sistema para luego procesarla. Además, según lo planteado en los objetivos de este trabajo, se desea implementar un sistema operativo o algún tipo de capa de abstracción que permita la ejecución de un Software en el que se realizará dicho procesamiento de estos paquetes. Para vincular estos dos módulos también es necesario un módulo que transporte los datos recibidos por la interfaz de red hacia el software y luego sobreescriba los resultados obtenidos en una etiqueta adjunta a los datos procesados. En la figura ~\ref{fig:diseno2} se puede ver como resulta el diseño propuesto.
 
 \begin{figure}[H]
   \centering
@@ -452,7 +452,7 @@ El sistema implementado en el presente trabajo consta de un microprocesador NIOS
   \label{fig}
 \end{figure}
 
-A su vez, éste último está conformado por un generador de paquetes Ethernet conectado a una FIFO. Esta está a su vez conectada a un modulo denominado delay buffer, que está conectado al modulo uplink y al write output.. Uplink a su vez está conectado también a write output.
+A su vez, éste último está conformado por un generador de paquetes Ethernet conectado a una FIFO. Esta está a su vez conectada a un módulo denominado delay buffer, que está conectado al módulo uplink y al write output.. Uplink a su vez está conectado también a write output.
 
 \begin{figure}[h]
   \centering
