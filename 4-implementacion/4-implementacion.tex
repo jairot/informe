@@ -270,15 +270,15 @@ Propósito  & 1) Verificar la funcionalidad completa de System on Chip.
 
 3) Comprobar el funcionamiento de las E/S del procesador. 
 \\ \hline
- Prerrequisitos  & Se debe haber sintetizado el sistema completo y compilado sin errores el software.\\ \hline
+ Prerrequisitos  & Se debe haber sintetizado el sistema completo y compilado sin errores el software. La placa debe estar conectada a la PC por USB mediante el cable correspondiente. \\ \hline
  Datos de Prueba & Se preparara un sistema básico que incluye un Nios II/f, la interfaz de memoria y un PIO conectado a los LEDs de la placa.
 
-Se usara un Software en C que va incrementando e imprimiendo en consola un valor entero mientras envía este valor, en binario, al PIO y por extensión a los LED.  \\ \hline
+Se usa un Software en lenguaje C que va incrementando e imprimiendo en consola un valor entero mientras envía este valor, en binario, al PIO y por extensión a los LEDs.  \\ \hline
  Pasos & 1) Programar la FPGA con el sistema completo.
 
-2) Descargar el Software al Microprocesador.
+2) Descargar el software al Microprocesador.
 
-3) Iniciar la consola del NIOS II .\\ \hline
+3) Iniciar la consola del NIOS II en la PC.\\ \hline
  Resultados Esperados & El valor del contador que se imprime por consola debe coincidir con el valor mostrado por los LED.\\ \hline
  Evaluación de la Prueba  & El resultado de la ejecución fue exitoso. \\ \hline
 	\end{tabular}
@@ -287,26 +287,26 @@ Se usara un Software en C que va incrementando e imprimiendo en consola un valor
 \end{table}
 \begin{table}
 	\begin{tabular}{|>{\columncolor[gray]{0.8}}l|p{11cm}|} \hline
-\multicolumn{2}{|>{\columncolor[gray]{0.8}}l|}{\textbf{Caso de Prueba: Interrupción, Envió y Recepción de datos}}\\ \hline
-Propósito  & 1) Comprobar mediante un Custom Component simple el funcionamiento de las interrupciones.
+\multicolumn{2}{|>{\columncolor[gray]{0.8}}l|}{\textbf{Caso de Prueba: Interrupción, Envío y Recepción de datos}}\\ \hline
+Propósito  & 1) Comprobar mediante un Custom Component (Apéndice D)  simple el funcionamiento de las interrupciones.
 
-2) Enviar y recibir un dato Estático por el bus sin errores. 
+2) Enviar y recibir un dato estático por el bus sin errores. 
 \\ \hline
- Prerrequisitos  & Se debe contar con el SoC Completo y funcional.\\ \hline
- Datos de Prueba & Se prepara un Componente propio simple que interrumpe, envía un dato y espera que el procesador le responda con le mismo dato. 
+ Prerrequisitos  & Se debe contar con el SoC completo y funcional.\\ \hline
+ Datos de Prueba & Se prepara un Componente propio simple que interrumpe, envía un dato y espera que el procesador le responda con el mismo dato. 
 
-Preparar un software que cuente con la Rutina de Interrupción correspondiente y que cuando reciba un dato responda con el mismo de manera inmediata, además de imprimirlo por consola.
+Se utiliza un software que cuente con la Rutina de Interrupción correspondiente y que cuando reciba un dato responda con el mismo de manera inmediata, además de imprimirlo por consola.
  \\ \hline
  Pasos & 1) Programar la FPGA con el sistema completo.
 
 2) Descargar el Software al Microprocesador.
 
-3) Iniciar la consola del NIOS II .
+3) Iniciar la consola del NIOS II en la PC.
 \\ \hline
- Resultados Esperados & En la consola debe aparecer repetidamente el valor que fue puesto en el Hardware. \\ \hline
+ Resultados Esperados & En la consola debe aparecer repetidamente el valor que fue generado en el Hardware. \\ \hline
  Evaluación de la Prueba  & El resultado de la prueba fue exitoso.\\ \hline
 	\end{tabular}
-	\caption{Caso de Prueba: Interrupción, Envió y Recepción de datos}
+	\caption{Caso de Prueba: Interrupción, Envío y Recepción de datos}
 	\label{tab:enviorecepcion}
 \end{table}
 \begin{table}
