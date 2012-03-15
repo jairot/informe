@@ -34,7 +34,7 @@
      inkscape:pageshadow="2"
      inkscape:zoom="0.7"
      inkscape:cx="587.58677"
-     inkscape:cy="824.35446"
+     inkscape:cy="767.2116"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="true"
@@ -55,7 +55,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -129,19 +129,34 @@
     <text
        xml:space="preserve"
        style="font-size:56px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
-       x="100"
+       x="80"
        y="172.36218"
        id="text3623"><tspan
          sodipodi:role="line"
          id="tspan3625"
-         x="100"
+         x="80"
          y="172.36218"
          style="font-size:36px;text-align:start;text-anchor:start">- FPGA</tspan><tspan
          sodipodi:role="line"
-         x="100"
-         y="217.36218"
+         x="80"
+         y="209.38818"
          id="tspan3627"
-         style="font-size:36px;text-align:start;text-anchor:start">- ASIC</tspan></text>
+         style="font-size:28px;text-align:start;text-anchor:start">(NetFPGA)</tspan><tspan
+         sodipodi:role="line"
+         x="80"
+         y="244.38818"
+         style="font-size:36px;text-align:start;text-anchor:start"
+         id="tspan2830" /><tspan
+         sodipodi:role="line"
+         x="80"
+         y="279.38818"
+         style="font-size:36px;text-align:start;text-anchor:start"
+         id="tspan2832" /><tspan
+         sodipodi:role="line"
+         x="80"
+         y="314.38818"
+         style="font-size:36px;text-align:start;text-anchor:start"
+         id="tspan2834" /></text>
     <text
        id="text3629"
        y="172.36218"
@@ -153,8 +168,9 @@
          id="tspan3631"
          sodipodi:role="line">- C++</tspan><tspan
          id="tspan3633"
-         y="217.36218"
+         y="209.38818"
          x="360"
-         sodipodi:role="line">- Click</tspan></text>
+         sodipodi:role="line"
+         style="font-size:28px">  (Click)</tspan></text>
   </g>
 </svg>
