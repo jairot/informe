@@ -35,7 +35,7 @@
      inkscape:pageshadow="2"
      inkscape:zoom="0.7"
      inkscape:cx="520.76237"
-     inkscape:cy="821.79298"
+     inkscape:cy="740.53934"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="true"
@@ -242,22 +242,32 @@
          sodipodi:role="line"
          x="240"
          y="287.36218"
-         id="tspan3750">Bit 3: Válido.</tspan><tspan
+         id="tspan3750">Bit 3: Paquete válido.</tspan><tspan
          sodipodi:role="line"
          x="240"
          y="322.36218"
-         id="tspan3752">Bit 4: SOP.</tspan><tspan
+         id="tspan3752">Bit 4: Comienzo de paquete (SOP).</tspan><tspan
          sodipodi:role="line"
          x="240"
          y="357.36218"
-         id="tspan3754">Bit 5: EOP.</tspan><tspan
+         id="tspan3754">Bit 5: Final de paquete (EOP).</tspan><tspan
          sodipodi:role="line"
          x="240"
          y="392.36218"
-         id="tspan3756">Bit 6: Error.</tspan><tspan
+         id="tspan3756">Bit 6: Error de trama.</tspan><tspan
          sodipodi:role="line"
          x="240"
          y="427.36218"
-         id="tspan3758">Bit 7: Available.</tspan></text>
+         id="tspan3758">Bit 7: Paquete disponible.</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:32px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+       x="290"
+       y="208.36218"
+       id="text2857"><tspan
+         sodipodi:role="line"
+         id="tspan2859"
+         x="290"
+         y="208.36218">Campos de control</tspan></text>
   </g>
 </svg>
