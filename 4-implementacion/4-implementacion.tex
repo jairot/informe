@@ -1,13 +1,10 @@
 \chapter{Implementación}
 
+En este capitulo se describe la implementacion con mayor detalle, haciendo incapie en los algoritmos de clasificación, en el hardware usado y presentando, ademas, algunos de los casos de prueba que fueron usados para validar el funcionamiento de este proyecto integrador.
+
 \section{Algoritmos de clasificación}
 
-Se implementaron 2 algoritmos de clasificación: Búsqueda lineal y Búsqueda en árbol unibit.
-
-El software utilizado para realizar las pruebas consistió en 2 proyectos por separado. Uno para cada tipo de búsqueda en la tabla.
-
-El mismo fue desarrollado en lenguaje c++, por presentar éste ciertas facilidades para las implementaciones llevadas a cabo. Puntualmente se sacó ventaja de un STL container (list) para implementar la búsqueda lineal. La característica utilizada en este caso fue el ordenamiento de la lista con sólo una llamada a función.
-
+Se implementaron 2 algoritmos de clasificación: Búsqueda lineal y Búsqueda en árbol unibit. El software utilizado para realizar las pruebas consistió en 2 proyectos por separado, uno para cada tipo de búsqueda en la tabla. El mismo fue desarrollado en lenguaje c++, por presentar éste ciertas facilidades para las implementaciones llevadas a cabo. Puntualmente se sacó provecho de un STL container (list) para implementar la búsqueda lineal. La característica utilizada en este caso fue el ordenamiento de la lista con sólo una llamada a función.
 Para efectuar el intercambio de datos con el hardware se hizo uso de las macros IOWR e IORD, las cuales escriben y leen respectivamente los datos hacia/desde un componente conectado al bus Avalon MM. La razón de haber usado dichas macros yace en el hecho de que las mismas no son puestas en caché. Esta característica se torna indispensable en este diseño, ya que en el mismo no se puede leer un dato sin saber si está verdaderamente disponible en el bus.
 
 
@@ -166,9 +163,9 @@ Una vez llevado a cabo el procedimiento de clasificación, \textit{flag2} es pue
 \end{figure}
 
 
-\section{Hardware}
+\section{Plataforma}
 
-El hardware utilizado fue la placa de desarrollo DE2, cuyas características principales son:
+El hardware utilizado fue la placa de desarrollo Altera DE2, cuyas características principales son:
 
 \begin{itemize}
 	\item FPGA: Cyclone II EP2C35F672C6
@@ -177,9 +174,7 @@ El hardware utilizado fue la placa de desarrollo DE2, cuyas características pri
 	\item Clock de 50 MHz
 \end{itemize}
 
-Para una descripción más detallada, referirse al Apéndice A.
-
-A su vez, la FPGA incluida en esta placa cuenta con estas características:
+Para una descripción más detallada, referirse al Apéndice A. A su vez, la FPGA incluida en esta placa cuenta con las siguientes características:
 
 \begin{itemize}
 	\item Elementos lógicos: 33216
@@ -190,35 +185,27 @@ A su vez, la FPGA incluida en esta placa cuenta con estas características:
 \end{itemize}
 
 
-\section{Microprocesador NIOS II}
+\subsection{Microprocesador NIOS II}
 El Nios II es un procesador RISC de 32 bits de propósito general que cuenta con las siguientes especificaciones:
 \begin{itemize}
-	\item Set de instrucciones, bus de datos y espacio de direcciones de 32 bits.
-	\item 32 registros de propósito general.
-	\item Soporte de hasta 32 interrupciones.
-	\item Controlador de interrupciones externas para soportar una mayor cantidad de interrupciones.
-	\item Multiplicación y división en una sola instrucción de 32 x 32 produciendo un resultado de 32-bits.
-	\item Instrucciones dedicadas para multiplicaciones con resultados de 64 y 128 bits.
-	\item Acceso a una variedad de periféricos e interfases a memorias  y periféricos fuera del chip.
-	\item Modulo de depurado asistido por hardware.
+	\item Set de instrucciones, bus de datos y espacio de direcciones de 32 bits. 32 registros de propósito general y soporte de hasta 32 interrupciones.
+	\item Acceso a una variedad de periféricos e interfaces a memorias y periféricos fuera del chip.
 	\item Unidad de manejo de memoria (MMU) opcional para soportar sistemas operativos mas complejos.
 	\item Unidad de protección de memoria (MPU) opcional.
 	\item Entorno de desarrollo de software basado en GNU C/C++ integrado a Eclipse.
-	\item Integración con SignalTap® II, el analizador de lógica embebida de Altera permitiendo el análisis de tiempo real de todas las señales presentes en la FPGA.
-	\item Set de instrucciones compatible entre todos las versiones del procesador Nios II.
 \end{itemize}
 
 Para poder ser implementado en una mayor variedad de dispositivos el Nios II ofrece 3 configuraciones diferentes:  Nios II/f (fast), Nios II/s (Standard), and Nios II/e (Economy).
 
 \subsubsection{Nios II/e}
-El Core Nios II/e esta diseñado para utilizar la menor cantidad de espacio posible. Esto esto funciona especialmente para FPGA de bajo costo. Tiene las siguientes características:
+El Core Nios II/e está diseñado para utilizar la menor cantidad de espacio posible. Esto es apropiado para FPGAs de bajo costo. El mismo Tiene las siguientes características:
 \begin{itemize}
 	\item Espacio de direcciones de hasta 2GB
 	\item Gratuito, no requiere licencia 
 \end{itemize}
 
 \subsubsection{Nios II/s}
-El Nios II/s esta diseñado para mantener un balance entre rendimiento y costo. Entre sus características principales están:
+El Nios II/s está diseñado para mantener un balance entre rendimiento y costo. Entre sus características principales están:
 
 \begin{itemize}
 	\item Cache de instrucciones
@@ -229,7 +216,7 @@ El Nios II/s esta diseñado para mantener un balance entre rendimiento y costo. 
 \end{itemize}
 
 \subsubsection{Nios II/f}
-El core Nios II/f esta diseñado para ofrecer la mayor performance a las expensas de un mayor tamaño, medido en unidades lógicas, este core tiene las siguientes características:
+El core Nios II/f está diseñado para ofrecer la mayor performance a expensas de un mayor tamaño, medido en unidades lógicas. Este core tiene las siguientes características:
 
 \begin{itemize}
 	\item Cache de instrucciones y de datos separadas
@@ -241,12 +228,32 @@ El core Nios II/f esta diseñado para ofrecer la mayor performance a las expensa
 	\item Predictor de saltos dinámico
 \end{itemize}
 
-En vista de que este último ofrece la mayor performance y el hardware utilizado es capaz de soportarlo, se optó por el mismo para ser instanciado en el sistema.
+En vista de que este último ofrece la mayor flexibilidad y el hardware seleccionado cuenta con las caracteristicas necesarias para soportarlo, sera el utilizado para la implementación de este proyecto integrador.
+
+\subsection{Sintesis y Uso de Recursos}
+
+
+Los recursos totales utilizados por el proyecto completo fueron:
+\begin{itemize}
+\item Elementos lógicos: 4983
+	\item Bits de RAM: 280627
+	\item Multiplicadores embebidos: 2
+	\item PLLs: 1
+	\item Cantidad máxima de pines definidos por el usuario: 86
+\end{itemize}
+
+\begin{figure}[H]
+  \centering
+	\includegraphics[scale=0.70]{4-implementacion/graf/fpga.eps}
+  \caption{Uso de los recursos de la FPGA}
+  \label{fig:fpga}
+\end{figure}
+
 
 \section{Verificación}
 Se muestran a continuación varios casos de prueba que se realizaron para verificar el correcto funcionamiento del sistema.
 \begin{table}
-	\begin{tabular}{|>{\columncolor[gray]{0.8}}l|p{9cm}|} \hline
+	\begin{tabular}{|>{\columncolor[gray]{0.8}}l|p{11cm}|} \hline
 \multicolumn{2}{|>{\columncolor[gray]{0.8}}l|}{\textbf{Caso de Prueba: Funcionalidad del SoC}}\\ \hline
 Propósito  & 1) Verificar la funcionalidad completa de System on Chip. 
 
@@ -270,7 +277,7 @@ Se usara un Software en C que va incrementando e imprimiendo en consola un valor
 	\label{tab:testsoc}
 \end{table}
 \begin{table}
-	\begin{tabular}{|>{\columncolor[gray]{0.8}}l|p{9cm}|} \hline
+	\begin{tabular}{|>{\columncolor[gray]{0.8}}l|p{11cm}|} \hline
 \multicolumn{2}{|>{\columncolor[gray]{0.8}}l|}{\textbf{Caso de Prueba: Interrupción, Envió y Recepción de datos}}\\ \hline
 Propósito  & 1) Comprobar mediante un Custom Component simple el funcionamiento de las interrupciones.
 
@@ -294,7 +301,7 @@ Preparar un software que cuente con la Rutina de Interrupción correspondiente y
 	\label{tab:enviorecepcion}
 \end{table}
 \begin{table}
-	\begin{tabular}{|>{\columncolor[gray]{0.8}}l|p{9cm}|} \hline
+	\begin{tabular}{|>{\columncolor[gray]{0.8}}l|p{11cm}|} \hline
 \multicolumn{2}{|>{\columncolor[gray]{0.8}}l|}{\textbf{Caso de Prueba: Integridad del paquete }}\\ \hline
 Propósito  & 1) Comprobar que la cabecera llega completa y sin errores al software. 
 
@@ -322,7 +329,7 @@ Se prepara el software para que lea la cabecera completa, imprima lo leído en c
 	\label{tab:integridad}
 \end{table}
 \begin{table}
-	\begin{tabular}{|>{\columncolor[gray]{0.8}}l|p{9cm}|} \hline
+	\begin{tabular}{|>{\columncolor[gray]{0.8}}l|p{11cm}|} \hline
 \multicolumn{2}{|>{\columncolor[gray]{0.8}}l|}{\textbf{Caso de Prueba: Funcionamiento del LookUp }}\\ \hline
 Propósito  & 1) Verificar que el lookup de direcciones se lleve a cabo exitosamente. 
 
@@ -346,23 +353,5 @@ Se prepara el software para que imprima lo leído en consola.
 	\label{tab:retlook}
 \end{table}
 
-\newpage
-
-
-Los recursos totales utilizados por el proyecto completo fueron:
-\begin{itemize}
-\item Elementos lógicos: 4983
-	\item Bits de RAM: 280627
-	\item Multiplicadores embebidos: 2
-	\item PLLs: 1
-	\item Cantidad máxima de pines definidos por el usuario: 86
-\end{itemize}
-
-\begin{figure}[H]
-  \centering
-	\includegraphics[scale=0.70]{4-implementacion/graf/fpga.eps}
-  \caption{Uso de los recursos de la FPGA}
-  \label{fig:fpga}
-\end{figure}
 
 %\section{Distribucion Lineal}
