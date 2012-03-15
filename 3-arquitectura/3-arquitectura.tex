@@ -1,8 +1,8 @@
 \chapter{Arquitectura}
 
-En este capitulo se dara cuenta de la arquitectura digital de los módulos implementados de manera exclusiva para este trabajo. Pero antes de eso, es pertinente especificar el formato que tienen los datos en su paso por la interfaz de acceso a la cabecera.
+En este capitulo se dará cuenta de la arquitectura digital de los módulos implementados de manera exclusiva para este trabajo. Pero antes de eso, es pertinente especificar el formato que tienen los datos en su paso por la interfaz de acceso a la cabecera.
 
-Todas las palabras de cada paquete que ingresa a la interfaz de acceso a la cabecera, lleva anexa un campo de 8 bits que contienen el valor de los campos de control que corresponden a esa palabra y ademas 3 bits libres en donde se escribira la etiqueta con los resultados de lo procesado en el software. En la figura \ref{fig:datocontrol}  es posible ver el valor de cada uno de estos campos.
+Todas las palabras de cada paquete que ingresa a la interfaz de acceso a la cabecera, lleva anexa un campo de 8 bits que contienen el valor de los campos de control que corresponden a esa palabra y además 3 bits libres en donde se escribirá la etiqueta con los resultados de lo procesado en el software. En la figura \ref{fig:datocontrol}  es posible ver el valor de cada uno de estos campos.
 
 \begin{figure}[H]
   \centering
@@ -41,13 +41,13 @@ El mismo cuenta con las siguientes capacidades:
 	\item Mantiene un contador global de la cantidad de paquetes generados y lo imprime en la última palabra del Payload de cada uno.
 \end{itemize}
 
-Este módulo es una versión adaptada y mejorada del generador usado en otro proyecto integrador\cite{spaz} desarollado en el Laboratorio de Comunicaciones Digitales.
+Este módulo es una versión adaptada y mejorada del generador usado en otro proyecto integrador\cite{spaz} desarrollado en el Laboratorio de Comunicaciones Digitales.
 
 \section{Interfaz de Acceso a la Cabecera}
 En base a la figura~\ref{fig:inter}, se pasará a describir de manera detallada la estructura y el funcionamiento de cada uno de los módulos que componen la Interfaz de Acceso a la Cabecera. 
 
 \subsection{FIFO}
-Se trata de una FIFO estándar, basada en un código disponible en OpenCores, que soporta palabras de 72 bits, 64 del paquete, 5 de control y 3 del identificador de interfaz de salida. Como capacidad extra se le agregó un mecanismo para controlar la integridad de los paquetes que ingresan, aceptando solo los que pueden ser almacenados completamente en la memoria interna. 
+Se trata de una FIFO estándar, basada en un código disponible en OpenCores\cite{fifo}, que soporta palabras de 72 bits, 64 del paquete, 5 de control y 3 del identificador de interfaz de salida. Como capacidad extra se le agregó un mecanismo para controlar la integridad de los paquetes que ingresan, aceptando solo los que pueden ser almacenados completamente en la memoria interna. 
 
 \begin{figure}[H]
   \centering
@@ -57,7 +57,7 @@ Se trata de una FIFO estándar, basada en un código disponible en OpenCores, qu
 \end{figure}
 
 \subsection{Delay Buffer}
-Este módulo fué desarrollado íntegramente para este proyecto y está compuesto por un registro de desplazamiento interno, que cuenta, en esta configuracion, con 8 posiciones de 72 bits cada una. Su función principal es detectar la llegada de un paquete a la FIFO, cargar 5 palabras correspondientes a la cabecera, y enviar una copia a Uplink. Luego, cuando el microprocesador termina su procesamiento, continua leyendo la FIFO y transfiere el resto del paquete. Este módulo permite, además, desacoplar el flujo de datos de la comunicación con el Microprocesador.
+Este módulo fue desarrollado íntegramente para este proyecto y está compuesto por un registro de desplazamiento interno, que cuenta, en esta configuración, con 8 posiciones de 72 bits cada una. Su función principal es detectar la llegada de un paquete a la FIFO, cargar 5 palabras correspondientes a la cabecera, y enviar una copia a Uplink. Luego, cuando el microprocesador termina su procesamiento, continua leyendo la FIFO y transfiere el resto del paquete. Este módulo permite, además, desacoplar el flujo de datos de la comunicación con el Microprocesador.
 
 La implementación de este módulo está formada por la máquina de estados que se muestra en la figura~\ref{fig:dbstate}.
 
@@ -155,7 +155,7 @@ Este módulo implementa la máquina de estados que se puede ver en la figura~\re
 
 \begin{itemize}
 	\item IDLE: es el estado inicial en el que se encuentra la máquina, hasta que recibe la confirmación de que la cabecera esta disponible.
-	\item READ,HOLD,WAIT: estos estados se alternan para interrumpir y transmitir 1 o 15 palabras de 32 bits al procesador, segun el caso.
+	\item READ,HOLD,WAIT: estos estados se alternan para interrumpir y transmitir 1 o 15 palabras de 32 bits al procesador, según el caso.
 	\item WRITE: es el estado encargado de esperar que el procesador envié los resultados, para luego dar aviso a los otros componentes de la disponibilidad de los mismos.
 \end{itemize}
 

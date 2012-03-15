@@ -17,15 +17,15 @@ Para el problema planteado en el capítulo anterior se propone, de manera funcio
 
     \begin{enumerate}
   	\item Un flujo de paquetes llega a la interfaz de red del dispositivo y es necesario clasificarlo en distintos flujos para que sea redireccionado.
-	\item Se almacenan los paquetes en un buffer segun el orden de llegada.
+	\item Se almacenan los paquetes en un buffer según el orden de llegada.
 	\item Se extrae el primer paquete y se toma la información que pertenece a la cabecera; La información completa del paquete queda en espera.
 	\item Se envía la cabecera al microprocesador.
 	\item El microprocesador aplica un algoritmo de clasificación a cierta información de la cabecera y reenvía los resultados al hardware. 
-	\item Se envia el paquete a la interfaz de salida, anexandole a cada palabra un tag adjunto con el resultado de la clasificación.
+	\item Se envía el paquete a la interfaz de salida, anexándole a cada palabra un tag adjunto con el resultado de la clasificación.
     \end{enumerate}
 \newpage
 \section{Esquema propuesto}
-Para implementar la solucion se propone el hardware descripto en el diagrama de la figura~\ref{fig:solucion}
+Para implementar la solución se propone el hardware descripto en el diagrama de la figura~\ref{fig:solucion}
  \begin{figure}[h]
   \centering
 	 \includegraphics[width=0.6\textwidth]{2-sistema/graf/solucion.eps}
@@ -57,7 +57,7 @@ A la entrada del módulo se encuentra una FIFO que se encarga de almacenar y pon
 Este módulo también debe permitir la parametrización en la mayor cantidad de sentidos posibles, especialmente se desea poder configurar la cantidad de palabras a almacenar, ya que la memoria dentro de un FPGA es un recurso crítico y se desea encontrar la mejor relación entre rendimiento y consumo de recursos.
 
 \subsubsection{Delay Buffer}
-Este componente será el encargado de ir tomando los datos desde la FIFO y de detectar el inicio y finalización de un paquete. Además deberá mantener almacenada la cabecera del paquete mientras el software toma una decisión. En este módulo es deseable configurar la cantidad de palabras que se considerarán parte de la cabecera y que seran enviadas al microprocesador.
+Este componente será el encargado de ir tomando los datos desde la FIFO y de detectar el inicio y finalización de un paquete. Además deberá mantener almacenada la cabecera del paquete mientras el software toma una decisión. En este módulo es deseable configurar la cantidad de palabras que se considerarán parte de la cabecera y que serán enviadas al microprocesador.
 
 \subsubsection{Uplink}
 Este módulo es el encargado de gestionar las transacciones con el microprocesador. Para ello debe entender las señales que utiliza el bus y poder interrumpir al procesador para enviarle los datos cuando estos estén disponibles. Asimismo cuando el procesador responde con el resultado de la clasificación, Uplink lo almacena y lo envía al módulo Write output para que este escriba el resultado de la clasificación en la etiqueta anexa al paquete correspondiente.
