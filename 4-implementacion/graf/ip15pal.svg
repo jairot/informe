@@ -40,9 +40,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.98994949"
-     inkscape:cx="2143.5559"
-     inkscape:cy="1929.2266"
+     inkscape:zoom="0.7"
+     inkscape:cx="2312.5458"
+     inkscape:cy="1279.5774"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="true"
@@ -63,7 +63,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -677,11 +677,6 @@
        x="0"
        width="744.09448"
        height="1052.3622" />
-    <path
-       inkscape:connector-type="polyline"
-       id="path4008"
-       d="m 1517.3092,-499.23047 0,400.000003"
-       style="fill:#999999;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:1, 1;stroke-dashoffset:0;display:inline" />
     <rect
        style="fill:#999999;fill-opacity:1;stroke:#000000;stroke-width:1.38169861;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
        id="rect4010"
@@ -991,21 +986,6 @@
        xlink:href="#rect3810"
        transform="translate(1547.3092,418.40735)"
        id="use4074" />
-    <path
-       style="fill:#000000;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;display:inline"
-       d="m 7045.7144,-1773.3521 0,100"
-       id="path4101"
-       inkscape:connector-type="polyline" />
-    <path
-       style="fill:#000000;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="m 7045.7144,-1713.3521 -1600,0"
-       id="path4103"
-       inkscape:connector-type="polyline" />
-    <path
-       style="fill:#000000;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;display:inline"
-       d="m 5445.7144,-1773.3521 0,100"
-       id="path4105"
-       inkscape:connector-type="polyline" />
     <text
        xml:space="preserve"
        style="font-size:32px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
@@ -1016,16 +996,6 @@
          id="tspan4109"
          x="2323.574"
          y="-458.47949">0</tspan></text>
-    <text
-       xml:space="preserve"
-       style="font-size:72px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
-       x="5920"
-       y="-1827.6378"
-       id="text4140"><tspan
-         sodipodi:role="line"
-         id="tspan4142"
-         x="5920"
-         y="-1827.6378">Dirección IP</tspan></text>
     <path
        style="fill:#b3b3b3;fill-opacity:1;stroke:#000000;stroke-width:2.85714293;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
        d="m 1518.5715,-294.78068 0,-102.85714 22.8571,0 22.8572,0 0,102.85714 0,102.85714 -22.8572,0 -22.8571,0 0,-102.85714 z"
