@@ -352,14 +352,14 @@
        y="-52.637817" />
     <text
        xml:space="preserve"
-       style="font-size:16px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
-       x="475"
+       style="font-size:16px;font-style:normal;font-weight:normal;text-align:center;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+       x="487"
        y="-27.637817"
        id="text2853-8"><tspan
          sodipodi:role="line"
          id="tspan2855-50"
-         x="475"
-         y="-27.637817">BUS </tspan></text>
+         x="489.54688"
+         y="-27.637817">BUS de interconexión </tspan></text>
     <path
        style="fill:none;stroke:#000000;stroke-width:1.09544515999999992px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#Arrow1Mstart);marker-end:url(#Arrow1Mend)"
        d="m 490,42.362183 0,-60"
