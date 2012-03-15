@@ -154,12 +154,12 @@ Este módulo implementa la máquina de estados que se puede ver en la figura~\re
 \end{figure}
 
 \begin{itemize}
-	\item IDLE: Es el estado inicial en el que se encuentra la máquina, hasta que recibe la confirmación de que la cabecera esta disponible.
-	\item READ,HOLD,WAIT: Estos estados se alternan para interrumpir y transmitir 1 o 15 palabras de 32bits al procesador.
-	\item WRITE: Es el estado encargado de esperar que el procesador envié los resultados, para luego darle aviso a los otros componentes de la disponibilidad de los mismos.
+	\item IDLE: es el estado inicial en el que se encuentra la máquina, hasta que recibe la confirmación de que la cabecera esta disponible.
+	\item READ,HOLD,WAIT: estos estados se alternan para interrumpir y transmitir 1 o 15 palabras de 32 bits al procesador, segun el caso.
+	\item WRITE: es el estado encargado de esperar que el procesador envié los resultados, para luego dar aviso a los otros componentes de la disponibilidad de los mismos.
 \end{itemize}
 
-En al tabla que sigue se puede ver las señales que componen el módulo con su correspondiente descripción:
+En la tabla que sigue se pueden ver las señales que componen el módulo con su correspondiente descripción:
 
 \begin{figure}[H]
   \centering
@@ -175,8 +175,8 @@ En al tabla que sigue se puede ver las señales que componen el módulo con su c
 \rowcolor[gray]{0.75} data\_avail & Input & High & Señala la disponibilidad de la Cabecera\\ \hline
 \rowcolor[gray]{0.75} NIOS\_DATAout[31:0] & Input & N/A & Bus de datos desde el procesador\\ \hline
 \rowcolor[gray]{0.75} NIOS\_ADDR[2:0] & Input & N/A & Bus de direcciones Avalon\\ \hline
-\rowcolor[gray]{0.75} NIOS\_CSn & Input & Low & Señal Avalon que indica que se esta trabajando con este componente\\ \hline
-\rowcolor[gray]{0.75} NIOS\_RDn & Input & Low & Indica que el procesador esta leyendo los datos presentes en NIOS\_DATAin \\ \hline
+\rowcolor[gray]{0.75} NIOS\_CSn & Input & Low & Señal Avalon que indica que se está trabajando con este componente\\ \hline
+\rowcolor[gray]{0.75} NIOS\_RDn & Input & Low & Indica que el procesador está leyendo los datos presentes en NIOS\_DATAin \\ \hline
 \rowcolor[gray]{0.75} NIOS\_WRn & Input & Low & Señala la disponibilidad de datos en NIOS\_DATAout\\ \hline
 \rowcolor[gray]{0.9} NIOS\_DATAin[31:0] & Output & N/A & Bus de datos de entrada al procesador\\ \hline
 \rowcolor[gray]{0.9} shift\_en & Output & High & Avisa a los otros componentes que ya están listos los resultados\\ \hline
@@ -192,7 +192,7 @@ En al tabla que sigue se puede ver las señales que componen el módulo con su c
 
 \subsection{Write output}
 
-Este módulo es el que se encarga de tomar el resultado emitido por el microprocesador y de estamparlo en los campos de control anexos a cada una de las palabras del paquete. Se puede ver en la figura~\ref{fig:inter} el diagrama de estados mediante el cual esta implementado este módulo y se describe cada estado a continuación:
+Este módulo es el que se encarga de tomar el resultado emitido por el microprocesador y de colocarlo en los campos de control anexos a cada una de las palabras del paquete. Se puede ver en la figura~\ref{fig:inter} el diagrama de estados en base al cual esta implementado este módulo, y se describe cada estado a continuación:
 
 \begin{figure}[H]
   \centering
@@ -202,12 +202,12 @@ Este módulo es el que se encarga de tomar el resultado emitido por el microproc
 \end{figure}
 
 \begin{itemize}
-	\item IDLE: Es el estado inicial en el que se encuentra la máquina, hasta que recibe la confirmación de que los resultados están disponibles.
-	\item READY: Espera que Delay Buffer le transmita la palabra correspondiente a un SOP. 
-	\item OVERWRITE: Escribe el resultado en el Tag adjunto a cada palabra hasta que encuentra la palabra correspondiente a un EOP. 
+	\item IDLE: es el estado inicial en el que se encuentra la máquina, hasta que recibe la confirmación de que los resultados están disponibles.
+	\item READY: espera que Delay Buffer le transmita la palabra correspondiente a un SOP. 
+	\item OVERWRITE: escribe el resultado en el Tag adjunto a cada palabra hasta que encuentra la palabra correspondiente a un EOP. 
 \end{itemize}
 
-Se detalla las señales de Entrada/Salida del módulo y su función:
+A continuación se detalla las señales de Entrada/Salida del módulo y su función:
 
 \begin{figure}[H]
   \centering
@@ -220,9 +220,9 @@ Se detalla las señales de Entrada/Salida del módulo y su función:
 \begin{table}
 	\begin{tabular}{|c|c|p{9cm}|} \hline
 \rowcolor[gray]{0.1} \textcolor{white}{Nombre} & \textcolor{white}{Activo} & \textcolor{white}{Descripción}\\ \hline
-\rowcolor[gray]{0.75} i\_data[71:0]	& N/A & Palabra de 72 bits que viene Delay Buffer\\ \hline
+\rowcolor[gray]{0.75} i\_data[71:0]	& N/A & Palabra de 72 bits proveniente Delay Buffer\\ \hline
 \rowcolor[gray]{0.75} i\_shift\_en & High & Indica la disponibilidad de los resultados de la clasificación\\ \hline
-\rowcolor[gray]{0.75} i\_result[32:0] & N/A! & Esta conectado a NIOS\_DATAout y guarda lo escrito por el procesador mientras i\_shift\_en esta activa \\ \hline
+\rowcolor[gray]{0.75} i\_result[32:0] & N/A! & Esta conectado a NIOS\_DATAout y conserva lo escrito por el procesador mientras i\_shift\_en esta activa \\ \hline
 \rowcolor[gray]{0.9} o\_data[71:0] & N/A & Salida de las palabras con el resultado anexo\\ \hline
  i\_clk & N/A & Señal de Reloj\\ \hline
  i\_rst & High & Reset\\ \hline
