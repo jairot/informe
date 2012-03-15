@@ -6,7 +6,7 @@ Se implementaron 2 algoritmos de clasificación: Búsqueda lineal y Búsqueda en
 
 El software utilizado para realizar las pruebas consistió en 2 proyectos por separado. Uno para cada tipo de búsqueda en la tabla.
 
-El mismo fue desarrollado en lenguaje c++, por presentar éste ciertas facilidades para las implementaciones llevadas a cabo. Puntualmente se sacó ventaja de un STL container (list) para implementar la búsqueda lineal. La característica utilizada en este caso fue el ordenamiento de la lista con sólo una llamada a función.
+El mismo fue desarrollado en lenguaje c++, por presentar éste ciertas facilidades para las implementaciones llevadas a cabo. Puntualmente se sacó provecho de un STL container (list) para implementar la búsqueda lineal. La característica utilizada en este caso fue el ordenamiento de la lista con sólo una llamada a función.
 
 Para efectuar el intercambio de datos con el hardware se hizo uso de las macros IOWR e IORD, las cuales escriben y leen respectivamente los datos hacia/desde un componente conectado al bus Avalon MM. La razón de haber usado dichas macros yace en el hecho de que las mismas no son puestas en caché. Esta característica se torna indispensable en este diseño, ya que en el mismo no se puede leer un dato sin saber si está verdaderamente disponible en el bus.
 
@@ -28,15 +28,19 @@ Los nodos de la lista contienen 3 campos:
 	\item Identificador de decisión (entero de 32 bit con signo)
 \end{itemize}
 
-Como se le dio prioridad a los prefijos de red más largos, se debió sobrecargar el operador de comparación ( > ) para que la función sort pudiese ordenar en base a la longitud de máscara. De esa manera, los nodos que contenían valores de máscara más grandes quedaban en las primeras posiciones de la lista.
+Como se le dio prioridad a los prefijos de red más largos, se debió sobrecargar el operador de comparación (\textgreater) para que la función de ordenamiento pudiese ordenar en base a la longitud de máscara, de manera que los nodos que contuviesen valores de máscara más grandes quedaran en las primeras posiciones de la lista. El nodo que representase a la ruta por defecto (que tiene una máscara de longitud cero) queda de esta forma en la última posición.
 
-La función de inserción toma como entrada una dirección, una máscara y un identificador de decisión. Luego instancia una entrada con dichos elementos y la inserta en la lista.
+\subsubsection{Inserción de nuevas entradas}
+
+La función de inserción toma como parámetros una dirección, una máscara y un identificador de decisión. Luego instancia una entrada con dichos elementos y la inserta en la lista.
+
+\subsubsection{Búsqueda}
 
 Cuando la función encargada del lookup recibe una dirección IP de destino, realiza los siguientes pasos:
 
 \begin{itemize}
-	\item Coloca un iterador al comienzo de la lista.
-	\item Realiza un AND con el valor de máscara del nodo que está siendo apuntado. Si el resultado de la operación es igual al valor de dirección de red de dicho nodo, entonces se retorna con el valor identificador de decisión. En otro caso, continúa la búsqueda en el siguiente nodo.
+	\item Coloca un iterador al comienzo de la lista, con el fin de comenzar el recorrido por la misma.
+	\item Realiza un AND con el valor de máscara del nodo que está siendo apuntado. Si el resultado de la operación es igual al valor de dirección de red de dicho nodo, entonces se retorna con el valor identificador de decisión, ya que ese es el prefijo más largo según el orden establecido. En otro caso, continúa la búsqueda en el siguiente nodo.
 \end{itemize}
 
 \subsection {Búsqueda en Árbol unibit}
@@ -52,32 +56,35 @@ Se implementaron 2 clases.
 En este contexto, pueden existir 2 tipos de nodo:
 
 \begin{itemize}
-	\item Común: no está asociado a una decisión.
-	\item Decisión: contiene un valor que identifica a la decisión a tomar. 
+	\item Común: no está asociado a una decisión. Es decir, sólo sirve como "nodo intermedio" en el recorrido por la estructura del árbol.
+	\item Decisión: contiene un valor que identifica a la decisión a tomar. En este caso, la interfaz por donde se direcciona el paquete.
 \end{itemize}
 
 Cada nodo cuenta con los siguientes campos:
 \begin{itemize}
 	\item gw: es un identificador de la decisión a tomar. En los nodos no asociados a una decisión (nodos comunes), tiene el valor estipulado en la macro NONE.
-    \item zero / one: Son punteros a nodo, asociados a los bits 0/1 del prefijo que se esté leyendo.
+    \item zero / one: son punteros a nodo, asociados a los valores de bit 0/1 del prefijo que se esté leyendo.
 
 \end{itemize}
 
+\subsubsection{Inserción de nuevas entradas}
+
 La función de inserción toma como entrada una dirección y una máscara de red, así como también un valor de decisión asociado a la entrada en tabla. Lleva a cabo los siguientes pasos:
 \begin{itemize}
-	\item Partiendo con un puntero de recorrido desde el nodo raíz, el procedimiento se encuentra contenido en un bucle controlado por la longitud de la máscara de red. Es decir, en cada iteración se hace un testeo de bit de dicha máscara. 
+	\item Partiendo con un puntero de recorrido desde el nodo raíz, el procedimiento se encuentra contenido en un bucle controlado por la longitud de la máscara de red. Es decir, en cada iteración se hace un testeo de bit de dicha máscara, comenzando por el bit más significativo. 
 	\item Si éste es igual a uno, la iteración se lleva a cabo.
-	\item En ella, se hace un testeo de bit pero de la dirección de red.
+	\item En ella, se hace un testeo de bit, pero de la dirección de red.
 	\item Si el mismo es igual a cero, se desplaza el puntero de recorrido hacia el nodo apuntado por \textit{zero}.
-	\item En caso de no existir dicho nodo, se lo crea y recién ahí se desplaza el puntero de recorrido.
+	\item En caso de no existir dicho nodo, se lo crea y recién entonces se desplaza el puntero de recorrido.
 	\item Un procedimiento análogo se lleva a cabo en caso de que el testeo de bit sea igual a uno.
 	\item Una vez finalizado el bucle, se escribe el valor de decisión en el nodo que esté siendo apuntado por el puntero de recorrido.
 \end{itemize}
 
+\subsubsection{Búsqueda}
 
 El algoritmo de búsqueda toma como entrada la dirección IP de destino del paquete a clasificar. Luego de ello realiza las siguientes acciones:
 \begin{itemize}
-	\item Va haciendo un testeo bit a bit de dicha dirección, partiendo con un puntero de recorrido desde el nodo raíz.
+	\item Hace un testeo bit a bit de dicha dirección, partiendo con un puntero de recorrido desde el nodo raíz.
 	\item Si el bit de la dirección es 0 y el puntero zero está apuntando hacia algún nodo, el puntero de recorrido se mueve al nodo apuntado por el puntero zero.
 	\item En caso contrario, se mueve al nodo apuntado por el puntero one (En caso de que exista alguno).
 \end{itemize}
@@ -113,11 +120,11 @@ Por último en el nodo raíz se inserta la ruta por defecto (S4 en este ejemplo)
 
 Tomando como ejemplo alguna dirección IP que comienza con 1100, puede verse que la búsqueda tomará el camino \textit{Raíz - one - one - zero - zero} y culminará en el nodo cuyo identificador de decisión es S1. 
 
-Vale la pena considerar qué sucede si la dirección IP comienza con 1101. En este caso el camino que seguirá la búsqueda es \textit{Raíz - one - one - zero} y el puntero de recorrido quedará varado allí, ya que no existe en dicho punto un nodo asociado al puntero one. Vale recordar que en cada iteración, el algoritmo de búsqueda chequea si el nodo apuntado por el puntero de recorrido es decisión. Para este caso puede verse que en la segunda iteración (cuando se ha recorrido \textit{Raíz - one - one}) el algoritmo se encuentra parado en un nodo decisión y por lo tanto almacena el valor contenido en dicho nodo y procede a continuar. Cuando se encuentre varado en el próximo, lo que hará es retornar con el valor mencionado anteriormente. 
+Vale la pena considerar qué sucede si la dirección IP comienza con 1101. En este caso el camino que seguirá la búsqueda es \textit{Raíz - one - one - zero} y el puntero de recorrido quedará varado allí, ya que no existe en dicho punto un nodo asociado al puntero one. Recuérdese que en cada iteración, el algoritmo de búsqueda chequea si el nodo apuntado por el puntero de recorrido es decisión. Para este caso puede verse que en la segunda iteración (cuando se ha recorrido \textit{Raíz - one - one}) el algoritmo se encuentra parado en un nodo decisión y por lo tanto almacena el valor contenido en dicho nodo (S3) y procede a continuar. Cuando se encuentre varado en el próximo, lo que hará es retornar con el valor mencionado anteriormente. 
 
 \subsection {Cache}
 
-Se implementó una cache directa. La misma consta de una tabla hash de 16 entradas, aunque este tamaño puede ser modificado mediante la macro CACHE\_SIZE. Las colisiones se resuelven por reemplazo directo. La misma fue testeada con ambos algoritmos mencionados anteriormente. Para ello, se agregó una lógica adicional que consistió en:
+Se implementó una cache directa que consta de una tabla hash de 16 entradas, aunque este tamaño puede ser modificado mediante la macro CACHE\_SIZE. Las colisiones se resuelven por reemplazo directo. La misma fue testeada con ambos algoritmos mencionados anteriormente. Para ello, se agregó una lógica adicional que consistió en:
 
 \begin{itemize}
 	\item Al tomar una dirección IP, chequear primero si el valor de decisión se encuentra en caché.
@@ -133,7 +140,7 @@ Para evitar el overhead introducido por el uso de clases, se optó por una imple
 	\item empty: Indica si la entrada de tabla está vacía.
 \end{itemize}
 
-\section{ISR}
+\section{Rutina de servicio de interrupción (Interrupt service routine, ISR)}
 
 Como se mencionó anteriormente, el módulo Uplink envía interrupciones al procesador. A fin de poder procesarlas en el software se implementó una ISR (Interrupt Service Routine) que hace uso de 3 elementos principales:
 
@@ -155,7 +162,7 @@ En la función principal (main) existe una variable llamada \textit{flag2}. A é
 \end{itemize}
 
 
-Una vez llevado a cabo el procedimiento de clasificación, \textit{flag2} es puesto de nuevo al valor de \textit{flag }y el proceso se repite.
+Una vez llevado a cabo el procedimiento de clasificación, \textit{flag2} se iguala de nuevo al valor de \textit{flag }y el proceso se repite.
 
 
 \begin{figure}[H]
