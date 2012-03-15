@@ -1,6 +1,8 @@
 \chapter{Arquitectura}
 
-A todas las palabras de todos los paquetes que ingresan a la interfaz de acceso a la cabecera, se le anexan 8 bits que contienen el valor de los campos de control que corresponden a esa palabra y ademas 3 bits libres en donde se pondra la etiqueta con los resultados de lo procesado en el software. En la figura\ref{fig:datocontrol}  es posible ver el valor de cada uno de estos campos.
+En este capitulo se dara cuenta de la arquitectura digital de los módulos implementados de manera exclusiva para este trabajo. Pero antes de eso, es pertinente especificar el formato que tienen los datos en su paso por la interfaz de acceso a la cabecera.
+
+Todas las palabras de cada paquete que ingresa a la interfaz de acceso a la cabecera, lleva anexa un campo de 8 bits que contienen el valor de los campos de control que corresponden a esa palabra y ademas 3 bits libres en donde se escribira la etiqueta con los resultados de lo procesado en el software. En la figura \ref{fig:datocontrol}  es posible ver el valor de cada uno de estos campos.
 
 \begin{figure}[H]
   \centering
@@ -9,7 +11,7 @@ A todas las palabras de todos los paquetes que ingresan a la interfaz de acceso 
   \label{fig:datocontrol}
 \end{figure}
 
-Para ilustrar el funcionamiento del sistema se puede observar en la figura~\ref{fig:interfaz1} el estado de los datos y los bits de control del paquete en cada uno de los módulos que integran la Interfaz de Acceso a la Cabecera.
+Para ilustrar el funcionamiento del sistema se puede observar en la figura~\ref{fig:interfaz1} el estado del identificador de interfaz de salida en cada uno de los módulos que integran la interfaz de acceso a la cabecera.
 
 \begin{figure}[H]
   \centering
@@ -20,59 +22,59 @@ Para ilustrar el funcionamiento del sistema se puede observar en la figura~\ref{
 
 \section{Generador}
 
-Con la intención de simplificar el desarrollo y el futuro Debugging del proyecto se remplazo la interfaz de red por un generador de paquetes.
+Con la intención de simplificar el desarrollo y el futuro debugging del proyecto se reemplazo la interfaz de red por un generador de paquetes.
 
 \begin{figure}[H]
   \centering
-	\includegraphics[scale=0.60]{3-arquitectura/graf/bloqgenerador.eps}
-  \caption{Modulo generador de Paquetes}
+	\includegraphics[scale=0.50]{3-arquitectura/graf/bloqgenerador.eps}
+  \caption{módulo generador de Paquetes}
   \label{fig:gen}
 \end{figure}
 
 
-El mismo cuenta con las siguientes capacidades
+El mismo cuenta con las siguientes capacidades:
 
 \begin{itemize}
 	\item Permite iniciar la generación de paquetes desde un interruptor externo.
 	\item Es posible parametrizar la distancia, en ciclos de clock, entre la generación de un paquete y el siguiente.
-	\item Puede generar una cantidad variable de paquetes, con valores diferentes en sus campos.
-	\item Mantiene un contador global de la cantidad de paquetes generados y lo imprime en la ultima palabra del Payload de cada uno.
+	\item Puede generar una cantidad variable de paquetes, con valores diferentes en todos sus campos.
+	\item Mantiene un contador global de la cantidad de paquetes generados y lo imprime en la última palabra del Payload de cada uno.
 \end{itemize}
 
-Este modulo es una versión adaptada del generador usado en otros proyectos integradores desarollados en el Laboratorio de Comunicaciones Digitales.
+Este módulo es una versión adaptada y mejorada del generador usado en otro proyecto integrador\cite{spaz} desarollado en el Laboratorio de Comunicaciones Digitales.
 
 \section{Interfaz de Acceso a la Cabecera}
-En base a la figura~\ref{fig:inter} se pasara a describir de manera detallada la estructura y el funcionamiento de cada uno de los módulos que componen la Interfaz de Acceso a la Cabecera. 
+En base a la figura~\ref{fig:inter}, se pasará a describir de manera detallada la estructura y el funcionamiento de cada uno de los módulos que componen la Interfaz de Acceso a la Cabecera. 
 
 \subsection{FIFO}
-Se trata de una FIFO estándar, basada en un código disponible en OpenCores, que soporta palabras de 72 bits, 64 del paquete y 8 de control. Como capacidad extra se le agrego un mecanismo para controlar la integridad de los paquetes que ingresan, aceptando solo los que pueden ser almacenados completamente en la memoria interna. 
+Se trata de una FIFO estándar, basada en un código disponible en OpenCores, que soporta palabras de 72 bits, 64 del paquete, 5 de control y 3 del identificador de interfaz de salida. Como capacidad extra se le agregó un mecanismo para controlar la integridad de los paquetes que ingresan, aceptando solo los que pueden ser almacenados completamente en la memoria interna. 
 
 \begin{figure}[H]
   \centering
-	\includegraphics[scale=0.60]{3-arquitectura/graf/bloqfifo.eps}
+	\includegraphics[scale=0.50]{3-arquitectura/graf/bloqfifo.eps}
   \caption{FIFO}
   \label{fig:gen}
 \end{figure}
 
 \subsection{Delay Buffer}
-Este modulo fue desarrollado íntegramente para este proyecto, esta compuesto por un registro de desplazamiento interno, que cuenta con 8 posiciones de 72 bits cada una. Su función principal es detectar la llegada de un paquete a la FIFO, cargar 5 palabras, correspondientes a la cabecera, y enviarle una copia a Uplink. Este modulo permite, además, desacoplar el flujo de datos de la comunicación con el Microprocesador.
+Este módulo fué desarrollado íntegramente para este proyecto y está compuesto por un registro de desplazamiento interno, que cuenta, en esta configuracion, con 8 posiciones de 72 bits cada una. Su función principal es detectar la llegada de un paquete a la FIFO, cargar 5 palabras correspondientes a la cabecera, y enviar una copia a Uplink. Luego, cuando el microprocesador termina su procesamiento, continua leyendo la FIFO y transfiere el resto del paquete. Este módulo permite, además, desacoplar el flujo de datos de la comunicación con el Microprocesador.
 
-La implementación de este modulo esta formada por una maquina de estados(Figura~\ref{fig:dbstate}) descripta a continuación:
+La implementación de este módulo está formada por la máquina de estados que se muestra en la figura~\ref{fig:dbstate}.
 
 \begin{figure}[H]
   \centering
 	\includegraphics[scale=0.50]{3-arquitectura/graf/estdelaycompleto.eps}
-  \caption{Maquina de estados de Delay Buffer}
+  \caption{Máquina de estados de Delay Buffer}
   \label{fig:dbstate}
 \end{figure}
 
 \begin{itemize}
-	\item IDLE: Es el estado inicial en el que se encuentra la maquina, cuando se detecta la presencia de datos en la FIFO pasa a SOP.
-	\item SOP: Este estado es el encargado de validar la integridad de los paquetes, permitiendo iniciar el proceso solo cuando lo que hay en la entrada del bus de datos es un indicador de Inicio de Paquete(SOP)
-	\item LOAD, WAIT1, WAIT3: Estos tres estados se alternan para ir sacando de la FIFO las 5 palabras correspondientes a la cabecera, implementan además mecanismos para manejar paquetes mas pequeños que 5 palabras.
-	\item ENABLE, HOLD: Son los estados que se encargan de poner a disposición de Uplink la Cabecera completa y quedar a la espera de los resultados.
-	\item WAIT2, UNLOAD: Estos estados se encargan de extraer de la FIFO las palabras restantes del paquete desplazando los espacios de memoria ya cargados. 
-	\item OUTPUT: Se encarga de vaciar el registro de desplazamiento llenándolo de ceros a medida que se va poniendo las palabras del paquete a la salida. 
+	\item IDLE: es el estado inicial en el que se encuentra la máquina. Cuando se detecta la presencia de datos en la FIFO pasa al estado SOP.
+	\item SOP: este estado es el encargado de validar la integridad de los paquetes, permitiendo iniciar el proceso sólo cuando lo que hay en la entrada del bus de datos es un indicador de Inicio de Paquete (SOP)
+	\item LOAD, WAIT1, WAIT3: estos tres estados se alternan para ir sacando de la FIFO las 5 palabras correspondientes a la cabecera. Estos implementan además mecanismos para manejar cabeceras mas pequeñas.
+	\item ENABLE, HOLD: son los estados que se encargan de poner a disposición de Uplink la Cabecera completa y quedar a la espera de los resultados.
+	\item WAIT2, UNLOAD: estos estados se encargan de extraer de la FIFO las palabras restantes del paquete desplazando los espacios de memoria ya cargados. 
+	\item OUTPUT: se encarga de vaciar el registro de desplazamiento llenándolo de ceros a medida que se va poniendo las palabras del paquete a la salida, en caso que no hubiera nuevos paquetes disponibles, de lo contrario el proceso se repite.
 \end{itemize}
 
 La ubicación de los datos en el registro de desplazamiento interno es representativo del funcionamiento del sistema y se muestra gráficamente en las figura~\ref{fig:regdata}
@@ -94,7 +96,7 @@ La ubicación de los datos en el registro de desplazamiento interno es represent
 
 
 
-A continuación se presentan las señales que integran el modulo, con su correspondiente descripción:
+A continuación se presentan las señales que integran el módulo, con su correspondiente descripción:
 
 \begin{figure}[H]
   \centering
@@ -109,11 +111,11 @@ A continuación se presentan las señales que integran el modulo, con su corresp
 \rowcolor[gray]{0.1} \textcolor{white}{Nombre} & \textcolor{white}{Activo} & \textcolor{white}{Descripción}\\ \hline
 \rowcolor[gray]{0.75} i\_data[71:0]	& N/A & Palabra de 72 bits que viene de la FIFO\\ \hline
 \rowcolor[gray]{0.75} i\_shift\_en & High & Indica la disponibilidad de los resultados de la clasificación\\ \hline
-\rowcolor[gray]{0.75} i\_fifo\_empty & Low & Señala la presencia de datos en en la FIFO\\ \hline
-\rowcolor[gray]{0.9} o\_data[71:0] & N/A & Salida conectada a la ultima posición del registro de desplazamiento\\ \hline
-\rowcolor[gray]{0.9} o\_header[359:0] & N/A & Bus interno por el que puede viajar las 5 palabras de la cabecera en un solo ciclo\\ \hline
-\rowcolor[gray]{0.9} o\_header\_rdy & High & Indica la disponibilidad de la cabecera en oheader \\ \hline
-\rowcolor[gray]{0.9} o\_fifo\_ren & High & Sirve para indicar a la fifo que se necesita una palabra nueva\\ \hline
+\rowcolor[gray]{0.75} i\_fifo\_empty & Low & Señala la presencia de datos en la FIFO\\ \hline
+\rowcolor[gray]{0.9} o\_data[71:0] & N/A & Salida conectada a la última posición del registro de desplazamiento\\ \hline
+\rowcolor[gray]{0.9} o\_header[359:0] & N/A & Bus interno por el que pueden transferirse las 5 palabras de la cabecera en un solo ciclo\\ \hline
+\rowcolor[gray]{0.9} o\_header\_rdy & High & Indica la disponibilidad de la cabecera en o\_header \\ \hline
+\rowcolor[gray]{0.9} o\_fifo\_ren & High & Indica a la FIFO que se requiere una palabra nueva\\ \hline
  i\_clk & N/A & Señal de Reloj\\ \hline
  i\_rst & High & Reset\\ \hline
 	\end{tabular}
@@ -123,9 +125,9 @@ A continuación se presentan las señales que integran el modulo, con su corresp
 
 
 \subsection{Uplink}
-El modulo Uplink lleva la comunicación entre el procesador y el resto de la Interfaz de acceso a la cabecera. Esta configurado para trabajar con las señales del bus Avalon(Apéndice B) y en caso de que se desee portar esta interfaz para interactuar con otro tipo de bus, solo es necesario modificar este bloque.
+El módulo Uplink gestiona la comunicación entre el procesador y el resto de los componentes de la Interfaz de acceso a la cabecera. Esta configurado para trabajar con las señales del bus Avalon (Apéndice B) de manera tal que en caso de que se desee portar esta interfaz para interactuar con otro tipo de bus, solo es necesario modificar este bloque.
 
-Se prepararon dos versiones de Uplink, una que transfiere al procesador la cabecera completa en 15 palabras de 32 bits y otra que solo envía una palabra de 32bits correspondiente a la IP Destino. 
+Se prepararon dos versiones de Uplink; Una que transfiere al procesador la cabecera completa en 15 palabras de 32 bits y otra que solo envía una palabra de 32 bits correspondiente a la IP Destino. Ambas se ilustran en la figura~\ref{fig:up151}.
 
 \begin{figure}[H]
   \centering
@@ -142,7 +144,7 @@ Se prepararon dos versiones de Uplink, una que transfiere al procesador la cabec
   \label{fig:up151}
 \end{figure}
 
-Este modulo implementa la maquina de estados que se puede ver en la figura~\ref{fig:inter} y se describe a continuación:
+Este módulo implementa la máquina de estados que se puede ver en la figura~\ref{fig:inter} y se describe a continuación:
 
 \begin{figure}[H]
   \centering
@@ -152,12 +154,12 @@ Este modulo implementa la maquina de estados que se puede ver en la figura~\ref{
 \end{figure}
 
 \begin{itemize}
-	\item IDLE: Es el estado inicial en el que se encuentra la maquina, hasta que recibe la confirmación de que la cabecera esta disponible.
+	\item IDLE: Es el estado inicial en el que se encuentra la máquina, hasta que recibe la confirmación de que la cabecera esta disponible.
 	\item READ,HOLD,WAIT: Estos estados se alternan para interrumpir y transmitir 1 o 15 palabras de 32bits al procesador.
 	\item WRITE: Es el estado encargado de esperar que el procesador envié los resultados, para luego darle aviso a los otros componentes de la disponibilidad de los mismos.
 \end{itemize}
 
-En al tabla que sigue se puede ver las señales que componen el modulo con su correspondiente descripción:
+En al tabla que sigue se puede ver las señales que componen el módulo con su correspondiente descripción:
 
 \begin{figure}[H]
   \centering
@@ -190,7 +192,7 @@ En al tabla que sigue se puede ver las señales que componen el modulo con su co
 
 \subsection{Write output}
 
-Este modulo es el que se encarga de tomar el resultado emitido por el microprocesador y de estamparlo en los campos de control anexos a cada una de las palabras del paquete. Se puede ver en la figura~\ref{fig:inter} el diagrama de estados mediante el cual esta implementado este modulo y se describe cada estado a continuación:
+Este módulo es el que se encarga de tomar el resultado emitido por el microprocesador y de estamparlo en los campos de control anexos a cada una de las palabras del paquete. Se puede ver en la figura~\ref{fig:inter} el diagrama de estados mediante el cual esta implementado este módulo y se describe cada estado a continuación:
 
 \begin{figure}[H]
   \centering
@@ -200,12 +202,12 @@ Este modulo es el que se encarga de tomar el resultado emitido por el microproce
 \end{figure}
 
 \begin{itemize}
-	\item IDLE: Es el estado inicial en el que se encuentra la maquina, hasta que recibe la confirmación de que los resultados están disponibles.
+	\item IDLE: Es el estado inicial en el que se encuentra la máquina, hasta que recibe la confirmación de que los resultados están disponibles.
 	\item READY: Espera que Delay Buffer le transmita la palabra correspondiente a un SOP. 
 	\item OVERWRITE: Escribe el resultado en el Tag adjunto a cada palabra hasta que encuentra la palabra correspondiente a un EOP. 
 \end{itemize}
 
-Se detalla las señales de Entrada/Salida del modulo y su función:
+Se detalla las señales de Entrada/Salida del módulo y su función:
 
 \begin{figure}[H]
   \centering
@@ -311,7 +313,7 @@ El Nios II es un procesador RISC de 32 bits de propósito general que cuenta con
 	\item Multiplicación y división en una sola instrucción de 32 x 32 produciendo un resultado de 32-bits.
 	\item Instrucciones dedicadas para multiplicaciones con resultados de 64 y 128 bits.
 	\item Acceso a una variedad de periféricos e interfases a memorias  y periféricos fuera del chip.
-	\item Modulo de depurado asistido por hardware.
+	\item módulo de depurado asistido por hardware.
 	\item Unidad de manejo de memoria (MMU) opcional para soportar sistemas operativos mas complejos.
 	\item Unidad de protección de memoria (MPU) opcional.
 	\item Entorno de desarrollo de software basado en GNU C/C++ integrado a Eclipse.
@@ -361,11 +363,11 @@ El core Nios II/f esta diseñado para ofrecer la mayor performance a las expensa
 
 
 \section{Interfaz Red-Procesador}
-En esta sección se detallara la función de cada uno de los bloques que integran el modulo que sera el encargado de gestionar el flujo de datos y la comunicación con el procesador. 
+En esta sección se detallara la función de cada uno de los bloques que integran el módulo que sera el encargado de gestionar el flujo de datos y la comunicación con el procesador. 
 
 \subsection{Interfaz de Red}
 A los fines de poder trabajar con un entorno de prueba mas controlado se utilizara un generador de paquetes en remplazo de la interfaz de red propuesta en la figura XX. 
-Este modulo debe ser altamente dramatizable para poder enfrentar el sistema a distintos escenarios. Dentro de los parámetros que se necesita variar se encuentran:
+Este módulo debe ser altamente dramatizable para poder enfrentar el sistema a distintos escenarios. Dentro de los parámetros que se necesita variar se encuentran:
 
 \begin{itemize}
 	\item Tamaño de los paquetes 
@@ -376,31 +378,31 @@ Este modulo debe ser altamente dramatizable para poder enfrentar el sistema a di
 
 En el laboratorio en el cual se desarrollo este proyecto integrador se cuenta con el código de un generador y se buscara reutilizar dicho código.
 
-\subsection{Modulo extractor de Cabeceras}
+\subsection{módulo extractor de Cabeceras}
 Bajo lo expuesto en el capitulo 2, se desprende que no se necesita transmitirle al procesador el paquete de datos entero, sino que solo la información presente en la cabecera es útil para la clasificación. Por esta razón, la interfaz Red-CPU solamente enviara al procesador las cabecera de cada paquete y mantendrá en espera del resultado los datos correspondientes al Payload. 
 
-En la figura~\ref{fig:moduloprop} se puede ver los sub-módulos que componen el extractor de cabeceras, pasando a detallar la funcionalidad de cada uno a continuación
+En la figura~\ref{fig:móduloprop} se puede ver los sub-módulos que componen el extractor de cabeceras, pasando a detallar la funcionalidad de cada uno a continuación
 
 \begin{figure}[h]
   \centering
-	\includegraphics[width=0.90\textwidth]{3-arquitectura/graf/modulo.eps}
-  \caption{Estructura propuesta para el modulo propio}
-  \label{fig:moduloprop}
+	\includegraphics[width=0.90\textwidth]{3-arquitectura/graf/módulo.eps}
+  \caption{Estructura propuesta para el módulo propio}
+  \label{fig:móduloprop}
 \end{figure}
 
 
 
 \subsubsection{FIFO}
-A la entrada del modulo se encuentra una FIFO que se encarga de almacenar y poner a disposición en orden de llegada los datos que emite el generador. Además, para poder manipular los paquetes, la FIFO debe almacenar toda la información de control que este disponible. 
-Este modulo también debe permitir la parametrización en la mayor cantidad de sentidos posibles, especialmente se desea poder configurar la cantidad de palabras disponibles que se puede almacenar, ya que la memoria dentro de una FPGA es un recurso critico y se desea encontrar la mejor relación entre rendimiento y uso de memoria.
+A la entrada del módulo se encuentra una FIFO que se encarga de almacenar y poner a disposición en orden de llegada los datos que emite el generador. Además, para poder manipular los paquetes, la FIFO debe almacenar toda la información de control que este disponible. 
+Este módulo también debe permitir la parametrización en la mayor cantidad de sentidos posibles, especialmente se desea poder configurar la cantidad de palabras disponibles que se puede almacenar, ya que la memoria dentro de una FPGA es un recurso critico y se desea encontrar la mejor relación entre rendimiento y uso de memoria.
 
 
 \subsubsection{Delay Buffer}
-El Componente Delay buffer sera el encargado de ir tomando los datos desde la FIFO y de detectar el inicio y finalización de un paquete. Además deberá mantener almacenado el paquete mientras el software toma una decisión. En este modulo es deseable poder configurar la cantidad de palabras que se consideraran parte de la cabecera y que sera enviadas al software. 
+El Componente Delay buffer sera el encargado de ir tomando los datos desde la FIFO y de detectar el inicio y finalización de un paquete. Además deberá mantener almacenado el paquete mientras el software toma una decisión. En este módulo es deseable poder configurar la cantidad de palabras que se consideraran parte de la cabecera y que sera enviadas al software. 
 
 \subsubsection{Uplink}
-Este Modulo es el encargado de realizar la comunicación entre el flujo de datos que proviene de la red y el procesador. Para ello debe entender las señales que utiliza el Bus, Avalon-MM, y poder interrumpir al procesador para enviarles los datos cuando estos estén disponibles. Cuando el procesador responde con el resultado de la clasificación, este modulo lo almacena y lo envía  write output para que este escriba el resultado de la clasificación en la etiqueta anexa al paquete correspondiente.
-Eventualmente se desarrollaran varias versiones de este modulo, que envíen toda la cabecera o una parte selectiva de ella para optimizar así el rendimiento.
+Este módulo es el encargado de realizar la comunicación entre el flujo de datos que proviene de la red y el procesador. Para ello debe entender las señales que utiliza el Bus, Avalon-MM, y poder interrumpir al procesador para enviarles los datos cuando estos estén disponibles. Cuando el procesador responde con el resultado de la clasificación, este módulo lo almacena y lo envía  write output para que este escriba el resultado de la clasificación en la etiqueta anexa al paquete correspondiente.
+Eventualmente se desarrollaran varias versiones de este módulo, que envíen toda la cabecera o una parte selectiva de ella para optimizar así el rendimiento.
 
 \subsubsection{Write Output}
 Para finalizar, Write Output, toma la salida de Delay buffer y escribe el resultado que le envía Uplink en la etiqueta que se encuentra anexa a cada una de las palabras del paquete.
