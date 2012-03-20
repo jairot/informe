@@ -9,21 +9,7 @@ En este contexto puede verse como es necesaria la optimización en el procesamie
 
 
 \section{Contexto}
-\begin{comment}
-\subsection{Evolución en los dispositivos de enrutamiento}
 
-En un principio los enrutadores contaban con un bus central compartido, un CPU, memoria y los puertos de entrada y salida. Cada paquete entrante era transferido al CPU por medio del bus compartido. La decisión de reenvío se llevaba a cabo allí y luego el paquete atravesaba nuevamente dicho bus hacia el puerto de salida. La performance de estos dispositivos estaba limitada principalmente por 2 factores: la capacidad de procesamiento de la CPU central (debido a que la búsqueda en la tabla de ruteo es una tarea que consume una alta cantidad de tiempo) y el hecho de que cada paquete tenía que atravesar 2 veces el bus compartido.
-
-Para hacer frente al primer factor algunos fabricantes de enrutadores introdujeron paralelismo mediante múltiples CPU. Cada una de ellas manipulaba un porción del tráfico entrante. Pero cada paquete tenía todavía que atravesar el bus compartido 2 veces. 
-
-Más adelante el diseño de la arquitectura de enrutadores avanzó un paso más. Una memoria caché de ruteo y capacidad de procesamiento fueron añadidos a cada puerto y las decisiones de reenvío se hacían localmente. De esta manera, cada paquete atraviesa el bus compartido solamente una vez desde el puerto de entrada hacia el puerto de salida. Aunque cada puerto contaba con capacidad de procesamiento, todas las funciones de control todavía se manejaban por el procesador central.
-
-Aunque con el tiempo la performance de los distintos CPU han crecido, este crecimiento no ha podido mantener el ritmo del incremento en la capacidad de los enlaces. Es en este contexto donde se ve claramente que hoy por hoy uno de los mayores cuellos de botella en los enrutadores troncales es el cómputo del prefijo más largo para cada paquete. Los protocolos de hoy en día requieren hacer selección de rutas en base no sólo a un campo sino a varios (tales como el número de protocolo, dirección de origen, puerto de destino, etc). El número de accesos a memoria y la velocidad de ésta determinan la rapidez de un algoritmo de búsqueda de ruta (route lookup algorithm).
-
-\end{comment}
-
-%\subsection{Requerimiento de procesamiento en redes}
-%\subsubsection{Características del tráfico}
 
 En lo que respecta a las tecnologías de red, las nuevas tendencias se canalizan hacia la agregación de paquetes en flujos. Dos ejemplos los constituyen conmutación multi-protocolo mediante etiquetas (\textit{Multiprotocol Label Switching}, MPLS) y redes virtuales  de área local (\textit{Virtual LAN}, VLANs). MPLS es un mecanismo en redes de telecomunicaciones de alta performance que transporta datos de nodo a nodo basado en etiquetas en lugar de direcciones de red, con el fin de evitar búsquedas complejas en una tabla de ruteo. Dichas etiquetas se aplican en el inicio de la transmisión e identifican enlaces virtuales entre nodos. También es capaz de encapsular paquetes de varios protocolos de red.
 
@@ -44,7 +30,7 @@ Las VLANs son redes virtuales, lógicamente independientes, que están conectada
 \end{figure}
 
 
-%\subsection{Lógica reconfigurable como respuesta}
+
 
 En cuanto al hardware necesario para hacer frente a esta brecha entre la necesidad de procesar el flujo creciente de datos de la red y la capacidad de hacerlo, se busca contar con soluciones que permitan generar respuestas específicas de manera flexible, en el menor tiempo y con el mejor rendimiento posible. Las tecnologías que en la actualidad son usadas para implementar soluciones a estos problemas, son tres:
 
@@ -71,11 +57,11 @@ Las tecnologías actuales, por las razones anteriormente mencionadas, están alc
 
 Los FPGAs (Field-Programmable Gate Array) son dispositivos de lógica reconfigurable que es posible programar, una o varias veces, usando un lenguaje de descripción de hardware(\textit{Hardware Description Language}, HDL). Las FPGAs se utilizan en aplicaciones similares a los ASICs; sin embargo son más lentas, tienen un mayor consumo de potencia y no pueden abarcar sistemas tan complejos como los ASICs. A pesar de esto, tienen un flujo de diseño flexible, sus costes de desarrollo y adquisición son mucho menores para pequeñas cantidades de dispositivos y el tiempo de desarrollo es también menor.
 
-%\subsubsection{FPGA como plataforma para SoC}
+
 
 Los Sistemas en un Chip (\textit{System on Chip}, SoC) son circuitos integrados que contienen todo, o la mayoría, de los módulos que corresponden a un sistema informático o electrónico en un solo componente. Son usados especialmente en el área de sistemas embebidos. Los microcontroladores son técnicamente SoC, pero se considera que los SoC tienen procesadores mas potentes y pueden correr aplicaciones mas complejas, para lo cual necesitan mayor cantidad de memoria que suele estar disponible como chips externos. 
 
-Gracias a la disponibilidad en la ultima década de Soft-Core CPUs y otros Soft IP, se ha producido un punto de inflección en el uso de FPGAs como plataforma para SoC. Como resultado de la combinacion de logros técnicos y fuerzas de mercado, varios fabricantes como Altera, Cypress Semiconductor, Intel y Xilinx anunciaron la comercialización de FPGA con facilidades para el desarrollo de SoC.
+Gracias a la disponibilidad en la ultima década de Soft-Core CPUs y otros Soft IP, se ha producido un punto de inflexión en el uso de FPGAs como plataforma para SoC. Como resultado de la combinación de logros técnicos y fuerzas de mercado, varios fabricantes como Altera, Cypress Semiconductor, Intel y Xilinx anunciaron la comercialización de FPGA con facilidades para el desarrollo de SoC.
 Estos avances que simplifican el desarrollo de SoC, la flexibilidad en el flujo de diseño y el prototipado rápido son las condiciones que posicionan a las FPGAs como la herramienta indicada para atacar un problema tan complejo como la clasificación de paquetes. 
 
  \begin{figure}[h]
@@ -91,51 +77,6 @@ Estos avances que simplifican el desarrollo de SoC, la flexibilidad en el flujo 
 
 
 \section{Problema Marco}
-\begin{comment}
-\subsubsection{Datagrama IP}
-
-\begin{figure}[h]
-  \centering
-	\includegraphics[width=1\textwidth]{2-sistema/graf/ip.eps}
-  \caption{Formato de datagrama IP}
-  \label{fig:ip}
-\end{figure}
-
-La PDU del protocolo IP se denomina \textit{datagrama IP} y se compone de los siguientes campos:
-\begin{itemize}
-	\item Versión: indica la versión del protocolo.
-	\item Longitud de la cabecera: longitud de la cabecera expresada en palabras de 32 bits.
-	\item Tipo de servicio: especifica los parámetros de fiabilidad, prioridad, retardo y rendimiento.
-	\item Longitud total: longitud total del datagrama en Bytes.
-	\item Identificador: un número de secuencia que, junto a la dirección origen y destino y el protocolo usuario, se utiliza para identificar de forma unívoca al datagrama.
-	\item Flags: son 3 bits de los cuales solo 2 están definidos. El bit de \textit{no fragmentación} prohíbe la fragmentación cuando está puesto a 1. El bit de \textit{Más datos} se utiliza para fragmentación y reensamblado.
-	\item Desplazamiento del fragmento: indica el lugar donde se sitúa el fragmento dentro del datagrama original, medido en unidades de 64 bits.
-	\item Tiempo de vida: en cada enrutador se decrementa en 1 unidad. Tiene como fin evitar que un datagrama se quede dando vueltas para siempre en la red.
-	\item Protocolo: especifica a que protocolo del nivel de transporte corresponde el datagrama.
-	\item Suma de comprobación de la cabecera: Es el complemento a uno de la suma en complemento a uno de todas las palabras de 16 bits de la cabecera.
-	\item Dirección origen: codificada para permitir una asignación variable de bits para especificar la red y el sistema final conectado a la red especificada.
-	\item Dirección destino: igual que el campo anterior.
-	\item Opciones: contiene las opciones solicitadas por el usuario que envía los datos.
-	\item Relleno: se usa para asegurar que la cabecera del datagrama tenga una longitud múltiplo de 31 bits.
-	\item Datos: debe tener una longitud múltiplo de 8 bits.
-\end{itemize}
-
-\subsubsection{Dirección IP}
-
-Es un número de 32 bit que identifica un dispositivo dentro de una red que utilice el protocolo IP. Las direcciones IP se suelen representar por cuatro números decimales separados por puntos, que equivalen al valor de cada uno de los cuatro bytes que componen la dirección.
-
-Como ocurre en la mayoría de las redes las direcciones IP tienen una estructura jerárquica. Una parte de la dirección corresponde a la red, y la otra al host dentro de la red. Cuando un dispositivo de enrutamiento recibe un datagrama por una de sus interfaces compara la parte de red de la dirección con las entradas contenidas en sus tablas (que normalmente sólo contienen direcciones de red, no de host) y envía el datagrama por la interfaz correspondiente.
-
-Los bits que corresponden a la parte de red conforman lo que se denomina \textit{prefijo de red}.
-
-Existen 3 maneras de representar un prefijo de red:
-
-\begin{itemize}
-	\item Binario con asterisco: por ejemplo, el prefijo 132.239 se denotaría 1000010011101111* (dado que 132 es en binario 10000100 y 239 es 11101111). El asterisco al final denota que los bits restantes pueden ser de cualquier valor.
-	\item Notación A/L, donde A es una dirección IP y L es la longitud del prefijo. Siguiendo el ejemplo anterior, la notación sería 132.239.0.0/16.
-	\item Notación máscara: pe utiliza una dirección de red y una máscara en vez de un prefijo explícito. De esta manera, volviendo al ejemplo anteriormente mencionado, éste puede expresarse como 132.239.0.0 con máscara 255.255.0.0
-\end{itemize}
-\end{comment}
 
 La necesidad de procesar cada vez más paquetes de datos lleva a lo que se conoce como \textit{clasificación}. Ésta consiste en la categorización de paquetes en flujos de acuerdo a un conjunto de reglas determinadas. Se efectúa en base a campos en la cabecera del paquete, tales como la dirección IP de origen/destino, puerto de origen/destino, tipo de servicio (TOS), etc. En general, para una clasificación basada en N campos, se dice que esta es N-dimensional (o multidimensional). Cada regla \textbf{R} tiene \textbf{F} componentes y el $ f^{vo} $ componente de \textbf{R}, denotado como \textbf{R[f]} es una \textit{expresión de correspondencia de rango} en el $ f^{vo} $ campo del paquete. Si para todo \textit{f} $ \in $ [1, \textit{f}] el $ f^{vo} $ campo de la cabecera de un paquete \textbf{P} satisface la expresión de rango \textbf{R[f]}, \textbf{P} se corresponde con \textbf{R}.
 
@@ -197,4 +138,4 @@ En el capítulo 2 se estudiará, a nivel funcional, una solución propuesta para
 
 
 
-%\section{Distribucion Lineal}
+
