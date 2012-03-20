@@ -1,11 +1,11 @@
 \chapter{Resultados}
 
-En este capítulo se presentan los datos obtenidos de la ejecución del proyecto bajo ciertas condiciones representativas, con la intención de validar la funcionalidad y también de encontrar los alcances y limites del mismo. Primero se estudiara el tiempo de respuesta de los algoritmos de manera individual, más tarde el rendimiento en la configuración mas simple, luego el sistema completo bajo condiciones varias y por ultimo el estudio de la mejora introducida por el uso de la cache. Para la obtención de los datos que corresponden al sistema completo se utilizo el Script Python/Bash.
+En este capítulo se presentan los datos obtenidos de la ejecución del proyecto bajo ciertas condiciones representativas, con la intención de validar la funcionalidad y también de encontrar los alcances y límites del mismo. Primero se estudia el tiempo de respuesta de los algoritmos de manera individual, a continuación el rendimiento en la configuración mas simple, luego el sistema completo bajo condiciones varias, y por ultimo se analiza la mejora introducida por el uso de la cache. Para la obtención de los datos que corresponden al sistema completo se utilizaron de manera complementaria scripts programados en lenguaje Python y en Bash. Durante todo el capítulo se usara LLU como acronimo de \textit{Linear Look Up} y UTL para referirse al \textit{Unibit Trie Lookup}. 
 
 
-\section{Caso Algoritmos únicamente}
+\section{Stress de software}
 
-Con la intención de obtener un gráfico que represente el rendimiento de los dos algoritmos implementados, se medirá el retardo de búsqueda en función de la posición en la tabla de enrutamiento, se realizaran las pruebas de manera independiente al modulo extracto de cabeceras. En el eje de las abscisas se expresa la ubicación en una tabla de 100 elementos del prefijo mas largo y en las ordenadas se puede observar el tiempo de búsqueda en ciclos de reloj.
+Con la intención de obtener un gráfico que represente el rendimiento de los dos algoritmos implementados, se mide el retardo de búsqueda en función de la posición de coincidencia en la tabla de enrutamiento. Se realizan las pruebas de manera independiente a la Interfaz de acceso a la cabecera con el fin de aisalar los efectos del mismo. En el eje de las abscisas se expresa la ubicación del prefijo mas largo en una tabla de 100 elementos  y en las ordenadas se puede observar el tiempo de búsqueda en ciclos de reloj.
 
 \begin{figure}[h]
   \centering
@@ -15,24 +15,27 @@ Con la intención de obtener un gráfico que represente el rendimiento de los do
 \end{figure}
 
 \newpage
-\section{Caso loopback}
+\section{Stress de hardware}
 \begin{figure}[h]
   \centering
 	\includegraphics[width=0.70\textwidth]{5-resultados/graf/loop.eps}
   \caption{Caso Loopback para 1 y 15 palabras}
-  \label{fig}
+  \label{fig:loop}
 \end{figure}
-Se estudia del caso loopback a los fines de encontrar los limites superiores del sistema. En este, el software solo se limita a recibir los datos e inmediatamente después confirma el procesamiento y envía los resultados de regreso al hardware. Se realizan las pruebas correspondientes para las dos versiones de Uplink.
-En el eje de las abscisas es posibles ver la cantidad de paquetes por segundo, el origen corresponde a la mayor velocidad a la que es posible transmitir sin perdidas. En las Ordenadas se puede observar la cantidad de paquetes perdidos en valores porcentuales, para obtener esta métrica se proceso una cantidad constante de paquetes, 9000, y luego se contrasto este valor con un contador global que el Generador estampa en la ultima palabra de cada paquete. Así se calculo la cantidad paquetes perdidos, sobre la cantidad total de paquetes generados. Este mismo sistema es el usado en todos los gráficos posteriores.
+Se estudia en primer termino el caso loopback a los fines de encontrar los límites superiores del sistema determinado por la sección hardware. En este caso el software solo se limita a recibir los datos e inmediatamente después confirma el procesamiento, enviando un resultado predefinido de regreso al hardware. Se realizan las pruebas correspondientes para las dos versiones de Uplink.
+En el eje de las abscisas de la figura \ref{fig:loop} es posible ver la cantidad de paquetes por segundo cuyo el origen corresponde a la mayor velocidad a la que es posible transmitir sin perdidas de datos. En las ordenadas se puede observar la cantidad de paquetes perdidos en valores porcentuales. Para obtener esta métrica se procesó una cantidad constante de paquetes, 9000, y luego se contrastó este valor con un contador global que el generador coloca en la ultima palabra de cada paquete. Así se calculó la cantidad paquetes perdidos, sobre la cantidad total de paquetes generados. Este mismo sistema es el usado en todos los gráficos posteriores.
 
 
 \newpage
 \section{Implementación Completa}
 
-Se verificara el rendimiento del sistema implementado de manera completa. Se consideraran tres puntos en las curvas que indican los tiempos de accesos del algoritmos, un punto mínimo que corresponde al menor tiempo de acceso, un punto promedio que ejercita 10 entradas equidistantes a lo largo de la tabla y un punto máximo que indica el peor tiempo de acceso posible para un algoritmo dado. 
+En este ensayo se verifica el rendimiento del sistema implementado de manera completa. Se considera tres puntos en las curvas que indican los tiempos de procesamiento de los algoritmos: un punto mínimo que corresponde al menor tiempo, un punto promedio que ejercita 10 entradas equidistantes a lo largo de la tabla y un punto máximo que indica el peor tiempo de acceso posible para un algoritmo dado. 
 
-\subsubsection{Linear Lookup}
-En la figura~\ref{figminllu} se puede observar que la diferencia en la cantidad de paquetes que pueden ser transmitidos sin errores en el mejor caso entre el modulo que envía una palabra al procesador y el que envía toda la cabecera, es considerable, mientras que a medida que aumenta la profundidad de búsqueda en la tabla estos valores convergen, como es posible ver en la figuras~\ref{figpromllu} y~\ref{figmaxllu}, lo que era esperable ya que para accesos muy lentos a la tabla el retardo introducido por el Hardware se vuelve despreciable.
+\subsubsection{a) Linear Lookup (LLU)}
+Se evalúa el desempeño para los casos en lque se envian 1 y 5 palabras de 72 bits como ya se mencionó. Se observa que los valores de pérdida de paquetes para ambos casos difieren mucho para profundidades de busqueda pequeña (figura \ref{figminllu}), pero convergen a medida que la profundidad de busqueda aumenta (figuras \ref{figpromllu} y \ref{figmaxllu}). Este efecto era esperable ya que para accesos muy lentos a la tabla el retardo introducido por el hardware se vuelve despreciable.
+
+
+
 \newpage
 \begin{figure}[!h]
   \centering
@@ -57,9 +60,9 @@ En la figura~\ref{figminllu} se puede observar que la diferencia en la cantidad 
 
 
 \newpage
-\subsubsection{Unibit Trie Lookup}
+\subsubsection{b) Unibit Trie Lookup (UTL) }
 
-En los gráficos que corresponden al Unibit Trie Lookup es posible observar que existe una menor diferencia entre la máxima cantidad de paquetes que pueden ser transmitidos sin error en cada uno de los 3 puntos elegidos. Así como también la diferencia entre enviar el paquete entero y solo la IP destino se reduce, lo que da la pauta de que cuando el tiempo de acceso es uniforme el impacto de la mejoras del Hardware tiende a ser menor.
+En los gráficos que corresponden al Unibit Trie Lookup es posible observar que existe una menor diferencia entre la máxima cantidad de paquetes que pueden ser transmitidos sin error en cada uno de los 3 puntos elegidos. También la diferencia entre enviar el paquete entero y solo la IP destino se reduce, lo que dá la pauta de que cuando el tiempo de acceso es uniforme el impacto de enviar 1 o 15 palabras tiende a ser menor.
 \newpage
 \begin{figure}[!h]
   \centering
@@ -82,7 +85,7 @@ En los gráficos que corresponden al Unibit Trie Lookup es posible observar que 
 
 \newpage
 \subsubsection{Comparativa Inter-Algoritmos}
-Se presenta a modo de comparación un gráfico que contiene el mínimo, el máximo y el promedio para el caso de una palabra en los dos algoritmos implementados. 
+Se presenta a modo de comparación un gráfico que contiene el mínimo, el máximo y el promedio para el caso de una palabra con los dos algoritmos implementados. 
 \begin{figure}[!h]
   \centering
 	\includegraphics[width=0.7\textwidth]{5-resultados/graf/lluvsutl.eps}
@@ -94,7 +97,7 @@ Se presenta a modo de comparación un gráfico que contiene el mínimo, el máxi
 \newpage
 \section{Cache}
 
-La cache desarrollada para este proyecto esta pensada a los fines de satisfacer la posibilidad de que varios paquetes consecutivos tengan una direccion de IP destino. Con la implementacion utilizada se logro un tiempo de acceso uniforme de alrededor de 1000 ciclos por segundo. En el grafico ~\ref{fig:cachecomp} se puede ver como el peor caso del algoritmo LLU soporta hasta 10000 paquetes por segundo sin cache y hasta 700000 paquetes por segundo con la cache. Aunque este ejemplo solo analiza el caso en el que son todos Hits, es posible ver la mejora sustancial que implica una cache. 
+La cache desarrollada para este proyecto está pensada a los fines de satisfacer la posibilidad de que varios paquetes consecutivos tengan una direcciones IP destino que pertenezcan a un grupo comun de flujos. Con la implementación utilizada se logró un tiempo de acceso uniforme de alrededor de 1000 ciclos, tiempo varias veces menor que el mejor caso tanto en LLU (6400) como en UTL (5000). En el gráfico ~\ref{fig:cachecomp} se puede ver como el peor caso del algoritmo LLU soporta hasta 10000 paquetes por segundo sin cache y hasta 700000 paquetes por segundo con la cache. Aunque este ejemplo sólo analiza el caso en el que son todos hits, es posible ver la mejora sustancial que implica una cache. 
 
 \begin{figure}[!h]
   \centering
