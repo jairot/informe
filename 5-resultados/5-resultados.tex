@@ -1,11 +1,11 @@
 \chapter{Resultados}
 
-En este capítulo se presentan los datos obtenidos de la ejecución del proyecto bajo ciertas condiciones representativas, con la intención de validar la funcionalidad y también de encontrar los alcances y límites del mismo. Primero se estudia el tiempo de respuesta de los algoritmos de manera individual, a continuación el rendimiento en la configuración mas simple, luego el sistema completo bajo condiciones varias, y por ultimo se analiza la mejora introducida por el uso de la cache. Para la obtención de los datos que corresponden al sistema completo se utilizaron de manera complementaria scripts programados en lenguaje Python y en Bash. Durante todo el capítulo se usara LLU como acronimo de \textit{Linear Look Up} y UTL para referirse al \textit{Unibit Trie Lookup}. 
+En este capítulo se presentan los datos obtenidos de la ejecución del proyecto bajo ciertas condiciones representativas, con la intención de validar la funcionalidad y también de encontrar los alcances y límites del mismo. Primero se estudia el tiempo de respuesta de los algoritmos de manera individual, a continuación el rendimiento en la configuración mas simple, luego el sistema completo bajo condiciones varias, y por ultimo se analiza la mejora introducida por el uso de la cache. Para la obtención de los datos que corresponden al sistema completo se utilizaron de manera complementaria scripts programados en lenguaje Python y en Bash. Durante todo el capítulo se usara LLU como acrónimo de \textit{Linear Look Up} y UTL para referirse al \textit{Unibit Trie Lookup}. 
 
 
 \section{Stress de software}
 
-Con la intención de obtener un gráfico que represente el rendimiento de los dos algoritmos implementados, se mide el retardo de búsqueda en función de la posición de coincidencia en la tabla de enrutamiento. Se realizan las pruebas de manera independiente a la Interfaz de acceso a la cabecera con el fin de aisalar los efectos del mismo. En el eje de las abscisas se expresa la ubicación del prefijo mas largo en una tabla de 100 elementos  y en las ordenadas se puede observar el tiempo de búsqueda en ciclos de reloj.
+Con la intención de obtener un gráfico que represente el rendimiento de los dos algoritmos implementados, se mide el retardo de búsqueda en función de la posición de coincidencia en la tabla de enrutamiento. Se realizan las pruebas de manera independiente a la Interfaz de acceso a la cabecera con el fin de aislar los efectos del mismo. En el eje de las abscisas se expresa la ubicación del prefijo mas largo en una tabla de 100 elementos  y en las ordenadas se puede observar el tiempo de búsqueda en ciclos de reloj.
 
 \begin{figure}[h]
   \centering
@@ -32,7 +32,7 @@ En el eje de las abscisas de la figura \ref{fig:loop} es posible ver la cantidad
 En este ensayo se verifica el rendimiento del sistema implementado de manera completa. Se considera tres puntos en las curvas que indican los tiempos de procesamiento de los algoritmos: un punto mínimo que corresponde al menor tiempo, un punto promedio que ejercita 10 entradas equidistantes a lo largo de la tabla y un punto máximo que indica el peor tiempo de acceso posible para un algoritmo dado. 
 
 \subsubsection{a) Linear Lookup (LLU)}
-Se evalúa el desempeño para los casos en lque se envian 1 y 5 palabras de 72 bits como ya se mencionó. Se observa que los valores de pérdida de paquetes para ambos casos difieren mucho para profundidades de busqueda pequeña (figura \ref{figminllu}), pero convergen a medida que la profundidad de busqueda aumenta (figuras \ref{figpromllu} y \ref{figmaxllu}). Este efecto era esperable ya que para accesos muy lentos a la tabla el retardo introducido por el hardware se vuelve despreciable.
+Se evalúa el desempeño para los casos en que se envían 1 y 5 palabras de 72 bits como ya se mencionó. Se observa que los valores de pérdida de paquetes para ambos casos difieren mucho para profundidades de búsqueda pequeña (figura \ref{figminllu}), pero convergen a medida que la profundidad de búsqueda aumenta (figuras \ref{figpromllu} y \ref{figmaxllu}). Este efecto era esperable ya que para accesos muy lentos a la tabla el retardo introducido por el hardware se vuelve despreciable.
 
 
 
@@ -62,7 +62,7 @@ Se evalúa el desempeño para los casos en lque se envian 1 y 5 palabras de 72 b
 \newpage
 \subsubsection{b) Unibit Trie Lookup (UTL) }
 
-En los gráficos que corresponden al Unibit Trie Lookup es posible observar que existe una menor diferencia entre la máxima cantidad de paquetes que pueden ser transmitidos sin error en cada uno de los 3 puntos elegidos. También la diferencia entre enviar el paquete entero y solo la IP destino se reduce, lo que dá la pauta de que cuando el tiempo de acceso es uniforme el impacto de enviar 1 o 15 palabras tiende a ser menor.
+En los gráficos que corresponden al Unibit Trie Lookup es posible observar que existe una menor diferencia entre la máxima cantidad de paquetes que pueden ser transmitidos sin error en cada uno de los 3 puntos elegidos. También la diferencia entre enviar el paquete entero y solo la IP destino se reduce, lo que da la pauta de que cuando el tiempo de acceso es uniforme el impacto de enviar 1 o 15 palabras tiende a ser menor.
 \newpage
 \begin{figure}[!h]
   \centering
@@ -97,7 +97,7 @@ Se presenta a modo de comparación un gráfico que contiene el mínimo, el máxi
 \newpage
 \section{Cache}
 
-La cache desarrollada para este proyecto está pensada a los fines de satisfacer la posibilidad de que varios paquetes consecutivos tengan una direcciones IP destino que pertenezcan a un grupo comun de flujos. Con la implementación utilizada se logró un tiempo de acceso uniforme de alrededor de 1000 ciclos, tiempo varias veces menor que el mejor caso tanto en LLU (6400) como en UTL (5000). En el gráfico ~\ref{fig:cachecomp} se puede ver como el peor caso del algoritmo LLU soporta hasta 10000 paquetes por segundo sin cache y hasta 700000 paquetes por segundo con la cache. Aunque este ejemplo sólo analiza el caso en el que son todos hits, es posible ver la mejora sustancial que implica una cache. 
+La cache desarrollada para este proyecto está pensada a los fines de satisfacer la posibilidad de que varios paquetes consecutivos tengan una direcciones IP destino que pertenezcan a un grupo común de flujos. Con la implementación utilizada se logró un tiempo de acceso uniforme de alrededor de 1000 ciclos, tiempo varias veces menor que el mejor caso tanto en LLU (6400) como en UTL (5000). En el gráfico ~\ref{fig:cachecomp} se puede ver como el peor caso del algoritmo LLU soporta hasta 10000 paquetes por segundo sin cache y hasta 700000 paquetes por segundo con la cache. Aunque este ejemplo sólo analiza el caso en el que son todos hits, es posible ver la mejora sustancial que implica una cache. 
 
 \begin{figure}[!h]
   \centering
