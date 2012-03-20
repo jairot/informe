@@ -31,7 +31,14 @@ Como se le dio prioridad a los prefijos de red más largos, se debió sobrecarga
 
 \subsubsection{Inserción de nuevas entradas}
 
-La función de inserción toma como parámetros una dirección, una máscara y un identificador de decisión. Luego instancia una entrada con dichos elementos y la inserta en la lista.
+La función de inserción toma como parámetros una dirección, una máscara y un identificador de decisión. Luego instancia una entrada con dichos elementos y la inserta en la lista. Este procedimiento se encuentra representado en la figura ~\ref{fig:lluinsert}
+
+\begin{figure}[H]
+  \centering
+	\includegraphics[scale=0.50]{4-implementacion/graf/lluinsert.eps}
+  \caption{Diagrama de flujos para la inserción de nuevos valores en LLU}
+  \label{fig:lluinsert}
+\end{figure}
 
 \subsubsection{Búsqueda}
 
@@ -41,6 +48,15 @@ Cuando la función encargada del lookup recibe una dirección IP de destino, rea
 	\item Coloca un iterador al comienzo de la lista, con el fin de comenzar el recorrido por la misma.
 	\item Realiza un AND con el valor de máscara del nodo que está siendo apuntado. Si el resultado de la operación es igual al valor de dirección de red de dicho nodo, entonces se retorna con el valor identificador de decisión, ya que ese es el prefijo más largo según el orden establecido. En otro caso, continúa la búsqueda en el siguiente nodo.
 \end{itemize}
+
+Dichos pasos pueden verse graficados en la figura~\ref{fig:llusearch}
+
+\begin{figure}[H]
+  \centering
+	\includegraphics[scale=0.50]{4-implementacion/graf/llusearch.eps}
+  \caption{Diagrama de flujos para la búsqueda LLU}
+  \label{fig:llusearch}
+\end{figure}
 
 \subsection {Búsqueda en Árbol unibit}
 
@@ -79,6 +95,16 @@ La función de inserción toma como entrada una dirección y una máscara de red
 	\item Una vez finalizado el bucle, se escribe el valor de decisión en el nodo que esté siendo apuntado por el puntero de recorrido.
 \end{itemize}
 
+La inserción se ve representada en la figura~\ref{fig:utlinsertfc}
+
+\begin{figure}[H]
+  \centering
+	\includegraphics[scale=0.40]{4-implementacion/graf/utlinsert.eps}
+  \caption{Diagrama de flujos para la inserción de valores en árbol unibit}
+  \label{fig:utlinsertfc}
+\end{figure}
+
+
 \subsubsection{Búsqueda}
 
 El algoritmo de búsqueda toma como entrada la dirección IP de destino del paquete a clasificar. Luego de ello realiza las siguientes acciones:
@@ -99,6 +125,15 @@ Esto se repite nodo a nodo, hasta que ocurre alguna de las siguientes situacione
 Contemplando esta última posibilidad, el algoritmo hace que en cada nodo se chequee si se trata de un nodo decisión. En dicho caso, se almacena el campo gw en una variable y se continua el recorrido. Si se da un caso en el cual el nodo de recorrido queda apuntando a un nodo común y luego de testear un bit se determina que el mismo no tiene un nodo asociado (es decir, que alguno de los punteros zero / one esté en NULL) la función retorna la variable anteriormente mencionada. 
 
 Cabe mencionar también que la ruta por defecto se inserta en el nodo raíz del árbol.
+
+El procedimiento de lookup se ve representado en la figura~\ref{fig:utlsearch}
+
+\begin{figure}[H]
+  \centering
+	\includegraphics[scale=0.40]{4-implementacion/graf/utlsearch.eps}
+  \caption{Diagrama de flujos para la búsqueda en árbol unibit}
+  \label{fig:utlsearch}
+\end{figure}
 
 \begin{figure}[H]
   \centering

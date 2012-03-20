@@ -148,13 +148,13 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.4142136"
-     inkscape:cx="904.75975"
-     inkscape:cy="-59.949107"
+     inkscape:zoom="1"
+     inkscape:cx="959.59054"
+     inkscape:cy="-254.23725"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="true"
-     inkscape:window-width="1024"
+     inkscape:window-width="1366"
      inkscape:window-height="693"
      inkscape:window-x="0"
      inkscape:window-y="24"
@@ -173,7 +173,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -462,7 +462,7 @@
        y="353.04654"
        id="text4259"><tspan
          sodipodi:role="line"
-         id="tspan4261"></tspan></text>
+         id="tspan4261" /></text>
     <path
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;display:inline"
        d="m 245,657.36218 -135,0"
@@ -594,14 +594,9 @@
        id="path5865-4"
        inkscape:connector-type="polyline" />
     <path
-       style="fill:none;stroke:#000000;stroke-width:0.99724895px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="m 110,1402.3622 905,0"
+       style="fill:none;stroke:#000000;stroke-width:0.99449033px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 110,1402.3622 900,0"
        id="path5889"
-       inkscape:connector-type="polyline" />
-    <path
-       style="fill:none;stroke:#000000;stroke-width:1.00271368px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="m 1016,1402.3622 4,-1110.00002"
-       id="path5893"
        inkscape:connector-type="polyline" />
     <path
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow1Lend-3-9)"
@@ -628,5 +623,15 @@
        id="path7090"
        d="m -262,1186.3622 50,-60"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 1010,1402.3622 0,-930.00002"
+       id="path2913"
+       inkscape:connector-type="polyline" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow1Lend-3-9)"
+       d="m 1010,472.36218 -710,0"
+       id="path2915"
+       inkscape:connector-type="polyline" />
   </g>
 </svg>
