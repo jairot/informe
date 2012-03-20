@@ -59,12 +59,12 @@ La FPGA incluida en la placa es una Cyclone II EP2C35 cuyas especificaciones son
 
 \section*{Bus Avalon}
 
-Avalon es una familia de interfaces para flujo de datos de alta velocidad, lectura/escritura de registros y memoria, y control de dispositivos "off-chip". Existen varios tipos, cuyo uso depende de las necesidades del diseño a implementar:
+Avalon es una familia de interfaces para flujo de datos de alta velocidad, lectura/escritura de registros y memoria, y control de dispositivos  ``off-chip''. Existen varios tipos de bus Avalon, cuyo uso depende de las necesidades del diseño a implementar:
 \begin{itemize}
 	\item Avalon ST: Soporta flujo unidireccional de datos, incluyendo flujos multiplexados y paquetes.
 	\item Avalon MM: Interfaz de lectura/escritura basada en memoria, típica de conexiones maestro-esclavo.
 	\item Avalon Conduit Interface: Para señales que no se amoldan a los tipos anteriores.
-	\item Avalon TC: Para dispositivos "off-chip".
+	\item Avalon TC: Para dispositivos ``off-chip''.
 	\item Avalon Interrupt Interface: Permite el envío de interrupciones entre componentes.
 	\item Avalon Clock Interface: Recibe y/o distribuye señales de clock.
 	\item Avalon Reset Interface.
@@ -110,11 +110,7 @@ Para esta interfaz, la señal a utilizar es
 
 \subsection*{NIOS II SBT}
 
-El NIOS II Software Building Tools (o SBT) es un conjunto de utilidades y scripts que sirve para crear y construir aplicaciones embebidas basadas en C/C++, librerías de usuario y paquetes de soporte de placa (board support packages o BSP). 
-
-Puede invocarse desde la IDE Eclipse o desde el intérprete de comandos del NIOS II.
-
-El NIOS II SBT puede crear los siguientes tipos de proyecto:
+El NIOS II Software Building Tools (o SBT) es un conjunto de utilidades y scripts que sirve para crear y construir aplicaciones embebidas basadas en C/C++, librerías de usuario y paquetes de soporte de placa (board support packages o BSP). Puede invocarse desde la IDE Eclipse o desde el intérprete de comandos del NIOS II. El NIOS II SBT puede crear los siguientes tipos de proyecto:
 \begin{itemize}
 	\item Aplicación NIOS II: un programa que implementa alguna función deseada.
 	\item NIOS II BSP: una librería que provee acceso al hardware en el sistema. Brinda un entorno de rutinas a medida para un procesador y, eventualmente, un sistema operativo. 
@@ -138,12 +134,12 @@ Actualmente los soportados son:
 
 \subsubsection{Board Support Packages}
 
-Un BSP es una librería especializada que contiene código de soporte específico del sistema. Aisla la aplicación de los detalles del sistema, tales como mapeo de memoria, dispositivos disponibles y configuración del procesador.
+Un BSP es una librería especializada que contiene código de soporte específico del sistema. La misma aisla la aplicación de los detalles del sistema, tales como mapeo de memoria, dispositivos disponibles y configuración del procesador.
 
 Se compone de:
 
 \begin{itemize}
-	\item Capa de abstracción de Hardware (Hardware Abstraction Layer o HAL): Permite al software interactuar con el hardware del sistema. Se describirá en detalle más adelante en este capítulo.
+	\item Capa de abstracción de hardware (Hardware Abstraction Layer o HAL): Permite al software interactuar con el hardware del sistema. Se describirá en detalle más adelante en este capítulo.
 	\item Librería C estándar newlib: ANSI C estándar diseñada para sistemas embebidos.
 	\item Drivers de dispositivos: para manejar cada uno de los componentes del sistema.
 	\item Paquetes de software opcionales: permiten proveer funcionalidad adicional.
@@ -165,7 +161,7 @@ Para crear un proyecto de software se llevan a cabo una serie de pasos:
 
 \subsection *{HAL}
 
-La Capa de Abstracción de Hardware \textit{(Hardware Abstraction Layer o HAL)} provee una interfaz simple de drivers de dispositivos para conectar los programas con el hardware subyacente. La API está integrada con la librería estándar ANSI C, lo cual permite al software acceder a los dispositivos mediante el uso de funciones C ampliamente conocidas, tales como printf(), fopen(), fwrite(), etc.
+La capa de abstracción de hardware \textit{(Hardware Abstraction Layer o HAL)} provee una interfaz simple de drivers de dispositivos para conectar los programas con el hardware subyacente. La API está integrada con la librería estándar ANSI C, lo cual permite al software acceder a los dispositivos mediante el uso de funciones C ampliamente conocidas, tales como printf(), fopen(), fwrite(), etc.
 
 \subsubsection*{Servicios}
 
@@ -190,15 +186,13 @@ La figura ~\ref{fig:hal} muestra las capas de un sistema basado en la HAL, desde
 
 \subsubsection*{Modelos de dispositivos genéricos}
 
-La HAL provee modelos de dispositivos genéricos para diversos tipos de periféricos que se encuentran en sistemas embebidos, tales como timers, interfaces Ethernet y dispositivos de I/O que transmiten datos de caracter. Estos modelos permiten escribir programas usando una API consistente sin preocuparse por el hardware subyacente.
-
-Los tipos de periféricos cubiertos son:
+La HAL provee modelos de dispositivos genéricos para diversos tipos de periféricos que se encuentran en sistemas embebidos, tales como timers, interfaces Ethernet y dispositivos de I/O que transmiten datos de caracter. Estos modelos permiten escribir programas usando una API consistente sin preocuparse por el hardware subyacente. Los tipos de periféricos cubiertos son:
 
 \begin{itemize}
 	\item Dispositivos de caracter: envían y/o reciben caracteres en forma serial, como ser una UART.
 	\item Timers: dispositivos que llevan la cuenta de los tics de un clock y pueden generar interrupciones periódicas.
 	\item Subsistemas de archivos: un mecanismo para acceder a archivos almacenados en dispositivos físicos. Dependiendo de la implementación interna, el driver del subsistema de archivos podría acceder a los dispositivos subyacentes en forma directa o usar un driver aparte.
-	\item Dispositivos Ethernet: proveen acceso a una conexión Ethernet para una pila de red, tal como la NicheStack® TCP/IP Stack, provista por Altera.
+	\item Dispositivos Ethernet: proveen acceso a una conexión Ethernet para un stack de red, tal como la NicheStack® TCP/IP Stack, provista por Altera.
 	\item Dispositivos DMA: periféricos que llevan a cabo una gran cantidad de transacciones de datos. El origen y destino pueden ser la propia memoria o algún otro dispositivo.
 	\item Dispositivos con memoria flash: periféricos con memoria no volátil que utilizan un protocolo especial de programación para almacenar datos.
 \end{itemize}
@@ -214,7 +208,7 @@ Algunos periféricos proveen funciones de acceso dedicadas que no están basadas
 La HAL integra su entorno de rutinas con una implementación open-source de la librería C estándar:\textbf{ newlib}. La misma está hecha para ser utilizada en sistemas embebidos. 
 
 \subsubsection*{La HAL dentro de un proyecto de software}
-La creación y administración de proyectos basados en la HAL están altamente ligadas al NIOS II SBT
+La creación y administración de proyectos basados en la HAL están altamente ligadas al NIOS II SBT. La figura ~\ref{fig:halsof} muestra el diagrama en bloques de un software basado en la HAL. Todo programa de este tipo consta de dos proyectos. El código de aplicación específico se encuentra en uno de ellos, el cual depende a su vez de otro proyecto BSP separado. El primero contiene todo el código que el programador desarrolla. El segundo, toda la información necesaria para la interacción hardware-software. Este último a su vez depende del hardware del sistema, cuya información se encuentra en un archivo generado por la herramienta SOPC Builder.
 
 \begin{figure}[h]
   \centering
@@ -223,11 +217,9 @@ La creación y administración de proyectos basados en la HAL están altamente l
   \label{fig:halsof}
 \end{figure}
 
-La figura ~\ref{fig:halsof} muestra el diagrama en bloques de un software basado en la HAL. Todo programa de este tipo consta de dos proyectos. El código de aplicación específico se encuentra en uno de ellos, el cual depende a su vez de otro proyecto BSP separado.
 
-EL primero contiene todo el código que el programador desarrolla. El segundo, toda la información necesaria para la interacción hardware-software. Este último a su vez depende del hardware del sistema, cuya información se encuentra en un archivo generado por la herramienta SOPC Builder.
 
-\subsubsection*{El archivo de descripción del sistema (system.h)}
+\subsubsection*{Archivo de descripción del sistema (system.h)}
 El archivo system.h provee una descripción completa del software del sistema basado en NIOS II. Describe cada periférico e incluye:
 
 \begin{itemize}
