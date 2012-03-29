@@ -23,7 +23,7 @@ Para el problema planteado en el capítulo anterior se propone, de manera funcio
 	\item El microprocesador aplica un algoritmo de clasificación a cierta información de la cabecera y reenvía los resultados al hardware. 
 	\item Se envía el paquete a la interfaz de salida, anexándole a cada palabra un tag adjunto con el resultado de la clasificación.
     \end{enumerate}
-\newpage
+
 \section{Esquema propuesto}
 Para implementar la solución se propone el hardware descripto en el diagrama de la figura~\ref{fig:solucion}
  \begin{figure}[h]
@@ -109,7 +109,7 @@ Considerar la siguiente tabla de enrutamiento:
 
 
 A la misma le corresponde la representación en Unibit trie de la figura~\ref{fig:trie}.
-Sea una dirección de destino \textit{D}. Para efectuar la búsqueda del prefijo más largo, los bits de \textit{D} son usados para trazar un camino a lo largo del trie. Dicho camino comienza en el nodo raíz y continúa hasta encontrar un puntero vacío o un nodo vacío. Durante el recorrido a través del trie, el algoritmo mantiene un registro del último enlace encontrado en un nodo del camino recorrido(que es el mas largo hasta el momento). En el caso de que la búsqueda terminara este es el prefijo retornado.
+Sea una dirección de destino \textit{D}. Para efectuar la búsqueda del prefijo más largo, los bits de \textit{D} son usados para trazar un camino a lo largo del trie. Dicho camino comienza en el nodo raíz y continúa hasta encontrar un puntero vacío o un nodo vacío. Durante el recorrido a través del trie, el algoritmo mantiene un registro del último enlace encontrado en un nodo del camino recorrido (que es el mas largo hasta el momento). En el caso que la búsqueda terminara éste es el prefijo retornado.
 
 \begin{figure}[h]
   \centering
