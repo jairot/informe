@@ -1,17 +1,17 @@
 \chapter{Introducción}
 
-En la actualidad las redes de datos están creciendo en complejidad. Basta mirar el incremento en la cantidad de aplicaciones web que ofrecen contenido multimedia, para determinar que no solo crece el volumen de los datos, sino que además se requiere una mayor velocidad y confiabilidad en la transmisión. 
+En la actualidad las redes de datos están creciendo en complejidad. Basta mirar el incremento en la cantidad de aplicaciones web que ofrecen contenido multimedia, para determinar que no sólo crece el volumen de los datos, sino que además se requiere mayor velocidad y confiabilidad en la transmisión. 
 
 También es notoria la consolidación de múltiples servicios sobre redes Ethernet, tales como comunicación de voz, vídeo en estándar y alta definición, videoconferencias, transacciones en tiempo real, etc.
 
-En este contexto puede verse como es necesaria la optimización en el procesamiento de los paquetes de datos. Esto debe darse bajo la premisa de que no alcanza con proveer soluciones rápidas, sino que también se debe dotar a las mismas de un buen grado de flexibilidad y escalabilidad que permitan sostener el ritmo actual de crecimiento.
+En este contexto es necesario introducir continuas mejoras en el procesamiento de los paquetes de datos. Esto debe darse bajo la premisa de que no alcanza con proveer soluciones rápidas, sino que también se debe dotar a las mismas de un buen grado de flexibilidad y escalabilidad que permitan sostener el ritmo actual de crecimiento en términos de velocidad de procesamiento.
 
 
 
 \section{Contexto}
 
 
-En lo que respecta a las tecnologías de red, las nuevas tendencias se canalizan hacia la agregación de paquetes en flujos. Dos ejemplos los constituyen conmutación multi-protocolo mediante etiquetas (\textit{Multiprotocol Label Switching}, MPLS) y redes virtuales  de área local (\textit{Virtual LAN}, VLANs). MPLS es un mecanismo en redes de telecomunicaciones de alta performance que transporta datos de nodo a nodo basado en etiquetas en lugar de direcciones de red, con el fin de evitar búsquedas complejas en una tabla de ruteo. Dichas etiquetas se aplican en el inicio de la transmisión e identifican enlaces virtuales entre nodos. También es capaz de encapsular paquetes de varios protocolos de red.
+En lo que respecta a las tecnologías de red, las nuevas tendencias se canalizan hacia la agregación de paquetes en flujos. Dos ejemplos los constituyen las redes de conmutación multi-protocolo mediante etiquetas (\textit{Multiprotocol Label Switching}, MPLS) y las redes virtuales  de área local (\textit{Virtual LAN}, VLANs). MPLS es un mecanismo en redes de telecomunicaciones de alta performance que transporta datos de nodo a nodo basado en etiquetas en lugar de direcciones de red, con el fin de evitar búsquedas complejas en una tabla de ruteo. Dichas etiquetas se aplican en el inicio de la transmisión e identifican enlaces virtuales entre nodos. También es capaz de encapsular paquetes de varios protocolos de red.
 
 \begin{figure}[h]
   \centering
@@ -39,7 +39,7 @@ En cuanto al hardware necesario para hacer frente a esta brecha entre la necesid
 \emph{Los Procesadores de Red (Network Processors, NPs), específicos para este tipo de problemas, ya que cuentan con múltiples elementos de procesamiento, buena performance para ciertas tareas, aunque tienen dificultades de portabilidad debido a que sus interfaces son propietarias en casi todos los casos.}
 \begin{figure}[h]
   \centering
-      \includegraphics[width=0.5\textwidth]{1-introduccion/graf/NP_based.eps}
+      \includegraphics[width=0.8\textwidth]{1-introduccion/graf/NP_based.eps}
   \caption{Solución basada en NP}
   \label{fig:diseno}
 \end{figure}
@@ -48,12 +48,12 @@ En cuanto al hardware necesario para hacer frente a esta brecha entre la necesid
 \emph{Los Procesadores de Propósito General (General Purpose Processors,GPPs), utilizan la arquitectura propia de la PC y la adaptan al procesamiento de red mediante un software especializado. Aunque esta solución es muy popular por su flexibilidad y su bajo costo, las transacciones con memoria RAM mediante un bus compartido y la naturaleza secuencial de los GPPs son factores limitantes a tener en cuenta. }
  \begin{figure}[h]
   \centering
-      \includegraphics[width=0.5\textwidth]{1-introduccion/graf/GPP_based.eps}
+      \includegraphics[width=0.8\textwidth]{1-introduccion/graf/GPP_based.eps}
   \caption{Solución basada en GPP}
   \label{fig:diseno}
 \end{figure}
 
-Las tecnologías actuales, por las razones anteriormente mencionadas, están alcanzando su límite y es necesario encontrar tecnologías que las reemplacen o que cubran sus falencias, para poder satisfacer los requerimientos actuales de las redes. 
+Por lo mencionado anteriormente, es notoria la necesidad de encontrar tecnologías que reemplacen a las actuales o que cubran sus falencias, para poder satisfacer los requerimientos crecientes de las redes. 
 
 Los FPGAs (Field-Programmable Gate Array) son dispositivos de lógica reconfigurable que es posible programar, una o varias veces, usando un lenguaje de descripción de hardware(\textit{Hardware Description Language}, HDL). Las FPGAs se utilizan en aplicaciones similares a los ASICs; sin embargo son más lentas, tienen un mayor consumo de potencia y no pueden abarcar sistemas tan complejos como los ASICs. A pesar de esto, tienen un flujo de diseño flexible, sus costes de desarrollo y adquisición son mucho menores para pequeñas cantidades de dispositivos y el tiempo de desarrollo es también menor.
 
@@ -66,7 +66,7 @@ Estos avances que simplifican el desarrollo de SoC, la flexibilidad en el flujo 
 
  \begin{figure}[h]
   \centering
-	 \includegraphics[width=0.5\textwidth]{1-introduccion/graf/FPGA_based.eps}
+	 \includegraphics[width=0.8\textwidth]{1-introduccion/graf/FPGA_based.eps}
   \caption{Solución basada en FPGA}
   \label{fig:diseno}
 \end{figure}
@@ -78,11 +78,11 @@ Estos avances que simplifican el desarrollo de SoC, la flexibilidad en el flujo 
 
 \section{Problema Marco}
 
-La necesidad de procesar cada vez más paquetes de datos lleva a lo que se conoce como \textit{clasificación}. Ésta consiste en la categorización de paquetes en flujos de acuerdo a un conjunto de reglas determinadas. Se efectúa en base a campos en la cabecera del paquete, tales como la dirección IP de origen/destino, puerto de origen/destino, tipo de servicio (TOS), etc. En general, para una clasificación basada en N campos, se dice que esta es N-dimensional (o multidimensional). Cada regla \textbf{R} tiene \textbf{F} componentes y el $ f^{vo} $ componente de \textbf{R}, denotado como \textbf{R[f]} es una \textit{expresión de correspondencia de rango} en el $ f^{vo} $ campo del paquete. Si para todo \textit{f} $ \in $ [1, \textit{f}] el $ f^{vo} $ campo de la cabecera de un paquete \textbf{P} satisface la expresión de rango \textbf{R[f]}, \textbf{P} se corresponde con \textbf{R}.
+La necesidad de procesar cada vez más paquetes de datos lleva a lo que se conoce como \textit{clasificación}. Ésta consiste en la categorización de paquetes en flujos de acuerdo a un conjunto de reglas determinadas. Se efectúa en base a campos en la cabecera del paquete, tales como la dirección IP de origen/destino, puerto de origen/destino, tipo de servicio (TOS), etc. En general, para una clasificación basada en N campos, se dice que esta es N-dimensional (o multidimensional).
 
-Un caso particular de clasificación unidimensional es lo que se conoce como IP Lookup. Este sera abordado en el presente Proyecto Integrador.
+El presente Proyecto Integrador considera en particular el caso de la clasificación unidimensional. Como caso de estudio se toma lo que se conoce como IP lookup, pero la propuesta estudiada en este trabajo puede aplicarse a cualquier caso de dicho tipo de clasificación.
 
-\subsubsection{Dirección IP}
+\subsubsection{IP Lookup}
 
 La dirección IP es un número de 32 bits que identifica un dispositivo dentro de una red que utiliza el protocolo IP. Las direcciones IP se suelen representar por cuatro números enteros separados por puntos, que equivalen al valor de cada uno de los cuatro bytes que componen la dirección.
 La mayor parte de las redes IP contienen un grupo de direcciones IP jerárquicas. En general se entiende que una parte de la dirección corresponde a la red, y la otra al host dentro de la red. Cuando un dispositivo de enrutamiento recibe un datagrama por una de sus interfaces, compara la parte de red de la dirección con las entradas contenidas en sus tablas y envía el datagrama por la interfaz correspondiente.
@@ -94,8 +94,6 @@ Existen 3 maneras de representar un prefijo de red:
 	\item Notación A/L: donde A es una dirección IP y L es la longitud del prefijo. Siguiendo el ejemplo anterior, la notación sería 132.239.0.0/16.
 	\item Notación máscara: se utiliza una dirección de red y una máscara en vez de un prefijo explícito. De esta manera, volviendo al ejemplo anteriormente mencionado, este puede expresarse como 132.239.0.0 con máscara 255.255.0.0
 \end{itemize}
-
-\subsubsection{IP Lookup}
 
 El procedimiento que se lleva a cabo en un dispositivo de enrutamiento podría describirse de la siguiente manera:
 
@@ -132,7 +130,7 @@ Con el fin de cumplimentar los objetivos generales planteados, son necesarias la
 
 \section{Organización}
 
-En el capítulo 2 se estudiará, a nivel funcional, una solución propuesta para este tipo de problemas. A continuación, en el capítulo 3, se presentará de manera detallada la arquitectura digital de los módulos que componen el sistema. En el capítulo 4 se describirá la metodología y los recursos utilizados para implementar este proyecto y en el capitulo 5 se presentaran los resultados de esta implementación.
+En el capítulo 2 se estudiará, a nivel funcional, una solución propuesta para este tipo de problemas. A continuación, en el capítulo 3, se presentará de manera detallada la arquitectura de los módulos que componen el sistema. En el capítulo 4 se describirá el software. En el capítulo 5 se presentará la integración hardware-software y los recursos utilizados para implementar este proyecto y en el capitulo 6 se presentaran los resultados de esta implementación.
 
 
 
