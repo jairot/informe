@@ -24,6 +24,21 @@
 %\usepackage{algorithm}
 %\usepackage{algorithmic}
 \newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
+\newenvironment{dedication}
+{
+   \cleardoublepage
+   \thispagestyle{empty}
+   \vspace*{\stretch{1}}
+   \hfill\begin{minipage}[t]{0.66\textwidth}
+   \raggedright
+}%
+{
+   \end{minipage}
+   \vspace*{\stretch{3}}
+   \clearpage
+}
+
+
 \begin{document}            % inicio del documento
 
 \input{Tesis_Portada.tex}
