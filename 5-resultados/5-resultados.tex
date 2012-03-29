@@ -1,11 +1,11 @@
 \chapter{Resultados}
 
-En este capítulo se presentan los datos obtenidos de la ejecución del proyecto bajo ciertas condiciones representativas, con la intención de validar la funcionalidad y también de encontrar los alcances y límites del mismo. Primero se estudia el tiempo de respuesta de los algoritmos de manera individual, a continuación el rendimiento en la configuración mas simple, luego el sistema completo bajo condiciones varias, y por ultimo se analiza la mejora introducida por el uso de la cache. Para la obtención de los datos que corresponden al sistema completo se utilizaron de manera complementaria scripts programados en lenguaje Python y en Bash. Durante todo el capítulo se usara LLU como acrónimo de \textit{Linear Look Up} y UTL para referirse al \textit{Unibit Trie Lookup}. 
+En este capítulo se presentan los datos obtenidos de la ejecución del proyecto bajo ciertas condiciones representativas, con la intención de validar la funcionalidad y también de encontrar los alcances y límites del mismo. Primero se estudia el tiempo de respuesta de los algoritmos de manera individual, a continuación el rendimiento en la configuración mas simple, luego el sistema completo bajo condiciones varias, y por ultimo se analiza la mejora introducida por el uso de la cache. Para la obtención de los datos que corresponden al sistema completo se utilizaron de manera complementaria scripts programados en lenguaje Python y en Bash. Durante todo el capítulo se usa LLU como acrónimo de \textit{Linear Look Up} y UTL para referirse al \textit{Unibit Trie Lookup}. 
 
 
 \section{Stress de software}
 
-Con la intención de obtener un gráfico que represente el rendimiento de los dos algoritmos implementados, se mide el retardo de búsqueda en función de la posición de coincidencia en la tabla de enrutamiento. Se realizan las pruebas de manera independiente a la Interfaz de acceso a la cabecera con el fin de aislar los efectos del mismo. En el eje de las abscisas se expresa la ubicación del prefijo mas largo en una tabla de 100 elementos  y en las ordenadas se puede observar el tiempo de búsqueda en ciclos de reloj.
+Con la intención de obtener un gráfico que represente el rendimiento de los dos algoritmos implementados, se mide el retardo de búsqueda en función de la posición de coincidencia en la tabla de enrutamiento. Se realizan las pruebas de manera independiente a la Interfaz de acceso a la cabecera con el fin de aislar los efectos del mismo. En el eje de las abscisas se expresa la ubicación del prefijo más largo en una tabla de 100 elementos  y en las ordenadas se puede observar el tiempo de búsqueda en ciclos de reloj.
 
 \begin{figure}[h]
   \centering
@@ -13,6 +13,12 @@ Con la intención de obtener un gráfico que represente el rendimiento de los do
   \caption{Retardo de Búsqueda LLU vs UTL}
   \label{fig}
 \end{figure}
+
+Puede observarse que para LLU el tiempo es proporcional a la posición del prefijo dentro de la tabla. La misma se encuentra representada en una lista y por ello es necesario recorrerla hasta encontrar la coincidencia correspondiente. La cantidad de iteraciones depende del nodo en el cual se encuentre el prefijo. Para direcciones que se correspondan con la ruta por defecto se obtiene el mayor retardo, ya que la misma está almacenada en el último nodo.
+
+En el caso de UTL los bits que conforman el prefijo se almacenan en un árbol binario. La cantidad de iteraciones depende entonces de la longitud del prefijo. Para este caso en particular el mayor de ellos tiene una longitud de 24 bits, por lo tanto se requieren 24 iteraciones como máximo, sea cual sea el tamaño de la tabla de ruteo. La ruta por defecto (prefijo de longitud cero) tiene el menor retardo de búsqueda, ya que la misma está representada en el nodo raíz del árbol.
+
+De todo esto surge la conclusión inmediata de el tiempo medio de lookup tiene menos variabilidad en el caso UTL que en LLU. Si para este último se incrementa la cantidad de elementos en la tabla, dicho tiempo se verá incrementado también. Sin embtargo no se encontrarán variaciones en el tiempo medio para UTL ya que, como se mencionó anteriormente, este retardo depende de la longitud del prefijo y no del tamaño de la tabla.
 
 \newpage
 \section{Stress de hardware}
@@ -22,7 +28,7 @@ Con la intención de obtener un gráfico que represente el rendimiento de los do
   \caption{Caso Loopback para 1 y 15 palabras}
   \label{fig:loop}
 \end{figure}
-Se estudia en primer termino el caso loopback a los fines de encontrar los límites superiores del sistema determinado por la sección hardware. En este caso el software solo se limita a recibir los datos e inmediatamente después confirma el procesamiento, enviando un resultado predefinido de regreso al hardware. Se realizan las pruebas correspondientes para las dos versiones de Uplink.
+Se estudia en primer término el caso loopback a los fines de encontrar los límites superiores del sistema determinado por la sección hardware. En este caso el software solo se limita a recibir los datos e inmediatamente después confirma el procesamiento, enviando un resultado predefinido de regreso al hardware. Se realizan las pruebas correspondientes para las dos versiones de Uplink.
 En el eje de las abscisas de la figura \ref{fig:loop} es posible ver la cantidad de paquetes por segundo cuyo el origen corresponde a la mayor velocidad a la que es posible transmitir sin perdidas de datos. En las ordenadas se puede observar la cantidad de paquetes perdidos en valores porcentuales. Para obtener esta métrica se procesó una cantidad constante de paquetes, 9000, y luego se contrastó este valor con un contador global que el generador coloca en la ultima palabra de cada paquete. Así se calculó la cantidad paquetes perdidos, sobre la cantidad total de paquetes generados. Este mismo sistema es el usado en todos los gráficos posteriores.
 
 
