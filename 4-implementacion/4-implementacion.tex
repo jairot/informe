@@ -7,8 +7,9 @@ En este capitulo se describe la implementación con mayor detalle, haciendo inca
 
 
 Se implementaron 2 algoritmos de clasificación: Búsqueda lineal y Búsqueda en árbol unibit. El software utilizado para realizar las pruebas consistió en 2 proyectos por separado, uno para cada tipo de búsqueda en la tabla. El mismo fue desarrollado en lenguaje c++, por presentar éste ciertas facilidades para las implementaciones llevadas a cabo. Puntualmente se sacó provecho de un STL container (list) para implementar la búsqueda lineal. La característica utilizada en este caso fue el ordenamiento de la lista con sólo una llamada a función.
+\begin{comment}
 Para efectuar el intercambio de datos con el hardware se hizo uso de las macros IOWR e IORD, las cuales escriben y leen respectivamente los datos hacia/desde un componente conectado al bus Avalon MM. La razón de haber usado dichas macros yace en el hecho de que las mismas no son puestas en caché. Esta característica se torna indispensable en este diseño, ya que en el mismo no se puede leer un dato sin saber si está verdaderamente disponible en el bus.
-
+\end{comment}
 
 \subsection {Búsqueda lineal}
 
@@ -191,7 +192,7 @@ Cada vez que el procesador recibe una interrupción, lleva a cabo la lectura del
 En la función principal (main) existe una variable llamada \textit{flag2}. A ésta se le asigna el valor de \textit{flag}. Al producirse una interrupción, el valor de \textit{flag} se modifica y por lo tanto la condición de igualdad entre \textit{flag} y \textit{flag2} ya no se cumple. En ese momento se utilizan los valores almacenados en \textit{store\_array} para llevar a cabo el algoritmo de clasificación. Dichos valores a utilizar dependerán de la versión de Uplink que se esté utilizando:
 
 \begin{itemize}
-	\item Para la versión que envía quince palabras de 32 bits, es necesario esperar a la quinta palabra de 96 bits en \textit{store\_array} para poder localizar la dirección IP de destino, necesaria para realizar la clasificación. En la figura ~\ref{fig:ip15pal} se muestra cómo está localizada dicha dirección. 
+	\item Para la versión que envía quince palabras de 32 bits, es necesario esperar a la quinta iteración. Recordar que en cada iteración se envían 3 palabras de 32 bits. La dirección IP de destino se encontrará dividida entre la segunda y tercer palabra. El software la extrae y lleva a cabo la clasificación. En la figura ~\ref{fig:ip15pal} se muestra dónde está localizada dicha dirección en la última iteración.
 	\item Para la versión que envía sólo una palabra de 32 bits, el procedimiento es trivial ya que esa misma palabra es la dirección IP de destino.
 \end{itemize}
 
@@ -202,18 +203,18 @@ Una vez llevado a cabo el procedimiento de clasificación, \textit{flag2} se igu
 \begin{figure}[H]
   \centering
 	\includegraphics[scale=0.30]{4-implementacion/graf/ip15pal.eps}
-  \caption{Ubicación de la dirección IP dentro de una palabra de 96 bits en store\_array, para la versión de Uplink que envía 15 palabras de 32 bits}
+  \caption{Ubicación de la dirección IP en la quinta iteración, para la versión de Uplink que envía 15 palabras de 32 bits}
   \label{fig:ip15pal}
 \end{figure}
 
 \chapter{Integración}
 
-(completar aca cuando este terminado el capitulo)
+%(completar aca cuando este terminado el capitulo)
 \section{Plataforma}
 
-En este punto es necesario especificar la plataforma en la que se implementara el software y el hardware desarrollado para este proyecto integrador. El mundo de las FPGA de proposito general cuenta con dos grandes fabricantes que dominan buena parte de mercado, Altera y Xilinx, ambos aparte de proveer las FPGA sueltas para utilizarlas en circuitos preparados especificamente, distribuyen, terceros mediante, placas de desarrollo con muchas flexibilidad para la realización de proyectos de todo tipo y con varios perifericos basicos integrados. En el laboratorio donde se desarrolla este proyecto se cuenta con varias de estas placas, la mayoria de ellas con una FPGA de Altera. 
+En este punto es necesario especificar la plataforma en la que se implementará el software y el hardware desarrollado para este proyecto integrador. El mundo de las FPGA de propósito general cuenta con dos grandes fabricantes que dominan buena parte de mercado, Altera y Xilinx, ambos aparte de proveer las FPGA sueltas para utilizarlas en circuitos preparados específicamente, distribuyen, terceros mediante, placas de desarrollo con muchas flexibilidad para la realización de proyectos de todo tipo y con varios periféricos basicos integrados. En el laboratorio donde se desarrolla este proyecto se cuenta con varias de estas placas, la mayoría de ellas con una FPGA de Altera. 
 
-De entre todas las placas disponibles, se utilizará la Altera DE2, ya que esta cuentan con todos los perifericos necesarios para la correcta implementacion de este proyecto y ademas se tiene constancia de cierto exito en la implementación de sistemas embebidos en dicha placa. Las caracteristas de la misma son:
+De entre todas las placas disponibles, se utilizará la Altera DE2, ya que esta cuenta con todos los periféricos necesarios para la correcta implementación de este proyecto y además se tiene constancia de cierto éxito en la implementación de sistemas embebidos en dicha placa. Las caracteristas de la misma son:
 
 \begin{itemize}
 	\item FPGA: Cyclone II EP2C35F672C6

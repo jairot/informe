@@ -32,6 +32,20 @@
        inkscape:vp_y="0 : 1000 : 0"
        inkscape:vp_x="0 : 0.5 : 1"
        sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective2966"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective2966-3"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
   </defs>
   <sodipodi:namedview
      id="base"
@@ -41,12 +55,12 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.7"
-     inkscape:cx="2312.5458"
-     inkscape:cy="1279.5774"
+     inkscape:cx="1652.0831"
+     inkscape:cy="1048.1488"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="true"
-     inkscape:window-width="1366"
+     inkscape:window-width="1024"
      inkscape:window-height="693"
      inkscape:window-x="0"
      inkscape:window-y="24"
@@ -63,7 +77,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -1152,5 +1166,35 @@
          id="tspan3000"
          x="3070"
          y="-827.63782">31</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:32px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+       x="1320"
+       y="-687.63782"
+       id="text2954"><tspan
+         sodipodi:role="line"
+         id="tspan2956"
+         x="1320"
+         y="-687.63782">1º palabra </tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:32px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+       x="1320"
+       y="-487.63782"
+       id="text2954-8"><tspan
+         sodipodi:role="line"
+         id="tspan2956-1"
+         x="1320"
+         y="-487.63782">2º palabra </tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:32px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+       x="1320"
+       y="-267.63782"
+       id="text2954-0"><tspan
+         sodipodi:role="line"
+         id="tspan2956-4"
+         x="1320"
+         y="-267.63782">3º palabra </tspan></text>
   </g>
 </svg>
