@@ -233,6 +233,14 @@ Para una descripción más detallada, referirse al Apéndice A. A su vez, la FPG
 	\item Cantidad máxima de pines definidos por el usuario: 475
 \end{itemize}
 
+Una vez seleccionado el hardware, se debe elegir un microprocesador embebido que soporte tanto el hardware como el software que se desea implementar. Los microprocesadores embebidos en logica reprogramable pueden encontrarse en dos presentaciones, hardcores y softcores.
+
+Los harcores son microprocesadores embebidos de manera permanente en el silicio, esto permite alcanzar muy buenos rendimientos a expensas de aumentos en los costos de las FPGA que incluyen este tipo de core. En la actualidad los grandes fabricantes comenzaron a incluir una linea de dispositivos con un harcore embebido y se espera que esta tendencia continue. Lamentablemente la FPGA seleccionada para la presente implentacion no cuenta con estas prestaciones. 
+
+Los Softcores son microprocesadores que se encuentran definidos a nivel de descripcion de hardware y que pueden ser instanciados en la logica de proposito general de una FPGA, u otro dispositivo programable, mediante un proceso de sintesis. Es posible clasificar los softcores de acuerdo a si su origen esta en la comunidad de software libre, las empresas proveedoras de modulos IP o en los fabricantes de FPGA. 
+
+
+
 
 \subsection{Microprocesador NIOS II}
 El Nios II es un procesador RISC de 32 bits de propósito general que cuenta con las siguientes especificaciones:
