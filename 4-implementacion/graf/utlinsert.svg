@@ -148,13 +148,13 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.35355339"
-     inkscape:cx="425.30245"
-     inkscape:cy="449.70024"
+     inkscape:zoom="1"
+     inkscape:cx="318.11"
+     inkscape:cy="482.14239"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="true"
-     inkscape:window-width="1024"
+     inkscape:window-width="1366"
      inkscape:window-height="693"
      inkscape:window-x="0"
      inkscape:window-y="24"
@@ -173,7 +173,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -553,7 +553,7 @@
        y="353.04654"
        id="text4259"><tspan
          sodipodi:role="line"
-         id="tspan4261"></tspan></text>
+         id="tspan4261" /></text>
     <text
        xml:space="preserve"
        style="font-size:11px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
@@ -720,19 +720,19 @@
        id="path5865-4"
        inkscape:connector-type="polyline" />
     <path
-       style="fill:none;stroke:#000000;stroke-width:0.99724895px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="m 110,1402.3622 905,0"
-       id="path5889"
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 110,1402.3622 850,0"
+       id="path2933"
        inkscape:connector-type="polyline" />
     <path
-       style="fill:none;stroke:#000000;stroke-width:1.00271368px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="m 1016,1402.3622 4,-1110.00002"
-       id="path5893"
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 960,1402.3622 0,-870.00002"
+       id="path2937"
        inkscape:connector-type="polyline" />
     <path
-       style="fill:none;stroke:#000000;stroke-width:1.01770043000000010px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow1Lend-3-9)"
-       d="m 1020,292.36218 -580,0"
-       id="path5895"
+       style="fill:none;stroke:#000000;stroke-width:0.99518067px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow1Lend-3-9)"
+       d="m 960,532.36218 -515,0"
+       id="path2939"
        inkscape:connector-type="polyline" />
   </g>
 </svg>

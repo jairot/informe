@@ -38,7 +38,7 @@ En el eje de las abscisas de la figura \ref{fig:loop} es posible ver la cantidad
 En este ensayo se verifica el rendimiento del sistema implementado de manera completa. Se considera tres puntos en las curvas que indican los tiempos de procesamiento de los algoritmos: un punto mínimo que corresponde al menor tiempo, un punto promedio que ejercita 10 entradas equidistantes a lo largo de la tabla y un punto máximo que indica el peor tiempo de acceso posible para un algoritmo dado. 
 
 \subsubsection{a) Linear Lookup (LLU)}
-Se evalúa el desempeño para los casos en que se envían 1 y 5 palabras de 72 bits como ya se mencionó. Se observa que los valores de pérdida de paquetes para ambos casos difieren mucho para profundidades de búsqueda pequeña (figura \ref{figminllu}), pero convergen a medida que la profundidad de búsqueda aumenta (figuras \ref{figpromllu} y \ref{figmaxllu}). Este efecto era esperable ya que para accesos muy lentos a la tabla el retardo introducido por el hardware se vuelve despreciable.
+Se evalúa el desempeño para los casos en que se envían 1 y 15 palabras de 32 bits como ya se mencionó. Se observa que los valores de pérdida de paquetes para ambos casos difieren mucho para profundidades de búsqueda pequeña (figura \ref{figminllu}), pero convergen a medida que la profundidad de búsqueda aumenta (figuras \ref{figpromllu} y \ref{figmaxllu}). Este efecto era esperable ya que para accesos muy lentos a la tabla el retardo introducido por el hardware se vuelve despreciable.
 
 
 
@@ -99,11 +99,12 @@ Se presenta a modo de comparación un gráfico que contiene el mínimo, el máxi
   \label{figvs}
 \end{figure}
 
+En la figura \ref{figvs} puede apreciarse de una manera más global las diferencias en transmisión de paquetes sin pérdida. Como puede observarse, dichas diferencias se ven más acentuadas para los casos de LLU, debido a que este tipo de búsqueda es, como se mencionó anteriormente, altamente dependiente de la posición del prefijo dentro de la tabla de ruteo. No sucede esto con UTL ya que en este caso el tiempo de búsqueda está ligado a la longitud del prefijo y no a su posición dentro de la tabla.
 
-\newpage
+
 \section{Cache}
 
-La cache desarrollada para este proyecto está pensada a los fines de satisfacer la posibilidad de que varios paquetes consecutivos tengan una direcciones IP destino que pertenezcan a un grupo común de flujos. Con la implementación utilizada se logró un tiempo de acceso uniforme de alrededor de 1000 ciclos, tiempo varias veces menor que el mejor caso tanto en LLU (6400) como en UTL (5000). En el gráfico ~\ref{fig:cachecomp} se puede ver como el peor caso del algoritmo LLU soporta hasta 10000 paquetes por segundo sin cache y hasta 700000 paquetes por segundo con la cache. Aunque este ejemplo sólo analiza el caso en el que son todos hits, es posible ver la mejora sustancial que implica una cache. 
+La cache desarrollada para este proyecto está pensada a los fines de satisfacer la posibilidad de que varios paquetes consecutivos tengan una direcciones IP destino que pertenezcan a un grupo común de flujos. Con la implementación utilizada se logró un tiempo de acceso uniforme de alrededor de 1000 ciclos, tiempo varias veces menor que el mejor caso tanto en LLU (6400) como en UTL (5000). En el gráfico ~\ref{fig:cachecomp} se puede ver como el peor caso del algoritmo LLU soporta hasta 10000 paquetes por segundo sin cache y hasta 700000 paquetes por segundo con la cache. Aunque este ejemplo sólo analiza el caso en el que son todos hits, es posible ver la mejora sustancial que implica el uso de una memoria de este tipo. 
 
 \begin{figure}[!h]
   \centering

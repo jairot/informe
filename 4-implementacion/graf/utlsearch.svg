@@ -149,8 +149,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1"
-     inkscape:cx="959.59054"
-     inkscape:cy="-254.23725"
+     inkscape:cx="607.66546"
+     inkscape:cy="545.76275"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="true"
@@ -594,11 +594,6 @@
        id="path5865-4"
        inkscape:connector-type="polyline" />
     <path
-       style="fill:none;stroke:#000000;stroke-width:0.99449033px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="m 110,1402.3622 900,0"
-       id="path5889"
-       inkscape:connector-type="polyline" />
-    <path
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow1Lend-3-9)"
        d="m 300,452.36218 0,50"
        id="path6503"
@@ -625,13 +620,18 @@
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
     <path
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="m 1010,1402.3622 0,-930.00002"
-       id="path2913"
+       d="m 110,1402.3622 850,0"
+       id="path2914"
+       inkscape:connector-type="polyline" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;display:inline"
+       d="m 960,1402.3622 0,-930.00002"
+       id="path2916"
        inkscape:connector-type="polyline" />
     <path
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow1Lend-3-9)"
-       d="m 1010,472.36218 -710,0"
-       id="path2915"
+       d="m 960,472.36218 -660,0"
+       id="path2918"
        inkscape:connector-type="polyline" />
   </g>
 </svg>
