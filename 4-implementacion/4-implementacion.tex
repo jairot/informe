@@ -100,7 +100,7 @@ La inserción se ve representada en la figura~\ref{fig:utlinsertfc}
 
 \begin{figure}[H]
   \centering
-	\includegraphics[scale=0.40]{4-implementacion/graf/utlinsert.eps}
+	\includegraphics[scale=0.35]{4-implementacion/graf/utlinsert.eps}
   \caption{Diagrama de flujos para la inserción de valores en árbol unibit}
   \label{fig:utlinsertfc}
 \end{figure}
@@ -131,7 +131,7 @@ El procedimiento de lookup se ve representado en la figura~\ref{fig:utlsearch}
 
 \begin{figure}[H]
   \centering
-	\includegraphics[scale=0.40]{4-implementacion/graf/utlsearch.eps}
+	\includegraphics[scale=0.35]{4-implementacion/graf/utlsearch.eps}
   \caption{Diagrama de flujos para la búsqueda en árbol unibit}
   \label{fig:utlsearch}
 \end{figure}
@@ -309,6 +309,8 @@ Los recursos totales utilizados por el proyecto completo fueron:
 	\item PLLs: 1
 	\item Cantidad máxima de pines definidos por el usuario: 86
 \end{itemize}
+
+La cantidad de elementos lógicos mencionada representa aproximadamente un 15\% del total de los presentes en la FPGA. Los bits de RAM conforman un 58\% del total. Se utilizaron 2 de 35 multiplicadores embebidos y 1 de 4 PLLs. Por otra parte se requirió definir 86 pines de un total de 475 con los que cuenta el dispositivo. Por todo esto, la conclusión más notoria es que luego de implementar el diseño descripto en este trabajo queda aún un remanente importante de recursos, lo cual da la posibilidad futura de ampliar las funcionalidades del mismo. Un ejemplo de ello lo constituye implementar un esquema que haga uso de multicores.
 
 \begin{figure}[H]
   \centering
