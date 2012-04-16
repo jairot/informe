@@ -168,9 +168,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="7.919596"
-     inkscape:cx="542.31577"
-     inkscape:cy="929.20761"
+     inkscape:zoom="1.979899"
+     inkscape:cx="370.71449"
+     inkscape:cy="1012.3673"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="true"
@@ -327,6 +327,22 @@
        d="m 620,167.36218 40,0"
        id="path4742"
        inkscape:connector-type="polyline" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 546,165.36218 c -2,4 -2,4 -2,4"
+       id="path4941" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 436,165.36218 c -2,4 -2,4 -2,4"
+       id="path4941-3" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 491.40923,124.62607 c -2.81846,3.47222 -2.81846,3.47222 -2.81846,3.47222"
+       id="path4941-6" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 551.64912,111.85208 c -3.29824,3.0202 -3.29824,3.0202 -3.29824,3.0202"
+       id="path4941-5" />
     <rect
        style="fill:#cccccc;fill-opacity:1;stroke:#000000;stroke-opacity:1"
        id="rect2866"
@@ -336,19 +352,23 @@
        y="-52.637817" />
     <text
        xml:space="preserve"
-       style="font-size:16px;font-style:normal;font-weight:normal;text-align:center;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
-       x="487"
+       style="font-size:16px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+       x="475"
        y="-27.637817"
        id="text2853-8"><tspan
          sodipodi:role="line"
          id="tspan2855-50"
-         x="489.54688"
-         y="-27.637817">BUS de interconexión </tspan></text>
+         x="475"
+         y="-27.637817">BUS </tspan></text>
     <path
        style="fill:none;stroke:#000000;stroke-width:1.09544515999999992px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#Arrow1Mstart);marker-end:url(#Arrow1Mend)"
        d="m 490,42.362183 0,-60"
        id="path2893"
        inkscape:connector-type="polyline" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 491,6.3621826 C 488.18154,9.834403 488.18154,9.834403 488.18154,9.834403"
+       id="path4941-6-1" />
     <path
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;display:inline;marker-end:url(#Arrow1Mend)"
        d="m 295,172.36218 60,0"

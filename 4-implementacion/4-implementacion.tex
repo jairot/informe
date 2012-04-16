@@ -1,12 +1,12 @@
 \chapter{Software}
 
-En este capítulo se describe la implementación con mayor detalle, haciendo hincapié en los algoritmos de clasificación, en el hardware usado y presentando, además, algunos de los casos de prueba que fueron usados para validar el funcionamiento de este proyecto integrador.
+En este capítulo se describe la implementación software con mayor detalle, haciendo hincapié en los algoritmos de clasificación, en el soporte de hardware usado y presentando, además, algunos de los casos de prueba que fueron evaluados para validar el funcionamiento de este proyecto integrador.
 
 
 \section{Algoritmos de clasificación}
 
 
-Se implementaron 2 algoritmos de clasificación: Búsqueda lineal y Búsqueda en árbol unibit. El software utilizado para realizar las pruebas consistió en 2 proyectos por separado, uno para cada tipo de búsqueda en la tabla. El mismo fue desarrollado en lenguaje c++, por presentar éste ciertas facilidades para las implementaciones llevadas a cabo. Puntualmente se sacó provecho de un STL container (list) para implementar la búsqueda lineal. La característica utilizada en este caso fue el ordenamiento de la lista con sólo una llamada a función.
+Se implementaron 2 algoritmos de clasificación: Búsqueda lineal y Búsqueda en árbol unibit. El software utilizado para realizar las pruebas consistió en 2 proyectos por separado, uno para cada tipo de búsqueda. El mismo fue desarrollado en lenguaje c++, por presentar éste ciertas facilidades para las implementaciones llevadas a cabo. Puntualmente se sacó provecho de un STL container (list) para implementar la búsqueda lineal. La característica utilizada en este caso fue el ordenamiento de la lista con sólo una llamada a función.
 \begin{comment}
 Para efectuar el intercambio de datos con el hardware se hizo uso de las macros IOWR e IORD, las cuales escriben y leen respectivamente los datos hacia/desde un componente conectado al bus Avalon MM. La razón de haber usado dichas macros yace en el hecho de que las mismas no son puestas en caché. Esta característica se torna indispensable en este diseño, ya que en el mismo no se puede leer un dato sin saber si está verdaderamente disponible en el bus.
 \end{comment}
@@ -16,8 +16,8 @@ Para efectuar el intercambio de datos con el hardware se hizo uso de las macros 
 Se implementaron 2 clases. 
 
 \begin{itemize}
-	\item \textit{iproute.h}: define el contenido de cada nodo de la lista (entrada en la tabla de ruteo).
-	\item \textit{iplookup.h} -  contiene la lista que constituye la tabla de ruteo en sí, así como también las funciones de inserción y búsqueda. También contiene la función que crea una tabla de ruteo de 100 entradas.
+	\item \textit{iproute}: define el contenido de cada nodo de la lista (entrada en la tabla de ruteo).
+	\item \textit{iplookup} -  contiene la lista que constituye la tabla de ruteo en sí, así como también las funciones de inserción y búsqueda. También contiene la función que crea una tabla de ruteo de 100 entradas.
 \end{itemize}
 
 Los nodos de la lista contienen 3 campos:
@@ -28,16 +28,16 @@ Los nodos de la lista contienen 3 campos:
 	\item Identificador de decisión (entero de 32 bit con signo)
 \end{itemize}
 
-Como se le dio prioridad a los prefijos de red más largos, se debió sobrecargar el operador de comparación (\textgreater) para que la función de ordenamiento pudiese ordenar en base a la longitud de máscara, de manera que los nodos que contuviesen valores de máscara más grandes quedaran en las primeras posiciones de la lista. El nodo que representase a la ruta por defecto (que tiene una máscara de longitud cero) queda de esta forma en la última posición.
+Como en IP lookup se le da prioridad a los prefijos de red más largos, se debió sobrecargar el operador de comparación (\textgreater) para que la función de ordenamiento pudiese ordenar en base a la longitud de máscara, de manera que los nodos que contuviesen valores de máscara más grandes quedaran en las primeras posiciones de la lista. El nodo que representa la ruta por defecto (que tiene una máscara de longitud cero) queda de esta forma en la última posición.
 
 \subsubsection{Inserción de nuevas entradas}
 
-La función de inserción toma como parámetros una dirección, una máscara y un identificador de decisión. Luego instancia una entrada con dichos elementos y la inserta en la lista. Este procedimiento se encuentra representado en la figura ~\ref{fig:lluinsert}
+La función de inserción toma como parámetros una dirección, una máscara y un identificador de decisión. Luego instancia una entrada con dichos elementos y la inserta en la lista. Este procedimiento se encuentra representado en la figura ~\ref{fig:lluinsert}.
 
 \begin{figure}[H]
   \centering
-	\includegraphics[scale=0.50]{4-implementacion/graf/lluinsert.eps}
-  \caption{Diagrama de flujos para la inserción de nuevos valores en LLU}
+	\includegraphics[scale=0.5]{4-implementacion/graf/lluinsert.eps}
+  \caption{Diagrama de flujo para la inserción de nuevos valores en LLU}
   \label{fig:lluinsert}
 \end{figure}
 
@@ -47,15 +47,15 @@ Cuando la función encargada del lookup recibe una dirección IP de destino, rea
 
 \begin{itemize}
 	\item Coloca un iterador al comienzo de la lista, con el fin de comenzar el recorrido por la misma.
-	\item Realiza un AND con el valor de máscara del nodo que está siendo apuntado. Si el resultado de la operación es igual al valor de dirección de red de dicho nodo, entonces se retorna con el valor identificador de decisión, ya que ese es el prefijo más largo según el orden establecido. En otro caso, continúa la búsqueda en el siguiente nodo.
+	\item Realiza un AND con el valor de máscara del nodo que está siendo apuntado. Si el resultado de la operación es igual al valor de dirección de red de dicho nodo, entonces se retorna con el valor del identificador de decisión, ya que ése es el prefijo más largo según el orden establecido. En otro caso, continúa la búsqueda en el siguiente nodo.
 \end{itemize}
 
-Dichos pasos pueden verse de manera grafica en la figura~\ref{fig:llusearch}
+Dichos pasos pueden verse de manera gráfica en la figura~\ref{fig:llusearch}
 
 \begin{figure}[H]
   \centering
-	\includegraphics[scale=0.50]{4-implementacion/graf/llusearch.eps}
-  \caption{Diagrama de flujos para la búsqueda LLU}
+	\includegraphics[scale=0.4]{4-implementacion/graf/llusearch.eps}
+  \caption{Diagrama de flujo para la búsqueda LLU}
   \label{fig:llusearch}
 \end{figure}
 
@@ -64,22 +64,22 @@ Dichos pasos pueden verse de manera grafica en la figura~\ref{fig:llusearch}
 Se implementaron 2 clases. 
 
 \begin{itemize}
-	\item \textit{trienode.h}: define las características de cada nodo del árbol.
-	\item \textit{trie.h}: contiene el árbol unibit, como así también las funciones de búsqueda e inserción de nodos. También contiene una función para la creación de la tabla de ruteo de 100 valores.
+	\item \textit{trienode}: define las características de cada nodo del árbol.
+	\item \textit{trie}: contiene el árbol unibit, como así también las funciones de búsqueda e inserción de nodos. También contiene una función para la creación de una tabla de ruteo de 100 valores.
 \end{itemize}
 
 
 En este contexto, pueden existir 2 tipos de nodo:
 
 \begin{itemize}
-	\item Común: no está asociado a una decisión. Es decir, sólo sirve como "nodo intermedio" en el recorrido por la estructura del árbol.
-	\item Decisión: contiene un valor que identifica a la decisión a tomar. En este caso, la interfaz por donde se direcciona el paquete.
+	\item \textit{Común}: no está asociado a una decisión. Es decir, sólo sirve como "nodo intermedio" en el recorrido por la estructura del árbol.
+	\item \textit{Decisión}: contiene un valor que identifica a la decisión a tomar. En este caso, la interfaz por donde se direcciona el paquete.
 \end{itemize}
 
 Cada nodo cuenta con los siguientes campos:
 \begin{itemize}
-	\item gw: es un identificador de la decisión a tomar. En los nodos no asociados a una decisión (nodos comunes), tiene el valor estipulado en la macro NONE.
-    \item zero / one: son punteros a nodo, asociados a los valores de bit 0/1 del prefijo que se esté leyendo.
+	\item \textit{gw}: es un identificador de la decisión a tomar. En los nodos no asociados a una decisión (nodos comunes), tiene el valor estipulado en la macro NONE.
+    \item \textit{zero / one}: son punteros a nodo, asociados a los valores de bit 0/1 del prefijo que se esté leyendo.
 
 \end{itemize}
 
@@ -101,49 +101,49 @@ La inserción se ve representada en la figura~\ref{fig:utlinsertfc}
 \begin{figure}[H]
   \centering
 	\includegraphics[scale=0.35]{4-implementacion/graf/utlinsert.eps}
-  \caption{Diagrama de flujos para la inserción de valores en árbol unibit}
+  \caption{Diagrama de flujo para la inserción de valores en árbol unibit}
   \label{fig:utlinsertfc}
 \end{figure}
 
 
 \subsubsection{Búsqueda}
 
-El algoritmo de búsqueda toma como entrada la dirección IP de destino del paquete a clasificar. Luego de ello realiza las siguientes acciones:
+El algoritmo de búsqueda toma como entrada la dirección IP de destino del paquete a clasificar. En base a ésta realiza las siguientes acciones:
 \begin{itemize}
 	\item Hace un testeo bit a bit de dicha dirección, partiendo con un puntero de recorrido desde el nodo raíz.
-	\item Si el bit de la dirección es 0 y el puntero zero está apuntando hacia algún nodo, el puntero de recorrido se mueve al nodo apuntado por el puntero zero.
-	\item En caso contrario, se mueve al nodo apuntado por el puntero one (En caso de que exista alguno).
+	\item Si el bit de la dirección es 0 y el puntero \textit{zero} está apuntando hacia algún nodo, el puntero de recorrido se mueve al nodo apuntado por el puntero \textit{zero}.
+	\item En caso contrario, se mueve al nodo apuntado por el puntero \textit{one} (en caso de que exista alguno).
 \end{itemize}
 
 Esto se repite nodo a nodo, hasta que ocurre alguna de las siguientes situaciones:
 
 \begin{itemize}
-    	\item El puntero de recorrido queda varado en un nodo decisión, con lo cual se retorna el valor de gw.
+    	\item El puntero de recorrido queda varado en un nodo decisión, con lo cual se retorna el valor de \textit{gw} almacenado en este nodo.
     	\item El puntero de recorrido queda varado en un nodo común. 
 \end{itemize}
 
 
-Contemplando esta última posibilidad, el algoritmo hace que en cada nodo se chequee si se trata de un nodo decisión. En dicho caso, se almacena el campo gw en una variable y se continua el recorrido. Si se da un caso en el cual el nodo de recorrido queda apuntando a un nodo común y luego de testear un bit se determina que el mismo no tiene un nodo asociado (es decir, que alguno de los punteros zero / one esté en NULL) la función retorna la variable anteriormente mencionada. 
+Contemplando esta última posibilidad, el algoritmo comprueba en si se trata de un nodo decisión. En dicho caso, se almacena el campo \textit{gw} en una variable y se continúa el recorrido. Si se da un caso en el cual el nodo de recorrido queda apuntando a un nodo común y luego de testear un bit se determina que el mismo no tiene un nodo asociado (es decir, que alguno de los punteros zero / one esté en NULL) la función retorna la variable anteriormente mencionada, correspondiente al último valor válido de \textit{gw}.
 
 Cabe mencionar también que la ruta por defecto se inserta en el nodo raíz del árbol.
 
-El procedimiento de lookup se ve representado en la figura~\ref{fig:utlsearch}
+El procedimiento de lookup se ve representado en la figura~\ref{fig:utlsearch}.
 
 \begin{figure}[H]
   \centering
-	\includegraphics[scale=0.35]{4-implementacion/graf/utlsearch.eps}
-  \caption{Diagrama de flujos para la búsqueda en árbol unibit}
+	\includegraphics[scale=0.33]{4-implementacion/graf/utlsearch.eps}
+  \caption{Diagrama de flujo para la búsqueda en árbol unibit}
   \label{fig:utlsearch}
 \end{figure}
 
-\begin{figure}[H]
+\begin{figure}[!h]
   \centering
-	\includegraphics[scale=0.50]{4-implementacion/graf/lluinsert09.eps}
+	\includegraphics[scale=0.33]{4-implementacion/graf/lluinsert09.eps}
   \caption{Ejemplo de inserción de prefijos en árbol unibit}
   \label{fig:lluinsert}
 \end{figure}
 
-En la figura ~\ref{fig:lluinsert} se encuentra ejemplificada la inserción de 3 prefijos más la ruta por defecto. 
+En la figura ~\ref{fig:lluinsert} se encuentra ejemplificada la inserción de 3 prefijos más la ruta por defecto, en un árbol inicialmente vacío. 
 
 Comenzando por el nodo raíz, se inserta el prefijo 1100*. Para ello es necesaria la creación de 4 nodos hijos, uno por cada bit del prefijo. 
 
@@ -153,26 +153,26 @@ Luego se inserta el prefijo 11*. Como anteriormente se había insertado el 1100*
 
 Por último en el nodo raíz se inserta la ruta por defecto (S4 en este ejemplo).
 
-Tomando como ejemplo alguna dirección IP que comienza con 1100, puede verse que la búsqueda tomará el camino \textit{Raíz - one - one - zero - zero} y culminará en el nodo cuyo identificador de decisión es S1. 
+Tomando como ejemplo una dirección IP que comienza con 1100, puede verse que la búsqueda tomará el camino \textit{Raíz - one - one - zero - zero} y culminará en el nodo cuyo identificador de decisión es S1. 
 
-Vale la pena considerar qué sucede si la dirección IP comienza con 1101. En este caso el camino que seguirá la búsqueda es \textit{Raíz - one - one - zero} y el puntero de recorrido quedará varado allí, ya que no existe en dicho punto un nodo asociado al puntero one. Recuérdese que en cada iteración, el algoritmo de búsqueda chequea si el nodo apuntado por el puntero de recorrido es decisión. Para este caso puede verse que en la segunda iteración (cuando se ha recorrido \textit{Raíz - one - one}) el algoritmo se encuentra parado en un nodo decisión y por lo tanto almacena el valor contenido en dicho nodo (S3) y procede a continuar. Cuando se encuentre varado en el próximo, lo que hará es retornar con el valor mencionado anteriormente. 
+Vale la pena considerar, por otra parte, qué sucede si la dirección IP comienza, por ejemplo, con 1101. En este caso el camino que seguirá la búsqueda es \textit{Raíz - one - one - zero} y el puntero de recorrido quedará varado allí, ya que no existe en dicho punto un nodo asociado al puntero one. Recuérdese que en cada iteración, el algoritmo de búsqueda chequea si el nodo apuntado por el puntero de recorrido es decisión. Para este caso puede verse que en la segunda iteración (cuando se ha recorrido \textit{Raíz - one - one}) el algoritmo se encuentra en un nodo decisión; por lo tanto almacena el valor contenido en dicho nodo (S3) y procede a continuar. Cuando se encuentre varado en el próximo nodo, lo que hará es retornar con el valor mencionado anteriormente. 
 
-\subsection {Cache}
+\subsection {Caché}
 
-Se implementó una cache directa que consta de una tabla hash de 16 entradas, aunque este tamaño puede ser modificado mediante la macro CACHE\_SIZE. Las colisiones se resuelven por reemplazo directo. La misma fue testeada con ambos algoritmos mencionados anteriormente. Para ello, se agregó una lógica adicional que consistió en:
+Se implementó una caché directa que consta de una tabla hash de 16 entradas, aunque este tamaño puede ser modificado mediante la macro CACHE\_SIZE. Las colisiones se resuelven por reemplazo directo. La misma fue testeada con ambos algoritmos mencionados anteriormente. Para ello, se agregó una lógica adicional que consistió en:
 
 \begin{itemize}
 	\item Al tomar una dirección IP, chequear primero si el valor de decisión se encuentra en caché.
 	\item Si está, retornar dicho valor.
-	\item En otro caso, efectuar el lookup y almacenar el valor de decisión en caché. Para dicho almacenamiento, se efectúa un hash en la dirección IP, que consiste en calcular el resto de la división entre dicha dirección y el valor de CACHE\_SIZE. El resultado es utilizado como índice para el almacenamiento en la tabla.
+	\item En otro caso, efectuar el lookup y almacenar el valor de decisión en caché. Para dicho almacenamiento, se efectúa un hash de la dirección IP, que consiste en calcular el resto de la división entre dicha dirección y el valor de CACHE\_SIZE. El resultado es utilizado como índice para el almacenamiento en la tabla.
 \end{itemize}
 
-Para evitar el overhead introducido por el uso de clases, se optó por una implementación basada en una estructura, a la cual se denominó \textit{HashEntry}. La misma cuenta con los siguientes campos:
+Para evitar el overhead introducido por el uso de clases, en este caso se optó por una implementación basada en una estructura, a la cual se denominó \textit{HashEntry}. La misma cuenta con los siguientes campos:
 
 \begin{itemize}
-	\item address: Dirección IP almacenada.
-	\item gw: Identificador de decisión.
-	\item empty: Indica si la entrada de tabla está vacía.
+	\item \textit{address}: Dirección IP almacenada.
+	\item \textit{gw}: Identificador de decisión.
+	\item \textit{empty}: Indica si la entrada de tabla está vacía.
 \end{itemize}
 
 \section{Rutina de servicio de interrupción (Interrupt service routine, ISR)}
@@ -185,14 +185,14 @@ Como se mencionó anteriormente, el módulo Uplink envía interrupciones al proc
 	\item \textit{flag}: Es un indicador que se incrementa cada vez que se produce una interrupción.
 \end{itemize}
 
-\textit{store\_array} está implementado como una matriz de enteros, y tiene 3 columnas. De esta manera, cada fila cuenta con con 96 bits de los cuales se utilizan 72 de ellos para almacenar las palabras enviadas por Uplink.
+\textit{store\_array} está implementado como una matriz de enteros, y tiene 3 columnas. De esta manera, cada fila cuenta con con 96 bits de los cuales se utilizan 72 para almacenar las palabras enviadas por Uplink. Recuérdese que la arquitectura hardware utiliza en cada palabra 64 bits de datos y 8 de control.
 
 Cada vez que el procesador recibe una interrupción, lleva a cabo la lectura del valor recibido y la almacena en \textit{store\_array}, en el lugar indicado por \textit{i}. Luego el subíndice se incrementa, al igual que \textit{flag}.
 
 En la función principal (main) existe una variable llamada \textit{flag2}. A ésta se le asigna el valor de \textit{flag}. Al producirse una interrupción, el valor de \textit{flag} se modifica y por lo tanto la condición de igualdad entre \textit{flag} y \textit{flag2} ya no se cumple. En ese momento se utilizan los valores almacenados en \textit{store\_array} para llevar a cabo el algoritmo de clasificación. Dichos valores a utilizar dependerán de la versión de Uplink que se esté utilizando:
 
 \begin{itemize}
-	\item Para la versión que envía quince palabras de 32 bits, es necesario esperar a la quinta iteración. Recordar que en cada iteración se envían 3 palabras de 32 bits. La dirección IP de destino se encontrará dividida entre la segunda y tercer palabra. El software la extrae y lleva a cabo la clasificación. En la figura ~\ref{fig:ip15pal} se muestra dónde está localizada dicha dirección en la última iteración.
+	\item Para la versión que envía quince palabras de 32 bits, es necesario esperar a la quinta iteración. Recordar que en cada iteración se envían 3 palabras de 32 bits. La dirección IP de destino se encuentra distribuida entre la segunda y tercera palabras de la última iteración. El software la extrae para llevar a cabo la clasificación. En la figura ~\ref{fig:ip15pal} se muestra dónde está localizada dicha dirección en la última iteración.
 	\item Para la versión que envía sólo una palabra de 32 bits, el procedimiento es trivial ya que esa misma palabra es la dirección IP de destino.
 \end{itemize}
 
@@ -202,7 +202,7 @@ Una vez llevado a cabo el procedimiento de clasificación, \textit{flag2} se igu
 
 \begin{figure}[H]
   \centering
-	\includegraphics[scale=0.30]{4-implementacion/graf/ip15pal.eps}
+	\includegraphics[scale=0.25]{4-implementacion/graf/ip15pal.eps}
   \caption{Ubicación de la dirección IP en la quinta iteración, para la versión de Uplink que envía 15 palabras de 32 bits}
   \label{fig:ip15pal}
 \end{figure}

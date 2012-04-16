@@ -150,7 +150,7 @@
      inkscape:pageshadow="2"
      inkscape:zoom="1"
      inkscape:cx="318.11"
-     inkscape:cy="482.14239"
+     inkscape:cy="-77.85761"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="true"
@@ -173,7 +173,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -556,24 +556,24 @@
          id="tspan4261" /></text>
     <text
        xml:space="preserve"
-       style="font-size:11px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
-       x="322.85583"
+       style="font-size:20px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+       x="328.85583"
        y="485.51602"
        id="text4263"><tspan
          sodipodi:role="line"
          id="tspan4265"
-         x="322.85583"
+         x="328.85583"
          y="485.51602">SI</tspan></text>
     <text
        xml:space="preserve"
-       style="font-size:11px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
-       x="225.5062"
-       y="411.57959"
+       style="font-size:20px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+       x="213.5062"
+       y="407.57959"
        id="text4267"><tspan
          sodipodi:role="line"
          id="tspan4269"
-         x="225.5062"
-         y="411.57959">NO</tspan></text>
+         x="213.5062"
+         y="407.57959">NO</tspan></text>
     <path
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow1Lend-3)"
        d="m -85,572.36218 0,80"
@@ -638,10 +638,11 @@
          sodipodi:role="line"
          id="tspan5620"
          x="366.28131"
-         y="644.008">SI</tspan></text>
+         y="644.008"
+         style="font-size:20">SI</tspan></text>
     <text
        xml:space="preserve"
-       style="font-size:11px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+       style="font-size:20;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
        x="218.14244"
        y="644.11896"
        id="text5622"><tspan
@@ -651,7 +652,7 @@
          y="644.11896">NO</tspan></text>
     <text
        xml:space="preserve"
-       style="font-size:11px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+       style="font-size:20;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
        x="-45.254833"
        y="849.77606"
        id="text5626"><tspan
@@ -661,7 +662,7 @@
          y="849.77606">NO</tspan></text>
     <text
        xml:space="preserve"
-       style="font-size:11px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+       style="font-size:20;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
        x="126.57211"
        y="987.66193"
        id="text5630"><tspan
@@ -671,7 +672,7 @@
          y="987.66193">SI</tspan></text>
     <text
        xml:space="preserve"
-       style="font-size:11px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+       style="font-size:20;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
        x="619.07196"
        y="851.19031"
        id="text5634"><tspan
@@ -681,7 +682,7 @@
          y="851.19031">NO</tspan></text>
     <text
        xml:space="preserve"
-       style="font-size:11px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+       style="font-size:20;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
        x="505.22778"
        y="984.1264"
        id="text5638"><tspan

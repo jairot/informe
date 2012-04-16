@@ -1,6 +1,6 @@
 \chapter{Sistema}
 
-Entre de dispositivos que realizan la clasificación de paquetes se encuentran soluciones implementadas de manera completa en hardware, FPGA, ASIC u otra plataforma, como por ejemplo NetFPGA\cite{netfpga}, o implementadas, procesador de propósito general mediante, completamente en software, que es el caso de Click\cite{click}. La intención de este proyecto integrador, como puede verse de manera gráfica en la figura~\ref{fig:hwsw}, es complementar las ventajas de ambos mundos maximizándolas y reduciendo así las desventajas de utilizar el hardware o el software por separado. 
+Entre los dispositivos utilizados para realizar la clasificación de paquetes se encuentran soluciones implementadas de manera completa en hardware (FPGA, ASIC u otra plataforma, como por ejemplo NetFPGA\cite{netfpga}), o implementadas completamente en software mediante un procesador de propósito general, que es el caso de Click\cite{click}. La intención de este proyecto integrador, como puede verse de manera gráfica en la figura~\ref{fig:hwsw}, es complementar las ventajas de ambos mundos maximizándolas y reduciendo así las desventajas de utilizar el hardware o el software por separado. 
 
 
  \begin{figure}[h]
@@ -13,7 +13,7 @@ Entre de dispositivos que realizan la clasificación de paquetes se encuentran s
 
 \section{Solución propuesta}
 
-Para el problema planteado en el capítulo anterior se propone, de manera funcional, la siguiente solución: 
+Para el problema de clasificación planteado en el capítulo anterior se propone, de manera funcional, la siguiente solución: 
 
     \begin{enumerate}
   	\item Un flujo de paquetes llega a la interfaz de red del dispositivo y es necesario clasificarlo en distintos flujos para que sea redireccionado.
@@ -25,7 +25,7 @@ Para el problema planteado en el capítulo anterior se propone, de manera funcio
     \end{enumerate}
 
 \section{Esquema propuesto}
-Para implementar la solución se propone el hardware descripto en el diagrama de la figura~\ref{fig:solucion}
+Para implementar la solución se propone el hardware descripto en el diagrama de la figura~\ref{fig:solucion}.
  \begin{figure}[h]
   \centering
 	 \includegraphics[width=0.6\textwidth]{2-sistema/graf/solucion.eps}
@@ -36,7 +36,7 @@ Para implementar la solución se propone el hardware descripto en el diagrama de
 De los módulos mencionados, es necesario poner especial atención en el diseño de la interfaz de acceso a la cabecera.
 
 \subsection{Interfaz de acceso a la cabecera}
-Este módulo tiene como función acceder a los campos que conforman la cabecera IP en los paquetes entrantes. La información recolectada es enviada al microprocesador para que este implemente el software de clasificación.
+Este módulo tiene como función acceder a los campos que conforman la cabecera IP en los paquetes entrantes. En este caso el hardware realiza esencialmente funciones de transferencia de paquetes. La información recolectada es enviada al microprocesador para que éste implemente el software de clasificación.
 
 \newpage
 
@@ -53,15 +53,15 @@ Este módulo tiene como función acceder a los campos que conforman la cabecera 
 
 A continuación se describe funcionalmente cada uno de los bloques que conforma la interfaz, ilustrada en la figura~\ref{fig:inter}
 \subsubsection{Cola de espera FIFO\textit{(First in First out)}}
-A la entrada del módulo se encuentra una FIFO que se encarga de almacenar y poner a disposición en orden de llegada los datos que emite el generador. Además, para poder manipular los paquetes, la FIFO debe almacenar toda la información de control disponible a su entrada.
-Este módulo también debe permitir la parametrización en la mayor cantidad de sentidos posibles, especialmente se desea poder configurar la cantidad de palabras a almacenar, ya que la memoria dentro de un FPGA es un recurso crítico y se desea encontrar la mejor relación entre rendimiento y consumo de recursos.
+A la entrada del módulo se encuentra una FIFO que se encarga de almacenar y poner a disposición en orden de llegada los datos de entrada, que pueden venir de un generador o de otra etapa de procesamiento, como ser la que se lleva a cabo en una interfaz de red. Además, para poder manipular los paquetes, la FIFO debe almacenar toda la información de control disponible a su entrada.
+Este módulo también debe permitir la parametrización en la mayor cantidad de sentidos posibles, especialmente se desea poder configurar la cantidad de palabras a almacenar, ya que la memoria dentro de un FPGA es un recurso crítico y se debe encontrar la mejor relación entre rendimiento y consumo de recursos.
 
 \subsubsection{Delay Buffer}
 Este componente será el encargado de ir tomando los datos desde la FIFO y de detectar el inicio y finalización de un paquete. Además deberá mantener almacenada la cabecera del paquete mientras el software toma una decisión. En este módulo es deseable configurar la cantidad de palabras que se considerarán parte de la cabecera y que serán enviadas al microprocesador.
 
 \subsubsection{Uplink}
-Este módulo es el encargado de gestionar las transacciones con el microprocesador. Para ello debe entender las señales que utiliza el bus y poder interrumpir al procesador para enviarle los datos cuando estos estén disponibles. Asimismo cuando el procesador responde con el resultado de la clasificación, Uplink lo almacena y lo envía al módulo Write output para que este escriba el resultado de la clasificación en la etiqueta anexa al paquete correspondiente.
-Eventualmente se desarrollaran varias versiones de este módulo, que envíen toda la cabecera o una parte selectiva de ella buscando optimizar el rendimiento.
+Este módulo es el encargado de gestionar las transacciones con el microprocesador. Para ello debe entender las señales que utiliza el bus y poder interrumpir al procesador para enviarle los datos cuando estos estén disponibles. Asimismo cuando el procesador responde con el resultado de la clasificación, Uplink lo almacena y lo envía al módulo Write Output para que éste escriba el resultado de la clasificación en la etiqueta anexa al paquete correspondiente.
+Eventualmente se desarrollarán varias versiones de este módulo, que envíen toda la cabecera o una parte selectiva de ella buscando optimizar el rendimiento.
 
 \subsubsection{Write Output}
 Para finalizar este módulo toma la salida de Delay Buffer y escribe el resultado que le envía Uplink en la etiqueta que se encuentra anexa a cada una de las palabras del paquete.
@@ -85,7 +85,7 @@ Para optimizar este esquema, los prefijos se almacenan en orden decreciente de l
 \newpage
 \subsection {Unibit tries}
 
-Un Unibit trie es un árbol en el cual cada nodo contiene un \textit{puntero-cero }y un \textit{puntero-uno}. Partiendo del nodo raíz, todos los prefijos que comienzan con 0 son almacenados en el subárbol apuntado por el puntero-cero y aquellos que comienzan con 1 se almacenan en el subárbol apuntado por el puntero-uno.Cada subárbol es construido recursivamente de manera similar usando los bits restantes de cada uno de los prefijos.
+Un Unibit trie es un árbol en el cual cada nodo contiene un \textit{puntero-cero }y un \textit{puntero-uno}. Partiendo del nodo raíz, todos los prefijos que comienzan con 0 son almacenados en el subárbol apuntado por el puntero-cero y aquellos que comienzan con 1 se almacenan en el subárbol apuntado por el puntero-uno. Cada subárbol es construido recursivamente de manera similar usando los bits restantes de cada uno de los prefijos.
 Considerar la siguiente tabla de enrutamiento:
 \begin{table}[h]
 \begin{center}
