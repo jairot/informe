@@ -1,8 +1,8 @@
 \chapter{Hardware}
 
-En este capitulo se dará cuenta de la arquitectura digital de los módulos implementados de manera exclusiva para este trabajo. Pero antes de eso, es pertinente especificar el formato que tienen los datos en su paso por la interfaz de acceso a la cabecera.
+En este capítulo se dará cuenta de la arquitectura digital de los módulos implementados de manera exclusiva para este trabajo. Antes de esto, es pertinente especificar el formato que tienen los datos en su paso por la interfaz de acceso a la cabecera.
 
-Todas las palabras de cada paquete que ingresa a la interfaz de acceso a la cabecera, lleva anexa un campo de 8 bits que contienen el valor de los campos de control que corresponden a esa palabra y además 3 bits libres en donde se escribirá la etiqueta con los resultados de lo procesado en el software. En la figura \ref{fig:datocontrol}  es posible ver el valor de cada uno de estos campos.
+Todas las palabras de cada paquete que ingresa a la interfaz de acceso a la cabecera, llevan anexado un campo de 8 bits que contiene el valor de los campos de control que corresponden a esa palabra y además 3 bits libres en donde se escribirá la etiqueta con los resultados de lo procesado en el software. En la figura \ref{fig:datocontrol}  es posible ver el significado de cada uno de estos campos.
 
 \begin{figure}[H]
   \centering
@@ -21,16 +21,13 @@ Para ilustrar el funcionamiento del sistema se puede observar en la figura~\ref{
 \end{figure}
 
 \section{Generador}
-
-Con la intención de simplificar el desarrollo y el futuro debugging del proyecto se reemplazo la interfaz de red por un generador de paquetes.
-
+A los fines de simplificar el desarrollo y el futuro debugging del proyecto, se reemplazó la interfaz de red por un generador de paquetes.
 \begin{figure}[H]
   \centering
 	\includegraphics[scale=0.50]{3-arquitectura/graf/bloqgenerador.eps}
   \caption{módulo generador de Paquetes}
   \label{fig:gen}
 \end{figure}
-
 
 El mismo cuenta con las siguientes capacidades:
 
@@ -47,27 +44,18 @@ Este módulo es una versión adaptada y mejorada del generador usado en otro pro
 En base a la figura~\ref{fig:inter}, se pasará a describir de manera detallada la estructura y el funcionamiento de cada uno de los módulos que componen la Interfaz de Acceso a la Cabecera. 
 
 \subsection{FIFO}
-Se trata de una FIFO estándar, basada en un código disponible en OpenCores\cite{fifo}, que soporta palabras de 72 bits, 64 del paquete, 5 de control y 3 del identificador de interfaz de salida. Como capacidad extra se le agregó un mecanismo para controlar la integridad de los paquetes que ingresan, aceptando solo los que pueden ser almacenados completamente en la memoria interna. 
+Se trata de una FIFO estándar, basada en un código disponible en OpenCores\cite{fifo}, que soporta palabras de 72 bits, 64 del paquete, 5 de control y 3 del identificador de interfaz de salida. Como capacidad extra se le agregó un mecanismo para controlar la integridad de los paquetes que ingresan, aceptando solo los que pueden ser almacenados completamente en la memoria interna. Se puede ver la interfaz general de este modulo en la figura \ref{fig:fifo1}
 
 \begin{figure}[H]
   \centering
 	\includegraphics[scale=0.50]{3-arquitectura/graf/bloqfifo.eps}
   \caption{FIFO}
-  \label{fig:gen}
+  \label{fig:fifo1}
 \end{figure}
 
 \subsection{Delay Buffer}
-Este módulo fue desarrollado íntegramente para este proyecto y está compuesto por un registro de desplazamiento interno, que cuenta, en esta configuración, con 8 posiciones de 72 bits cada una. Su función principal es detectar la llegada de un paquete a la FIFO, cargar 5 palabras correspondientes a la cabecera, y enviar una copia a Uplink. Luego, cuando el microprocesador termina su procesamiento, continua leyendo la FIFO y transfiere el resto del paquete. Este módulo permite, además, desacoplar el flujo de datos de la comunicación con el Microprocesador.
-
-La implementación de este módulo está formada por la máquina de estados que se muestra en la figura~\ref{fig:dbstate}.
-
-\begin{figure}[H]
-  \centering
-	\includegraphics[scale=0.50]{3-arquitectura/graf/estdelaycompleto.eps}
-  \caption{Máquina de estados de Delay Buffer}
-  \label{fig:dbstate}
-\end{figure}
-
+Este módulo fue desarrollado íntegramente para este proyecto y está compuesto por un registro de desplazamiento interno, que cuenta, en esta configuración, con 8 posiciones de 72 bits cada una. Su función principal es detectar la llegada de un paquete a la FIFO, cargar 5 palabras correspondientes a la cabecera, y enviar una copia a Uplink. Luego, cuando el microprocesador termina su procesamiento, continua leyendo la FIFO y transfiere el resto del paquete. Este módulo permite, además, desacoplar el flujo de datos de la comunicación con el microprocesador.
+La implementación del mismo se basa la máquina de estados que se muestra en la figura~\ref{fig:dbstate} y  que tiene definidos los siguientes estados:
 \begin{itemize}
 	\item IDLE: es el estado inicial en el que se encuentra la máquina. Cuando se detecta la presencia de datos en la FIFO pasa al estado SOP.
 	\item SOP: este estado es el encargado de validar la integridad de los paquetes, permitiendo iniciar el proceso sólo cuando lo que hay en la entrada del bus de datos es un indicador de Inicio de Paquete (SOP)
@@ -77,7 +65,15 @@ La implementación de este módulo está formada por la máquina de estados que 
 	\item OUTPUT: se encarga de vaciar el registro de desplazamiento llenándolo de ceros a medida que se va poniendo las palabras del paquete a la salida, en caso que no hubiera nuevos paquetes disponibles, de lo contrario el proceso se repite.
 \end{itemize}
 
-La ubicación de los datos en el registro de desplazamiento interno es representativo del funcionamiento del sistema y se muestra gráficamente en las figura~\ref{fig:regdata}
+\begin{figure}[H]
+  \centering
+	\includegraphics[scale=0.50]{3-arquitectura/graf/estdelaycompleto.eps}
+  \caption{Máquina de estados de Delay Buffer}
+  \label{fig:dbstate}
+\end{figure}
+
+
+La ubicación de los datos en el registro de desplazamiento interno es representativo del funcionamiento del sistema y se muestra gráficamente en la figura~\ref{fig:regdata}
 \begin{figure}[H]
   \centering
 
@@ -96,7 +92,7 @@ La ubicación de los datos en el registro de desplazamiento interno es represent
 
 
 
-A continuación se presentan las señales que integran el módulo, con su correspondiente descripción:
+En el cuadro \ref{tab:sigdb} se presentan las señales que integran el módulo, con su correspondiente descripción y en la figura \ref{fig:dbuffer} se puede ver la interfaz general del mismo.
 
 \begin{figure}[H]
   \centering
@@ -125,9 +121,7 @@ A continuación se presentan las señales que integran el módulo, con su corres
 
 
 \subsection{Uplink}
-El módulo Uplink gestiona la comunicación entre el procesador y el resto de los componentes de la Interfaz de acceso a la cabecera. Esta configurado para trabajar con las señales del bus Avalon (Apéndice B) de manera tal que en caso de que se desee portar esta interfaz para interactuar con otro tipo de bus, solo es necesario modificar este bloque.
-
-Se prepararon dos versiones de Uplink; Una que transfiere al procesador la cabecera completa en 15 palabras de 32 bits y otra que solo envía una palabra de 32 bits correspondiente a la IP Destino. Ambas se ilustran en la figura~\ref{fig:up151}.
+El módulo Uplink gestiona la comunicación entre el procesador y el resto de los componentes de la Interfaz de acceso a la cabecera. Está configurado para trabajar con las señales del bus Avalon (Apéndice B) de manera tal que en caso de que se desee portar esta interfaz para interactuar con otro tipo de bus, sólo es necesario modificar este bloque. En general los procesadores que es posible integrar en logica programable tienen un bus de 32 bits o menos y como el hardware trabaja con una arquitectura de de 72 bits surge la necesidad de preparar dos versiones de Uplink; Una que transfiere al procesador la cabecera completa en 15 palabras de 32 bits y otra que solo envía una palabra de 32 bits correspondiente a la IP Destino. Ambas se ilustran en la figura~\ref{fig:up151}.
 
 \begin{figure}[H]
   \centering
@@ -156,10 +150,10 @@ Este módulo implementa la máquina de estados que se puede ver en la figura~\re
 \begin{itemize}
 	\item IDLE: es el estado inicial en el que se encuentra la máquina, hasta que recibe la confirmación de que la cabecera esta disponible.
 	\item READ,HOLD,WAIT: estos estados se alternan para interrumpir y transmitir 1 o 15 palabras de 32 bits al procesador, según el caso.
-	\item WRITE: es el estado encargado de esperar que el procesador envié los resultados, para luego dar aviso a los otros componentes de la disponibilidad de los mismos.
+	\item WRITE: es el estado encargado de esperar que el procesador envíe los resultados, para luego dar aviso a los otros componentes de la disponibilidad de los mismos.
 \end{itemize}
 
-En la tabla que sigue se pueden ver las señales que componen el módulo con su correspondiente descripción:
+En el cuadro \ref{tab:sigup} se pueden ver las señales que componen el módulo con su correspondiente descripción:
 
 \begin{figure}[H]
   \centering
@@ -192,13 +186,13 @@ En la tabla que sigue se pueden ver las señales que componen el módulo con su 
 
 \subsection{Write output}
 
-Este módulo es el que se encarga de tomar el resultado emitido por el microprocesador y de colocarlo en los campos de control anexos a cada una de las palabras del paquete. Se puede ver en la figura~\ref{fig:inter} el diagrama de estados en base al cual esta implementado este módulo, y se describe cada estado a continuación:
+Este módulo es el que se encarga de tomar el resultado emitido por el microprocesador y de colocarlo en los campos de control anexos a cada una de las palabras del paquete. Se puede ver en la figura~\ref{fig:estwritecomp} el diagrama de estados en base al cual esta implementado este módulo, y se describe cada estado a continuación:
 
 \begin{figure}[H]
   \centering
 	\includegraphics[scale=0.45]{3-arquitectura/graf/estwritecompleto.eps}
   \caption{Diagrama de Estados de Write Output}
-  \label{fig:estuplink}
+  \label{fig:estwritecomp}
 \end{figure}
 
 \begin{itemize}
@@ -207,7 +201,7 @@ Este módulo es el que se encarga de tomar el resultado emitido por el microproc
 	\item OVERWRITE: escribe el resultado en el Tag adjunto a cada palabra hasta que encuentra la palabra correspondiente a un EOP. 
 \end{itemize}
 
-A continuación se detalla las señales de Entrada/Salida del módulo y su función:
+A continuación, en el cuadro \ref{tab:sigwo} se detallan las señales de Entrada/Salida del módulo junto con su función y en la figura \ref{fig:bloquplink} se puede un diagrama general de la interfaz del mismo.
 
 \begin{figure}[H]
   \centering
