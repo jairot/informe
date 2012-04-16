@@ -2,7 +2,7 @@
 
 En la actualidad las redes de datos están creciendo en complejidad. Basta mirar el incremento en la cantidad de aplicaciones web que ofrecen contenido multimedia, para determinar que no sólo crece el volumen de los datos, sino que además se requiere mayor velocidad y confiabilidad en la transmisión. 
 
-También es notoria la consolidación de múltiples servicios sobre redes Ethernet, tales como comunicación de voz, vídeo en estándar y alta definición, videoconferencias, transacciones en tiempo real, etc.
+También es notoria la consolidación de múltiples servicios sobre redes \mbox{Ethernet,} tales como comunicación de voz, vídeo en estándar y alta definición, videoconferencias, transacciones en tiempo real, etc.
 
 En este contexto es necesario introducir continuas mejoras en el procesamiento de los paquetes de datos. Esto debe darse bajo la premisa de que no alcanza con proveer soluciones rápidas, sino que también se debe dotar a las mismas de un buen grado de flexibilidad y escalabilidad que permitan sostener el ritmo actual de crecimiento en términos de velocidad de procesamiento.
 
@@ -11,7 +11,9 @@ En este contexto es necesario introducir continuas mejoras en el procesamiento d
 \section{Contexto}
 
 
-En lo que respecta a las tecnologías de red, las nuevas tendencias se canalizan hacia la agregación de paquetes en flujos. Dos ejemplos los constituyen las redes de conmutación multi-protocolo mediante etiquetas (\textit{Multiprotocol Label Switching}, MPLS) y las redes virtuales  de área local (\textit{Virtual LAN}, VLANs). MPLS es un mecanismo en redes de telecomunicaciones de alta performance que transporta datos de nodo a nodo basado en etiquetas en lugar de direcciones de red, con el fin de evitar búsquedas complejas en una tabla de ruteo. Dichas etiquetas se aplican en el inicio de la transmisión e identifican enlaces virtuales entre nodos. También es capaz de encapsular paquetes de varios protocolos de red.
+En lo que respecta a las tecnologías de red, las nuevas tendencias se canalizan hacia la agregación de paquetes en flujos. Dos ejemplos los constituyen las redes de conmutación multi-protocolo mediante etiquetas (\textit{Multiprotocol Label Switching}, MPLS) y las redes virtuales  de área local (\textit{Virtual LAN}, VLANs). 
+
+MPLS es un mecanismo en redes de telecomunicaciones de alta performance que transporta datos de nodo a nodo basado en etiquetas en lugar de direcciones de red, con el fin de evitar búsquedas complejas en una tabla de ruteo. Dichas etiquetas se aplican en el inicio de la transmisión e identifican enlaces virtuales entre nodos. También es capaz de encapsular paquetes de varios protocolos de red.
 
 \begin{figure}[h]
   \centering
@@ -19,24 +21,22 @@ En lo que respecta a las tecnologías de red, las nuevas tendencias se canalizan
   \caption{Encabezado MPLS}
   \label{fig:flow}
 \end{figure}
-Las VLANs son redes virtuales, lógicamente independientes, que están conectadas a un mismo conmutador físico. Su funcionamiento se basa en un etiquetado dentro de las tramas de enlace de datos. El estándar IEEE 802.1Q es el que domina el mundo de las VLANs.
-
-
-\begin{figure}[h]
+Las VLANs, por otro lado, son redes virtuales, lógicamente independientes, que están conectadas a un mismo conmutador físico. Su funcionamiento se basa en un etiquetado dentro de las tramas de enlace de datos. El estándar IEEE 802.1Q es el que domina el mundo de las VLANs.
+\begin{figure}[H]
   \centering
 	\includegraphics[width=0.90\textwidth]{1-introduccion/graf/vlan.eps}
   \caption{Redes virtuales (VLANs)}
   \label{fig:virt}
 \end{figure}
 
+\newpage
 
 
+En cuanto a las soluciones necesarias para hacer frente a esta brecha entre la necesidad de procesar el flujo creciente y variado de datos de la red y la capacidad de hacerlo, se busca contar con tecnologías que permitan generar respuestas específicas de manera flexible, en el menor tiempo y con el mejor rendimiento posible. Las tecnologías que en la actualidad son usadas para implementar soluciones a estos problemas, son en general tres:
 
-En cuanto al hardware necesario para hacer frente a esta brecha entre la necesidad de procesar el flujo creciente de datos de la red y la capacidad de hacerlo, se busca contar con soluciones que permitan generar respuestas específicas de manera flexible, en el menor tiempo y con el mejor rendimiento posible. Las tecnologías que en la actualidad son usadas para implementar soluciones a estos problemas, son tres:
+\emph{Los Circuitos Integrados de Propósito Específico (\textit{Application-Specific Integrated Circuit}, ASIC),} están formados por cientos de bloques especializados trabajando en paralelo. Aunque cuentan con un muy buen desempeño, tienen un alto costo inicial y el tiempo para desarrollarlos es grande.
 
-\emph{Los Circuitos Integrados de Propósito Específico (\textit{Application-Specific Integrated Circuit}, ASIC), están formados por cientos de bloques especializados trabajando en paralelo. Aunque cuentan con un muy buen desempeño, tienen un alto costo inicial y el tiempo para desarrollarlos es grande.}
-
-\emph{Los Procesadores de Red (Network Processors, NPs), específicos para este tipo de problemas, ya que cuentan con múltiples elementos de procesamiento, buena performance para ciertas tareas, aunque tienen dificultades de portabilidad debido a que sus interfaces son propietarias en casi todos los casos.}
+\emph{Los Procesadores de Red (Network Processors, NPs),} específicos para este tipo de problemas, ya que cuentan con múltiples elementos de procesamiento, buena performance para ciertas tareas, aunque tienen dificultades de portabilidad debido a que sus interfaces son propietarias en casi todos los casos.
 \begin{figure}[h]
   \centering
       \includegraphics[width=0.8\textwidth]{1-introduccion/graf/NP_based.eps}
@@ -45,7 +45,7 @@ En cuanto al hardware necesario para hacer frente a esta brecha entre la necesid
 \end{figure}
 \newpage
 
-\emph{Los Procesadores de Propósito General (General Purpose Processors,GPPs), utilizan la arquitectura propia de la PC y la adaptan al procesamiento de red mediante un software especializado. Aunque esta solución es muy popular por su flexibilidad y su bajo costo, las transacciones con memoria RAM mediante un bus compartido y la naturaleza secuencial de los GPPs son factores limitantes a tener en cuenta. }
+\emph{Los Procesadores de Propósito General (General Purpose Processors,GPPs),} utilizan la arquitectura propia de la PC y la adaptan al procesamiento de red mediante un software especializado. Aunque esta solución es muy popular por su flexibilidad y su bajo costo, las transacciones con memoria RAM mediante un bus compartido y la naturaleza secuencial de los GPPs son factores limitantes a tener en cuenta. 
  \begin{figure}[h]
   \centering
       \includegraphics[width=0.8\textwidth]{1-introduccion/graf/GPP_based.eps}
@@ -53,16 +53,16 @@ En cuanto al hardware necesario para hacer frente a esta brecha entre la necesid
   \label{fig:diseno}
 \end{figure}
 
-Por lo mencionado anteriormente, es notoria la necesidad de encontrar tecnologías que reemplacen a las actuales o que cubran sus falencias, para poder satisfacer los requerimientos crecientes de las redes. 
+Por lo mencionado anteriormente, es notoria la necesidad de encontrar tecnologías que se combinen con las actuales o que cubran sus falencias, para poder satisfacer los requerimientos crecientes de las redes. 
 
 Los FPGAs (Field-Programmable Gate Array) son dispositivos de lógica reconfigurable que es posible programar, una o varias veces, usando un lenguaje de descripción de hardware(\textit{Hardware Description Language}, HDL). Las FPGAs se utilizan en aplicaciones similares a los ASICs; sin embargo son más lentas, tienen un mayor consumo de potencia y no pueden abarcar sistemas tan complejos como los ASICs. A pesar de esto, tienen un flujo de diseño flexible, sus costes de desarrollo y adquisición son mucho menores para pequeñas cantidades de dispositivos y el tiempo de desarrollo es también menor.
 
 
 
-Los Sistemas en un Chip (\textit{System on Chip}, SoC) son circuitos integrados que contienen todo, o la mayoría, de los módulos que corresponden a un sistema informático o electrónico en un solo componente. Son usados especialmente en el área de sistemas embebidos. Los microcontroladores son técnicamente SoC, pero se considera que los SoC tienen procesadores mas potentes y pueden correr aplicaciones mas complejas, para lo cual necesitan mayor cantidad de memoria que suele estar disponible como chips externos. 
+Los Sistemas en un Chip (\textit{System on Chip}, SoC) son circuitos integrados que contienen todo, o la mayoría, de los módulos que corresponden a un sistema informático o electrónico en un solo componente. Son usados especialmente en el área de sistemas embebidos. Los microcontroladores son técnicamente SoC, pero se considera que los SoC tienen procesadores más potentes y pueden correr aplicaciones más complejas, para lo cual necesitan mayor cantidad de memoria que suele estar disponible como chips externos. 
 
 Gracias a la disponibilidad en la ultima década de Soft-Core CPUs y otros Soft IP, se ha producido un punto de inflexión en el uso de FPGAs como plataforma para SoC. Como resultado de la combinación de logros técnicos y fuerzas de mercado, varios fabricantes como Altera, Cypress Semiconductor, Intel y Xilinx anunciaron la comercialización de FPGA con facilidades para el desarrollo de SoC.
-Estos avances que simplifican el desarrollo de SoC, la flexibilidad en el flujo de diseño y el prototipado rápido son las condiciones que posicionan a las FPGAs como la herramienta indicada para atacar un problema tan complejo como la clasificación de paquetes. 
+Estos avances que simplifican el desarrollo de SoC, la flexibilidad en el flujo de diseño y el prototipado rápido son las condiciones que posicionan a las FPGAs como la herramienta indicada para atacar un problema tan complejo como el procesamiento de paquetes en redes de datos.
 
  \begin{figure}[h]
   \centering
@@ -78,7 +78,7 @@ Estos avances que simplifican el desarrollo de SoC, la flexibilidad en el flujo 
 
 \section{Problema Marco}
 
-La necesidad de procesar cada vez más paquetes de datos lleva a lo que se conoce como \textit{clasificación}. Ésta consiste en la categorización de paquetes en flujos de acuerdo a un conjunto de reglas determinadas. Se efectúa en base a campos en la cabecera del paquete, tales como la dirección IP de origen/destino, puerto de origen/destino, tipo de servicio (TOS), etc. En general, para una clasificación basada en N campos, se dice que esta es N-dimensional (o multidimensional).
+Como se mencionó, existe una tendencia a consolidar múltiples servicios sobre un soporte de red como es Ethernet. Asimismo la velocidad de dichas redes está en constante aumento. Esto plantea la necesidad de procesar una mayor cantidad y variedad de paquetes de datos, generando funciones de procesamiento conocidas como \textit{clasificación}. Ésta consiste en la categorización de paquetes en flujos de acuerdo a un conjunto de reglas determinadas. Se efectúa en base a campos en la cabecera del paquete, tales como la dirección IP de origen/destino, puerto de origen/destino, tipo de servicio (TOS), etc. En general, para una clasificación basada en N campos, se dice que ésta es N-dimensional (o multidimensional).
 
 El presente Proyecto Integrador considera en particular el caso de la clasificación unidimensional. Como caso de estudio se toma lo que se conoce como IP lookup, pero la propuesta estudiada en este trabajo puede aplicarse a cualquier caso de dicho tipo de clasificación.
 
