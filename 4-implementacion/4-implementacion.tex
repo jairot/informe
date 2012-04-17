@@ -209,17 +209,17 @@ Una vez llevado a cabo el procedimiento de clasificación, \textit{flag2} se igu
 
 \chapter{Integración}
 
-En este capítulo se explicara la manera en la que se construyo el sistema embebido completo, incluyendo el hardware y el software desarrollados para tal fin. Luego se mostraran algunos de los casos de prueba usados para validad la correcta funcionalidad del sistema.
+En este capítulo se explicará la manera en la que se construyó el sistema embebido completo, incluyendo el hardware y el software desarrollados. Luego se mostrarán algunos de los casos de prueba empleados para validar la correcta funcionalidad del sistema.
 
 \section{Plataforma}
 
-En este punto es necesario especificar la plataforma en la que se implementará el software y el hardware desarrollado para este proyecto integrador. El mundo de las FPGA de propósito general cuenta con dos grandes fabricantes que dominan buena parte de mercado, Altera y Xilinx, ambos aparte de proveer las FPGA sueltas para utilizarlas en circuitos preparados específicamente, distribuyen, terceros mediante, placas de desarrollo con muchas flexibilidad para la realización de proyectos de todo tipo y con varios periféricos básicos integrados. En el laboratorio donde se desarrolla este proyecto se cuenta con varias de estas placas, la mayoría de ellas con una FPGA de Altera. 
+En este punto es necesario especificar la plataforma en la que se implementará el software y hardware desarrollados para este proyecto integrador. El mundo de las FPGAs de propósito general cuenta con dos grandes fabricantes que dominan buena parte de mercado: Altera y Xilinx. Ambos fabricantes ademas de proveer FPGAs para aplicación en circuitos preparados específicamente, distribuyen, terceros mediante, placas de desarrollo de gran flexibilidad para la realización de proyectos de todo tipo y con varios periféricos básicos integrados. En el laboratorio donde se desarrolla este proyecto se cuenta con varias de estas placas, la mayoría de ellas basadas en FPGAs de Altera. 
 
-De entre todas las placas disponibles, se utilizará la Altera DE2, ya que esta cuenta con todos los periféricos necesarios para la correcta implementación de este proyecto y además se tiene constancia de cierto éxito en la implementación de sistemas embebidos en dicha placa. Las características de la misma son:
+De entre todas las placas disponibles, se utilizará el ‎kit de desarrollo  Altera DE2, ya que este cuenta con todos los periféricos necesarios para la  implementación de este proyecto y además se tiene constancia de casos de éxito en la implementación de sistemas embebidos en dicha placa. Las características de la misma son:
 
 \begin{itemize}
-	\item FPGA: Cyclone II EP2C35F672C6
-	\item USB Blaster integrado, para configuración de FPGA
+	\item FPGA: Cyclone II EP2C35F672C6. Familia de bajo costo para aplicaciones de uso masivo.
+	\item USB Blaster integrado, para configuración de FPGA y debugging on-chip.
 	\item Memoria: 8 MB SDRAM, 512 KB SRAM, 4 MB Flash
 	\item Clock de 50 MHz
 \end{itemize}
@@ -234,11 +234,11 @@ Para una descripción más detallada, referirse al Apéndice A. A su vez, la FPG
 	\item Cantidad máxima de pines definidos por el usuario: 475
 \end{itemize}
 
-Una vez seleccionado el hardware, se debe elegir un microprocesador embebido que soporte tanto el hardware como el software que se desea implementar. Los microprocesadores embebidos en lógica reprogramable pueden encontrarse en dos presentaciones, hardcores y softcores.
+Una vez seleccionado el hardware, se debe elegir un microprocesador embebido que soporte tanto el software que se desea implementar como la interacción necesaria con el hardware. Los microprocesadores embebidos en lógica reprogramable pueden encontrarse en dos presentaciones, hardcores y softcores.
 
-Los harcores son microprocesadores embebidos de manera permanente en el silicio, esto permite alcanzar muy buenos rendimientos a expensas de aumentos en los costos de las FPGA que incluyen este tipo de core. En la actualidad los grandes fabricantes comenzaron a incluir una linea de dispositivos con un harcore embebido y se espera que esta tendencia continúe. Lamentablemente la FPGA seleccionada para la presente implementación no cuenta con estas prestaciones. 
+Los hardcores son microprocesadores implementados de manera permanente en el silicio, esto permite alcanzar muy buenos rendimientos a expensas de aumentos en los costos de las FPGA que incluyen este tipo de core. En la actualidad los grandes fabricantes incluyen una linea de dispositivos con un hardcore embebido y se espera que esta tendencia continúe. Lamentablemente la FPGA seleccionada para la presente implementación, por ser de una linea de bajo costo, no cuenta con estas prestaciones. 
 
-Los Softcores son microprocesadores que se encuentran definidos a nivel de descripcion de hardware y que pueden ser instanciados en la lógica de propósito general de una FPGA, u otro dispositivo programable, mediante un proceso de síntesis. Es posible clasificar los softcores de acuerdo a si su origen esta en la comunidad de software libre, las empresas proveedoras de módulos IP o en los fabricantes de FPGA.  En la tabla \ref{tab:comp} se muestra una enumeración de algunos softcores, con sus características principales. 
+Los softcores, en tanto, son microprocesadores que se encuentran definidos a nivel de descripcion de hardware y que pueden ser instanciados en la lógica de propósito general de una FPGA, u otro dispositivo programable, mediante un proceso de síntesis. Es posible clasificar los softcores de acuerdo a si su origen esta en la comunidad de software libre, las empresas proveedoras de módulos IP o en los fabricantes de FPGA.  En la tabla \ref{tab:comp} se muestra una enumeración de algunos softcores, con sus características principales. 
 
 \begin{table}[h]
   %\centering
@@ -257,22 +257,22 @@ Los Softcores son microprocesadores que se encuentran definidos a nivel de descr
 	\label{tab:comp}
 \end{table}
 
-De todos los softcores disponibles, se optara por la arquitectura Nios II, entre las razones principales para esta decisión esta le hecho de que se cuenta con dispositivos de Altera y todas las licencias de las herramientas necesarias para instanciar un sistema embebido en la FPGA seleccionada. Además, se considera que la selección de esta arquitectura permitirá concentrar esfuerzos en optimizar y mejorar los módulos diseñados específicamente para este proyecto.\newpage
+De todos los softcores disponibles, se optó por la arquitectura Nios II. Entre las razones principales para esta decisión esta el hecho de que se cuenta con dispositivos de Altera y todas las licencias de las herramientas necesarias para instanciar un sistema embebido en la FPGA seleccionada. Además, se considera que la selección de esta arquitectura permitirá concentrar esfuerzos en optimizar y mejorar los módulos diseñados específicamente para este proyecto, dejando los aspectos de la integración a las herramientas que el fabricante provee y soporta.
 \subsection{Microprocesador NIOS II}
 El Nios II es un procesador RISC de 32 bits de propósito general diseñado específicamente para funcionar en las FPGA de Altera. Entre sus características principales se pueden mencionar las siguientes:
 
 \begin{itemize}
 	\item Set de instrucciones, bus de datos y espacio de direcciones de 32 bits. 32 registros de propósito general y soporte de hasta 32 interrupciones.
-	\item Acceso a una variedad de periféricos e interfaces a memorias y periféricos fuera del chip.
-	\item Unidad de manejo de memoria (MMU) opcional para soportar sistemas operativos mas complejos.
+	\item Acceso a una variedad de periféricos e interfaces a memorias y fuera del chip.
+	\item Unidad de manejo de memoria (MMU) opcional para soportar sistemas operativos más complejos.
 	\item Unidad de protección de memoria (MPU) opcional.
 	\item Entorno de desarrollo de software basado en GNU C/C++ integrado a Eclipse.
 \end{itemize}
 
-Para poder ser implementado en una mayor variedad de dispositivos el Nios II ofrece 3 configuraciones diferentes:  Nios II/f (fast), Nios II/s (Standard), and Nios II/e (Economy).
+Para poder ser implementado en una mayor variedad de dispositivos el Nios II ofrece 3 configuraciones diferentes:  
 
 \subsubsection{Nios II/e}
-El Core Nios II/e está diseñado para utilizar la menor cantidad de espacio posible. Esto es apropiado para FPGAs de bajo costo. El mismo Tiene las siguientes características:
+El Core Nios II/e está diseñado para utilizar la menor cantidad de espacio posible. Esto es apropiado para FPGAs de bajo costo. El mismo tiene las siguientes características:
 \begin{itemize}
 	\item Espacio de direcciones de hasta 2GB
 	\item Gratuito, no requiere licencia 
@@ -305,9 +305,9 @@ El core Nios II/f está diseñado para ofrecer la mayor performance a expensas d
 En vista de que este último ofrece la mayor flexibilidad y el hardware seleccionado cuenta con las características necesarias para soportarlo, sera el utilizado para esta implementación. 
 
 
-\subsection{Síntesis y Uso de Recursos}
+\subsection{Síntesis y uso de recursos}
 
-En la figura \ref{fig:comple} es posible observar un diagrama completo del SoC que se implemento para este proyecto integrador. La construcción del mismo se realizo utilizando la herramienta SOPC Builder, con todas los componentes que están disponibles ahí por defecto, y se conecto la interfaz de acceso a la cabecera al bus como un \textit{Custom Component}. Se pueden ver mas detalles de esto en el apéndice D.
+En la figura \ref{fig:comple} es posible observar un diagrama completo del SoC que se implementó para este proyecto integrador. La construcción del mismo se realizó utilizando la herramienta \textit{SOPC Builder}, con todos los componentes disponibles por defecto, conectando la interfaz de acceso a la cabecera al bus de interconexión como un \textit{Custom Component}. Se pueden ver más detalles de esto en el apéndice D.
 \begin{figure}[H]
   \centering
 	\includegraphics[scale=0.28]{4-implementacion/graf/sistema.eps}
@@ -335,7 +335,8 @@ La cantidad de elementos lógicos mencionada representa aproximadamente un 15\% 
 
 
 \section{Verificación}
-Se muestran a continuación varios casos de prueba que se realizaron para verificar el correcto funcionamiento del sistema.
+Se muestran a continuación varios casos de prueba que se realizaron para verificar el correcto funcionamiento del sistema embebido. Con esto se comprueba la correcta integración de los modulos diseñados a una plataforma donde se implementarán casos de prueba especificos.
+
 \begin{table}
 	\begin{tabular}{|>{\columncolor[gray]{0.8}}l|p{11cm}|} \hline
 \multicolumn{2}{|>{\columncolor[gray]{0.8}}l|}{\textbf{Caso de Prueba: Funcionalidad del SoC}}\\ \hline
@@ -359,8 +360,7 @@ Se usa un Software en lenguaje C que va incrementando e imprimiendo en consola u
 	\end{tabular}
 	\caption{Caso de Prueba: Funcionalidad del SoC}
 	\label{tab:testsoc}
-\end{table}
-\begin{table}
+\end{table}\begin{table}
 	\begin{tabular}{|>{\columncolor[gray]{0.8}}l|p{11cm}|} \hline
 \multicolumn{2}{|>{\columncolor[gray]{0.8}}l|}{\textbf{Caso de Prueba: Interrupción, Envío y Recepción de datos}}\\ \hline
 Propósito  & 1) Comprobar mediante un Custom Component (Apéndice D)  simple el funcionamiento de las interrupciones.
@@ -439,6 +439,7 @@ Se prepara el software para que imprima los resultados en consola.
 	\label{tab:retlook}
 \end{table}
 
-Una vez validada la funcionalidad completa del diseño se pasa a realizar pruebas mas intensivas para poder obtener valores representativos de los limites y los alcances del mismo.
+
+Una vez validada la funcionalidad completa del diseño se pasa a realizar pruebas más intensivas para poder obtener valores representativos de los limites y los alcances del mismo.
 
 %\section{Distribucion Lineal}

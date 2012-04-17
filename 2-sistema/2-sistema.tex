@@ -110,8 +110,7 @@ Considerar la siguiente tabla de enrutamiento:
 
 A la misma le corresponde la representación en Unibit trie de la figura~\ref{fig:trie}.
 Sea una dirección de destino \textit{D}. Para efectuar la búsqueda del prefijo más largo, los bits de \textit{D} son usados para trazar un camino a lo largo del trie. Dicho camino comienza en el nodo raíz y continúa hasta encontrar un puntero vacío o un nodo vacío. Durante el recorrido a través del trie, el algoritmo mantiene un registro del último enlace encontrado en un nodo del camino recorrido (que es el mas largo hasta el momento). En el caso que la búsqueda terminara éste es el prefijo retornado.
-
-\begin{figure}[h]
+\begin{figure}[H]
   \centering
 	\includegraphics[width=0.80\textwidth]{2-sistema/graf/trie.eps}
   \caption{Unibit trie}
