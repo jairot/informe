@@ -35,10 +35,10 @@ En el eje de las abscisas de la figura \ref{fig:loop} es posible ver la cantidad
 \newpage
 \section{Implementación Completa}
 
-En este ensayo se verifica el rendimiento del sistema implementado de manera completa. Se consideran tres situaciones que caracterizan los tiempos de procesamiento de los algoritmos: un punto mínimo que corresponde al menor tiempo de clasificación, un punto promedio que ejercita 10 entradas equidistantes a lo largo de la tabla y un punto máximo que indica el peor tiempo de acceso posible para un algoritmo dado. 
+En este ensayo se verifica el rendimiento del sistema implementado de manera completa. Se consideran tres situaciones que caracterizan los tiempos de procesamiento de los algoritmos: un punto mínimo que corresponde al menor tiempo de clasificación, un punto promedio que ejercita 10 entradas equidistantes a lo largo de la tabla y un punto máximo que indica el peor tiempo de clasificación posible para un algoritmo dado. 
 
 \subsubsection{a) Linear Lookup (LLU)}
-Se evalúa el desempeño para los casos en que se envían 1 y 15 palabras de 32 bits como ya se mencionó. Se observa que los valores de pérdida de paquetes para ambos casos difieren mucho para profundidades de búsqueda pequeña (figura \ref{figminllu}), pero convergen a medida que la profundidad de búsqueda aumenta (figuras \ref{figpromllu} y \ref{figmaxllu}). Este efecto era esperable ya que para accesos muy lentos a la tabla el retardo introducido por el hardware se vuelve despreciable.
+Se evalúa el desempeño para los casos en que se envían 1 y 15 palabras de 32 bits como ya se mencionó. Se observa que los valores de pérdida de paquetes para ambos casos difieren mucho para profundidades de búsqueda pequeña (figura \ref{figminllu}), pero convergen a medida que la profundidad de búsqueda aumenta (figuras \ref{figpromllu} y \ref{figmaxllu}). Este efecto era esperable ya que para accesos muy lentos a la tabla el retardo introducido por la transferencia de datos desde el  el hardware se vuelve despreciable.
 
 \begin{figure}[!h]
   \centering
@@ -65,8 +65,8 @@ Se evalúa el desempeño para los casos en que se envían 1 y 15 palabras de 32 
 \newpage
 \subsubsection{b) Unibit Trie Lookup (UTL) }
 
-En los gráficos que corresponden al Unibit Trie Lookup es posible observar que existe una menor diferencia entre la máxima cantidad de paquetes que pueden ser transmitidos sin error en cada uno de los 3 puntos elegidos. También la diferencia entre enviar el paquete entero y solo la IP destino se reduce, lo que da la pauta de que cuando el tiempo de acceso es uniforme el impacto de enviar 1 o 15 palabras tiende a ser menor.
-\newpage
+En los gráficos que corresponden al Unibit Trie Lookup es posible observar que existe una menor diferencia entre la máxima cantidad de paquetes que pueden ser transmitidos sin pérdida en cada una de las 3 situaciones. Por ejemplo, si se considera pérdida nula para la versión de Uplink que envía 15 palabras de 72 bits, se tiene una cantidad de 80000 paquetes para retardo mínimo, 65000 para retardo promedio y 50000 para el máximo retardo para UTL, contra 60000, 20000 y 10000 respectivamente para LLU. También la diferencia entre enviar el paquete entero y solo la IP destino se reduce, lo que da la pauta de que cuando el tiempo de acceso es uniforme el impacto de enviar 1 o 15 palabras tiende a ser menor.
+%\newpage
 \begin{figure}[!h]
   \centering
 	\includegraphics[width=0.7\textwidth]{5-resultados/graf/utlmin.eps}
@@ -88,7 +88,7 @@ En los gráficos que corresponden al Unibit Trie Lookup es posible observar que 
 
 \newpage
 \subsubsection{Comparativa Inter-Algoritmos}
-Se presenta a modo de comparación un gráfico que contiene el mínimo, el máximo y el promedio para el caso de una palabra con los dos algoritmos implementados. 
+Se presenta a modo de comparación un gráfico que contiene el mínimo, el máximo y el promedio para la versión de Uplink que envía una sola una palabra con los dos algoritmos implementados. 
 \begin{figure}[!h]
   \centering
 	\includegraphics[width=0.7\textwidth]{5-resultados/graf/lluvsutl.eps}
@@ -96,12 +96,12 @@ Se presenta a modo de comparación un gráfico que contiene el mínimo, el máxi
   \label{figvs}
 \end{figure}
 
-En la figura \ref{figvs} puede apreciarse de una manera más global las diferencias en transmisión de paquetes sin pérdida. Como puede observarse, dichas diferencias se ven más acentuadas para los casos de LLU, debido a que este tipo de búsqueda es, como se mencionó anteriormente, altamente dependiente de la posición del prefijo dentro de la tabla de ruteo. No sucede esto con UTL ya que en este caso el tiempo de búsqueda está ligado a la longitud del prefijo y no a su posición dentro de la tabla.
+En la figura \ref{figvs} pueden apreciarse de una manera más global las diferencias en transmisión de paquetes sin pérdida. Como puede observarse, dichas diferencias se ven más acentuadas para los casos de LLU, debido a que este tipo de búsqueda es, como se mencionó anteriormente, altamente dependiente de la posición del prefijo dentro de la tabla de ruteo. No sucede esto con UTL ya que en este caso el tiempo de búsqueda está ligado a la longitud del prefijo y no a su posición dentro de la tabla.
 
 
-\section{Cache}
+\section{Caché}
 
-La cache desarrollada para este proyecto está pensada a los fines de satisfacer la posibilidad de que varios paquetes consecutivos tengan una direcciones IP destino que pertenezcan a un grupo común de flujos. Con la implementación utilizada se logró un tiempo de acceso uniforme de alrededor de 1000 ciclos, tiempo varias veces menor que el mejor caso tanto en LLU (6400) como en UTL (5000). En el gráfico ~\ref{fig:cachecomp} se puede ver como el peor caso del algoritmo LLU soporta hasta 10000 paquetes por segundo sin cache y hasta 700000 paquetes por segundo con la cache. Aunque este ejemplo sólo analiza el caso en el que son todos hits, es posible ver la mejora sustancial que implica el uso de una memoria de este tipo. 
+La cache desarrollada para este proyecto está pensada a los fines de satisfacer la posibilidad de que varios paquetes consecutivos tengan una dirección IP destino que pertenezcan a un grupo común de flujos (flow locality). Con la implementación utilizada se logró un tiempo de acceso uniforme de alrededor de 1000 ciclos, tiempo varias veces menor que el mejor caso tanto en LLU (6400) como en UTL (5000). En la figura ~\ref{fig:cachecomp} se puede ver cómo el peor caso del algoritmo LLU soporta hasta 10000 paquetes por segundo sin cache, mientras que es capaz de procesar hasta 700000 paquetes por segundo con el agregado de la cache. Aunque este ejemplo sólo analiza el caso en el que son todos hits, es posible ver la mejora sustancial que implica el uso de una memoria de este tipo. 
 
 \begin{figure}[!h]
   \centering
