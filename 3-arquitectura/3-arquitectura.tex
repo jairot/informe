@@ -16,7 +16,8 @@ Para ilustrar el funcionamiento del sistema se puede observar en la figura~\ref{
 \begin{figure}[H]
   \centering
 	\includegraphics[scale=0.60]{3-arquitectura/graf/moduloexp.eps}
-  \caption{Estado del campo de control}
+  \captionsetup{format=hang,justification=justified,font=footnotesize}
+  \caption{Estado del campo de control. (a): el paquete ingresando a la FIFO. Se destaca el campo de control donde luego se escribirá el resultado de la clasificación. (b)-(c): Las cinco palabras que conforman la cabecera, que son extraídas por Delay Buffer y enviadas a Uplink. (d): Resultado de la clasificación. (e): Dicho resultado escrito en el campo de control de cada palabra. }
   \label{fig:interfaz1}
 \end{figure}
 
