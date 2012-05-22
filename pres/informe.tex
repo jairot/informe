@@ -63,66 +63,50 @@
 
 \scriptsize
 
-\section{Motivación}
+\section{Introducción}
 
-\subsection{Requerimientos}
+\subsection{Contexto}
 
-\begin{frame}{Requerimientos de procesamiento en Redes}
+\begin{frame}{Introducción}
   \scriptsize
   
-  \begin{block}<+->{Características de Tráfico}
+  \begin{block}<+->{}
 
     \begin{itemize}
-      \item Las redes de datos crecen en {\bf Complejidad:} nuevas aplicaciones, multimedia
-      \item Las redes de datos crecen en {\bf Velocidad:} $n \times 100 Gbps\ (1Tbps@2015)$
-      \item {\bf Consolidación} de múltiples servicios sobre redes Ethernet      
-      \item Redes \emph{Locales}, \emph{Metropolitanas} y \emph{Extensas} utilizan {\bf Conmutación de Paquetes}
-      \item Adopción de tecnologías para \emph{virtualización} en redes y servidores
+      \item Las redes de datos crecen en {\bf Complejidad:} nuevas aplicaciones, multimedia.
+      \item Crece el volumen de datos y se requiere más velocidad de procesamiento.
+      \item {\bf Consolidación} de múltiples servicios sobre redes Ethernet.     
+      \item Necesidad de introducir continuas mejoras en el procesamiento de los datos.
+      \item Soluciones: no solo rápidas sino también flexibles y escalables.
     \end{itemize}
     
   \end{block}
     
-  \begin{block}<+->{Procesamiento de Paquetes}
-    \begin{itemize}
-      \item Los \emph{enlaces} ofrecen alta capacidad. El \emph{procesamiento} de paquetes es {\bf crítico} y debe optimizarse
-      \item El procesamiento \emph{a velocidad de línea}
-      \item Paquete Ethernet mínimo $=64 bytes$ $\rightarrow 6 nanosegundos/paquete$  
-    \end{itemize}    
-  \end{block}
 
 \end{frame}
 
 
 
-\subsection{Soluciones}
-\begin{frame}{Soluciones}
-  \begin{block}<+->{Granularidad}  
+\subsection{Contexto}
+\begin{frame}{Contexto}
+  \begin{block}<+->{Tecnologías de red}  
     \begin{itemize}
       \scriptsize
-      \item {\bf Actualmente} $\rightarrow$ {\bf paquetes} de longitud {\bf variable}
-      \item Peor caso $\rightarrow$ mínima longitud (64 bytes en Ethernet)
-      \item {\bf Tendencia} $\rightarrow$ agregación de paquetes en {\bf flujos}
-      \item Ejemplos: Multi-protocol Label Switching (MPLS), VLANs (802.1Q)  
+      \item {\bf Nuevas tendencias} $\rightarrow$ agregación de paquetes en flujos.
+      \item Ejemplos: MPLS, VLANs.
+      \item MPLS: transporte de datos basado en etiquetas.
+      \item VLANs: redes lógicamente independientes conectadas al mismo conmutador físico. 
     \end{itemize}
   \end{block}
-    
-  \vskip2ex  
-%    \newcolumntype{V}{>{\centering\arraybackslash} m{.4\linewidth} }
-    \begin{tabularx}{\linewidth}{ZZ}
-    \includegraphics[scale=0.45]{figures/packet_vs_flow-crop.eps} 
-    &
-    \includegraphics[scale=0.2]{figures/network_virtualization_2.eps}
-    \\
-    \tiny Agregación de flujos
-    &
-    \tiny Virtualización de redes
-    \\
-  \end{tabularx}
-
 
 \end{frame}  
   
-   
+\begin{frame}
+  \includegraphics[scale=0.45]{figures/MPLS_packet.eps} 
+  
+  \includegraphics[scale=0.4]{figures/vlan.eps}
+\end{frame}
+
 \begin {frame}{Tecnologías Actuales}   
   
   Requerimientos $\rightarrow$ {\bf flexibilidad, performance} 
@@ -283,6 +267,21 @@
 \end{frame}
 
 \section{Sistema}
+\begin{frame}{Sistema}
+\begin{block}  
+    \begin{itemize}
+      \scriptsize
+     	\item Soluciones en HW (FPGA, ASIC, NetFPGA)
+	\item Soluciones en SW (Click Router)
+	\item Complementar las ventajas de ambos mundos 
+    \end{itemize}
+  \end{block}
+  
+ \center 
+\includegraphics[scale=0.5]{figures/interseccion.eps}
+  
+\end{frame}
+  
 \subsection{Solución Propuesta}
 \begin{frame}{Solución}
 
@@ -564,6 +563,7 @@
 	\item En caso contrario, se mueve al nodo apuntado por el puntero \emph{one} (En caso de que exista alguno).
 	\item El puntero de recorrido puede quedar en un nodo común o en un nodo decisión
 	\item En cada iteración se debe guardar el valor de gw en caso de tratarse de un nodo decisión
+	\item Ruta por defecto: nodo raiz
     \end{itemize}
   \end{block}
 \end{frame}
