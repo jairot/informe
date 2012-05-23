@@ -488,6 +488,21 @@
 
 
 \begin{frame}{Delay Buffer}
+ \begin{block}<+->{Delay Buffer}
+	\begin{itemize}
+      \scriptsize
+	\item Desarrollado íntegramente para este proyecto.
+	\item Registro de desplazamiento de 8 posiciones de 72 bits.
+	\item Detecta la llegada de un paquete a la FIFO, carga 5 palabras (cabecera) y envía una copia a Uplink.
+	\item Cuando el software termina la clasificación, continúa leyendo la FIFO y transfiere el resto del paquete.
+	\item Implementación basada en máquina de estados.
+
+	   \end{itemize}
+\end{block}
+
+\end{frame}
+
+\begin{frame}{Delay Buffer}
  \begin{tabularx}{\linewidth}{Z|Z}
     \includegraphics[scale=0.40]{figures/bloqdelaybuffer.eps} 
     &
@@ -497,7 +512,33 @@
 
 \end{frame}
 
+\begin{frame}{Delay Buffer}
 
+\center 
+
+\includegraphics[scale=0.50]{figures/regdespl01.eps}
+
+\end{frame}
+
+\begin{frame}{Delay Buffer}
+
+\center 
+
+\includegraphics[scale=0.50]{figures/regdespl02.eps}
+
+\end{frame}
+
+\begin{frame}{Uplink}
+ \begin{block}<+->{Uplink}
+	\begin{itemize}
+      \scriptsize
+	\item Gestiona la comunicación entre el procesador y el resto de los componentes.
+	\item Configurado para trabajar con las señales del bus Avalon.
+	\item 2 Versiones: Una transfiere cabecera completa y la otra sólo la dirección IP de destino.
+	
+	   \end{itemize}
+\end{block}
+\end{frame}
 
 \begin{frame}{Uplink}
  \begin{tabularx}{\linewidth}{Z|Z}
@@ -525,14 +566,36 @@
 \end{block}
 \end{frame}
 
-
 \begin{frame}{Write Output}
-\center 
-\includegraphics[scale=0.60]{figures/bloqwrite.eps}
+ \begin{block}<+->{Write Output}
+	\begin{itemize}
+      \scriptsize
+	\item Toma el resultado emitido por el microprocesador y lo coloca en los campos de control correspondientes.	
+	   \end{itemize}
+	   \center 
+ \begin{tabularx}{\linewidth}{Z|Z}
+    \includegraphics[scale=0.40]{figures/bloqwrite.eps} 
+    &
+    \includegraphics[scale=0.25]{figures/estwritecompleto.eps}
+    \\
+  \end{tabularx}
+\end{block}
 \end{frame}
 
-\section{Implementación}
 
+\section{Software}
+\subsection{Introducción}
+
+\begin{frame}{Introducción}
+ \begin{block}<+->{Software}
+	\begin{itemize}
+      \scriptsize
+	\item Busqueda Lineal (LLU)
+	\item Busqueda en Arbol
+	\item C++ (STL container)	
+	   \end{itemize}
+\end{block}
+\end{frame}
 
 
 
@@ -541,7 +604,7 @@
 \begin{block}<+->{LLU}   
     \begin{itemize}
       \scriptsize
-     	\item Lenguaje: C++
+     	
      	\item Template \emph{list}
      	\item Cada nodo tiene 3 campos: Dirección de red, Máscara de red e Identificador de decisión
 	\item Lista ordenada en base a longitud de máscara de red. Se recorre con un iterador
@@ -553,7 +616,7 @@
 \end{frame}
 
 \begin{frame}{Algoritmos - LLU}
-\begin{block}<+->{iproute.h}   
+\begin{block}<+->{iproute}   
     \begin{itemize}
       \scriptsize
      	\item unsigned int addr
@@ -562,7 +625,7 @@
     \end{itemize}
   \end{block}
 
-\begin{block}<+->{iplookup.h}   
+\begin{block}<+->{iplookup}   
     \begin{itemize}
       \scriptsize
      	\item list<iproute> table
@@ -584,7 +647,7 @@
 \begin{block}<+->{UTL}   
     \begin{itemize}
       \scriptsize
-     	\item Lenguaje: C++
+     	
      	\item Se implementaron clases propias, donde se definieron las características de los nodos del árbol, como así también las operaciones de inserción y búsqueda
      	\item Nodo \emph{común} y nodo \emph{decisión}
 	\item Cada nodo tiene 2 campos: \emph{gw} y \emph{zero / one}
@@ -601,7 +664,7 @@
 
 
 \begin{frame}{Algoritmos - UTL}
-\begin{block}<+->{trienode.h}   
+\begin{block}<+->{trienode}   
     \begin{itemize}
       \scriptsize
      	\item int id;
@@ -610,7 +673,7 @@
     \end{itemize}
   \end{block}
 
-\begin{block}<+->{trie.h}   
+\begin{block}<+->{trie}   
     \begin{itemize}
       \scriptsize
      	\item PtrTrienode root;
@@ -675,7 +738,63 @@
 \includegraphics[scale=0.30]{figures/lluinsert09.eps} 
 \end{frame}
 
+\subsection{Caché}
+%\begin{comment}
+\begin{frame}{Caché}
+  \begin{block}<+->{Caché} 	
+    \begin{itemize}
+      \scriptsize
+     	\item Directa
+	\item Tabla de 16 entradas
+	\item Estructura \textit{HashEntry}
+	\item Colisiones se resuelven por reemplazo directo
+     \end{itemize}
+  \end{block}
+  
+  \begin{block}<+->{Funcionamiento} 	
+    \begin{itemize}
+      \scriptsize
+     	\item Al tomar una dirección IP, chequear si el valor de decisión se encuentra en la caché
+	\item Si se encuentra, retornar dicho valor.
+	\item En otro caso, almacenarlo
+     \end{itemize}
+  \end{block}
+\end{frame}
 
+%\end{comment}
+
+
+\subsection{ISR}
+\begin{frame}{ISR}
+
+  \begin{block}<+->{Elementos} 	
+    \begin{itemize}
+      \scriptsize
+     	\item \textit{store\_array}: Buffer en el cual se van almacenando las palabras enviadas por Uplink. 3 enteros por fila (96 bits).
+	\item \textit{i}: subíndice para moverse dentro del buffer
+	\item \textit{flag}: se incrementa cada vez que se recibe una interrupción
+	\item \textit{flag2}: se utiliza en conjunto con \textit{flag} controlar el bucle principal del programa. Se inicializa al mismo valor que \textit{flag}
+     \end{itemize}
+  \end{block}
+\end{frame}
+
+\begin{frame}{ISR}
+  \begin{block}<+->{Funcionamiento} 	
+    \begin{itemize}
+      \scriptsize
+     	\item El procesador recibe una interrupción.
+	\item El valor leído se almacena en \textit{store\_array}, en la posición indicada por \textit{i}
+	\item Se incrementan \textit{i} y \textit{flag}
+	\item Se pierde la condición de igualdad entre \textit{flag} y \textit{flag2}, con lo cual se lleva a cabo la clasificación.
+	\item Se asigna a \textit{flag2} el valor de \textit{flag}
+	\item Uplink versión "Cabecera completa": Esperar 5° iteración.
+	\item Uplink versión "Sólo IP destino": Trivial.
+     \end{itemize}
+  \end{block}
+\end{frame}
+  
+
+\section{Integración}
 
 \subsection{Hardware}
 \begin{frame}{Hardware}

@@ -68,7 +68,7 @@
      inkscape:pageshadow="2"
      inkscape:zoom="0.7"
      inkscape:cx="370.64774"
-     inkscape:cy="580.97495"
+     inkscape:cy="866.68924"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="true"
@@ -127,7 +127,7 @@
          sodipodi:role="line"
          id="tspan2826"
          x="20"
-         y="52.362183">1100   -   1</tspan></text>
+         y="52.362183">1100   -   S1</tspan></text>
     <path
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow1Mend)"
        d="m 260,172.36218 -60,60"
@@ -445,7 +445,7 @@
          sodipodi:role="line"
          id="tspan2826-0"
          x="20"
-         y="92.362183">100   -   2</tspan></text>
+         y="92.362183">100   -   S2</tspan></text>
     <rect
        y="392.36218"
        x="260"
