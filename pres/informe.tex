@@ -2,7 +2,8 @@
 
 \mode<presentation>
 {
-  \usetheme{Frankfurt}
+  %\usetheme{Frankfurt}
+  \usetheme{Goettingen}
   % or ...
 
   \setbeamercovered{transparent}
@@ -267,7 +268,7 @@
 \end{frame}
 
 \section{Sistema}
-\subsection{Introducción}
+%\subsection{Introducción}
 \begin{frame}{Introducción}
 \begin{block}<+->{Tipos de soluciones}  
     \begin{itemize}
@@ -584,7 +585,7 @@
 
 
 \section{Software}
-\subsection{Introducción}
+%\subsection{Introducción}
 
 \begin{frame}{Introducción}
  \begin{block}<+->{Software}
@@ -746,7 +747,7 @@
       \scriptsize
      	\item Directa
 	\item Tabla de 16 entradas
-	\item Estructura \textit{HashEntry}
+	\item Estructura \textit{HashEntry} (dirección, decisión, vacío)
 	\item Colisiones se resuelven por reemplazo directo
      \end{itemize}
   \end{block}
@@ -776,9 +777,7 @@
 	\item \textit{flag2}: se utiliza en conjunto con \textit{flag} controlar el bucle principal del programa. Se inicializa al mismo valor que \textit{flag}
      \end{itemize}
   \end{block}
-\end{frame}
 
-\begin{frame}{ISR}
   \begin{block}<+->{Funcionamiento} 	
     \begin{itemize}
       \scriptsize
@@ -796,7 +795,7 @@
 
 \section{Integración}
 
-\subsection{Hardware}
+\subsection{Plataforma}
 \begin{frame}{Hardware}
   \begin{block}<+->{Placa de desarrollo DE2} 	
     \begin{itemize}
@@ -817,6 +816,28 @@
 	\item PLLs: 4
 	\item Cantidad máxima de pines definidos por el usuario: 475
      \end{itemize}
+  \end{block}
+\end{frame}
+
+
+\begin{frame}{Microprocesadores - HardCores VS SoftCores}
+   \begin{block}<+->{HardCores}	
+    \begin{itemize}
+	\scriptsize
+     	\item Implementados de forma permanente en el silicio.
+	\item Gran rendimiento a expensas de altos costos en FPGA.
+	\item Tendencia actual: HardCore incluido.
+	\item No disponible en FPGA de este trabajo.
+    \end{itemize}	
+  \end{block}
+  
+  \begin{block}<+->{SoftCores}	
+    \begin{itemize}
+	\scriptsize
+     	\item Definidos a nivel de descripción de hardware.
+	\item Instanciados en la lógica de la FPGA.
+	\item Implementaciones libres y propietarias.
+    \end{itemize}	
   \end{block}
 \end{frame}
 
@@ -864,17 +885,39 @@
   \end{block}
 \end{frame}
 
+\begin{frame}{Sistema Embebido}
+\center
+\includegraphics[scale=0.20]{figures/sistema.eps}
+   
+
+\end{frame}
+
+
 \subsection{Verificación}
 \begin{frame}{Uso de la FPGA}
 
 	\center	
-	\includegraphics[scale=0.70]{figures/fpga.eps}  
+	\includegraphics[scale=0.30]{figures/fpga.eps}  
+	
+
+   \begin{block}<+->{Recursos totales utilizados}	
+    \begin{itemize}
+	\scriptsize
+     	\item Elementos lógicos: 4983 (15\% del total).
+	\item Bits de RAM: 280627.
+	\item Multiplicadores embebidos: 2 (de 35).
+	\item PLLs: 1 (de 4).
+	\item Pines definidos: 86 (de 475).
+	\item Remanente importante de recursos -> Posibilidad de ampliar las funcionalidades del sistema (ej, uso de multicores).
+    \end{itemize}	
+  \end{block}
+
 
 \end{frame}
 
 
 \section{Resultados}
-\subsection{Introducción}
+%\subsection{Introducción}
 \begin{frame}{Introducción}
 	\begin{block}<+->{Resultados}  
 	 \begin{itemize}	
@@ -888,15 +931,17 @@
   \end{block}
 \end{frame}
 
-\subsection{Caso algoritmos únicamente}
-\begin{frame}{Caso algoritmos únicamente}
-\begin{block}<+->{Algoritmos únicamente}   
+\subsection{Stress de Software}
+\begin{frame}{Stress de Software}
+\begin{block}<+->{Stress de Software}   
     \begin{itemize}
       \scriptsize
-     	\item Retardo de búsqueda en función de la posición en la tabla de enrutamiento
-     	\item Independiente al modulo extracto de cabeceras
-	\item En el eje de las abscisas se expresa la ubicación en una tabla de 100 elementos del prefijo mas largo
-	\item En las ordenadas se puede observar el tiempo de búsqueda en ciclos de reloj
+     	\item Retardo de búsqueda en función de la posición en la tabla de enrutamiento.
+     	\item Independiente al modulo extracto de cabeceras.
+	\item En el eje de las abscisas se expresa la ubicación en una tabla de 100 elementos del prefijo mas largo.
+	\item En las ordenadas se puede observar el tiempo de búsqueda en ciclos de reloj.
+	\item LLU: Retardo depende de la posición en la lista.
+	\item UTL: Retardo depende de la longitud del prefijo.
     \end{itemize}
   \end{block}
 \end{frame}
@@ -1007,7 +1052,23 @@
 \begin{block}<+->{Conclusiones}   
     \begin{itemize}
       \scriptsize
-     	\item     	
+     	\item Factibilidad de implementación.
+     	\item HW -> Velocidad de procesamiento.
+     	\item SW -> Escalabilidad.
+     	\item Complejidad -> Implementación del SoC, curva de aprendizaje de las herramientas.
+     	\item Modularidad -> Portabilidad.
+     	\item Integración de los 3 ejes de la carrera.      	
+    \end{itemize}
+  \end{block}
+  \begin{block}<+->{Trabajos futuros.}   
+    \begin{itemize}
+      \scriptsize
+     	\item Clasificación multidimensional.
+     	\item Optimización de código para NIOS II.
+     	\item Portar el sistema a otras plataformas.
+     	\item Caché por HW.
+     	\item Mecanismos de actualización automática de la tabla de ruteo.
+     	\item Complementación con otros trabajos.     	
     \end{itemize}
   \end{block}
 \end{frame}
