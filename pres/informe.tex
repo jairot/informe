@@ -100,14 +100,24 @@
       \item VLANs: redes lógicamente independientes conectadas al mismo conmutador físico. 
     \end{itemize}
   \end{block}
+  
+     \center 
+    \newcolumntype{V}{>{\centering\arraybackslash} m{.5\linewidth} }
+    \begin{tabularx}{\linewidth}{V|V}
+
+      \includegraphics[scale=0.20]{figures/MPLS_packet.eps}
+      &
+      \includegraphics[scale=0.20]{figures/vlan.eps}      
+      \\
+      \tiny MPLS
+      &
+      \tiny VLANs
+      \\
+    \end{tabularx}
 
 \end{frame}  
   
-\begin{frame}
-  \includegraphics[scale=0.45]{figures/MPLS_packet.eps} 
-  
-  \includegraphics[scale=0.4]{figures/vlan.eps}
-\end{frame}
+
 
 \begin {frame}{Tecnologías Actuales}   
   
@@ -148,26 +158,10 @@
       \item Permiten \emph{reconfiguración} y \emph{reprogramación}, contando con librerías de \emph{Open Hardware}. 
       \item Su performance no es lejana a la de un ASIC. Fabricantes: Altera, Xilinx, Actel.
       \item Incorporación creciente de bloques \emph{hardcore} especializados
-    \end{itemize}      
-  \end{block}
-    \vskip3ex
-    \center 
-    \newcolumntype{V}{>{\centering\arraybackslash} m{.3\linewidth} }
-    \begin{tabularx}{\linewidth}{VVV}
-
-      \includegraphics[scale=0.35]{figures/GPP_based.eps}
-      &
-      \includegraphics[scale=0.35]{figures/NP_based.eps}
-      &
-      \includegraphics[scale=0.38]{figures/FPGA_based.eps}
-      \\
-      \tiny Implementación con GPPs
-      &
-      \tiny Implementación con NPs
-      &
-      \tiny Implementación con FPGAs
-      \\
-    \end{tabularx}
+    \end{itemize}
+    \center
+    \includegraphics[scale=0.38]{figures/FPGA_based.eps}      
+  \end{block}  
 \end{frame}
 
 \begin{frame}{FPGA como plataforma para SoC}
