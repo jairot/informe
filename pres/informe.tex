@@ -286,12 +286,12 @@
 \begin{block}{}  
     \begin{enumerate}
       \scriptsize
- \pause     	\item Un flujo de paquetes llega a la interfaz de red del dispositivo y es necesario clasificarlo en distintos flujos para que sea redireccionado.
-\pause 	\item Se almacenan en un buffer los paquetes en orden de llegada.
-\pause 	\item Se extrae el primer paquete y se toma la información que pertenece a la cabecera, la información completa del paquete queda en espera.
-\pause 	\item Se envía al microprocesador la cabecera. 
-\pause 	\item El Microprocesador aplica un algoritmo de clasificación a cierta información de la cabecera y reenvía los resultados al Hardware. 
-\pause 	\item Se anexa a cada palabra del paquete un Tag adjunto con el resultado de la clasificación y se lo envía hacia la interfaz de salida.
+      	\item Un flujo de paquetes llega a la interfaz de red del dispositivo y es necesario clasificarlo en distintos flujos para que sea redireccionado.
+ 	\item Se almacenan en un buffer los paquetes en orden de llegada.
+	\item Se extrae el primer paquete y se toma la información que pertenece a la cabecera, la información completa del paquete queda en espera.
+	\item Se envía al microprocesador la cabecera. 
+	\item El Microprocesador aplica un algoritmo de clasificación a cierta información de la cabecera y reenvía los resultados al Hardware. 
+	\item Se anexa a cada palabra del paquete un Tag adjunto con el resultado de la clasificación y se lo envía hacia la interfaz de salida.
     \end{enumerate}
   \end{block}
 \end{frame}
@@ -464,32 +464,34 @@
 
 \subsection{Diagrama en bloques: Lineas E/S}
 
-\begin{frame}{Generador}
+\begin{frame}{Generador y FIFO}
   \begin{block}<+->{Generador}
 	\begin{itemize}
       \scriptsize
 	\item Permite iniciar la generación de paquetes desde un interruptor externo
-	\item Es posible parametrizar la distancia, en ciclos de clock, entre la generación de un paquete y el siguiente.
-	\item Puede generar una cantidad variable de paquetes, con valores diferentes en todos sus campos.
-	\item Mantiene un contador global de la cantidad de paquetes generados y lo imprime en la ultima palabra del Payload de cada uno.
-	\center
-	\includegraphics[scale=0.40]{figures/bloqgenerador.eps}
+	\item Es posible parametrizar la distancia en ciclos de clock, entre la generación de un paquete y el siguiente, tambien se pueden modificar los campos internos de cada paquete
 	   \end{itemize}
 \end{block}
-
-\end{frame}
-
-\begin{frame}{FIFO}
   \begin{block}<+->{FIFO}
 	\begin{itemize}
       \scriptsize
 	\item Se trata de una FIFO estándar, adaptada de un codigo disponible en Opencores.
 	\item Almacena palabras de 72 bits, 64 de la palabra correspondiente al paquete y 8  bits de control.
-	\item Es posible parametrizar la cantidad de palabras, en potencias de 2, que esta FIFO almacena.
-	\center
-	\includegraphics[scale=0.40]{figures/bloqfifo.eps}
 	   \end{itemize}
 \end{block}
+     \center 
+    \newcolumntype{V}{>{\centering\arraybackslash} m{.5\linewidth} }
+    \begin{tabularx}{\linewidth}{VV}
+
+      \includegraphics[scale=0.30]{figures/bloqfifo.eps}
+      &
+      \includegraphics[scale=0.30]{figures/bloqgenerador.eps}      
+      \\
+      \tiny FIFO
+      &
+      \tiny Generador
+      \\
+    \end{tabularx}
 
 \end{frame}
 
@@ -516,22 +518,6 @@
     \includegraphics[scale=0.25]{figures/estdelay.eps}
     \\
   \end{tabularx}
-
-\end{frame}
-
-\begin{frame}{Delay Buffer}
-
-\center 
-
-\includegraphics[scale=0.50]{figures/regdespl01.eps}
-
-\end{frame}
-
-\begin{frame}{Delay Buffer}
-
-\center 
-
-\includegraphics[scale=0.50]{figures/regdespl02.eps}
 
 \end{frame}
 
@@ -591,7 +577,7 @@
 
 
 \section{Software}
-%\subsection{Introducción}
+\subsection{Introducción}
 
 \begin{frame}{Introducción}
  \begin{block}<+->{Software}
@@ -899,7 +885,7 @@
 \end{frame}
 
 
-\subsection{Verificación}
+\subsection{Sintesis y uso de Recursos}
 \begin{frame}{Uso de la FPGA}
 
 	\center	
