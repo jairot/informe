@@ -297,8 +297,12 @@
 \end{frame}
 
 \begin{frame}{Arquitectura propuesta}
-   \center 
-   \includegraphics[scale=0.17]{figures/solucion.eps}
+   %\begin{block}
+   	\begin{figure}
+   		\centering
+    		\includegraphics[scale=0.17]{figures/solucion.eps}
+    	\end{figure}
+   %\end{block}
 \end{frame}
 
 \begin{comment}
@@ -336,9 +340,10 @@
 \subsection{Interfaz de acceso a la cabecera}
 
 \begin{frame}{Interfaz de acceso a la cabecera}
-
-\center 
+\begin{figure}
+\centering 
 \includegraphics[scale=0.60]{figures/modulo.eps}
+\end{figure}
 \end{frame}
 
 \begin{frame}{Descripción funcional}
@@ -355,7 +360,7 @@
       \scriptsize
      	\item Va tomando los datos desde la FIFO.
 	\item Detecta inicio y finalización de cada paquete.
-	\item Envía las primeras 5 palabras del paquete, suficientes para cubría la cabecera IP, a Uplink.
+	\item Envía las palabras del paquete que sean necesarias para cubrir la cabecera IP, a Uplink.
 	\item Mantiene almacenado el paquete mientras el software toma una decisión.
     \end{itemize}
   \end{block}
@@ -394,8 +399,10 @@
 \end{frame}
 
 \begin{frame}{Algoritmos de Clasificación}
-\center 
+\begin{figure}
+\centering 
 \includegraphics[scale=0.40]{figures/linear.eps}
+\end{figure}
 \end{frame}
 
 
@@ -431,8 +438,10 @@
 \end{frame}
 
 \begin{frame}{Algoritmos de clasificación}
-\center 
+\begin{figure}
+\centering 
 \includegraphics[scale=0.40]{figures/trie.eps}
+\end{figure}
 \end{frame}
 
 \section{Hardware}
