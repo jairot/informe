@@ -31,11 +31,16 @@
 
 \title[] {Implementación de Arquitectura Mixta de Clasificación de Paquetes Sobre Lógica Reconfigurable.}
 
-\author[] {Jairo N. Trad y Luis R. Romano}
+\author[] 
+{
+	Luis R. Romano - Jairo N. Trad. \\
+	\scriptsize Director: Dr. Ing. Jorge Finochietto. \\
+  	\scriptsize CoDirector: Ing. Carlos Zerbini. \\ 
+}
 
 
 \institute[Universidades] % (optional, but mostly needed)
-{
+{   
   \scriptsize Laboratorio de Comunicaciones Digitales \\
   \scriptsize Universidad Nacional de Córdoba, Facultad Ciencias Exactas, Físicas y Naturales \\ 
 }
@@ -286,12 +291,14 @@
 \begin{block}{}  
     \begin{enumerate}
       \scriptsize
+
       	\item Un flujo de paquetes llega a la interfaz de red del dispositivo y es necesario clasificarlo en distintos flujos para que sea redireccionado.
  	\item Se almacenan en un buffer los paquetes en orden de llegada.
 	\item Se extrae el primer paquete y se toma la información que pertenece a la cabecera, la información completa del paquete queda en espera.
 	\item Se envía al microprocesador la cabecera. 
 	\item El Microprocesador aplica un algoritmo de clasificación a cierta información de la cabecera y reenvía los resultados al Hardware. 
 	\item Se anexa a cada palabra del paquete un Tag adjunto con el resultado de la clasificación y se lo envía hacia la interfaz de salida.
+
     \end{enumerate}
   \end{block}
 \end{frame}
@@ -521,6 +528,11 @@
 
 \end{frame}
 
+<<<<<<< HEAD:pres/informe.tex
+=======
+
+
+>>>>>>> 82b21a8297b50814d47733c67a9e4ade91758bab:pres/informe.tex
 \begin{frame}{Uplink}
  \begin{block}<+->{Uplink}
 	\begin{itemize}
@@ -1063,6 +1075,14 @@
      	\item Complementación con otros trabajos.     	
     \end{itemize}
   \end{block}
+\end{frame}
+
+\begin{frame}{Conclusiones}
+	\large PREGUNTAS??
+\end{frame}
+
+\begin{frame}{Conclusiones}
+	\large MUCHAS GRACIAS!!
 \end{frame}
 
 \end{document}
