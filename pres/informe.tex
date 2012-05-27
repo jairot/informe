@@ -27,6 +27,7 @@
 \newcommand{\pphantom}{\textcolor{ta3aluminium}} % phantom introduces a vertical space in p formatted table columns??!!
 \usepackage{amsmath,amsthm, amssymb, latexsym}
 \usepackage{graphicx}
+\usepackage{multicol}
 \usepackage{verbatim}
 
 \title[] {Implementación de Arquitectura Mixta de Clasificación de Paquetes Sobre Lógica Reconfigurable.}
@@ -126,6 +127,55 @@
 \end{frame}  
   
 
+\subsection{Problema marco}
+
+\begin{frame}{Clasificación de Paquetes}
+
+ \begin{block}<+->{Clasificación}   
+    \begin{itemize}
+      \scriptsize
+      \item La necesidad de procesar cada vez más paquetes de datos lleva a lo que se conoce como \textit{clasificación.}
+      \item Es el proceso de categorización de paquetes en distintos flujos.
+      \item Efectuada en base a un número de campos de una cabecera.
+      \item En general, para una clasificación basada en N campos, se dice que la misma es N-dimensional (o multidimensional) 
+      \item Un caso en particular de la clasificación unidimensional (N=1) utilizando el campo IP destino es lo que se conoce como \textit{IP Lookup}.     
+    \end{itemize}
+  \end{block}
+\end{frame}
+
+\begin{frame}{Dirección IP - Prefijos}
+ \begin{block}<+->{Dirección IP}   
+    \begin{itemize}
+      \scriptsize
+      \item Es un número de 32 bit que identifica un dispositivo dentro de una red que utilice el protocolo IP
+      \item Estructura jerárquica. Una parte de la dirección corresponde a la red, y la otra al host dentro de la red
+      \item Los bits que corresponden a la parte de red conforman lo que se denomina \textit{prefijo de red}.
+     \end{itemize}
+  \end{block}
+\begin{block}<+->{Formas de representar un prefijo de red}   
+    \begin{itemize}
+      \scriptsize
+      \item Binario con asterisco (132.239 - 1000010011101111*)
+      \item Notación A/L, donde A es una dirección IP y L es la longitud del prefijo (132.239.0.0/16)
+      \item Notación máscara: se utiliza una dirección de red y una máscara (132.239.0.0 con máscara 255.255.0.0)
+     \end{itemize}
+  \end{block}
+\end{frame}
+
+\begin{frame}{IP LookUp}
+ \begin{block}<+->{IP Lookup}   
+    \begin{itemize}
+      \scriptsize
+      \item Un paquete llega por una interfaz de entrada. Éste porta una dirección IP de destino determinada.
+      \item El dispositivo consulta una tabla para determinar la interfaz de salida para el paquete en cuestión
+      \item Dicha tabla contiene un conjunto de prefijos con sus correspondientes interfaces de salida.
+      \item El paquete es correspondido con el prefijo más largo que esté contenido en la dirección de destino y luego es redirigido  a la correspondiente interfaz de salida
+      \item No es una búsqueda trivial, ya que no se busca un valor en particular sino un prefijo contenido dentro de un valor. No aplican los algoritmos de búsqueda tradicionales.   
+    \end{itemize}
+\center 
+\includegraphics[scale=0.50]{figures/prefijos.eps}
+  \end{block}
+\end{frame}
 
 \begin {frame}{Tecnologías Actuales}   
   
@@ -194,59 +244,6 @@
 \end{frame}
 
 
-\subsection{Problema marco}
-
-\begin{frame}{Clasificación de Paquetes}
-
- \begin{block}<+->{Clasificación}   
-    \begin{itemize}
-      \scriptsize
-      \item La necesidad de procesar cada vez más paquetes de datos lleva a lo que se conoce como \textit{clasificación.}
-      \item Es el proceso de categorización de paquetes en distintos flujos.
-      \item Efectuada en base a un número de campos de una cabecera.
-      \item En general, para una clasificación basada en N campos, se dice que la misma es N-dimensional (o multidimensional) 
-      \item Un caso en particular de la clasificación unidimensional (N=1) utilizando el campo IP destino es lo que se conoce como \textit{IP Lookup}.     
-    \end{itemize}
-  \end{block}
-\end{frame}
-
-\begin{frame}{Dirección IP - Prefijos}
- \begin{block}<+->{Dirección IP}   
-    \begin{itemize}
-      \scriptsize
-      \item Es un número de 32 bit que identifica un dispositivo dentro de una red que utilice el protocolo IP
-      \item Estructura jerárquica. Una parte de la dirección corresponde a la red, y la otra al host dentro de la red
-      \item Los bits que corresponden a la parte de red conforman lo que se denomina \textit{prefijo de red}.
-     \end{itemize}
-  \end{block}
-\begin{block}<+->{Formas de representar un prefijo de red}   
-    \begin{itemize}
-      \scriptsize
-      \item Binario con asterisco (132.239 - 1000010011101111*)
-      \item Notación A/L, donde A es una dirección IP y L es la longitud del prefijo (132.239.0.0/16)
-      \item Notación máscara: se utiliza una dirección de red y una máscara (132.239.0.0 con máscara 255.255.0.0)
-     \end{itemize}
-  \end{block}
-\end{frame}
-
-\begin{frame}{IP LookUp}
- \begin{block}<+->{IP Lookup}   
-    \begin{itemize}
-      \scriptsize
-      \item Se lleva a cabo en el dispositivo de enrutamiento.
-      \item Un paquete llega por una interfaz de entrada. Éste porta una dirección IP de destino determinada.
-      \item El dispositivo consulta una tabla para determinar la interfaz de salida para el paquete en cuestión
-      \item Dicha tabla contiene un conjunto de prefijos con sus correspondientes interfaces de salida.
-      \item El paquete es correspondido con el prefijo más largo que esté contenido en la dirección de destino y luego es redirigido  a la correspondiente interfaz de salida
-      \item No es una búsqueda trivial, ya que no se busca un valor en particular sino un prefijo contenido dentro de un valor. No aplican los algoritmos de búsqueda tradicionales.   
-    \end{itemize}
-  \end{block}
-\end{frame}
-
-\begin{frame}{Prefijos}
-\center 
-\includegraphics[scale=0.75]{figures/prefijos.eps}
-\end{frame}
 
 \subsection{Objetivos}
 \begin{frame}{Objetivos}
@@ -352,7 +349,7 @@
 \includegraphics[scale=0.60]{figures/modulo.eps}
 \end{figure}
 \end{frame}
-
+\begin{comment}
 \begin{frame}{Descripción funcional}
 
 \begin{block}<+->{FIFO}   
@@ -390,7 +387,7 @@
     \end{itemize}
   \end{block}
 \end{frame}
-
+\end{comment}
 \subsection{Algoritmos de Clasificación}
 \begin{frame}{Algoritmos de Clasificación}
 \begin{block}<+->{Linear Lookup (LLU)}   
@@ -402,16 +399,10 @@
 	\item Si esto se cumple para varios prefijos, se opta por el más largo de ellos y el paquete se expide por el enlace asociado a dicho prefijo
 	\item Para optimizar este esquema, los prefijos se almacenan en orden decreciente de longitud, de manera que al encontrar una coincidencia no sea necesario seguir buscando en el resto de la tabla
     \end{itemize}
+\centering 
+\includegraphics[scale=0.35]{figures/linear.eps}
   \end{block}
 \end{frame}
-
-\begin{frame}{Algoritmos de Clasificación}
-\begin{figure}
-\centering 
-\includegraphics[scale=0.40]{figures/linear.eps}
-\end{figure}
-\end{frame}
-
 
 \begin{frame}{Algoritmos de Clasificación}
   \begin{block}<+->{Unibit trie lookup (UTL)}   
@@ -421,12 +412,16 @@
 	\item Partiendo del nodo raíz, todos los prefijos que comienzan con 0 son almacenados en el subárbol apuntado por el puntero-cero y aquellos que comienzan con 1 se almacenan en el subárbol apuntado por el puntero-uno.
 	\item Cada subárbol es construido recursivamente de manera similar usando los bits restantes de cada uno de los prefijos
     \end{itemize}
+\centering 
+\includegraphics[scale=0.25]{figures/trie.eps}	
   \end{block}
 \end{frame}
-
+\begin{comment}
 \begin{frame}{Algoritmos de Clasificación}
   \begin{block}<+->{Ejemplo}   
-	\begin{center}
+\begin{multicols}{2}
+\begin{flushleft}
+
 	\begin{tabular}{|c|c|} \hline
 		\textbf{Prefijo} & \textbf{Enlace de salida} \\ \hline
 		101* & S1 \\
@@ -438,18 +433,18 @@
 		100000* & S7 \\
 		100* & S8 \\
 		110* & S9 \\	\hline
-	\end{tabular}	
-\end{center}
+	\end{tabular}
+\end{flushleft}
 
+%\centering 
+
+%\end{center}
+
+
+\end{multicols}
   \end{block}
 \end{frame}
-
-\begin{frame}{Algoritmos de clasificación}
-\begin{figure}
-\centering 
-\includegraphics[scale=0.40]{figures/trie.eps}
-\end{figure}
-\end{frame}
+\end{comment}
 
 \section{Hardware}
 
@@ -489,14 +484,13 @@
      \center 
     \newcolumntype{V}{>{\centering\arraybackslash} m{.5\linewidth} }
     \begin{tabularx}{\linewidth}{VV}
-
-      \includegraphics[scale=0.30]{figures/bloqfifo.eps}
-      &
       \includegraphics[scale=0.30]{figures/bloqgenerador.eps}      
-      \\
-      \tiny FIFO
       &
+      \includegraphics[scale=0.30]{figures/bloqfifo.eps}
+      \\
       \tiny Generador
+      &
+      \tiny FIFO
       \\
     \end{tabularx}
 
@@ -514,25 +508,17 @@
 	\item Implementación basada en máquina de estados.
 
 	   \end{itemize}
+ \begin{tabularx}{\linewidth}{Z|Z}
+    \includegraphics[scale=0.35]{figures/bloqdelaybuffer.eps} 
+    &
+    \includegraphics[scale=0.20]{figures/estdelay.eps}
+    \\
+  \end{tabularx}
 \end{block}
 
 \end{frame}
 
-\begin{frame}{Delay Buffer}
- \begin{tabularx}{\linewidth}{Z|Z}
-    \includegraphics[scale=0.40]{figures/bloqdelaybuffer.eps} 
-    &
-    \includegraphics[scale=0.25]{figures/estdelay.eps}
-    \\
-  \end{tabularx}
 
-\end{frame}
-
-<<<<<<< HEAD:pres/informe.tex
-=======
-
-
->>>>>>> 82b21a8297b50814d47733c67a9e4ade91758bab:pres/informe.tex
 \begin{frame}{Uplink}
  \begin{block}<+->{Uplink}
 	\begin{itemize}
@@ -542,17 +528,15 @@
 	\item 2 Versiones: Una transfiere cabecera completa y la otra sólo la dirección IP de destino.
 	
 	   \end{itemize}
+ \begin{tabularx}{\linewidth}{Z|Z}
+    \includegraphics[scale=0.35]{figures/bloquplink.eps} 
+    &
+    \includegraphics[scale=0.30]{figures/estuplink.eps}
+    \\
+  \end{tabularx}
 \end{block}
 \end{frame}
 
-\begin{frame}{Uplink}
- \begin{tabularx}{\linewidth}{Z|Z}
-    \includegraphics[scale=0.40]{figures/bloquplink.eps} 
-    &
-    \includegraphics[scale=0.35]{figures/estuplink.eps}
-    \\
-  \end{tabularx}
-\end{frame}
 
 \begin{frame}{Uplink}
   \begin{block}<+->{Uplink}
@@ -676,6 +660,8 @@
      	\item PtrTrienode zero;
      	\item PtrTrienode one;
     \end{itemize}
+	\center	
+	\includegraphics[scale=0.15]{figures/utlimp.eps}  
   \end{block}
 
 \begin{block}<+->{trie}   
@@ -690,13 +676,6 @@
   \end{block}
 \end{frame}	
 
-
-\begin{frame}{Algoritmos}
-
-	\center	
-	\includegraphics[scale=0.50]{figures/utlimp.eps}  
-
-\end{frame}
 
 \begin{frame}{Ejemplo inserción} 
 \center	
@@ -744,7 +723,7 @@
 \end{frame}
 
 \subsection{Caché}
-%\begin{comment}
+
 \begin{frame}{Caché}
   \begin{block}<+->{Caché} 	
     \begin{itemize}
@@ -766,8 +745,8 @@
   \end{block}
 \end{frame}
 
-%\end{comment}
 
+\begin{comment}
 
 \subsection{ISR}
 \begin{frame}{ISR}
@@ -795,7 +774,7 @@
      \end{itemize}
   \end{block}
 \end{frame}
-  
+  \end{comment}
 
 \section{Integración}
 
@@ -955,10 +934,10 @@
 \includegraphics[scale=0.70]{figures/llu-utlsof.eps} 
 \end{frame}
 
-\subsection{Caso loopback}
+\subsection{Stress de Hardware}
 
-\begin{frame}{Caso loopback} 
-\begin{block}<+->{Caso loopback}   
+\begin{frame}{Stress de Hardware} 
+\begin{block}<+->{Stress de Hardware}   
     \begin{itemize}
       \scriptsize
      	\item Finalidad: encontrar los limites superiores del sistema
@@ -971,7 +950,7 @@
   \end{block}
 \end{frame}
 
-\begin{frame}{Caso loopback} 
+\begin{frame}{Stress de Hardware} 
 \center	
 \includegraphics[scale=0.70]{figures/loop.eps} 
 \end{frame}
