@@ -491,13 +491,21 @@
 	\item Implementación basada en máquina de estados.
 
 	   \end{itemize}
+
+\end{block}
  \begin{tabularx}{\linewidth}{Z|Z}
     \includegraphics[scale=0.35]{figures/bloqdelaybuffer.eps} 
     &
     \includegraphics[scale=0.20]{figures/estdelay.eps}
     \\
   \end{tabularx}
-\end{block}
+\end{frame}
+\begin{frame}{Delay Buffer}
+\begin{center}
+    \includegraphics[scale=0.35]{figures/regdespl01.eps}
+
+    \includegraphics[scale=0.35]{figures/regdespl02.eps}
+\end{center}
 
 \end{frame}
 
@@ -509,15 +517,14 @@
 	\item Gestiona la comunicación entre el procesador y el resto de los componentes.
 	\item Configurado para trabajar con las señales del bus Avalon.
 	\item 2 Versiones: Una transfiere cabecera completa y la otra sólo la dirección IP de destino.
-	
 	   \end{itemize}
+\end{block}
  \begin{tabularx}{\linewidth}{Z|Z}
     \includegraphics[scale=0.35]{figures/bloquplink.eps} 
     &
     \includegraphics[scale=0.30]{figures/estuplink.eps}
     \\
   \end{tabularx}
-\end{block}
 \end{frame}
 
 
@@ -545,14 +552,16 @@
 	\item Toma el resultado emitido por el microprocesador y lo coloca en los campos de control de cada palabra del paquete correspondiente.
 	\item Se conecta directamente al Bus de Datos aunque su funcionamiento depende de las señales que emite Uplink.
 	   \end{itemize}
-	   \center 
+
+
+\end{block}
+\center 
  \begin{tabularx}{\linewidth}{Z|Z}
     \includegraphics[scale=0.40]{figures/bloqwrite.eps} 
     &
     \includegraphics[scale=0.25]{figures/estwritecompleto.eps}
     \\
   \end{tabularx}
-\end{block}
 \end{frame}
 
 
@@ -677,7 +686,6 @@
 \begin{block}<+->{UTL}   
     \begin{itemize}
       \scriptsize
-     	
      	\item Se implementaron clases propias, donde se definieron las características de los nodos del árbol, como así también las operaciones de inserción y búsqueda
      	\item Nodo \emph{común} y nodo \emph{decisión}
 	\item Cada nodo tiene 2 campos: \emph{gw} y \emph{zero / one}
