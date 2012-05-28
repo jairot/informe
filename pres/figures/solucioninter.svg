@@ -14,7 +14,7 @@
    id="svg2"
    version="1.1"
    inkscape:version="0.47 r22583"
-   sodipodi:docname="solucion.svg">
+   sodipodi:docname="solucioninter.svg">
   <defs
      id="defs4">
     <marker
@@ -193,8 +193,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.38183766"
-     inkscape:cx="665.59257"
-     inkscape:cy="135.13404"
+     inkscape:cx="167.99891"
+     inkscape:cy="449.40372"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="true"
@@ -497,5 +497,15 @@
        id="path4546"
        transform="translate(0,308.2677)"
        inkscape:connector-type="polyline" />
+    <path
+       sodipodi:type="arc"
+       style="fill:none;stroke:#000000;stroke-width:11.1539135;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       id="path2889"
+       sodipodi:cx="1070.4532"
+       sodipodi:cy="210.54109"
+       sodipodi:rx="169.54678"
+       sodipodi:ry="173.55339"
+       d="m 1240,210.54109 a 169.54678,173.55339 0 1 1 -339.09354,0 169.54678,173.55339 0 1 1 339.09354,0 z"
+       transform="matrix(1.0898077,0,0,1,-345.36158,615.82109)" />
   </g>
 </svg>
