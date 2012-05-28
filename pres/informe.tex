@@ -1049,13 +1049,27 @@
   \end{block}
 \end{frame}
 
-\subsection{Comparativa inter-algortimos}
-\begin{frame}{Comparativa inter-algortimos} 
+\subsection{Comparativa inter-algoritmos}
+\begin{frame}{Comparativa inter-algoritmos} 
 \begin{flushleft}
 \includegraphics[scale=0.20]{figures/llu-utlsof.eps} 
 \end{flushleft}
 \begin{center}
 \includegraphics[scale=0.70]{figures/lluvsutl.eps} 
+\end{center}
+\end{frame}
+
+\subsection{Cache}
+\begin{frame}{Cache} 
+ \begin{block}<+->{Cache} 
+\begin{itemize}
+      \scriptsize
+     	\item La cache desarrollada busca explotar la posibilidad de que varios paquetes consecutivos tengan una dirección IP destino que pertenezcan a un grupo común de flujos (flow locality).
+     	\item Se logró un tiempo de acceso uniforme de alrededor de 1000 ciclos.
+    \end{itemize}
+ \end{block}
+\begin{center}
+\includegraphics[scale=0.5]{figures/cachecomp.eps} 
 \end{center}
 \end{frame}
 
