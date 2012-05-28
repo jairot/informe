@@ -149,8 +149,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1"
-     inkscape:cx="318.11"
-     inkscape:cy="-77.85761"
+     inkscape:cx="672.27045"
+     inkscape:cy="682.14239"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="true"
@@ -726,13 +726,13 @@
        id="path2933"
        inkscape:connector-type="polyline" />
     <path
-       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="m 960,1402.3622 0,-870.00002"
+       style="fill:none;stroke:#000000;stroke-width:1.12954068px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 960,1402.3622 960,292.36218"
        id="path2937"
        inkscape:connector-type="polyline" />
     <path
        style="fill:none;stroke:#000000;stroke-width:0.99518067px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow1Lend-3-9)"
-       d="m 960,532.36218 -515,0"
+       d="m 958,292.36218 -515,0"
        id="path2939"
        inkscape:connector-type="polyline" />
   </g>
