@@ -285,7 +285,7 @@
   
 \subsection{Solución Propuesta}
 \begin{frame}{Solución Propuesta}
-\begin{block}{}  
+\begin{block}{Enumeracion conceptual de la soluciòn propuesta}  
     \begin{enumerate}
       \scriptsize
 
@@ -413,7 +413,8 @@
 \end{comment}
 
 \section{Hardware}
-\begin{frame}{Arquitectura propuesta}
+\subsection{Interfaz de acceso a la cabecera}
+\begin{frame}{Hardware}
    %\begin{block}
    	\begin{figure}
    		\centering
@@ -421,8 +422,6 @@
     	\end{figure}
    %\end{block}
 \end{frame}
-
-\subsection{Interfaz de acceso a la cabecera}
 
 \begin{frame}{Interfaz de acceso a la cabecera}
 \begin{figure}
@@ -481,7 +480,7 @@
 
 
 \begin{frame}{Delay Buffer}
- \begin{block}<+->{Delay Buffer}
+ \begin{block}<+->{Detalles de la Implementación}
 	\begin{itemize}
       \scriptsize
 	\item Desarrollado íntegramente para este proyecto.
@@ -503,7 +502,7 @@
 
 
 \begin{frame}{Uplink}
- \begin{block}<+->{Uplink}
+ \begin{block}<+->{Detalles de la Implementación}
 	\begin{itemize}
       \scriptsize
 	\item Gestiona la comunicación entre el procesador y el resto de los componentes.
@@ -539,10 +538,11 @@
 \end{frame}
 
 \begin{frame}{Write Output}
- \begin{block}<+->{Write Output}
+ \begin{block}<+->{Detalles de la Implementación}
 	\begin{itemize}
       \scriptsize
-	\item Toma el resultado emitido por el microprocesador y lo coloca en los campos de control correspondientes.	
+	\item Toma el resultado emitido por el microprocesador y lo coloca en los campos de control de cada palabra del paquete correspondiente.
+	\item Se conecta directamente al Bus de Datos aunque su funcionamiento depende de las señales que emite Uplink.
 	   \end{itemize}
 	   \center 
  \begin{tabularx}{\linewidth}{Z|Z}
