@@ -92,40 +92,19 @@
     \end{itemize}
     
   \end{block}
-    
+      \begin{block}<+->{Tecnologías de red}  
+    \begin{itemize}
+      \scriptsize
+      \item {\bf Nuevas tendencias} $\rightarrow$ agregación de paquetes en flujos.
+      \item Flujo: Conjunto de paquetes que comparten información de control.
+      \item Ejemplos: MPLS, VLANs.
+    \end{itemize}
+  \end{block}
 
 \end{frame}
 
 
 
-
-\begin{frame}{Contexto}
-  \begin{block}<+->{Tecnologías de red}  
-    \begin{itemize}
-      \scriptsize
-      \item {\bf Nuevas tendencias} $\rightarrow$ agregación de paquetes en flujos.
-      \item Ejemplos: MPLS, VLANs.
-      \item MPLS: transporte de datos basado en etiquetas.
-      \item VLANs: redes lógicamente independientes conectadas al mismo conmutador físico. 
-    \end{itemize}
-  \end{block}
-  
-     \center 
-    \newcolumntype{V}{>{\centering\arraybackslash} m{.5\linewidth} }
-    \begin{tabularx}{\linewidth}{V|V}
-
-      \includegraphics[scale=0.20]{figures/MPLS_packet.eps}
-      &
-      \includegraphics[scale=0.20]{figures/vlan.eps}      
-      \\
-      \tiny MPLS
-      &
-      \tiny VLANs
-      \\
-    \end{tabularx}
-
-\end{frame}  
-  
 
 \subsection{Problema marco}
 
@@ -213,12 +192,13 @@
   \begin{block}<+->{Dispositivos Lógicos Programables (FPGAs)} 
     \begin{itemize}
       \scriptsize
-      \item Permiten \emph{reconfiguración} y \emph{reprogramación}, contando con librerías de \emph{Open Hardware}. 
+      \item Permiten \emph{reconfiguración} y \emph{reprogramación}, mediante un Lenguaje de Descripción de Hardware (HDL).
       \item Su performance no es lejana a la de un ASIC. Fabricantes: Altera, Xilinx, Actel.
+      \item No abarcan sistemas tan complejos como los ASIC. Mayor consumo de potencia.
+      \item Menor costo de desarrollo y adquisición. Menor tiempo de desarrollo.
       \item Incorporación creciente de bloques \emph{hardcore} especializados
     \end{itemize}
-    \center
-    \includegraphics[scale=0.38]{figures/FPGA_based.eps}      
+
   \end{block}  
 \end{frame}
 
@@ -236,8 +216,7 @@
       \scriptsize
       \item En la ultima década la integración entre FPGAs de propósito general y CPUs tuvo una aceptación amplia como plataforma de para el desarrollo de SoC.    
 	\item La flexibilidad, el prototipado rápido, el aumento de la cantidad de lógica reprogramable de propósito general y la creciente disponibilidad de IP cores fueron elementos determinantes que profundizaron esta tendencia.
-	\center
-        \includegraphics[scale=0.29]{figures/soc2.eps} 
+	
 
     \end{itemize}      
   \end{block}
@@ -576,9 +555,9 @@
    %\end{block}
 \end{frame}
 
-\subsection{Algoritmos de Clasificación}
-\begin{frame}{Algoritmos de Clasificación}
-\begin{block}<+->{Linear Lookup (LLU)}   
+
+\begin{frame}{Linear Lookup}
+\begin{block}<+->{Descripción}   
     \begin{itemize}
       \scriptsize     	
 	\item Consiste en una tabla, donde cada entrada contiene un prefijo más un identificador de enlace de salida
@@ -592,8 +571,39 @@
   \end{block}
 \end{frame}
 
-\begin{frame}{Algoritmos de Clasificación}
-  \begin{block}<+->{Unibit trie lookup (UTL)}   
+\begin{frame}{Linear Lookup}
+\begin{block}<+->{Implementación}   
+    \begin{itemize}
+      \scriptsize
+     	
+     	\item Lenguaje: C++
+     	\item Template \emph{list}
+     	\item Cada nodo tiene 3 campos: Dirección de red, Máscara de red e Identificador de decisión
+	\item Lista ordenada en base a longitud de máscara de red. Se recorre con un iterador
+	\item En cada iteración, Realiza un AND con el valor de máscara del nodo que está siendo apuntado
+	\item Si el resultado de la operación es igual al valor de dirección de red de dicho nodo, entonces se retorna con el valor identificador de decisión
+	\item En otro caso, continúa la búsqueda en el siguiente nodo
+    \end{itemize}
+  \end{block}
+\end{frame}
+
+\begin{frame}{Linear Lookup}
+\begin{block}<+->{Inserción}
+	\center	
+	\includegraphics[scale=0.50]{figures/lluinsert.eps}
+\end{block}
+\end{frame}
+
+\begin{frame}{Linear Lookup}
+\begin{block}<+->{Búsqueda}
+	\center	
+	\includegraphics[scale=0.25]{figures/llusearch.eps}  
+\end{block}
+
+\end{frame}
+
+\begin{frame}{Unibit Trie Lookup}
+  \begin{block}<+->{Descripción}   
     \begin{itemize}
       \scriptsize
      	\item Árbol en el cual cada nodo contiene un \textit{puntero-cero }y un \textit{puntero-uno}
@@ -605,7 +615,7 @@
   \end{block}
 \end{frame}
 
-
+\begin{comment}
 \begin{frame}{Software}
  \begin{block}<+->{Implementación}
 	\begin{itemize}
@@ -617,39 +627,11 @@
 	   \end{itemize}
 \end{block}
 \end{frame}
+\end{comment}
 
 
 
-\subsection{Algoritmos}
-\begin{frame}{Algoritmos}
-\begin{block}<+->{LLU}   
-    \begin{itemize}
-      \scriptsize
-     	
-     	\item Template \emph{list}
-     	\item Cada nodo tiene 3 campos: Dirección de red, Máscara de red e Identificador de decisión
-	\item Lista ordenada en base a longitud de máscara de red. Se recorre con un iterador
-	\item En cada iteración, Realiza un AND con el valor de máscara del nodo que está siendo apuntado
-	\item Si el resultado de la operación es igual al valor de dirección de red de dicho nodo, entonces se retorna con el valor identificador de decisión
-	\item En otro caso, continúa la búsqueda en el siguiente nodo
-    \end{itemize}
-  \end{block}
-\end{frame}
 
-\begin{frame}{LLU}
-\begin{block}<+->{LLU - Inserción}
-	\center	
-	\includegraphics[scale=0.50]{figures/lluinsert.eps}
-\end{block}
-\end{frame}
-
-\begin{frame}{LLU}
-\begin{block}<+->{LLU - Búsqueda}
-	\center	
-	\includegraphics[scale=0.25]{figures/llusearch.eps}  
-\end{block}
-
-\end{frame}
 
 \begin{comment}
 \begin{frame}{Algoritmos - LLU}
@@ -682,10 +664,14 @@
 \end{frame}
 \end{comment}
 
-\begin{frame}{Algoritmos}
-\begin{block}<+->{UTL}   
+\begin{frame}{Unibit Trie Lookup}
+\begin{block}<+->{Implementación}   
     \begin{itemize}
       \scriptsize
+
+     	
+     	\item Lenguaje: C++
+
      	\item Se implementaron clases propias, donde se definieron las características de los nodos del árbol, como así también las operaciones de inserción y búsqueda
      	\item Nodo \emph{común} y nodo \emph{decisión}
 	\item Cada nodo tiene 2 campos: \emph{gw} y \emph{zero / one}
@@ -700,9 +686,9 @@
   \end{block}
 \end{frame}
 
-\begin{frame}{UTL}
+\begin{frame}{Unibit Trie Lookup}
 
-\begin{block}<+->{UTL - Inserción}	
+\begin{block}<+->{Inserción}	
 	\center	
 	\includegraphics[scale=0.17]{figures/utlinsert.eps}  
 \end{block}
@@ -781,7 +767,7 @@
 \end{frame}
 
 
-\begin{frame}{UTL}
+\begin{frame}{Unibit Trie Lookup}
   \begin{block}<+->{UTL - Búsqueda} 
 	\center	
 	\includegraphics[scale=0.20]{figures/utlsearch.eps}  
