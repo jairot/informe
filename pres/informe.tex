@@ -341,14 +341,7 @@
 \end{frame}
 \end{comment}
 
-\subsection{Interfaz de acceso a la cabecera}
 
-\begin{frame}{Interfaz de acceso a la cabecera}
-\begin{figure}
-\centering 
-\includegraphics[scale=0.60]{figures/modulo.eps}
-\end{figure}
-\end{frame}
 \begin{comment}
 \begin{frame}{Descripción funcional}
 
@@ -388,34 +381,7 @@
   \end{block}
 \end{frame}
 \end{comment}
-\subsection{Algoritmos de Clasificación}
-\begin{frame}{Algoritmos de Clasificación}
-\begin{block}<+->{Linear Lookup (LLU)}   
-    \begin{itemize}
-      \scriptsize     	
-	\item Consiste en una tabla, donde cada entrada contiene un prefijo más un identificador de enlace de salida
-	\item Cuando llega un paquete se examina su dirección IP y se va comparando con cada uno de los prefijos almacenados
-	\item Debe existir igualdad bit a bit entre el prefijo y la dirección IP
-	\item Si esto se cumple para varios prefijos, se opta por el más largo de ellos y el paquete se expide por el enlace asociado a dicho prefijo
-	\item Para optimizar este esquema, los prefijos se almacenan en orden decreciente de longitud, de manera que al encontrar una coincidencia no sea necesario seguir buscando en el resto de la tabla
-    \end{itemize}
-\centering 
-\includegraphics[scale=0.35]{figures/linear.eps}
-  \end{block}
-\end{frame}
 
-\begin{frame}{Algoritmos de Clasificación}
-  \begin{block}<+->{Unibit trie lookup (UTL)}   
-    \begin{itemize}
-      \scriptsize
-     	\item Árbol en el cual cada nodo contiene un \textit{puntero-cero }y un \textit{puntero-uno}
-	\item Partiendo del nodo raíz, todos los prefijos que comienzan con 0 son almacenados en el subárbol apuntado por el puntero-cero y aquellos que comienzan con 1 se almacenan en el subárbol apuntado por el puntero-uno.
-	\item Cada subárbol es construido recursivamente de manera similar usando los bits restantes de cada uno de los prefijos
-    \end{itemize}
-\centering 
-\includegraphics[scale=0.25]{figures/trie.eps}	
-  \end{block}
-\end{frame}
 \begin{comment}
 \begin{frame}{Algoritmos de Clasificación}
   \begin{block}<+->{Ejemplo}   
@@ -447,6 +413,23 @@
 \end{comment}
 
 \section{Hardware}
+\begin{frame}{Arquitectura propuesta}
+   %\begin{block}
+   	\begin{figure}
+   		\centering
+    		\includegraphics[scale=0.17]{figures/solucion.eps}
+    	\end{figure}
+   %\end{block}
+\end{frame}
+
+\subsection{Interfaz de acceso a la cabecera}
+
+\begin{frame}{Interfaz de acceso a la cabecera}
+\begin{figure}
+\centering 
+\includegraphics[scale=0.60]{figures/modulo.eps}
+\end{figure}
+\end{frame}
 
 \subsection{Formato de la palabra}
 \begin{frame}{Formato de la palabra}
@@ -574,6 +557,36 @@
 
 \section{Software}
 \subsection{Introducción}
+
+\subsection{Algoritmos de Clasificación}
+\begin{frame}{Algoritmos de Clasificación}
+\begin{block}<+->{Linear Lookup (LLU)}   
+    \begin{itemize}
+      \scriptsize     	
+	\item Consiste en una tabla, donde cada entrada contiene un prefijo más un identificador de enlace de salida
+	\item Cuando llega un paquete se examina su dirección IP y se va comparando con cada uno de los prefijos almacenados
+	\item Debe existir igualdad bit a bit entre el prefijo y la dirección IP
+	\item Si esto se cumple para varios prefijos, se opta por el más largo de ellos y el paquete se expide por el enlace asociado a dicho prefijo
+	\item Para optimizar este esquema, los prefijos se almacenan en orden decreciente de longitud, de manera que al encontrar una coincidencia no sea necesario seguir buscando en el resto de la tabla
+    \end{itemize}
+\centering 
+\includegraphics[scale=0.35]{figures/linear.eps}
+  \end{block}
+\end{frame}
+
+\begin{frame}{Algoritmos de Clasificación}
+  \begin{block}<+->{Unibit trie lookup (UTL)}   
+    \begin{itemize}
+      \scriptsize
+     	\item Árbol en el cual cada nodo contiene un \textit{puntero-cero }y un \textit{puntero-uno}
+	\item Partiendo del nodo raíz, todos los prefijos que comienzan con 0 son almacenados en el subárbol apuntado por el puntero-cero y aquellos que comienzan con 1 se almacenan en el subárbol apuntado por el puntero-uno.
+	\item Cada subárbol es construido recursivamente de manera similar usando los bits restantes de cada uno de los prefijos
+    \end{itemize}
+\centering 
+\includegraphics[scale=0.25]{figures/trie.eps}	
+  \end{block}
+\end{frame}
+
 
 \begin{frame}{Introducción}
  \begin{block}<+->{Software}
